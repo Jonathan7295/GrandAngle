@@ -7,7 +7,10 @@
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
     {% block stylesheet %}
-		<link rel="stylesheet" href="{{  asset ( 'css/style.css' )  }}" type="text/css" />
+    	{% stylesheets 'css/*' %}
+		    <link rel="stylesheet" href="{{ asset_url }}" />
+		{% endstylesheets %}
+		{#<link rel="stylesheet" href="{{  asset ( 'css/style.css' )  }}" type="text/css" />#}
 	{% endblock %}
 	<div class="login">
 		<header class="login-header"><span class="text">LOGIN</span><span class="loader"></span></header>
