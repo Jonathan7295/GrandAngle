@@ -3,5 +3,5 @@ module_gestion_homepage:
     defaults: { _controller: FOSUserBundle:Security:login }
 
 module_gestion_index:
-    path:     /index
+    path:     /accueil
     defaults: { _controller: ModuleGestionBundle:Default:index }

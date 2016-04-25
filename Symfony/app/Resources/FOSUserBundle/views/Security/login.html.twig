@@ -7,10 +7,10 @@
 		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
     {% block stylesheet %}
+    	<link rel="stylesheet" href="{{  asset ( 'css/style.css' )  }}" type="text/css" />
     	{% stylesheets 'css/*' %}
 		    <link rel="stylesheet" href="{{ asset_url }}" />
 		{% endstylesheets %}
-		{#<link rel="stylesheet" href="{{  asset ( 'css/style.css' )  }}" type="text/css" />#}
 	{% endblock %}
 	<div class="login">
 		<header class="login-header"><span class="text">LOGIN</span><span class="loader"></span></header>
@@ -20,7 +20,7 @@
 		    <input type="text" id="username" placeholder="Username" class="login-input" name="_username" value="{{ last_username }}" required="required" />
 
 		    <input type="password" placeholder="Password" id="password" class="login-input" name="_password" required="required" />
-		    
+		     <a id="link" href="{{ path("fos_user_resetting_request")}}">Mot de passe oublié</a>
 		    <input type="submit" id="_submit" class="login-btn" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 		</form>
 	</div>

@@ -16,7 +16,11 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-                default_target_path: /index
+                default_target_path: /accueil
+                # submit the login form here
+                check_path: /login_check
+                # the user is redirected here when they need to log in
+                login_path: /
             logout:
                 path: /logout
                 target: /login
@@ -27,3 +31,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/accueil, role: ROLE_USER }
