@@ -1,72 +1,96 @@
-		body {
-			margin: 0;
-			padding: 0;
-			overflow: hidden;
-			height: 100%; 
-			max-height: 100%; 
-			font-family:Sans-serif;
-			line-height: 1.5em;
-		}
-		
-		#header {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100px; 
-			overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
-			background: #BCCE98;
-		}
-		
-		#nav {
-			position: absolute; 
-			top: 100px; 
-			left: 0; 
-			bottom: 0;
-			width: 230px;
-			overflow: auto; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
-			background: #DAE9BC; 		
-		}
-		
-		#logo {
-			padding:10px;
-		}
-		
-		main {
-			position: fixed;
-			top: 100px; /* Set this to the height of the header */
-			left: 230px; 
-			right: 0;
-			bottom: 0;
-			overflow: auto; 
-			background: #fff;
-		}
-		
-		.innertube {
-			margin: 15px; /* Provides padding for the content */
-		}
-		
-		p {
-			color: #555;
-		}
+body {
+	background-color: #333;
+}
 
-		nav ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
-		
-		nav ul a {
-			color: darkgreen;
-			text-decoration: none;
-		}
-				
-		/*IE6 fix*/
-		* html body{
-			padding: 100px 0 0 230px; /* Set the first value to the height of the header and last value to the width of the nav */
-		}
-		
-		* html main{ 
-			height: 100%; 
-			width: 100%; 
-		}
+.container {
+	
+}
+/***************style du cadre de navbar*******************/
+.navbar {
+	margin-top: 20px;
+	height: 80px;
+	padding-top: 5px;
+	padding-bottom: 85px;
+}
+
+/***************style Bouton de menu*******************/
+.nav-pills li a{
+	margin-top: 20px;
+}
+
+.nav-pills li{
+	text-align: center;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#droit{
+	/*display: none;*/
+}
+
+/***************Bouton de menu*******************/
+#acce {
+	background-color: #777;
+	color : #E3E3E3;
+}
+
+#acce:hover {
+	background-color: #373737;
+	color : white;
+}
+
+#expo {
+	background-color: #337ab7;
+	color : #E3E3E3;
+}
+
+#expo:hover {
+	background-color: #214F77;
+	color : white;
+}
+
+
+#oeuv {
+	background-color: #5cb85c;
+	color : #E3E3E3;
+}
+
+#oeuv:hover {
+	background-color: #3C783C;
+	color : white;
+}
+
+#stat {
+	background-color: #f0ad4e;
+	color : #E3E3E3;
+} 
+
+#stat:hover {
+	background-color: #B07F39;
+	color : white;
+} 
+
+#util {
+	background-color: #5bc0de;
+	color : #E3E3E3;
+} 
+
+#util:hover {
+	background-color: #41899E;
+	color : white;
+} 
+
+#deco {
+	background-color: #d9534f;
+	color : #E3E3E3;
+}
+
+#deco:hover {
+	background-color: #993B38;
+	color : white;
+}
+
+/***************style image*******************/
+.img-logo {
+
+}

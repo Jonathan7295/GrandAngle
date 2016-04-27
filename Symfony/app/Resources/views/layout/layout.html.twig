@@ -4,49 +4,39 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         <!-- <link rel="stylesheet" type="text/css" href="../css/stylesite.css"/> -->
-        {% stylesheets 'css/*' %}
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        {% stylesheets 'css/stylesite.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-    </head>
-    <body>
-        <header id="header">
-            <div id="logo">
-                <h1>Grand Angle</h1>
+        <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-default">
+                        <div class="col-md-10">
+                            <ul class="nav nav-pills">
+                                <li role="presentation"><a id="acce" href="#">Accueil</a></li>
+                                <li role="presentation"><a id="expo" href="#">Gestion Exposition</a></li>
+                                <li role="presentation"><a id="oeuv" href="#">Gestion Oeuvre</a></li>
+                                <li id="droit" role="presentation"><a id="util" href="#">Gestion Utilisateur</a></li>
+                                <li role="presentation"><a id="stat" href="#">Gestion Statistique</a></li>
+                                <li role="presentation">{% block connection %}{% endblock %}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2">
+                            {% image 'image/logo2.png' %}
+                                <img class="img-logo" title="Grand Angle" src="{{ asset_url }}" width="140" height="90"/>
+                            {% endimage %}
+                        </div>
+                    </nav>
+                </div>
             </div>
-        </header>
-        <main>
-            <div class="innertube">
-                {% block body %}{% endblock %}
-                {% block javascripts %}{% endblock %}  
-            </div>
-        </main>
-        <nav id="nav">
-            <div class="innertube">
-                <h1>Heading</h1>
-                <ul>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Link 5</a></li>
-                </ul>
-                <h1>Heading</h1>
-                <ul>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Link 5</a></li>
-                </ul>
-                <h1>Heading</h1>
-                <ul>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Link 5</a></li>
-                </ul>
-            </div>
-        </nav>  
+        </div>
     </body>
 </html>
