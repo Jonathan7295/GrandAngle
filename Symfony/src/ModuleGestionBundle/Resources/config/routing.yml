@@ -1,3 +1,7 @@
+module_gestion_exposition:
+    resource: "@ModuleGestionBundle/Resources/config/routing/exposition.yml"
+    prefix:   /exposition
+
 module_gestion_homepage:
     path:     /
     defaults: { _controller: FOSUserBundle:Security:login }
