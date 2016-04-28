@@ -1,3 +1,4 @@
+{# Layout de la page principale #}
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,7 +22,7 @@
                     <nav class="navbar navbar-default">
                         <div class="col-md-10">
                             <ul class="nav nav-pills">
-                                <li role="presentation"><a id="acce" href="#">Accueil</a></li>
+                                <li role="presentation"><a id="acce" href="{{ path("module_gestion_index") }}">Accueil</a></li>
                                 <li role="presentation"><a id="expo" href="#">Gestion Exposition</a></li>
                                 <li role="presentation"><a id="oeuv" href="#">Gestion Oeuvre</a></li>
                                 <li id="droit" role="presentation"><a id="util" href="#">Gestion Utilisateur</a></li>
