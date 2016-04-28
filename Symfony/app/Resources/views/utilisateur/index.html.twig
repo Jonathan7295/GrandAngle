@@ -1,0 +1,45 @@
+{% extends ':layout:layout.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Utilisateur list
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for utilisateur in utilisateurs %}
+                <tr>
+                    <td><a href="{{ path('utilisateur_show', { 'id': utilisateur.id }) }}">{{ utilisateur.id }}</a></td>
+                    <td>{{ utilisateur.firstname }}</td>
+                    <td>{{ utilisateur.lastname }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('utilisateur_show', { 'id': utilisateur.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('utilisateur_edit', { 'id': utilisateur.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul class="nav nav-pills">
+            <li role="presentation">
+                <a id="util" href="{{ path('utilisateur_new') }}">Create a new entry</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

@@ -3,7 +3,7 @@
 {% block body %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            Exposition creation
+            Utilisateur creation
         </div>
         {{ form_start(form) }}
             {{ form_widget(form) }}
@@ -11,8 +11,8 @@
         {{ form_end(form) }}
         <ul class="nav nav-pills">
             <li role="presentation">
-                <a id="expo" href="{{ path('exposition_index') }}">Back to the list</a>
+                <a href="{{ path('utilisateur_index') }}">Back to the list</a>
             </li>
         </ul>
-    </dv>
+    </div>
 {% endblock %}

@@ -40,6 +40,8 @@ fos_user:
     user_class: ModuleGestionBundle\Entity\Utilisateur
 
     registration:
+        form:
+            type: ModuleGestionBundle\Form\RegistrationType
         confirmation:
             enabled: true
 

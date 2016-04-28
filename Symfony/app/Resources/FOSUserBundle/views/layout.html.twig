@@ -3,7 +3,8 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        {% block stylesheet %}{% endblock %}
+        {% block stylesheet %}
+        {% endblock %}
     </head>
     <body>
        {% if app.request.hasPreviousSession %}
@@ -19,6 +20,9 @@
             {% block fos_user_content %}
             {% endblock fos_user_content %}
             {% block javascript %}
+                {% javascripts 'js/*' %}
+                    <script type="text/javascript" src="{{ asset_url }}"></script>
+                {% endjavascripts %}
             {% endblock javascript %}
         </div>
     </body>
