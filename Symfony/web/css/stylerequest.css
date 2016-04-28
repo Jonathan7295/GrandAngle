@@ -1,0 +1,54 @@
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #41899E;
+  font: 100%/1 "Helvetica Neue", Arial, sans-serif;
+}
+
+/*Formulaire de reset*/
+#formRequest{
+	background-color:orange;
+	height: 350px;
+	margin-top: 30%;
+	margin-bottom: 30%; 
+	border-left: 4px solid black;
+	border-top: 4px solid #C38005;
+	border-right: 2px solid #DFB66A;
+	border-bottom: 1px solid black;
+	padding: 60px;
+	color: #1E1B1B;
+}
+
+label{
+	font-size: 1.6em;
+	text-shadow:1px 1px white;
+}
+
+input[type="text"]{
+	
+}
+
+input[type="submit"]{
+	background-color:#5bc0de;
+	margin-top: 20px;
+}
+
+input[type="submit"]:hover{
+	color:#0D0C0C;
+}
+
+#red{
+	font-size: 12px;
+	color:red;
+}
+
+/*Formulaire d'enregistrement d'un utilisateur*/
+label.control-label{
+	line-height: 34px;
+}
+.form-control.ajust{
+	margin-bottom: 10px;
+}
