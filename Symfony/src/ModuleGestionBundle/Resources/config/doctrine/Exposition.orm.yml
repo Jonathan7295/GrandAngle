@@ -1,0 +1,25 @@
+ModuleGestionBundle\Entity\Exposition:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\ExpositionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nomExposition:
+            type: string
+            length: 255
+            column: nom_exposition
+        dateHeureDebutExposition:
+            type: datetime
+            column: date_heure_debut_exposition
+        dateHeureFinExpositon:
+            type: datetime
+            column: date_heure_fin_expositon
+        nombreVisiteExposition:
+            type: integer
+            column: nombre_visite_exposition
+    lifecycleCallbacks: {  }

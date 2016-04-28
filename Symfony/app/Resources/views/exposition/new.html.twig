@@ -1,0 +1,19 @@
+{# extends 'base.html.twig' #}
+{% extends ':layout:layout.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Exposition creation
+        </div>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Create" />
+        {{ form_end(form) }}
+        <ul class="nav nav-pills">
+            <li role="presentation">
+                <a id="expo" href="{{ path('exposition_index') }}">Back to the list</a>
+            </li>
+        </ul>
+    </dv>
+{% endblock %}

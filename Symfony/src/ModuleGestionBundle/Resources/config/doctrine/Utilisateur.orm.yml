@@ -1,0 +1,13 @@
+ModuleGestionBundle\Entity\Utilisateur:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\UtilisateurRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+
+    lifecycleCallbacks: {  }

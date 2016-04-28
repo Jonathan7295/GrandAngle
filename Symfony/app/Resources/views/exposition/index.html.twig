@@ -1,0 +1,48 @@
+{# extends 'base.html.twig' #}
+{% extends ':layout:layout.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Exposition list
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nomexposition</th>
+                    <th>Dateheuredebutexposition</th>
+                    <th>Dateheurefinexpositon</th>
+                    <th>Nombrevisiteexposition</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for exposition in expositions %}
+                <tr>
+                    <td><a href="{{ path('exposition_show', { 'id': exposition.id }) }}">{{ exposition.id }}</a></td>
+                    <td>{{ exposition.nomExposition }}</td>
+                    <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if exposition.dateHeureFinExpositon %}{{ exposition.dateHeureFinExpositon|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ exposition.nombreVisiteExposition }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('exposition_show', { 'id': exposition.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('exposition_edit', { 'id': exposition.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <ul class="nav nav-pills">
+            <li role="presentation">
+                <a id="expo" href="{{ path('exposition_new') }}">Create a new entry</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
