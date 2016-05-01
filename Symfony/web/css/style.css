@@ -164,12 +164,14 @@ form #link:hover, form #link:focus, form #link:active {
   text-decoration: none;
   color: #FFA500 ;
 }
+
 /********** Message d'erreur Login**********/
 .alert {
   display:none;
   position:absolute;
-  top:240px;
+  top:175px;
   left:50px;
   color: red;
+  font-size: 0.8em;
   font-weight: bolder;
 }

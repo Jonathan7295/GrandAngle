@@ -1,0 +1,25 @@
+ModuleGestionBundle\Entity\Telephone:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\TelephoneRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        numero:
+            type: string
+            length: 255
+        libelle:
+            type: string
+            length: 255
+    manyToOne:
+        utilisateur:
+            targetEntity: ModuleGestionBundle\Entity\Utilisateur
+            inversedBy: telephones
+            joinColumn:
+                name: utilisateur_id
+                referencedColumnName: id            
+    lifecycleCallbacks: {  }

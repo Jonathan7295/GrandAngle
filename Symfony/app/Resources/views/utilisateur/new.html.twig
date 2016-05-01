@@ -3,16 +3,65 @@
 {% block body %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            Utilisateur creation
+            Création d'un utilisateur
         </div>
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input type="submit" value="Create" />
-        {{ form_end(form) }}
-        <ul class="nav nav-pills">
-            <li role="presentation">
-                <a href="{{ path('utilisateur_index') }}">Back to the list</a>
-            </li>
-        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    {{ form_start(form) }}
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Nom</label>
+                        <div class="col-md-8">
+                            {{ form_widget(form.firstname, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Prénom</label>
+                        <div class="col-md-8">
+                           {{ form_widget(form.lastname, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Adresse e-mail</label>
+                        <div class="col-md-8">
+                           {{ form_widget(form.email, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Identifiant de connexion</label>
+                        <div class="col-md-8">
+                            {{ form_widget(form.username, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Mot de passe</label>
+                        <div class="col-md-8">
+                           {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Vérification</label>
+                        <div class="col-md-8">
+                           {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-6">
+                        <input id="newutilval" type="submit" value="Valider" />
+                        <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                     <div class="form-group">
+                        <label class="col-md-4 control-label tel">Téléphone</label>
+                        <div class="col-md-8">
+                            {{ form.vars.value }}
+                            {{ form_widget(form.telephones, {'attr': {'class': 'form-control tel'}}) }}
+                        </div>
+                    </div>
+                </div>
+                    {{ form_end(form) }}
+                
+            </div>
+        </div>
     </div>
 {% endblock %}

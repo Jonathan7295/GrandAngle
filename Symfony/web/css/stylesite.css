@@ -8,9 +8,7 @@ body {
 /***************style du cadre de navbar*******************/
 .navbar {
 	margin-top: 20px;
-	height: 80px;
-	padding-top: 5px;
-	padding-bottom: 85px;
+	height: 100%;
 }
 
 /***************style Bouton de menu*******************/
@@ -90,7 +88,144 @@ body {
 	color : white;
 }
 
-/***************style image*******************/
-.img-logo {
+/***************Style Gestion utilisateur*******************/
 
+/****Index Utilisateur*****/
+
+#searchindex {
+	background-color: #C4D4D9;  
+	border-radius:4px;
+	padding: 8px 8px;
+}
+
+#searchindex:hover {
+	text-decoration: none;
+	color: black;
+}
+
+#editindex {
+	background-color: #B4D2AE;  
+	border-radius:4px;
+	padding: 8px 8px;
+}
+
+#editindex:hover {
+	text-decoration: none;
+	color: black;
+}
+
+#delindex {
+	background-color: #FF0327;  
+	border-radius:4px;
+	padding: 8px 8px;
+}
+
+#delindex:hover {
+	text-decoration: none;
+	color: black;
+}
+
+#scrollind {
+	height: 700px;
+	overflow-y: scroll;
+}
+
+/*****New Utilisateur******/
+#newutilval {
+	background-color: #5bc0de;
+	color : #E3E3E3;
+	margin: 20px 20px;
+	border-radius:4px;
+	padding: 6px 15px;
+}
+
+#newutilval:hover {
+	background-color: #41899E;
+	color : white;
+}
+
+#newutilret {
+	background-color: #777;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#newutilret:hover {
+	background-color: #373737;
+	color : white;
+	text-decoration: none;
+}
+
+.form-control.ajust {
+	margin-bottom:10px;
+}
+
+.control-label.ajust {
+	line-height: 35px
+}
+
+.form-control.tel {
+	margin-top: 15px;
+}
+
+.control-label.tel {
+	line-height: 60px;
+}
+/*****Show Utilisateur*****/
+
+#showutilret {
+	background-color: #777;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#showutilret:hover {
+	background-color: #373737;
+	color : white;
+	text-decoration: none;
+}
+
+#showutiledit {
+	background-color: #373737;
+	color : white;  
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#showutiledit:hover {
+	background-color: #777;
+	color : #E3E3E3;
+	text-decoration: none;
+}
+
+#debshow {
+	padding-left: 10px;
+	margin-left: 20px;
+	color: red;
+}
+
+#actshow {
+	padding-left: 10px;
+	margin-left: 20px;
+	color: blue;
+}
+
+.sho tr:nth-child(odd) {
+	background-color: #5BC0DE;
+}
+
+.sho tr:nth-child(even) {
+	background-color: #D2E1E2;
+}
+
+.panel-heading.show {
+	margin-bottom: 25px;
+}
+
+/*****Edit Utilisateur*****/
+
+.roleEdit div label {
+	display:none;
 }
