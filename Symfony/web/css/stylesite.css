@@ -94,3 +94,13 @@ body {
 .img-logo {
 
 }
+
+/**************Style Tableau******************/
+
+#btn_ul {
+	margin :0;
+	padding: 0;
+}
+#btn_li {
+	list-style-type: none;
+}

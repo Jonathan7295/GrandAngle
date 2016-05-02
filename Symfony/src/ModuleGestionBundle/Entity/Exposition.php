@@ -7,6 +7,7 @@ namespace ModuleGestionBundle\Entity;
  */
 class Exposition
 {
+
     /**
      * @var int
      */
@@ -32,7 +33,6 @@ class Exposition
      */
     private $nombreVisiteExposition;
 
-
     /**
      * Get id
      *
@@ -53,7 +53,7 @@ class Exposition
     public function setNomExposition($nomExposition)
     {
         $this->nomExposition = $nomExposition;
-    
+
         return $this;
     }
 
