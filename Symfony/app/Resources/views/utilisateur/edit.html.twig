@@ -1,0 +1,87 @@
+{% extends ':layout:layout.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Modification d'un utilisateur
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    {{ form_start(edit_form) }}
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Nom</label>
+                        <div class="col-md-8">
+                            {{ form_widget(edit_form.firstname, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Prénom</label>
+                        <div class="col-md-8">
+                           {{ form_widget(edit_form.lastname, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Role</label>
+                        <div class="col-md-8">
+                            {{ form_widget(edit_form.role, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Adresse e-mail</label>
+                        <div class="col-md-8">
+                           {{ form_widget(edit_form.email, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Identifiant de connexion</label>
+                        <div class="col-md-8">
+                            {{ form_widget(edit_form.username, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Mot de passe</label>
+                        <div class="col-md-8">
+                           {{ form_widget(edit_form.plainPassword.first, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label ajust">Vérification</label>
+                        <div class="col-md-8">
+                           {{ form_widget(edit_form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-6">
+                        <input id="newutilval" type="submit" value="Valider" />
+                        <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    {# {% for item in edit_form.telephones %}
+                        {% set myVal = 1 %}
+                        {{ form_widget(item, {'attr': {'class': 'phone' ~ myVal }}) }}
+                        {% set myVal = myVal + 1 %}
+                    {% endfor %} #}
+                    {% block submit_row -%}
+                    {% spaceless %}
+                        <div class="form-group">
+                            {# <div class="{{ block('form_label_class') }}"></div> #}
+                            <div>
+                                {{ form_widget(edit_form.telephones) }}
+                            </div>
+                        </div>
+                    {% endspaceless %}
+                    {% endblock submit_row %}
+                    {# <div class="form-group">
+                        <label class="col-md-4 control-label tel">Téléphone</label>
+                        <div class="col-md-8">
+                            {{ form_widget(edit_form.telephones, {'attr': {'class': 'form-control tel'}}) }}
+                        </div>
+                    </div> #}
+                </div>
+                    {# {{ form_end(edit_form) }} #}
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

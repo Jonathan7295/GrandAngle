@@ -4,14 +4,14 @@
 }
 
 body {
-  background: #41899E;
+  background: #333;
   font: 100%/1 "Helvetica Neue", Arial, sans-serif;
 }
 
 /*Formulaire de reset*/
-#formRequest{
+#formRequest {
 	background-color:orange;
-	height: 350px;
+	height: 450px;
 	margin-top: 30%;
 	margin-bottom: 30%; 
 	border-left: 4px solid black;
@@ -22,33 +22,44 @@ body {
 	color: #1E1B1B;
 }
 
-label{
+label {
 	font-size: 1.6em;
 	text-shadow:1px 1px white;
 }
-
-input[type="text"]{
-	
-}
-
-input[type="submit"]{
-	background-color:#5bc0de;
-	margin-top: 20px;
-}
-
-input[type="submit"]:hover{
-	color:#0D0C0C;
-}
-
-#red{
+/* message d'erreur */
+#red {
 	font-size: 12px;
 	color:red;
 }
+/* Logo formulaire */
+.logo-right {
+	float: right;
+}
 
 /*Formulaire d'enregistrement d'un utilisateur*/
-label.control-label{
+label.control-label {
 	line-height: 34px;
 }
-.form-control.ajust{
+.form-control.ajust {
 	margin-bottom: 10px;
+}
+
+
+/*Resetting mot de passe*/
+#reset h1 {
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+#reset #formRequest {
+	height: 370px;
+	padding: 40px; 
+}
+
+label.inline-label {
+	line-height: 34px;
+}
+
+#btnReset {
+	margin-top: 25px;
 }

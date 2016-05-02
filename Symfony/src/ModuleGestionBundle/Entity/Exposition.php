@@ -139,4 +139,3 @@ class Exposition
         return $this->nombreVisiteExposition;
     }
 }
-

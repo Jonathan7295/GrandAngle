@@ -5,6 +5,8 @@ namespace ModuleGestionBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -13,28 +15,33 @@ use Doctrine\ORM\Mapping as ORM;
 class Utilisateur extends BaseUser
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="ModuleGestionBundle\Entity\Telephone", mappedBy="utilisateur")
      */
-    protected $id;
+    private $telephones;
 
     /**
-    * @ORM\Column(name="firstname", type="string", length=255)
-    */
-    protected $firstname;
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    private $firstname;
 
-   /**
-   * @ORM\Column(name="lastname", type="string", length=255)
-   */
-    protected $lastname;
+    /**
+     * @ORM\Column(name="lastname", type="string", length=255)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(name="role", type="string", length=255)
+     */
+    private $role;
+
     
-
     public function __construct()
     {
         parent::__construct();
+        $this->enabled = true;
+        $telephones = new ArrayCollection();
+        $role = "ROLE_USER";
     }
-
 
     /**
      * Set firstname
@@ -82,5 +89,64 @@ class Utilisateur extends BaseUser
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+
+    /**
+     * Add telephone
+     *
+     * @param \ModuleGestionBundle\Entity\Telephone $telephone
+     *
+     * @return Utilisateur
+     */
+    public function addTelephone(\ModuleGestionBundle\Entity\Telephone $telephone)
+    {
+        $this->telephones[] = $telephone;
+    
+        return $this;
+    }
+
+    /**
+     * Remove telephone
+     *
+     * @param \ModuleGestionBundle\Entity\Telephone $telephone
+     */
+    public function removeTelephone(\ModuleGestionBundle\Entity\Telephone $telephone)
+    {
+        $this->telephones->removeElement($telephone);
+    }
+
+    /**
+     * Get telephones
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTelephones()
+    {
+        return $this->telephones;
+    }
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     *
+     * @return Utilisateur
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

@@ -9,5 +9,20 @@ ModuleGestionBundle\Entity\Utilisateur:
             generator:
                 strategy: AUTO
     fields:
-
+        firstname:
+            type: string
+            length: 255
+            column: firstname
+        lastname:
+            type: string
+            length: 255
+            column: lastname
+        role:
+            type: string
+            length: 255
+            column: role
+    oneToMany:
+        telephones:
+            targetEntity: ModuleGestionBundle\Entity\Telephone
+            mappedBy: utilisateur
     lifecycleCallbacks: {  }

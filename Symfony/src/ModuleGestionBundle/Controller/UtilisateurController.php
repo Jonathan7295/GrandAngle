@@ -4,9 +4,8 @@ namespace ModuleGestionBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use ModuleGestionBundle\Entity\Telephone;
 use ModuleGestionBundle\Entity\Utilisateur;
-use ModuleGestionBundle\Form\UtilisateurType;
 
 /**
  * Utilisateur controller.
@@ -35,13 +34,26 @@ class UtilisateurController extends Controller
      */
     public function newAction(Request $request)
     {
+
         $utilisateur = new Utilisateur();
-        $form = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
+        $telephone = new Telephone();
+
+        $form = $this->createForm('ModuleGestionBundle\Form\RegistrationType', $utilisateur);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($utilisateur);
+
+            $phone = $request->request->all();
+            $phone = $phone["app_user_registration"]["telephones"][0]["numero"];
+
+            $telephone->setNumero($phone);
+            $telephone->setLibelle("test");
+            $telephone->setUtilisateur($utilisateur);
+            $em->persist($telephone);
             $em->flush();
 
             return $this->redirectToRoute('utilisateur_show', array('id' => $utilisateur->getId()));
@@ -73,8 +85,11 @@ class UtilisateurController extends Controller
      */
     public function editAction(Request $request, Utilisateur $utilisateur)
     {
+
         $deleteForm = $this->createDeleteForm($utilisateur);
-        $editForm = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
+
+        $editForm = $this->createForm('ModuleGestionBundle\Form\RegistrationType', $utilisateur);
+
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

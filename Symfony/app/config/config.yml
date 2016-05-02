@@ -19,7 +19,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
@@ -40,15 +40,16 @@ fos_user:
     user_class: ModuleGestionBundle\Entity\Utilisateur
 
     registration:
+        form:
+            type: ModuleGestionBundle\Form\RegistrationType
         confirmation:
-            enabled: true
+            enabled: false
 
     service:
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:    
             template: email/password_resetting.email.twig
-
 
 # Twig Configuration
 twig:

@@ -38,7 +38,7 @@ class RegistrationController extends Controller
         $userManager = $this->get('fos_user.user_manager');
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
-        
+
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
