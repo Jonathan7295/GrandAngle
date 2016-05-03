@@ -17,7 +17,7 @@ class Utilisateur extends BaseUser
     /**
      * @ORM\OneToMany(targetEntity="ModuleGestionBundle\Entity\Telephone", mappedBy="utilisateur")
      */
-    private $telephones;
+    protected $telephones;
 
     /**
      * @ORM\Column(name="firstname", type="string", length=255)
@@ -39,8 +39,8 @@ class Utilisateur extends BaseUser
     {
         parent::__construct();
         $this->enabled = true;
-        $telephones = new ArrayCollection();
-        $role = "ROLE_USER";
+        $this->role = "USER";
+        // $this->telephones = new ArrayCollection();
     }
 
     /**

@@ -226,6 +226,22 @@ body {
 
 /*****Edit Utilisateur*****/
 
-.roleEdit div label {
+.editlock {
+	position:absolute;
+	top: 23.4em;
+	right: 56.5em;
+	height: 34px;
+	width: 34px;
+}
+
+div #app_user_registration_telephones {
 	display:none;
+}
+
+.blocdeb {
+	position: absolute;
+	top: 24em;
+	right: 60.2em;
+	width: 46%;
+	color: #D9534F;
 }

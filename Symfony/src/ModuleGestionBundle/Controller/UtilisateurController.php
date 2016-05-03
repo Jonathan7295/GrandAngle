@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ModuleGestionBundle\Entity\Telephone;
 use ModuleGestionBundle\Entity\Utilisateur;
+use ModuleGestionBundle\Form\RegistrationType;
 
 /**
  * Utilisateur controller.
@@ -34,30 +35,40 @@ class UtilisateurController extends Controller
      */
     public function newAction(Request $request)
     {
+        $utilisateur = new utilisateur();
 
-        $utilisateur = new Utilisateur();
-        $telephone = new Telephone();
+        $form = $this->createForm(RegistrationType::class, $utilisateur);
 
-        $form = $this->createForm('ModuleGestionBundle\Form\RegistrationType', $utilisateur);
+        $form->handleRequest($request); 
 
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        // var_dump($request->request->all());die();
+        // $utilisateur = new Utilisateur();
+        // $telephone = new Telephone();
+       
+        // $form = $this->createForm('ModuleGestionBundle\Form\RegistrationType', $utilisateur);
+        
+        
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
             
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($utilisateur);
+        //     $em = $this->getDoctrine()->getManager();
+        //     $em->persist($utilisateur);
 
-            $phone = $request->request->all();
-            $phone = $phone["app_user_registration"]["telephones"][0]["numero"];
+        //     $phone = $request->request->all();
+            
+        //     // $phone = $phone["app_user_registration"]["numero"];
+        //     // $libelle = $phone["app_user_registration"]["libelle"];
 
-            $telephone->setNumero($phone);
-            $telephone->setLibelle("test");
-            $telephone->setUtilisateur($utilisateur);
-            $em->persist($telephone);
-            $em->flush();
+        //     $telephone->setNumero($phone);
+        //     $telephone->setLibelle($libelle);
+        //     $telephone->setUtilisateur($utilisateur);
+        //     $em->persist($telephone);
+        //     $em->flush();
 
-            return $this->redirectToRoute('utilisateur_show', array('id' => $utilisateur->getId()));
-        }
+        //     return $this->redirectToRoute('utilisateur_show', array('id' => $utilisateur->getId()));
+        // }
 
         return $this->render('utilisateur/new.html.twig', array(
             'utilisateur' => $utilisateur,

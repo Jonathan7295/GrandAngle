@@ -2,11 +2,9 @@
 
 namespace ModuleGestionBundle\Form;
 
- 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TelephoneType extends AbstractType
@@ -16,8 +14,8 @@ class TelephoneType extends AbstractType
     {
         
         $builder
-            ->add('numero', TextType::class)
-            ->add('libelle', TextType::class);
+            ->add('numero', TextType::class, array('label' => 'Numero'), 'attr', array('class' => 'form-control'))
+            ->add('libelle', TextType::class, array('label' => 'Libellé'), 'attr', array('class' => 'form-control'));
     }
 
 	/**

@@ -57,31 +57,24 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    {# {% for item in edit_form.telephones %}
-                        {% set myVal = 1 %}
-                        {{ form_widget(item, {'attr': {'class': 'phone' ~ myVal }}) }}
-                        {% set myVal = myVal + 1 %}
-                    {% endfor %} #}
-                    {% block submit_row -%}
-                    {% spaceless %}
-                        <div class="form-group">
-                            {# <div class="{{ block('form_label_class') }}"></div> #}
-                            <div>
-                                {{ form_widget(edit_form.telephones) }}
-                            </div>
-                        </div>
-                    {% endspaceless %}
-                    {% endblock submit_row %}
-                    {# <div class="form-group">
-                        <label class="col-md-4 control-label tel">Téléphone</label>
-                        <div class="col-md-8">
-                            {{ form_widget(edit_form.telephones, {'attr': {'class': 'form-control tel'}}) }}
-                        </div>
-                    </div> #}
+                    <div class="form-group">
+                       {{ form_widget(edit_form.telephones, {'attr': {'class': 'form-control ajust'}}) }}
+                    </div>
                 </div>
-                    {# {{ form_end(edit_form) }} #}
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label blocdeb">Blocage & Deblocage</label>
+                       {{ form_widget(edit_form.locked, {'attr': {'class': 'editlock'}}) }}
+                    </div>
+                </div>
+                    {{ form_end(edit_form) }}
                 
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        
+    </script>
 {% endblock %}

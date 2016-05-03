@@ -2,6 +2,8 @@
 
 namespace ModuleGestionBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Telephone
  */
@@ -15,13 +17,13 @@ class Telephone
     /**
      * @var string
      */
-    private $numero;
+    public $numero;
 
     /**
      * @var string
      */
-    private $libelle;
- 
+    public $libelle;
+    
     /**
      * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Utilisateur", inversedBy="telephones",cascade={"persist"})
      * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
