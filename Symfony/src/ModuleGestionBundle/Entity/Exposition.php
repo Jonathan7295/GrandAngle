@@ -7,7 +7,6 @@ namespace ModuleGestionBundle\Entity;
  */
 class Exposition
 {
-
     /**
      * @var int
      */
@@ -137,5 +136,10 @@ class Exposition
     public function getNombreVisiteExposition()
     {
         return $this->nombreVisiteExposition;
+    }
+
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }

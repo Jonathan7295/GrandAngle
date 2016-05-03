@@ -1,0 +1,15 @@
+ModuleGestionBundle\Entity\Langue:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\LangueRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nomlangue:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
