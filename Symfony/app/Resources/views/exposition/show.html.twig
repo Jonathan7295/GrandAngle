@@ -3,8 +3,7 @@
 
 {% block body %}
     <h1>Exposition</h1>
-
-    <table>
+    <table  class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -29,16 +28,16 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('exposition_index') }}">Back to the list</a>
+    <ul class="nav nav-pills">
+        <li role="presentation">
+            <a id="oeuv" href="{{ path('exposition_index') }}">Back to the list</a>
         </li>
-        <li>
-            <a href="{{ path('exposition_edit', { 'id': exposition.id }) }}">Edit</a>
+        <li role="presentation">
+            <a id="deco" href="{{ path('exposition_edit', { 'id': exposition.id }) }}">Edit</a>
         </li>
-        <li>
+        <li role="presentation">
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input class="btn btn-danger" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
