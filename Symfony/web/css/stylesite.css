@@ -183,6 +183,23 @@ body {
 .control-label.tel {
 	line-height: 60px;
 }
+
+.editlocknew {
+	position:absolute;
+	top: 19.6em;
+	right: 56.5em;
+	height: 34px;
+	width: 34px;
+}
+
+.blocdebnew {
+	position: absolute;
+	top: 20.2em;
+	right: 60.2em;
+	width: 46%;
+	color: #D9534F;
+}
+
 /*****Show Utilisateur*****/
 
 #showutilret {
@@ -239,19 +256,15 @@ body {
 
 .editlock {
 	position:absolute;
-	top: 23.4em;
+	top: 20.7em;
 	right: 56.5em;
 	height: 34px;
 	width: 34px;
 }
 
-div #app_user_registration_telephones {
-	display:none;
-}
-
 .blocdeb {
 	position: absolute;
-	top: 24em;
+	top: 21.3em;
 	right: 60.2em;
 	width: 46%;
 	color: #D9534F;

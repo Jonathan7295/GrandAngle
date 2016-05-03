@@ -18,9 +18,9 @@
                         <td>{{ utilisateur.firstname }}</td>
                         <td>{{ utilisateur.lastname }}</td>
                         <td>
-                            {% if utilisateur.role == "ROLE_ADMIN" %}
+                            {% if utilisateur.role == "ADMIN" %}
                                 Administrateur
-                            {% elseif utilisateur.role == "ROLE_USER" %}
+                            {% elseif utilisateur.role == "USER" %}
                                 Utilisateur
                             {% else %}
                                 Indéfini

@@ -59,17 +59,15 @@
                 <div class="col-md-4">
                      <div class="form-group">
                         <label class="col-md-4 control-label tel">Téléphone</label>
-                        <div class="col-md-8">
+                        {# <div class="col-md-8">
                             {{ form_widget(form.telephones, {'attr': {'class': 'form-control tel'}}) }}
-                        </div>
+                        </div> #}
                     </div>
                 </div>
-                <div class="col-md-4">
-                     <div class="form-group">
-                        <label class="col-md-4 control-label tel">Libellé</label>
-                        <div class="col-md-8">
-                            {{ form_rest(form) }}
-                        </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label blocdebnew">Blocage & Deblocage</label>
+                        {{ form_widget(form.locked, {'attr': {'class': 'editlocknew'}}) }}
                     </div>
                 </div>
                 {{ form_end(form) }}
