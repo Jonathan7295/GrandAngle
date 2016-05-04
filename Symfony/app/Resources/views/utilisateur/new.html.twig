@@ -3,80 +3,110 @@
 {% block body %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            Création d'un utilisateur
+            Création d'un nouvel utilisateur
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
                     {{ form_start(form) }}
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Nom</label>
+                        <label class="col-md-3 control-label ajust">Nom</label>
                         <div class="col-md-8">
                             {{ form_widget(form.firstname, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Prénom</label>
+                        <label class="col-md-3 control-label ajust">Prénom</label>
                         <div class="col-md-8">
                            {{ form_widget(form.lastname, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                      <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Role</label>
+                        <label class="col-md-3 control-label ajust">Role</label>
                         <div class="col-md-8">
                            {{ form_widget(form.role, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Adresse e-mail</label>
+                        <label class="col-md-3 control-label ajust">Adresse e-mail</label>
                         <div class="col-md-8">
                            {{ form_widget(form.email, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>    
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Identifiant de connexion</label>
+                        <label class="col-md-3 control-label ajust">Identifiant</label>
                         <div class="col-md-8">
                             {{ form_widget(form.username, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Mot de passe</label>
+                        <label class="col-md-3 control-label ajust">Mot de passe</label>
                         <div class="col-md-8">
                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Vérification</label>
+                        <label class="col-md-3 control-label ajust">Vérification</label>
                         <div class="col-md-8">
                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
-                    <div class="col-md-6 col-md-offset-6">
-                        <input id="newutilval" type="submit" value="Valider" />
-                        <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
-                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                      <div class="form-group">
-                        <label class="col-md-4 control-label tel">Téléphone</label>
-                        {# <div class="col-md-8">
-                            {{ form_widget(form.telephones, {'attr': {'class': 'form-control tel'}}) }}
-                        </div> #}
+                        <label class="col-md-3 control-label tel">Libellé</label>
+                        <div class="col-md-8">
+                            {{ form_widget(form2.libelle, {'attr': {'class': 'form-control tel'}}) }}
+                        </div>
                     </div>
                 </div>
-                 <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="col-md-4 control-label blocdebnew">Blocage & Deblocage</label>
-                        {{ form_widget(form.locked, {'attr': {'class': 'editlocknew'}}) }}
+                <div class="col-md-3 upnew">
+                     <div class="form-group">
+                        <label class="col-md-3 control-label tel">Numéro</label>
+                        <div class="col-md-8">
+                            {{ form_widget(form2.numero, {'attr': {'class': 'form-control tel'}}) }}
+                        </div>
                     </div>
                 </div>
-                {{ form_end(form) }}
-                
+                <div class="col-md-2">
+                    <a id="newlien" type="button" title="Ajouter un numéro" class="glyphicon glyphicon-collapse-down">&nbsp;Ajouter</a>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label id="bloc" class="blocdebnew">Bloquer</label>
+                    <label id="debloc" class="blocdebnew">Debloquer</label> 
+                </div>
+                <div class="col-md-2">
+                     {{ form_widget(form.locked, {'attr': {'class': 'editlocknew'}}) }}
+                </div>
+                <div class="col-md-5">
+                    <input id="newutilval" type="submit" value="Valider" />
+                    <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
+                </div>
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
 {% block javascripts %}
     <script type="text/javascript">
+
+        // Gestion du checked
+        $('.editlocknew').click(function(){
+            if ($( "input:checked" ).val()==1) {
+                $("#debloc").css('display','block');
+                $("#bloc").css('display','none');
+            }else{
+                $("#debloc").css('display','none');
+                $("#bloc").css('display','block');
+            }
+        });
+
+        // Génération d'un nouveau groupe de champs tel
+        $('#newlien').click(function(){
+            alert("Louper !!");
+        });
+       
     </script>
 {% endblock %}

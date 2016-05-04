@@ -51,30 +51,38 @@
                            {{ form_widget(edit_form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
-                    <div class="col-md-6 col-md-offset-6">
-                        <input id="newutilval" type="submit" value="Valider" />
-                        <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
-                    </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                       {{ form_widget(edit_form.telephones, {'attr': {'class': 'form-control ajust'}}) }}
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label id="bloc" class="blocdebnew">Bloquer</label>
+                    <label id="debloc" class="blocdebnew">Debloquer</label> 
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="col-md-4 control-label blocdeb">Blocage & Deblocage</label>
-                        {{ form_widget(edit_form.locked, {'attr': {'class': 'editlock'}}) }}
-                    </div>
+                <div class="col-md-2">
+                     {{ form_widget(edit_form.locked, {'attr': {'class': 'editlocknew'}}) }}
                 </div>
-                    {{ form_end(edit_form) }}
-                
+                <div class="col-md-5">
+                    <input id="newutilval" type="submit" value="Valider" />
+                    <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
+                </div>
+                {{ form_end(edit_form) }}
             </div>
         </div>
     </div>
 {% endblock %}
-{% block javascript %}
+{% block javascripts %}
     <script type="text/javascript">
-        
+
+        // Gestion du checked
+        $('.editlocknew').click(function(){
+            if ($( "input:checked" ).val()==1) {
+                $("#debloc").css('display','block');
+                $("#bloc").css('display','none');
+            }else{
+                $("#debloc").css('display','none');
+                $("#bloc").css('display','block');
+            }
+        });
+       
     </script>
 {% endblock %}

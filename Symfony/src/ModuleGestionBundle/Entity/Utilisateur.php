@@ -40,7 +40,7 @@ class Utilisateur extends BaseUser
         parent::__construct();
         $this->enabled = true;
         $this->role = "USER";
-        // $this->telephones = new ArrayCollection();
+        $this->telephones = new ArrayCollection();
     }
 
     /**

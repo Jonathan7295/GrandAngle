@@ -20,12 +20,6 @@ class RegistrationType extends AbstractType
         $builder
             ->add('firstname', TextType::class, array('label' => 'Nom'))
             ->add('lastname', TextType::class, array('label' => 'Prénom'))
-            // ->add('telephones', CollectionType::class, array(
-            //         'entry_type' => TelephoneType::class,
-            //         'allow_add' => true))
-            // ->add('telephones', EntityType::class, array(
-            //     'class' => 'ModuleGestionBundle:Telephone',
-            //     'choice_label' => 'libelle'))
             ->add('locked', CheckboxType::class, array('required' => false))
             ->add('role', ChoiceType::class, array(
                   'choices' => array(

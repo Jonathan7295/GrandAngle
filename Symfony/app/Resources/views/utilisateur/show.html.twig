@@ -11,7 +11,7 @@
                     <a id="showutilret" href="{{ path('utilisateur_index') }}">Retour</a>
                     <a id="showutiledit" href="{{ path('utilisateur_edit', { 'id': utilisateur.id }) }}">Modifier</a>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-5">
                     <table class="table sho">
                         <tbody>
                             <tr>
@@ -44,7 +44,7 @@
                             </tr>
                             <tr>
                                 <th>Dernière connexion</th>
-                                <td>{{ utilisateur.lastlogin | date("d/m/Y h:m:s", "Europe/Paris") }}</td>
+                                <td>{{ utilisateur.lastlogin | date("d/m/Y H:m:s", "Europe/Paris") }}</td>
                             </tr>
                             <tr>
                                 <th>Etat du compte</th>
@@ -60,6 +60,22 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Libellé</th>
+                                <th>Numéro</th>
+                            </tr>
+                        {% for telephone in utilisateur.telephones %}
+                            <tr>
+                                <td>{{ telephone.libelle }}</td>
+                                <td>{{ telephone.numero }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
                 </div>      
             </div>
         </div>

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ModuleGestionBundle\Entity\Telephone;
 use ModuleGestionBundle\Entity\Utilisateur;
 use ModuleGestionBundle\Form\RegistrationType;
+use ModuleGestionBundle\Form\TelephoneType;
 
 /**
  * Utilisateur controller.
@@ -36,41 +37,29 @@ class UtilisateurController extends Controller
     public function newAction(Request $request)
     {
         $utilisateur = new utilisateur();
+        $telephone = new telephone();
 
         $form = $this->createForm(RegistrationType::class, $utilisateur);
+        $form2 = $this->createForm(TelephoneType::class, $telephone);
 
-        $form->handleRequest($request); 
+        $form->handleRequest($request);
+        $form2->handleRequest($request); 
 
-
-        // var_dump($request->request->all());die();
-        // $utilisateur = new Utilisateur();
-        // $telephone = new Telephone();
-       
-        // $form = $this->createForm('ModuleGestionBundle\Form\RegistrationType', $utilisateur);
-        
-        
-        // $form->handleRequest($request);
-
-        // if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             
-        //     $em = $this->getDoctrine()->getManager();
-        //     $em->persist($utilisateur);
-
-        //     $phone = $request->request->all();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($utilisateur);
             
-        //     // $phone = $phone["app_user_registration"]["numero"];
-        //     // $libelle = $phone["app_user_registration"]["libelle"];
+            $telephone->setUtilisateur($utilisateur);
+            $em->persist($telephone);
+            $em->flush();
 
-        //     $telephone->setNumero($phone);
-        //     $telephone->setLibelle($libelle);
-        //     $telephone->setUtilisateur($utilisateur);
-        //     $em->persist($telephone);
-        //     $em->flush();
-
-        //     return $this->redirectToRoute('utilisateur_show', array('id' => $utilisateur->getId()));
-        // }
+            return $this->redirectToRoute('utilisateur_show', array('id' => $utilisateur->getId()));
+        }
 
         return $this->render('utilisateur/new.html.twig', array(
+            'telephone' => $telephone,
+            'form2' => $form2->createView(),
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
         ));
@@ -96,8 +85,7 @@ class UtilisateurController extends Controller
      */
     public function editAction(Request $request, Utilisateur $utilisateur)
     {
-
-        $deleteForm = $this->createDeleteForm($utilisateur);
+         $deleteForm = $this->createDeleteForm($utilisateur);
 
         $editForm = $this->createForm('ModuleGestionBundle\Form\RegistrationType', $utilisateur);
 
