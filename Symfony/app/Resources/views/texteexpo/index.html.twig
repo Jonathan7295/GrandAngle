@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>TexteExpo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descriptiontextexpo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for texteExpo in texteExpos %}
+            <tr>
+                <td><a href="{{ path('texteexpo_show', { 'id': texteExpo.id }) }}">{{ texteExpo.id }}</a></td>
+                <td>{{ texteExpo.descriptionTextexpo }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('texteexpo_show', { 'id': texteExpo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('texteexpo_edit', { 'id': texteExpo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('texteexpo_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

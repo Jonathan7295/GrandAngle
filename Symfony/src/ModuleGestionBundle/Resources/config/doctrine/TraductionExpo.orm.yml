@@ -1,0 +1,32 @@
+ModuleGestionBundle\Entity\TraductionExpo:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\TraductionExpoRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    oneToOne:
+        langue:
+            targetEntity: ModuleGestionBundle\Entity\Langue
+            inversedBy: traductionexpo
+            joinColumn:
+                name: idLangue
+                referencedColumnName: id  
+    manyToOne:
+        exposition:
+            targetEntity: ModuleGestionBundle\Entity\Exposition
+            inversedBy: traductionexpo
+            joinColumn:
+                name: IdExpo
+                referencedColumnName: id  
+    manyToOne:
+        texteexpo:
+            targetEntity: ModuleGestionBundle\Entity\TexteExpo
+            inversedBy: traductionexpo
+            joinColumn:
+                name: IdTexteExpo
+                referencedColumnName: id  
+    lifecycleCallbacks: {  }

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>TraductionExpo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for traductionExpo in traductionExpos %}
+            <tr>
+                <td><a href="{{ path('traductionexpo_show', { 'id': traductionExpo.id }) }}">{{ traductionExpo.id }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('traductionexpo_show', { 'id': traductionExpo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('traductionexpo_edit', { 'id': traductionExpo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('traductionexpo_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
