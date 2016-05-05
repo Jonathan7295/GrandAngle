@@ -9,64 +9,150 @@
             <div class="row">
                 <div class="col-md-7">
                     {{ form_start(edit_form) }}
+
+                        {# Erreurs générales du formulaire #}
+                        {{ form_errors(edit_form) }}
+
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Nom</label>
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.firstname, "Nom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.firstname) }}
+
                         <div class="col-md-8">
+                            {# Génération de l'input #}
                             {{ form_widget(edit_form.firstname, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Prénom</label>
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.lastname, "Prénom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.lastname) }}
+                       
                         <div class="col-md-8">
-                           {{ form_widget(edit_form.lastname, {'attr': {'class': 'form-control ajust'}}) }}
+                            {# Génération de l'input #}
+                            {{ form_widget(edit_form.lastname, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Role</label>
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.role, "Role", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.role) }}
+
                         <div class="col-md-8">
+                            {# Génération du select #}
                             {{ form_widget(edit_form.role, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Adresse e-mail</label>
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.email, "Adresse e-mail", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.email) }}
+                    
                         <div class="col-md-8">
+                           {# Génération de l'input #}
                            {{ form_widget(edit_form.email, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>    
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Identifiant de connexion</label>
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.username, "Identifiant", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.username) }}
+                        
                         <div class="col-md-8">
+                            {# Génération de l'input #}
                             {{ form_widget(edit_form.username, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Mot de passe</label>
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.plainPassword.first) }}
+
                         <div class="col-md-8">
-                           {{ form_widget(edit_form.plainPassword.first, {'attr': {'class': 'form-control ajust'}}) }}
+                            {# Génération de l'input #}
+                            {{ form_widget(edit_form.plainPassword.first, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label ajust">Vérification</label>
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.plainPassword.second, "Vérification", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.plainPassword.second) }}
+
                         <div class="col-md-8">
-                           {{ form_widget(edit_form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
+                            {# Génération de l'input #}
+                            {{ form_widget(edit_form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3">
+                     <div class="form-group">
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.telephones.0.libelle, "Libellé", {'label_attr': {'class': 'col-md-3 control-label tel'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.telephones.0.libelle) }}
+
+                        <div class="col-md-8">
+                            {# Génération de l'input #}
+                            {{ form_widget(edit_form.telephones.0.libelle, {'attr': {'class': 'form-control tel'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 upnew">
+                     <div class="form-group">
+
+                        {# Génération du label #}
+                        {{ form_label(edit_form.telephones.0.numero, "Numéro", {'label_attr': {'class': 'col-md-3 control-label tel'}})}}
+                        
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.telephones.0.numero) }}
+
+                        <div class="col-md-8">
+                            {# Génération de l'input #}
+                            {{ form_widget(edit_form.telephones.0.numero, {'attr': {'class': 'form-control tel'}}) }}
+                        </div>
+                    </div>
+                </div>
+                {# <div class="col-md-2">
+                    <a id="newlien" type="button" title="Ajouter un numéro" class="glyphicon glyphicon-collapse-down">&nbsp;Ajouter</a>
+                </div> #}
             </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <label id="bloc" class="blocdebnew">Bloquer</label>
-                    <label id="debloc" class="blocdebnew">Debloquer</label> 
-                </div>
-                <div class="col-md-2">
-                     {{ form_widget(edit_form.locked, {'attr': {'class': 'editlocknew'}}) }}
-                </div>
-                <div class="col-md-5">
-                    <input id="newutilval" type="submit" value="Valider" />
-                    <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
-                </div>
-                {{ form_end(edit_form) }}
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label id="bloc" class="blocdebnew">Bloquer</label>
+                <label id="debloc" class="blocdebnew">Debloquer</label> 
             </div>
+            <div class="col-md-2">
+                 {{ form_widget(edit_form.locked, {'attr': {'class': 'editlocknew'}}) }}
+            </div>
+            <div class="col-md-5">
+                <input id="newutilval" type="submit" value="Valider" />
+                <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
+            </div>
+            {{ form_end(edit_form) }}
         </div>
     </div>
 {% endblock %}

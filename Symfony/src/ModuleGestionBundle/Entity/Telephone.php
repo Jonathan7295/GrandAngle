@@ -2,6 +2,7 @@
 
 namespace ModuleGestionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,7 +26,7 @@ class Telephone
     public $libelle;
     
     /**
-     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Utilisateur", inversedBy="telephones",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Utilisateur", inversedBy="telephones")
      * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
      */
     

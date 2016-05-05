@@ -41,7 +41,7 @@ fos_user:
 
     registration:
         form:
-            type: ModuleGestionBundle\Form\RegistrationType
+            type: ModuleGestionBundle\Form\UtilisateurType
         confirmation:
             enabled: false
 

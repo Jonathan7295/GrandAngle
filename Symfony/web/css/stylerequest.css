@@ -30,6 +30,7 @@ label {
 #red {
 	font-size: 12px;
 	color:red;
+	float:left;
 }
 /* Logo formulaire */
 .logo-right {
@@ -62,4 +63,19 @@ label.inline-label {
 
 #btnReset {
 	margin-top: 25px;
+}
+
+.form-control.ajust {
+	margin-bottom:10px;
+}
+
+.control-label.ajust {
+	line-height: 35px
+}
+.editlocknew {
+	height: 34px;
+	width: 34px;
+}
+#debloc {
+	display:none;
 }

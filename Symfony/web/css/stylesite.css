@@ -126,9 +126,18 @@ body {
 }
 
 #delindex {
-	background-color: #FF0327;  
+	background-color: red;
 	border-radius:4px;
-	padding: 8px 8px;
+	width: 30px;
+	height:30px;
+}
+
+#formdel {
+	position: relative;
+	bottom: 29px;
+	left: 69px;
+	width: 30px;
+	height:30px;
 }
 
 #delindex:hover {
@@ -290,4 +299,12 @@ body {
 	right: 60.2em;
 	width: 46%;
 	color: #D9534F;
+}
+
+/***************Style Gestion exposition*******************/
+
+/****Index exposition*****/
+
+.table {
+	background-color: white;
 }

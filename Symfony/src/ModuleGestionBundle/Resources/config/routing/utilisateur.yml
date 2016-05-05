@@ -21,4 +21,4 @@ utilisateur_edit:
 utilisateur_delete:
     path:     /{id}/delete
     defaults: { _controller: "ModuleGestionBundle:Utilisateur:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

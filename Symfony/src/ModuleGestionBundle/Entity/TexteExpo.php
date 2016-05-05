@@ -51,4 +51,3 @@ class TexteExpo
         return $this->descriptionTextexpo;
     }
 }
-

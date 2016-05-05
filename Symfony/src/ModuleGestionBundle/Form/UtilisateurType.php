@@ -2,25 +2,32 @@
 
 namespace ModuleGestionBundle\Form;
 
- 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegistrationType extends AbstractType
+class UtilisateurType extends AbstractType
 {
-   
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
         $builder
-            ->add('firstname', TextType::class, array('label' => 'Nom'))
-            ->add('lastname', TextType::class, array('label' => 'Prénom'))
+            ->add('firstname')
+            ->add('lastname')
             ->add('locked', CheckboxType::class, array('required' => false))
+            ->add('telephones', CollectionType::class, array(
+                'entry_type'    => TelephoneType::class,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'label'         => false,
+                'prototype'     => true))
             ->add('role', ChoiceType::class, array(
                   'choices' => array(
                       'Sélectionnez' => 'INDEFINI',
@@ -29,7 +36,7 @@ class RegistrationType extends AbstractType
                       ),
                 ));
     }
-
+    
     /**
      * @param OptionsResolver $resolver
      */
@@ -40,18 +47,8 @@ class RegistrationType extends AbstractType
         ));
     }
 
-    public function getParent()
+     public function getParent()
     {
-    	return 'FOS\UserBundle\Form\Type\RegistrationFormType';
-    }
-
-    public function getBlockPrefix()
-    {
-    	return 'app_user_registration';
-    }
-
-    public function getName()
-    {
-    	return $this->getBlockPrefix();
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
     }
 }

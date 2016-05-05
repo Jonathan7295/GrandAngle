@@ -29,7 +29,10 @@
                         <td>
                             <a id="searchindex" class="glyphicon glyphicon-search" href="{{ path('utilisateur_show', { 'id': utilisateur.id }) }}"></a>
                             <a id="editindex" class="glyphicon glyphicon-pencil" href="{{ path('utilisateur_edit', { 'id': utilisateur.id }) }}"></a>
-                            <a id="delindex" class="glyphicon glyphicon-trash" href="{{ path('utilisateur_delete', { 'id': utilisateur.id }) }}"></a>
+                            <form id="formdel" method="DELETE" action="{{ path('utilisateur_delete', { 'id': utilisateur.id }) }}">
+                                <input id="delindex" type="submit" value="X" />
+                            </form>
+                            {# <a id="delindex" class="glyphicon glyphicon-trash" href="{{ path('utilisateur_delete', { 'id': utilisateur.id }) }}"></a> #}
                         </td>
                     </tr>
                 {% endfor %}
