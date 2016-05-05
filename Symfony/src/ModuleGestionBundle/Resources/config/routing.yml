@@ -4,7 +4,7 @@ module_gestion_homepage:
 
 module_gestion_index:
     path:     /accueil
-    defaults: { _controller: ModuleGestionBundle:Default:index }
+    defaults: { _controller: ModuleGestionBundle:Security:login }
 
 module_gestion_exposition:
     resource: "@ModuleGestionBundle/Resources/config/routing/exposition.yml"
