@@ -11,22 +11,7 @@ ModuleGestionBundle\Entity\TraductionExpo:
     oneToOne:
         langue:
             targetEntity: ModuleGestionBundle\Entity\Langue
-            inversedBy: traductionexpo
             joinColumn:
-                name: idLangue
-                referencedColumnName: id  
-    manyToOne:
-        exposition:
-            targetEntity: ModuleGestionBundle\Entity\Exposition
-            inversedBy: traductionexpo
-            joinColumn:
-                name: IdExpo
-                referencedColumnName: id  
-    manyToOne:
-        texteexpo:
-            targetEntity: ModuleGestionBundle\Entity\TexteExpo
-            inversedBy: traductionexpo
-            joinColumn:
-                name: IdTexteExpo
-                referencedColumnName: id  
+                name: langue_id
+                referencedColumnName: id 
     lifecycleCallbacks: {  }

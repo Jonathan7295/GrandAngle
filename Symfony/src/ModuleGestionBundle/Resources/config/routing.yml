@@ -14,14 +14,6 @@ module_gestion_utilisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/utilisateur.yml"
     prefix:    /utilisateur
 
-module_gestion_texteexpo:
-    resource: "@ModuleGestionBundle/Resources/config/routing/texteexpo.yml"
-    prefix:   /texteexpo
-
 module_gestion_traductionexpo:
     resource: "@ModuleGestionBundle/Resources/config/routing/traductionexpo.yml"
     prefix:   /traductionexpo
-
-module_gestion_langue:
-    resource: "@ModuleGestionBundle/Resources/config/routing/langue.yml"
-    prefix:   /langue

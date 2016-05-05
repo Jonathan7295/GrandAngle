@@ -16,7 +16,6 @@ class TraductionExpoType extends AbstractType
     {
         $builder
             ->add('langue')
-            ->add('exposition')
         ;
     }
     

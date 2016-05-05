@@ -9,7 +9,8 @@ ModuleGestionBundle\Entity\Langue:
             generator:
                 strategy: AUTO
     fields:
-        nomlangue:
+        nomLangue:
             type: string
             length: 255
+            column: NomLangue
     lifecycleCallbacks: {  }

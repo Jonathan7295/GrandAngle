@@ -8,49 +8,48 @@ namespace ModuleGestionBundle\Entity;
 class Langue
 {
     /**
-     * @var string
-     */
-    private $nomlangue;
-    /**
-     * @var integer
+     * @var int
      */
     private $id;
+
     /**
-    * Get id
-    * @return  
-    */
+     * @var string
+     */
+    private $nomLangue;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
     public function getId()
     {
         return $this->id;
     }
-    
+
     /**
-    * Set id
-    * @return $this
-    */
-    public function setId($id)
+     * Set nomLangue
+     *
+     * @param string $nomLangue
+     *
+     * @return Langue
+     */
+    public function setNomLangue($nomLangue)
     {
-        $this->id = $id;
+        $this->nomLangue = $nomLangue;
+    
         return $this;
     }
 
     /**
-    * Get nomlangue
-    * @return  
-    */
+     * Get nomLangue
+     *
+     * @return string
+     */
     public function getNomLangue()
     {
-        return $this->nomlangue;
-    }
-    
-    /**
-    * Set nomlangue
-    * @return $this
-    */
-    public function setNomLangue($nomlangue)
-    {
-        $this->nomlangue = $nomlangue;
-        return $this;
+        return $this->nomLangue;
     }
 
     public function __toString()
@@ -58,3 +57,4 @@ class Langue
         return strval($this->id);
     }
 }
+
