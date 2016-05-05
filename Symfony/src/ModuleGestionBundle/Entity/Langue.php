@@ -15,7 +15,6 @@ class Langue
      * @var integer
      */
     private $id;
-
     /**
     * Get id
     * @return  

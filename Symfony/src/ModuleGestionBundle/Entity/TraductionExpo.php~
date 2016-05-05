@@ -13,19 +13,20 @@ use ModuleGestionBundle\Entity\Langue;
 class TraductionExpo
 {
     /**
-     * @ORM\OneToOne(targetEntity="ModuleGestionBundle/Entity/Langue", inversedBy="traductionexpo",cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="ModuleGestionBundle/Entity/Langue", inversedBy="traductionexpos",cascade={"persist"})
+     * @ORM\JoinColumn(name="idLangue", referencedColumnName="id")
      */
     private $langue;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle/Entity/Exposition", inversedBy="traductionexpo",cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle/Entity/Exposition", inversedBy="traductionexpos",cascade={"persist"})
+     * @ORM\JoinColumn(name="idExpo", referencedColumnName="id")
      */
      private $exposition;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle/Entity/TexteExpo", inversedBy="traductionexpo",cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle/Entity/TexteExpo", inversedBy="traductionexpos",cascade={"persist"})
+     * @ORM\JoinColumn(name="idTextexpo", referencedColumnName="id")
      */
     private $texteexpo;
 
@@ -67,7 +68,6 @@ class TraductionExpo
     {
         return $this->id;
     }
-
     /**
      * Set exposition
      *
