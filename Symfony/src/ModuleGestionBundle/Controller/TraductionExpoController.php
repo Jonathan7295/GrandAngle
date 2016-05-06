@@ -20,18 +20,17 @@ class TraductionExpoController extends Controller
      */
     public function indexAction()
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $em = $this->getDoctrine()->getManager();
 
-        $traductionExpos = $em->getRepository('ModuleGestionBundle:TraductionExpo')->findAll();
-        foreach ($traductionExpo as $traductionExpos) {
-            $id = $traductionExpo->getLangue();
-            $langue = $em->getRepository('ModuleGestionBundle:Langue')->find($id);
-            $nom = $langue->getNomLangue();
-        }
-
+        $traductionExpos = $em->getRepository('ModuleGestionBundle:TraductionExpo')
+                              ->getTraductionAll();
+    
         return $this->render('traductionexpo/index.html.twig', array(
             'traductionExpos' => $traductionExpos,
-            'nom' => $nom,
+            'role'            => $role,
         ));
     }
 
@@ -41,6 +40,9 @@ class TraductionExpoController extends Controller
      */
     public function newAction(Request $request)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $traductionExpo = new TraductionExpo();
         $form = $this->createForm('ModuleGestionBundle\Form\TraductionExpoType', $traductionExpo);
         $form->handleRequest($request);
@@ -56,6 +58,7 @@ class TraductionExpoController extends Controller
         return $this->render('traductionexpo/new.html.twig', array(
             'traductionExpo' => $traductionExpo,
             'form' => $form->createView(),
+            'role' => $role,
         ));
     }
 
@@ -65,11 +68,15 @@ class TraductionExpoController extends Controller
      */
     public function showAction(TraductionExpo $traductionExpo)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($traductionExpo);
 
         return $this->render('traductionexpo/show.html.twig', array(
             'traductionExpo' => $traductionExpo,
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -79,6 +86,9 @@ class TraductionExpoController extends Controller
      */
     public function editAction(Request $request, TraductionExpo $traductionExpo)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($traductionExpo);
         $editForm = $this->createForm('ModuleGestionBundle\Form\TraductionExpoType', $traductionExpo);
         $editForm->handleRequest($request);
@@ -95,6 +105,7 @@ class TraductionExpoController extends Controller
             'traductionExpo' => $traductionExpo,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -104,6 +115,9 @@ class TraductionExpoController extends Controller
      */
     public function deleteAction(Request $request, TraductionExpo $traductionExpo)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+        
         $form = $this->createDeleteForm($traductionExpo);
         $form->handleRequest($request);
 

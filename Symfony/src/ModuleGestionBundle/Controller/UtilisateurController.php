@@ -22,12 +22,16 @@ class UtilisateurController extends Controller
      */
     public function indexAction()
     {
+         // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $em = $this->getDoctrine()->getManager();
 
         $utilisateurs = $em->getRepository('ModuleGestionBundle:Utilisateur')->findAll();
 
         return $this->render('utilisateur/index.html.twig', array(
             'utilisateurs' => $utilisateurs,
+            'role' => $role,
         ));
     }
 
@@ -37,6 +41,9 @@ class UtilisateurController extends Controller
      */
     public function newAction(Request $request)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $utilisateur = new Utilisateur();
 
         $form = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
@@ -72,6 +79,7 @@ class UtilisateurController extends Controller
         return $this->render('utilisateur/new.html.twig', array(
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
+            'role' => $role,
         ));
     }
 
@@ -81,11 +89,15 @@ class UtilisateurController extends Controller
      */
     public function showAction(Utilisateur $utilisateur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($utilisateur);
 
         return $this->render('utilisateur/show.html.twig', array(
             'utilisateur' => $utilisateur,
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -95,6 +107,9 @@ class UtilisateurController extends Controller
      */
     public function editAction(Request $request, Utilisateur $utilisateur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($utilisateur);
         $editForm = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
 
@@ -112,6 +127,7 @@ class UtilisateurController extends Controller
             'utilisateur' => $utilisateur,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -121,6 +137,9 @@ class UtilisateurController extends Controller
      */
     public function deleteAction(Request $request, Utilisateur $utilisateur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+        
         // $form = $this->createDeleteForm($utilisateur);
         
         // $form->handleRequest($request);
