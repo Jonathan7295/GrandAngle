@@ -54,20 +54,19 @@ class UtilisateurController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            // $telephone = new telephone();
+            $telephones = $request->request->All()["utilisateur"]["telephones"];
 
-            // $numero = $request
-            //                   ->request
-            //                   ->All()["utilisateur"]["telephones"]["__name__"]["numero"];
-            // $libelle = $request
-            //                   ->request
-            //                   ->All()["utilisateur"]["telephones"]["__name__"]["libelle"];
+            foreach ($telephones as $value) {
+                
+                $telephone = new Telephone();
 
-            // $telephone->setNumero($numero)
-            //           ->setLibelle($libelle)
-            //           ->setUtilisateur($utilisateur);
+                $telephone->setLibelle($value['libelle']);
+                $telephone->setNumero($value['numero']);
+                $telephone->setUtilisateur($utilisateur);
+                $em->persist($telephone);
 
-            // $utilisateur->addTelephone($telephone);
+                $utilisateur->addTelephone($telephone);
+            }
 
             $em->persist($utilisateur);
 
@@ -116,8 +115,27 @@ class UtilisateurController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+
+            var_dump($utilisateur->getTelephones());die();
+
+            $telephones = $request->request->All()["utilisateur"]["telephones"];
+
+            foreach ($telephones as $value) {
+                
+                $telephone = new Telephone();
+
+                $telephone->setLibelle($value['libelle']);
+                $telephone->setNumero($value['numero']);
+                $telephone->setUtilisateur($utilisateur);
+                $em->persist($telephone);
+
+                $utilisateur->addTelephone($telephone);
+            }
+
             $em->persist($utilisateur);
+
             $em->flush();
 
             return $this->redirectToRoute('utilisateur_edit', array('id' => $utilisateur->getId()));
@@ -137,19 +155,20 @@ class UtilisateurController extends Controller
      */
     public function deleteAction(Request $request, Utilisateur $utilisateur)
     {
+        var_dump($utilisateur->getId());die();
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
         
-        // $form = $this->createDeleteForm($utilisateur);
+        $form = $this->createDeleteForm($utilisateur);
+
+        $form->handleRequest($request);
         
-        // $form->handleRequest($request);
-        // var_dump($form->isValid());die();
-        // if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($utilisateur);
             $em->flush();
-        // }
+        }
 
         return $this->redirectToRoute('utilisateur_index');
     }

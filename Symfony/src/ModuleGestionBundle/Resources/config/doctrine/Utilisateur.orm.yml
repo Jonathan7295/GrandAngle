@@ -25,4 +25,6 @@ ModuleGestionBundle\Entity\Utilisateur:
         telephones:
             targetEntity: ModuleGestionBundle\Entity\Telephone
             mappedBy: utilisateur
+            cascade: ["remove","persist"] 
+    
     lifecycleCallbacks: {  }

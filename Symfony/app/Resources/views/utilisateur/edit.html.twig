@@ -7,7 +7,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-5">
                     {{ form_start(edit_form) }}
 
                         {# Erreurs générales du formulaire #}
@@ -105,39 +105,69 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                     <div class="form-group">
+                {% if edit_form.telephones.0 is defined %}
+                    
+                    <script>
+                        $(document).ready(function(){
 
-                        {# Génération du label #}
-                        {{ form_label(edit_form.telephones.0.libelle, "Libellé", {'label_attr': {'class': 'col-md-3 control-label tel'}})}}
+                            // Nombre de champs téléphone généré
+                            var nbElements = $('#utilisateur_telephones_1').length;
                         
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(edit_form.telephones.0.libelle) }}
+                            // On commence le compteur de champs
+                            var index = 0;
 
-                        <div class="col-md-8">
-                            {# Génération de l'input #}
-                            {{ form_widget(edit_form.telephones.0.libelle, {'attr': {'class': 'form-control tel'}}) }}
+                            // Tant que les champs existent on génère les labels et input pour afficher les valeurs
+                            while ($('#utilisateur_telephones_'+index).length > 0) {
+
+                                // On récupère le lien de suppression
+                                var dellink = '<a type="button" name='+index+' title="Supprimer un numéro" alt="Supprimer un numéro" class="glyphicon glyphicon-earphone editlienred"></a>';
+
+                                // On désactive le label de l'indice de collection
+                                $('label.required:contains('+index+')').css('display','none');
+
+                                // On récupère le groupe de champs dans son div
+                                var enfant  = $('#utilisateur_telephones_'+index).children();
+
+                                // On en extrait les balises descendantes
+                                var descendant = enfant.find("*");
+
+                                // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+                                $('.labelLib').append(descendant[0]);
+                                $('.champslib').append(descendant[1]);
+                                $('.labelnum').append(descendant[2]);
+                                $('.champsnum').append(descendant[3]);
+                                $('.deplace').append(dellink);
+                                // On incremente après chaque disposition de champs
+                               index++;
+                            }
+
+                            $('a').click(function(){
+                                alert($(this).attr('name'));
+                            });
+                           
+                        });
+                    </script>
+                    
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-md-2  labelLib"></div>
+                            <div class="col-md-3  champslib"></div>
+                            <div class="col-md-2  labelnum"></div> 
+                            <div class="col-md-4  champsnum"></div>
+                            <div class="col-md-1 deplace"></div>
+                        </div>
+                        <div class="form-group">
+                            <a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 upnew">
-                     <div class="form-group">
-
-                        {# Génération du label #}
-                        {{ form_label(edit_form.telephones.0.numero, "Numéro", {'label_attr': {'class': 'col-md-3 control-label tel'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(edit_form.telephones.0.numero) }}
-
-                        <div class="col-md-8">
-                            {# Génération de l'input #}
-                            {{ form_widget(edit_form.telephones.0.numero, {'attr': {'class': 'form-control tel'}}) }}
-                        </div>
+                
+                {% else %}
+                    <div class="col-md-1">
+                        <a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>
                     </div>
-                </div>
-                {# <div class="col-md-2">
-                    <a id="newlien" type="button" title="Ajouter un numéro" class="glyphicon glyphicon-collapse-down">&nbsp;Ajouter</a>
-                </div> #}
+                {% endif %}   
             </div>
         </div>
         <div class="row">

@@ -1,8 +1,6 @@
 <?php
 // src/ModuleGestionBundle/Entity/Utilisateur.php
-
 namespace ModuleGestionBundle\Entity;
-
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,25 +13,21 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Utilisateur extends BaseUser
 {
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBundle\Entity\Telephone", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"remove", "persist"})
      */
     protected $telephones;
-
     /**
      * @ORM\Column(name="firstname", type="string", length=255)
      */
     private $firstname;
-
     /**
      * @ORM\Column(name="lastname", type="string", length=255)
      */
     private $lastname;
-
     /**
      * @ORM\Column(name="role", type="string", length=255)
      */
     private $role;
-
     
     public function __construct()
     {
@@ -42,7 +36,6 @@ class Utilisateur extends BaseUser
         $this->role = "USER";
         $this->telephones = new ArrayCollection();
     }
-
     /**
      * Set firstname
      *
@@ -56,7 +49,6 @@ class Utilisateur extends BaseUser
     
         return $this;
     }
-
     /**
      * Get firstname
      *
@@ -66,7 +58,6 @@ class Utilisateur extends BaseUser
     {
         return $this->firstname;
     }
-
     /**
      * Set lastname
      *
@@ -80,7 +71,6 @@ class Utilisateur extends BaseUser
     
         return $this;
     }
-
     /**
      * Get lastname
      *
@@ -90,7 +80,28 @@ class Utilisateur extends BaseUser
     {
         return $this->lastname;
     }
-
+    /**
+     * Set role
+     *
+     * @param string $role
+     *
+     * @return Utilisateur
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    
+        return $this;
+    }
+    /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
 
     /**
      * Add telephone
@@ -117,6 +128,16 @@ class Utilisateur extends BaseUser
     }
 
     /**
+      * Set telephones
+      *
+      * @param \Doctrine\Common\Collections\Collection $telephones
+      */
+    public function setTelephones(\Doctrine\Common\Collections\Collection $telephones)
+    {
+        $this->telephones = $telephones;
+    }
+
+    /**
      * Get telephones
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -124,29 +145,5 @@ class Utilisateur extends BaseUser
     public function getTelephones()
     {
         return $this->telephones;
-    }
-
-    /**
-     * Set role
-     *
-     * @param string $role
-     *
-     * @return Utilisateur
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-    
-        return $this;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string
-     */
-    public function getRole()
-    {
-        return $this->role;
     }
 }

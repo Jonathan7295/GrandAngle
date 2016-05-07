@@ -128,8 +128,7 @@ body {
 #delindex {
 	background-color: red;
 	border-radius:4px;
-	width: 30px;
-	height:30px;
+	padding: 8px 8px;
 }
 
 #formdel {
@@ -221,7 +220,6 @@ body {
 	padding: 10px 15px;
 	margin-bottom: 10px;
 	margin-right: 1em;
-	width: 115px;
 }
 
 #newlien:hover {
@@ -229,6 +227,12 @@ body {
 	color : white;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+#tel {
+	position:relative;
+	bottom: 22em;
+	left: 45em;
 }
 
 /*****Show Utilisateur*****/
@@ -299,6 +303,40 @@ body {
 	right: 60.2em;
 	width: 46%;
 	color: #D9534F;
+}
+
+
+.labelLib label,.labelnum label {
+	line-height: 30px;
+	margin-bottom: 16px;
+}
+
+.champslib input,.champsnum input {
+	width:100%;
+	padding: 6px 12px;
+	border:1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	margin-bottom: 16px;
+}
+
+.editlienred {
+	background-color: #BD3329;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 7px 12px;
+	margin-bottom: 10px;
+	margin-right: 1em;
+	margin-top:13px;
+}
+
+.editlienred:hover {
+	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 /***************Style Gestion exposition*******************/

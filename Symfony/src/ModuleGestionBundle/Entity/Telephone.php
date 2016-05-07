@@ -1,37 +1,31 @@
 <?php
-
 namespace ModuleGestionBundle\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Telephone
  */
 class Telephone
 {
     /**
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="telephones", cascade={"remove"})
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+     */
+    protected $utilisateur;
+    
+    /**
      * @var int
      */
     private $id;
-
     /**
      * @var string
      */
     public $numero;
-
     /**
      * @var string
      */
     public $libelle;
     
-    /**
-     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Utilisateur", inversedBy="telephones")
-     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
-     */
-    
-    private $utilisateur;
-
     /**
      * Get id
      *
@@ -41,7 +35,6 @@ class Telephone
     {
         return $this->id;
     }
-
     /**
      * Set numero
      *
@@ -55,7 +48,6 @@ class Telephone
     
         return $this;
     }
-
     /**
      * Get numero
      *
@@ -65,7 +57,6 @@ class Telephone
     {
         return $this->numero;
     }
-
     /**
      * Set libelle
      *
@@ -79,7 +70,6 @@ class Telephone
     
         return $this;
     }
-
     /**
      * Get libelle
      *
