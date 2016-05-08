@@ -149,6 +149,42 @@ body {
 	overflow-y: scroll;
 }
 
+/*Fond le pop-up de suppression*/
+#back {
+	display:none;
+	position:absolute;
+	background-color: rgba(0,0,0, 0.5);
+	width: 100%;
+	height: 100%;
+	z-index:1000;
+}
+/*Fenêtre de la pop-up*/
+#modal-form {
+	display:none;
+	position:absolute;
+	top: 36.5%;
+	left: 37.5%;
+	background-color: #2E6170;
+	border: 1px solid rgba(184, 208, 192, 0.74);
+	color:white;
+	border-radius: 25%;
+	padding: 25px;
+	width: 25%;
+	height: 250px;
+	z-index:1200;
+}
+
+.head-form {
+	padding: 15px;
+	font-size: 1.1em;
+}
+
+.content-form {
+	margin-top: 25%;
+	margin-left: 25%;
+}
+
+
 /*****New Utilisateur******/
 #newutilval {
 	background-color: #5bc0de;
@@ -229,10 +265,37 @@ body {
 	cursor: pointer;
 }
 
-#tel {
-	position:relative;
-	bottom: 22em;
-	left: 45em;
+#newlien2 {
+	background-color: #48B865;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+	margin-bottom: 10px;
+	margin-right: 1em;
+}
+
+#newlien2:hover {
+	background-color: #6AC682;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.newlienred {
+	background-color: #BD3329;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 16px;
+}
+
+.newlienred:hover {
+	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 /*****Show Utilisateur*****/
@@ -307,7 +370,7 @@ body {
 
 
 .labelLib label,.labelnum label {
-	line-height: 30px;
+	line-height: 33px;
 	margin-bottom: 16px;
 }
 
@@ -326,10 +389,8 @@ body {
 	font-size: 16px;
 	color : #E3E3E3;
 	border-radius:4px;
-	padding: 7px 12px;
-	margin-bottom: 10px;
-	margin-right: 1em;
-	margin-top:13px;
+	padding: 9px 9px;
+	margin-bottom: 16px;
 }
 
 .editlienred:hover {
@@ -337,6 +398,24 @@ body {
 	color : white;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+#formedit {
+	position:absolute;
+	top: 0px;
+	left: 40em;
+}
+
+#formedit2 {
+	position:absolute;
+	top: 173px;
+	left: 40em;
+}
+
+.error ul li {
+	list-style-type: none; 
+	font-size: 0.9em;
+	color: red;
 }
 
 /***************Style Gestion exposition*******************/

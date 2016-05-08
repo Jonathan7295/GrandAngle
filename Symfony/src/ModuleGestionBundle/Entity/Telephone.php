@@ -2,6 +2,7 @@
 namespace ModuleGestionBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Telephone
  */
@@ -17,10 +18,18 @@ class Telephone
      * @var int
      */
     private $id;
+
     /**
      * @var string
      */
+     /**
+     * @Assert\Type(
+     *     type="integer",
+     *     message="La valeur {{ value }} est de type {{ type }} qui est non valide."
+     * )
+     */
     public $numero;
+
     /**
      * @var string
      */

@@ -104,7 +104,23 @@
                             {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
                     </div>
-                    <div id="tel" class="form-group col-md-6"></div>
+                    <div id="tel" class="form-group col-md-12">
+                        
+                    </div>
+                    <div id="formedit" class="col-md-12">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-md-2  labelLib"></div>
+                            <div class="col-md-3  champslib"></div>
+                            <div class="col-md-2  labelnum"></div> 
+                            <div class="col-md-4  champsnum"></div>
+                            <div class="col-md-1 deplace"></div>
+                        </div>
+                        {# <div class="form-group">
+                            <a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>
+                        </div> #}
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -141,7 +157,6 @@
 
             // On récupère la balise <div> qui contient le prototype
             var $container = $('div#utilisateur_telephones');
-
             // On repositionne correctement sur la page
             $('#tel').append($container);
             var $newcontainer = $('#tel');
@@ -149,7 +164,8 @@
             
             // On ajoute le lien pour ajouter un nouveau téléphone
             var $addLink = $('<a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>');
-            $container.append($addLink);
+            // $container.append($addLink);
+            $('#tel').append($addLink);
 
             // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
             $addLink.click(function(e){
@@ -176,11 +192,19 @@
 
                 var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g,'Téléphone n°' + (index+1)).replace(/__name__/g, index));
 
-                // On ajoute au prototype un lien pour pouvoir supprimer le telephone
-                addDeleteLink($prototype);
+                // On récupère le groupe de champs dans son div
+                $newprototype = $($prototype);
 
-                // On ajoute le prototype modifié à la fin de la balise <div>
-                $container.append($prototype);
+                var descendant = $newprototype.find('*');
+
+                // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+                $('.labelLib').append(descendant[3]);
+                $('.champslib').append(descendant[4]);
+                $('.labelnum').append(descendant[6]);
+                $('.champsnum').append(descendant[7]);
+
+                // On ajoute au prototype un lien pour pouvoir supprimer le telephone
+                addDeleteLink($('.deplace'));
 
                 // Enfin on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
                 index++;
@@ -189,14 +213,33 @@
             // La fonction qui ajoute un lien de suppression de Telephone
             function addDeleteLink($prototype) {
                 // Création du lien
-                $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+                $deleteLink = $('<a type="button" name="'+index+'" title="Supprimer un numéro" alt="Supprimer un numéro" class="glyphicon glyphicon-earphone newlienred"></a>');
 
                 // Ajout du lien
                 $prototype.append($deleteLink);
 
                 // Ajout du listener sur le clic du lien
                 $deleteLink.click(function(e){
-                    $prototype.remove();
+
+                    // On récupère l'index du champs à supprimer
+                    var num = $(this).attr('name');
+
+                    // Test pour vérifier si le champs existe car indice 1 de l'index est 0 du champs quand il n'en reste qu'un apparu dans les premiers.
+                    var test = $('.labelLib').children()[num];
+                    test === undefined ? num = 0 : num = num;
+
+                    // On supprime les champs un à un
+                        // Label Libellé
+                        $('.labelLib').children()[num].remove();
+                        // Champs Libellé
+                        $('.champslib').children()[num].remove();
+                        // Label Numéro
+                        $('.labelnum').children()[num].remove();
+                        // Champs Numéro
+                        $('.champsnum').children()[num].remove();
+                        // Lien button delete
+                        $(this).remove();
+                    
                     e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
                     index--;
                     return false;

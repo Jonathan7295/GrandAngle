@@ -9,7 +9,13 @@ use Doctrine\ORM\Mapping\OneToOne;
  */
 class TraductionExpo
 {
-    /**Enti
+    /**
+     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Exposition",inversedBy="traductionexpos", cascade={"remove"})
+     * @ORM\JoinColumn(name="exposition_id", referencedColumnName="id")
+     */
+     private $exposition;
+
+    /**
      * @var int
      */
     private $id;

@@ -13,5 +13,14 @@ ModuleGestionBundle\Entity\TraductionExpo:
             targetEntity: ModuleGestionBundle\Entity\Langue
             joinColumn:
                 name: langue_id
-                referencedColumnName: id 
+                referencedColumnName: id
+    manyToOne:
+        exposition:
+            targetEntity: ModuleGestionBundle\Entity\Exposition
+            inversedBy: traductionexpos
+            cascade: ["remove"]
+            joinColumn:
+                name: exposition_id
+                referencedColumnName: id
+                
     lifecycleCallbacks: {  }

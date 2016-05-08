@@ -3,6 +3,7 @@
 namespace ModuleGestionBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use ModuleGestionBundle\Entity\Utilisateur;
@@ -110,6 +111,7 @@ class UtilisateurController extends Controller
         $role = $this->getUser()->getRole();
 
         $deleteForm = $this->createDeleteForm($utilisateur);
+
         $editForm = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
 
         $editForm->handleRequest($request);
@@ -118,27 +120,25 @@ class UtilisateurController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            var_dump($utilisateur->getTelephones());die();
+            // $id = $utilisateur->getId();
 
-            $telephones = $request->request->All()["utilisateur"]["telephones"];
+            // $telephones = $em->getRepository('ModuleGestionBundle:Telephone')->findBy(
+            //     array('utilisateur_id' => '9'));
 
-            foreach ($telephones as $value) {
-                
-                $telephone = new Telephone();
+            // foreach ($telephones as $value) {
+            //     var_dump($value->getId().'<br>');
+            // }
 
-                $telephone->setLibelle($value['libelle']);
-                $telephone->setNumero($value['numero']);
-                $telephone->setUtilisateur($utilisateur);
-                $em->persist($telephone);
-
-                $utilisateur->addTelephone($telephone);
-            }
+            // die();
+            // var_dump($request->request->All());die();
 
             $em->persist($utilisateur);
 
             $em->flush();
 
-            return $this->redirectToRoute('utilisateur_edit', array('id' => $utilisateur->getId()));
+            return $this->redirectToRoute('utilisateur_edit', array(
+                'id' => $utilisateur->getId(),
+            ));
         }
 
         return $this->render('utilisateur/edit.html.twig', array(
@@ -155,20 +155,13 @@ class UtilisateurController extends Controller
      */
     public function deleteAction(Request $request, Utilisateur $utilisateur)
     {
-        var_dump($utilisateur->getId());die();
+        
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
-        
-        $form = $this->createDeleteForm($utilisateur);
-
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($utilisateur);
             $em->flush();
-        }
 
         return $this->redirectToRoute('utilisateur_index');
     }

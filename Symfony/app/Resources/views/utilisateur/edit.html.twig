@@ -82,9 +82,6 @@
 
                         {# Génération du label #}
                         {{ form_label(edit_form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(edit_form.plainPassword.first) }}
 
                         <div class="col-md-8">
                             {# Génération de l'input #}
@@ -96,19 +93,25 @@
                         {# Génération du label #}
                         {{ form_label(edit_form.plainPassword.second, "Vérification", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
                         
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(edit_form.plainPassword.second) }}
-
                         <div class="col-md-8">
                             {# Génération de l'input #}
                             {{ form_widget(edit_form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
                         </div>
+                    </div>
+                    <div class="form-group error">
+                        {# Affichage des erreurs pour ce champs précis #}
+                        {{ form_errors(edit_form.plainPassword.first) }}
                     </div>
                 </div>
                 {% if edit_form.telephones.0 is defined %}
                     
                     <script>
                         $(document).ready(function(){
+
+                            // On ajoute le lien pour ajouter un nouveau téléphone
+                            var $addLink = $('<a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>');
+
+                            $('#tel').append($addLink);
 
                             // Nombre de champs téléphone généré
                             var nbElements = $('#utilisateur_telephones_1').length;
@@ -140,15 +143,64 @@
                                 // On incremente après chaque disposition de champs
                                index++;
                             }
+                            // Puis on intègre tout ça dans le formulaire
+                                $('form').append($('#formedit'));
 
-                            $('a').click(function(){
-                                alert($(this).attr('name'));
+                            // Quand on clique pour supprimer un numéro
+                            $('a.editlienred').click(function(e){
+
+                                // On récupère l'index du champs à supprimer
+                                var num = $(this).attr('name');
+
+                                // Test pour vérifier si le champs existe car indice 1 de l'index est 0 du champs quand il n'en reste qu'un apparu dans les premiers.
+                                var test = $('.labelLib').children()[num];
+                                test === undefined ? num = 0 : num = num;
+
+                                // On supprime les champs un à un
+                                    // Label Libellé
+                                    $('.labelLib').children()[num].remove();
+                                    // Champs Libellé
+                                    $('.champslib').children()[num].remove();
+                                    // Label Numéro
+                                    $('.labelnum').children()[num].remove();
+                                    // Champs Numéro
+                                    $('.champsnum').children()[num].remove();
+                                    // Lien button delete
+                                    $(this).remove();
+
+                                    e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
                             });
-                           
+
+                            // Quand on clique sur ajouter un numéro
+                            $('#newlien').click(function(e){
+
+                                    // On récupère la balise <div> qui contient le prototype
+                                    var $container = $('div#utilisateur_telephones');
+
+                                    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+                                    var index = $container.find(':input').length;
+
+                                    // On récupère le lien de suppression
+                                    var dellink2 = '<a type="button" name='+index+' title="Supprimer un numéro" alt="Supprimer un numéro" class="glyphicon glyphicon-earphone editlienred"></a>';
+
+                                    var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g,'Téléphone n°' + (index+1)).replace(/__name__/g, index));
+
+                                    var descendant = $prototype.find('*');
+
+                                    // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+                                    $('.labelLib').append(descendant[3]);
+                                    $('.champslib').append(descendant[4]);
+                                    $('.labelnum').append(descendant[6]);
+                                    $('.champsnum').append(descendant[7]);
+                                    $('.deplace').append(dellink2);
+
+                                    index++;
+
+                                    e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
+                            });
                         });
-                    </script>
-                    
-                <div class="col-md-5">
+                    </script>    
+                <div id="formedit" class="col-md-12">
                     <div class="form-group">
                         <div class="form-group">
                             <div class="col-md-2  labelLib"></div>
@@ -157,18 +209,116 @@
                             <div class="col-md-4  champsnum"></div>
                             <div class="col-md-1 deplace"></div>
                         </div>
+                    </div>
+                </div>  
+                {% else %}
+                    <script>
+                        $(document).ready(function(){
+
+                            // On récupère la balise <div> qui contient le prototype
+                            var $container = $('div#utilisateur_telephones');
+                            
+                            // On ajoute le lien pour ajouter un nouveau téléphone
+                            var $addLink = $('<a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>');
+
+                            $('#tel').append($addLink);
+
+                            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+                            $addLink.click(function(e){
+                                addTelephone($container);
+                                e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
+                                return false;
+                            });
+
+                            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+                            var index = $container.find(':input').length;
+
+                            // On ajoute un premier champs automatiquement s'il n'en existe pas
+                            if (index == 0) {
+                                addTelephone($container);
+                            }else{
+                                // Pour chaque telephone déjà existant, on ajoute un lien de suppression
+                                $container.children('div').each(function() {
+                                    addDeleteLink($(this));
+                                });
+                            }
+
+                            // La fonction qui ajoute un formulaire Telephone
+                            function addTelephone($container) {
+
+                                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g,'Téléphone n°' + (index+1)).replace(/__name__/g, index));
+
+                                // On récupère le groupe de champs dans son div
+                                $newprototype = $($prototype);
+
+                                var descendant = $newprototype.find('*');
+
+                                // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+                                $('.labelLib').append(descendant[3]);
+                                $('.champslib').append(descendant[4]);
+                                $('.labelnum').append(descendant[6]);
+                                $('.champsnum').append(descendant[7]);
+
+                                // On ajoute au prototype un lien pour pouvoir supprimer le telephone
+                                addDeleteLink($('.deplace'));
+
+                                // Enfin on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                                index++;
+                            }
+
+                            // La fonction qui ajoute un lien de suppression de Telephone
+                            function addDeleteLink($prototype) {
+                                // Création du lien
+                                $deleteLink = $('<a type="button" name="'+index+'" title="Supprimer un numéro" alt="Supprimer un numéro" class="glyphicon glyphicon-earphone newlienred"></a>');
+
+                                // Ajout du lien
+                                $prototype.append($deleteLink);
+
+                                // Ajout du listener sur le clic du lien
+                                $deleteLink.click(function(e){
+
+                                    // On récupère l'index du champs à supprimer
+                                    var num = $(this).attr('name');
+
+                                    // Test pour vérifier si le champs existe car indice 1 de l'index est 0 du champs quand il n'en reste qu'un apparu dans les premiers.
+                                    var test = $('.labelLib').children()[num];
+                                    test === undefined ? num = 0 : num = num;
+
+                                    // On supprime les champs un à un
+                                        // Label Libellé
+                                        $('.labelLib').children()[num].remove();
+                                        // Champs Libellé
+                                        $('.champslib').children()[num].remove();
+                                        // Label Numéro
+                                        $('.labelnum').children()[num].remove();
+                                        // Champs Numéro
+                                        $('.champsnum').children()[num].remove();
+                                        // Lien button delete
+                                        $(this).remove();
+                                    
+                                    e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
+                                    index--;
+                                    return false;
+                                });
+                            }
+                        });
+                    </script>
+                <div id="formedit2" class="col-md-6">
+                    <div class="form-group">
                         <div class="form-group">
-                            <a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>
+                            <div class="col-md-2  labelLib"></div>
+                            <div class="col-md-3  champslib"></div>
+                            <div class="col-md-2  labelnum"></div> 
+                            <div class="col-md-4  champsnum"></div>
+                            <div class="col-md-1 deplace"></div>
                         </div>
                     </div>
-                </div>
-                
-                {% else %}
-                    <div class="col-md-1">
-                        <a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>
-                    </div>
-                {% endif %}   
+                </div>  
+                {% endif %}
             </div>
+        </div>
+        <div class="row">
+            <div id="tel" class="form-group col-md-10 col-md-offset-1"></div>
         </div>
         <div class="row">
             <div class="col-md-2">

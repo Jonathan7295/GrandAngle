@@ -17,26 +17,26 @@
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
-        <body>
+    </head>
+    <body>
+        <div id="back"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-default">
-                        <div class="col-md-12">
-                            <ul class="nav nav-pills">
-                                <li class="col-md-"role="presentation"><a id="acce" href="{{ path("module_gestion_index") }}">Accueil</a></li>
-                                <li role="presentation"><a id="expo" href="{{ path("exposition_index") }}">Gestion Exposition</a></li>
-                                <li role="presentation"><a id="oeuv" href="#">Gestion Oeuvre</a></li>
-                                {% if role == "ADMIN" %}
-                                <li id="droit" role="presentation"><a id="util" href="{{ path("utilisateur_index") }}">Gestion Utilisateur</a></li>
-                                {% endif %}
-                                <li role="presentation"><a id="stat" href="#">Gestion Statistique</a></li>
-                                <li role="presentation"><a id="deco" href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
-                                {% image 'image/logo2.png' %}
-                                <img class="img-responsive" title="Grand Angle" src="{{ asset_url }}" width="140" height:"90" />
-                                {% endimage %}
-                            </ul>
-                        </div>
+                        <ul class="nav nav-pills">
+                            <li class="col-md-"role="presentation"><a id="acce" href="{{ path("module_gestion_index") }}">Accueil</a></li>
+                            <li role="presentation"><a id="expo" href="{{ path("exposition_index") }}">Gestion Exposition</a></li>
+                            <li role="presentation"><a id="oeuv" href="#">Gestion Oeuvre</a></li>
+                            {% if role == "ADMIN" %}
+                            <li id="droit" role="presentation"><a id="util" href="{{ path("utilisateur_index") }}">Gestion Utilisateur</a></li>
+                            {% endif %}
+                            <li role="presentation"><a id="stat" href="#">Gestion Statistique</a></li>
+                            <li role="presentation"><a id="deco" href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
+                            {% image 'image/logo2.png' %}
+                            <img class="img-responsive" title="Grand Angle" src="{{ asset_url }}" width="140" height:"90" />
+                            {% endimage %}
+                        </ul>
                     </nav>
                 </div>
             </div>

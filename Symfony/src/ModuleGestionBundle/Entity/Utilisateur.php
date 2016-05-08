@@ -16,12 +16,25 @@ class Utilisateur extends BaseUser
      * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"remove", "persist"})
      */
     protected $telephones;
+
     /**
      * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    /**
+     * @Assert\Length(
+     *      max = 30,
+     *      maxMessage = "Votre nom ne doit pas excéder {{ limit }} caractères !"
+     * )
      */
     private $firstname;
     /**
      * @ORM\Column(name="lastname", type="string", length=255)
+     */
+    /**
+     * @Assert\Length(
+     *      max = 30,
+     *      maxMessage = "Votre nom ne doit pas excéder {{ limit }} caractères !"
+     * )
      */
     private $lastname;
     /**
