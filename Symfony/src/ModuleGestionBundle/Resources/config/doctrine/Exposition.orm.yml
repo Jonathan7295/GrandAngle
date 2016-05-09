@@ -22,4 +22,10 @@ ModuleGestionBundle\Entity\Exposition:
         nombreVisiteExposition:
             type: integer
             column: nombre_visite_exposition
+
+    oneToMany:
+        traductionexpos:
+            targetEntity: ModuleGestionBundle\Entity\TraductionExpo
+            mappedBy: Exposition
+            cascade: ["remove","persist"]
     lifecycleCallbacks: {  }

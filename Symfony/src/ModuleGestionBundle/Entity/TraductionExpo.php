@@ -61,4 +61,23 @@ class TraductionExpo
     {
         return $this->langue;
     }
+
+    /**
+     * Get exposition
+     * @return  
+     */
+    public function getExposition()
+    {
+        return $this->exposition;
+    }
+     
+    /**
+    * Set exposition
+    * @return $this
+    */
+    public function setExposition($exposition)
+    {
+        $this->exposition = $exposition;
+        return $this;
+    }
 }
