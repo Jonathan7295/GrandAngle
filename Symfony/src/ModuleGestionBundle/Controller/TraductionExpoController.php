@@ -22,12 +22,9 @@ class TraductionExpoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $traductionExpos = $em->getRepository('ModuleGestionBundle:TraductionExpo')->findAll();
-        foreach ($traductionExpo as $traductionExpos) {
-            $id = $traductionExpo->getLangue();
-            $langue = $em->getRepository('ModuleGestionBundle:Langue')->find($id);
-            $nom = $langue->getNomLangue();
-        }
+        $traductionExpos = $em->getRepository('ModuleGestionBundle:TraductionExpo')->find(1);
+        $langue = $traductionExpos->getLangue();
+        $nom = $langue->getNomLangue();
 
         return $this->render('traductionexpo/index.html.twig', array(
             'traductionExpos' => $traductionExpos,
