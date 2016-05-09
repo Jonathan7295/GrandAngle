@@ -20,12 +20,16 @@ class ExpositionController extends Controller
      */
     public function indexAction()
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $em = $this->getDoctrine()->getManager();
 
         $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
 
         return $this->render('exposition/index.html.twig', array(
             'expositions' => $expositions,
+            'role'        => $role,
         ));
     }
 
@@ -35,6 +39,9 @@ class ExpositionController extends Controller
      */
     public function newAction(Request $request)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $exposition = new Exposition();
         $form = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
         $form->handleRequest($request);
@@ -50,6 +57,7 @@ class ExpositionController extends Controller
         return $this->render('exposition/new.html.twig', array(
             'exposition' => $exposition,
             'form' => $form->createView(),
+            'role' => $role,
         ));
     }
 
@@ -59,11 +67,15 @@ class ExpositionController extends Controller
      */
     public function showAction(Exposition $exposition)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($exposition);
 
         return $this->render('exposition/show.html.twig', array(
             'exposition' => $exposition,
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -73,6 +85,9 @@ class ExpositionController extends Controller
      */
     public function editAction(Request $request, Exposition $exposition)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($exposition);
         $editForm = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
         $editForm->handleRequest($request);
@@ -89,6 +104,7 @@ class ExpositionController extends Controller
             'exposition' => $exposition,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -98,6 +114,9 @@ class ExpositionController extends Controller
      */
     public function deleteAction(Request $request, Exposition $exposition)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+        
         $form = $this->createDeleteForm($exposition);
         $form->handleRequest($request);
 

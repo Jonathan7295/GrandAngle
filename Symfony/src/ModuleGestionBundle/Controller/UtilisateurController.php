@@ -3,6 +3,7 @@
 namespace ModuleGestionBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use ModuleGestionBundle\Entity\Utilisateur;
@@ -22,12 +23,16 @@ class UtilisateurController extends Controller
      */
     public function indexAction()
     {
+         // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $em = $this->getDoctrine()->getManager();
 
         $utilisateurs = $em->getRepository('ModuleGestionBundle:Utilisateur')->findAll();
 
         return $this->render('utilisateur/index.html.twig', array(
             'utilisateurs' => $utilisateurs,
+            'role' => $role,
         ));
     }
 
@@ -37,6 +42,9 @@ class UtilisateurController extends Controller
      */
     public function newAction(Request $request)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $utilisateur = new Utilisateur();
 
         $form = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
@@ -47,20 +55,19 @@ class UtilisateurController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            // $telephone = new telephone();
+            $telephones = $request->request->All()["utilisateur"]["telephones"];
 
-            // $numero = $request
-            //                   ->request
-            //                   ->All()["utilisateur"]["telephones"]["__name__"]["numero"];
-            // $libelle = $request
-            //                   ->request
-            //                   ->All()["utilisateur"]["telephones"]["__name__"]["libelle"];
+            foreach ($telephones as $value) {
+                
+                $telephone = new Telephone();
 
-            // $telephone->setNumero($numero)
-            //           ->setLibelle($libelle)
-            //           ->setUtilisateur($utilisateur);
+                $telephone->setLibelle($value['libelle']);
+                $telephone->setNumero($value['numero']);
+                $telephone->setUtilisateur($utilisateur);
+                $em->persist($telephone);
 
-            // $utilisateur->addTelephone($telephone);
+                $utilisateur->addTelephone($telephone);
+            }
 
             $em->persist($utilisateur);
 
@@ -72,6 +79,7 @@ class UtilisateurController extends Controller
         return $this->render('utilisateur/new.html.twig', array(
             'utilisateur' => $utilisateur,
             'form' => $form->createView(),
+            'role' => $role,
         ));
     }
 
@@ -81,11 +89,15 @@ class UtilisateurController extends Controller
      */
     public function showAction(Utilisateur $utilisateur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($utilisateur);
 
         return $this->render('utilisateur/show.html.twig', array(
             'utilisateur' => $utilisateur,
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -95,23 +107,58 @@ class UtilisateurController extends Controller
      */
     public function editAction(Request $request, Utilisateur $utilisateur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
         $deleteForm = $this->createDeleteForm($utilisateur);
+
         $editForm = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
 
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+
+            // if (isset($request->request->All()['utilisateur']['telephones'])) {
+
+            //     $telephone = new Telephone();
+
+            //     $telephone  = $utilisateur->getTelephones();
+            //     $em->remove($telephone);
+            //     $em->flush();
+
+            //     $telephones = $request->request->All()['utilisateur']['telephones'];
+
+            //     foreach ($telephones as $value) {
+
+            //         $telephone = new Telephone();
+
+            //         $telephone->setLibelle($value['libelle']);
+            //         $telephone->setNumero($value['numero']);
+            //         $telephone->setUtilisateur($utilisateur);
+
+            //         $em->persist($telephone);
+
+            //         $utilisateur->addTelephone($telephone);
+            //     }
+                
+            // }
+
             $em->persist($utilisateur);
+
             $em->flush();
 
-            return $this->redirectToRoute('utilisateur_edit', array('id' => $utilisateur->getId()));
+            return $this->redirectToRoute('utilisateur_edit', array(
+                'id' => $utilisateur->getId(),
+            ));
         }
 
         return $this->render('utilisateur/edit.html.twig', array(
             'utilisateur' => $utilisateur,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'role'        => $role,
         ));
     }
 
@@ -121,16 +168,13 @@ class UtilisateurController extends Controller
      */
     public function deleteAction(Request $request, Utilisateur $utilisateur)
     {
-        // $form = $this->createDeleteForm($utilisateur);
         
-        // $form->handleRequest($request);
-        // var_dump($form->isValid());die();
-        // if ($form->isSubmitted() && $form->isValid()) {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($utilisateur);
             $em->flush();
-        // }
 
         return $this->redirectToRoute('utilisateur_index');
     }

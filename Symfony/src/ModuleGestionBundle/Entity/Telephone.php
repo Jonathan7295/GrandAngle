@@ -1,15 +1,19 @@
 <?php
-
 namespace ModuleGestionBundle\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Telephone
  */
 class Telephone
 {
+    /**
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="telephones", cascade={"remove"})
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+     */
+    protected $utilisateur;
+    
     /**
      * @var int
      */
@@ -17,21 +21,18 @@ class Telephone
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = 10)
      */
-    public $numero;
+    private $numero;
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = 30)
      */
-    public $libelle;
+    private $libelle;
     
-    /**
-     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Utilisateur", inversedBy="telephones")
-     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
-     */
-    
-    private $utilisateur;
-
     /**
      * Get id
      *
@@ -41,7 +42,6 @@ class Telephone
     {
         return $this->id;
     }
-
     /**
      * Set numero
      *
@@ -55,7 +55,6 @@ class Telephone
     
         return $this;
     }
-
     /**
      * Get numero
      *
@@ -65,7 +64,6 @@ class Telephone
     {
         return $this->numero;
     }
-
     /**
      * Set libelle
      *
@@ -79,7 +77,6 @@ class Telephone
     
         return $this;
     }
-
     /**
      * Get libelle
      *

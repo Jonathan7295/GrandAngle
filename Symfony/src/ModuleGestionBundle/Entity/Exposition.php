@@ -35,9 +35,9 @@ class Exposition
     private $nombreVisiteExposition;
 
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBundle/Entity/TraductionExpo", mappedBy="exposition")
+     * @ORM\OneToMany(targetEntity="TraductionExpo", mappedBy="exposition",cascade={"remove", "persist"})
      */
-     private $traductionexpos;
+    private $traductionexpos;
 
     /**
     * Get traductionexpo
@@ -64,26 +64,26 @@ class Exposition
     }
 
     /**
-     * Add traductionexpos
+     * Add traductionexpo
      *
-     * @param ModuleGestionBundle\Entity\TraductionExpo $traductionexpos
+     * @param ModuleGestionBundle\Entity\TraductionExpo $traductionexpo
      * @return Exposition
      */
-    public function addTraductionExpo(ModuleGestionBundle\Entity\TraductionExpo $traductionexpos)
+    public function addTraductionExpo(\ModuleGestionBundle\Entity\TraductionExpo $traductionexpo)
     {
-        $this->traductionexpos[] = $traductionexpos;
+        $this->traductionexpos[] = $traductionexpo;
  
         return $this;
     }
  
     /**
-     * Remove traductionexpos
+     * Remove traductionexpo
      *
-     * @param ModuleGestionBundle\Entity\TraductionExpo $traductionexpos
+     * @param ModuleGestionBundle\Entity\TraductionExpo $traductionexpo
      */
-    public function removeTraductionExpo(ModuleGestionBundle\Entity\TraductionExpo $traductionexpos)
+    public function removeTraductionExpo(\ModuleGestionBundle\Entity\TraductionExpo $traductionexpo)
     {
-        $this->traductionexpos->removeElement($traductionexpos);
+        $this->traductionexpos->removeElement($traductionexpo);
     }
 
 

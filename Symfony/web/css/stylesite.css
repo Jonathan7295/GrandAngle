@@ -128,8 +128,7 @@ body {
 #delindex {
 	background-color: red;
 	border-radius:4px;
-	width: 30px;
-	height:30px;
+	padding: 8px 8px;
 }
 
 #formdel {
@@ -149,6 +148,42 @@ body {
 	height: 700px;
 	overflow-y: scroll;
 }
+
+/*Fond le pop-up de suppression*/
+#back {
+	display:none;
+	position:absolute;
+	background-color: rgba(0,0,0, 0.5);
+	width: 100%;
+	height: 100%;
+	z-index:1000;
+}
+/*Fenêtre de la pop-up*/
+#modal-form {
+	display:none;
+	position:absolute;
+	top: 36.5%;
+	left: 37.5%;
+	background-color: #2E6170;
+	border: 1px solid rgba(184, 208, 192, 0.74);
+	color:white;
+	border-radius: 25%;
+	padding: 25px;
+	width: 25%;
+	height: 250px;
+	z-index:1200;
+}
+
+.head-form {
+	padding: 15px;
+	font-size: 1.1em;
+}
+
+.content-form {
+	margin-top: 25%;
+	margin-left: 25%;
+}
+
 
 /*****New Utilisateur******/
 #newutilval {
@@ -221,7 +256,6 @@ body {
 	padding: 10px 15px;
 	margin-bottom: 10px;
 	margin-right: 1em;
-	width: 115px;
 }
 
 #newlien:hover {
@@ -229,6 +263,43 @@ body {
 	color : white;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+#newlien2 {
+	background-color: #48B865;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+	margin-bottom: 10px;
+	margin-right: 1em;
+}
+
+#newlien2:hover {
+	background-color: #6AC682;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.newlienred {
+	background-color: #BD3329;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 16px;
+}
+
+.newlienred:hover {
+	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#formUser {
+	width: 100%;
 }
 
 /*****Show Utilisateur*****/
@@ -301,10 +372,137 @@ body {
 	color: #D9534F;
 }
 
+
+.labelLib label,.labelnum label {
+	line-height: 33px;
+	margin-bottom: 16px;
+}
+
+.champslib input,.champsnum input {
+	width:100%;
+	padding: 6px 12px;
+	border:1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	margin-bottom: 16px;
+}
+
+.editlienred {
+	background-color: #BD3329;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 16px;
+}
+
+.editlienred:hover {
+	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.error ul li {
+	list-style-type: none; 
+	font-size: 0.9em;
+	color: red;
+}
+
 /***************Style Gestion exposition*******************/
 
 /****Index exposition*****/
 
 .table {
 	background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************************************/
+/**************************Responsive Ajustement****************************/
+/***************************************************************************/
+
+/*Smartphones (portrait and landscape)*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles pour cette Media Queries */
+}
+
+/*Smartphones (landscape)*/
+@media only screen and (min-width : 321px) {
+/* Styles pour cette Media Queries */
+	#champs {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+}
+
+/*iPads (portrait and landscape)*/
+@media only screen and (max-width : 320px) {
+/* Styles pour cette Media Queries */
+	body {
+		font-size: 1.3em;
+	}
+}
+
+/*iPads (landscape)*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles pour cette Media Queries */
+}
+
+/*iPads (portrait)*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles pour cette Media Queries */
+}
+
+/*Desktops and laptops*/
+@media only screen and (min-width : 1224px){
+/* Styles pour cette Media Queries */
+}
+
+/*Large screens*/
+@media only screen and (min-width : 1824px) {
+/* Styles pour cette Media Queries */
+}
+
+/*iPhone 4*/
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5){
+/* Styles pour cette Media Queries */
+}
+
+/*iPhone 3G*/
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1){
+/* Styles pour cette Media Queries */
+}
+
+/*iPhone 5*/
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
+/* Styles pour cette Media Queries */
+}
+
+/*iPad Mini*/
+@media screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1){
+/* Styles pour cette Media Queries */
+}
+
+/*iPad 2 Landscape*/
+@media (max-device-width: 1024px) and (orientation: landscape) {
+/* Styles pour cette Media Queries */
+}
+
+/*iPad 2 Portrait*/
+@media (max-device-width: 768px) and (orientation: portrait) {
+/* Styles pour cette Media Queries */
 }
