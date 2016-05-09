@@ -1,144 +1,145 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
+
+{{ form_start(form, {'attr': {'id': 'formUser'}}) }}
     <div class="panel panel-default">
         <div class="panel-heading">
             Création d'un nouvel utilisateur
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    {{ form_start(form, {'attr': {'id': 'formUser'}}) }}
-
+                <div id="lienrow" class="col-md-5 col-sm-11">
+                    <div class="form-group">
                         {# Erreurs générales du formulaire #}
                         {{ form_errors(form) }}
 
-                    <div class="form-group">
+                        <div class="form-group">
 
-                        {# Génération du label #}
-                        {{ form_label(form.firstname, "Nom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            {# Génération du label #}
+                            {{ form_label(form.firstname, "Nom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.firstname) }}
+
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.firstname, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.lastname, "Prénom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.lastname) }}
+                           
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.lastname, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.role, "Role", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.role) }}
+
+                            <div class="col-md-8">
+                                {# Génération du select #}
+                                {{ form_widget(form.role, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.email, "Adresse e-mail", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.email) }}
                         
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(form.firstname) }}
+                            <div class="col-md-8">
+                               {# Génération de l'input #}
+                               {{ form_widget(form.email, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>    
+                        <div class="form-group">
 
-                        <div class="col-md-8">
-                            {# Génération de l'input #}
-                            {{ form_widget(form.firstname, {'attr': {'class': 'form-control ajust'}}) }}
+                            {# Génération du label #}
+                            {{ form_label(form.username, "Identifiant", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.username) }}
+                            
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.username, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.plainPassword.first) }}
+
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.plainPassword.second, "Vérification", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.plainPassword.second) }}
+
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-
-                        {# Génération du label #}
-                        {{ form_label(form.lastname, "Prénom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(form.lastname) }}
-                       
-                        <div class="col-md-8">
-                            {# Génération de l'input #}
-                            {{ form_widget(form.lastname, {'attr': {'class': 'form-control ajust'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        {# Génération du label #}
-                        {{ form_label(form.role, "Role", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(form.role) }}
-
-                        <div class="col-md-8">
-                            {# Génération du select #}
-                            {{ form_widget(form.role, {'attr': {'class': 'form-control ajust'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        {# Génération du label #}
-                        {{ form_label(form.email, "Adresse e-mail", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(form.email) }}
-                    
-                        <div class="col-md-8">
-                           {# Génération de l'input #}
-                           {{ form_widget(form.email, {'attr': {'class': 'form-control ajust'}}) }}
-                        </div>
-                    </div>    
-                    <div class="form-group">
-
-                        {# Génération du label #}
-                        {{ form_label(form.username, "Identifiant", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(form.username) }}
-                        
-                        <div class="col-md-8">
-                            {# Génération de l'input #}
-                            {{ form_widget(form.username, {'attr': {'class': 'form-control ajust'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        {# Génération du label #}
-                        {{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(form.plainPassword.first) }}
-
-                        <div class="col-md-8">
-                            {# Génération de l'input #}
-                            {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control ajust'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        {# Génération du label #}
-                        {{ form_label(form.plainPassword.second, "Vérification", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                        
-                        {# Affichage des erreurs pour ce champs précis #}
-                        {{ form_errors(form.plainPassword.second) }}
-
-                        <div class="col-md-8">
-                            {# Génération de l'input #}
-                            {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control ajust'}}) }}
-                        </div>
-                    </div>
-                    <div id="tel" class="form-group col-md-12">
-                        
-                    </div>
-                    <div id="formedit" class="col-md-12">
+                </div>
+                <div id="champs" class="col-md-5 col-sm-10 col-xs-10">
                     <div class="form-group">
                         <div class="form-group">
-                            <div class="col-md-2  labelLib"></div>
-                            <div class="col-md-3  champslib"></div>
-                            <div class="col-md-2  labelnum"></div> 
-                            <div class="col-md-4  champsnum"></div>
-                            <div class="col-md-1 deplace"></div>
+                            <div class="col-md-2 col-sm-2 col-xs-2 labelLib"></div>
+                            <div class="col-md-3 col-sm-3 col-xs-10 champslib"></div>
+                            <div class="col-md-2 col-sm-2 col-xs-2 labelnum"></div> 
+                            <div class="col-md-4 col-sm-4 col-xs-8 champsnum"></div>
+                            <div class="col-md-1 col-sm-1 col-xs-1 deplace"></div>
                         </div>
-                        {# <div class="form-group">
-                            <a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>
-                        </div> #}
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div id="tel" class="form-group col-md-12"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label id="bloc" class="blocdebnew">Bloquer</label>
+                    <label id="debloc" class="blocdebnew">Debloquer</label> 
                 </div>
+                <div class="col-md-2">
+                     {{ form_widget(form.locked, {'attr': {'class': 'editlocknew'}}) }}
+                </div>
+                <div class="col-md-5">
+                    <input id="newutilval" type="submit" value="Valider" />
+                    <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
+                </div>
+                
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <label id="bloc" class="blocdebnew">Bloquer</label>
-                <label id="debloc" class="blocdebnew">Debloquer</label> 
-            </div>
-            <div class="col-md-2">
-                 {{ form_widget(form.locked, {'attr': {'class': 'editlocknew'}}) }}
-            </div>
-            <div class="col-md-5">
-                <input id="newutilval" type="submit" value="Valider" />
-                <a id="newutilret" href="{{ path('utilisateur_index') }}">Retour</a>
-            </div>
-            {{ form_end(form) }}
         </div>
     </div>
+
+{{ form_end(form) }}
 {% endblock %}
 {% block javascripts %}
     <script type="text/javascript">
@@ -164,8 +165,8 @@
             
             // On ajoute le lien pour ajouter un nouveau téléphone
             var $addLink = $('<a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>');
-            // $container.append($addLink);
-            $('#tel').append($addLink);
+            
+            $('form#formUser').append($addLink);
 
             // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
             $addLink.click(function(e){
@@ -206,6 +207,9 @@
                 // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                 addDeleteLink($('.deplace'));
 
+                // On emmene ensuite tout ça dans le formulaire
+                $('#lienrow').append($('#newlien'));
+
                 // Enfin on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
                 index++;
             }
@@ -224,21 +228,17 @@
                     // On récupère l'index du champs à supprimer
                     var num = $(this).attr('name');
 
-                    // Test pour vérifier si le champs existe car indice 1 de l'index est 0 du champs quand il n'en reste qu'un apparu dans les premiers.
-                    var test = $('.labelLib').children()[num];
-                    test === undefined ? num = 0 : num = num;
-
                     // On supprime les champs un à un
-                        // Label Libellé
-                        $('.labelLib').children()[num].remove();
-                        // Champs Libellé
-                        $('.champslib').children()[num].remove();
-                        // Label Numéro
-                        $('.labelnum').children()[num].remove();
-                        // Champs Numéro
-                        $('.champsnum').children()[num].remove();
-                        // Lien button delete
-                        $(this).remove();
+                    // Label Libellé
+                    $('[for="utilisateur_telephones_'+num+'_libelle"]').remove();
+                    // // Champs Libellé
+                    $('[id="utilisateur_telephones_'+num+'_libelle"]').remove();
+                    // // Label Numéro
+                    $('[for="utilisateur_telephones_'+num+'_numero"]').remove();
+                    // // Champs Numéro
+                    $('[id="utilisateur_telephones_'+num+'_numero"]').remove();
+                    // // Lien button delete
+                    $(this).remove();
                     
                     e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
                     index--;
@@ -246,8 +246,5 @@
                 });
             }
         });
-
-        
-       
     </script>
 {% endblock %}

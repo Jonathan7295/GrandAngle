@@ -30,7 +30,6 @@ class UtilisateurType extends AbstractType
                 'prototype'     => true))
             ->add('role', ChoiceType::class, array(
                   'choices' => array(
-                      'Sélectionnez' => 'INDEFINI',
                       'Utilisateur' => 'USER',
                       'Administrateur' => 'ADMIN',
                       ),

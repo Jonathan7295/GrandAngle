@@ -298,6 +298,10 @@ body {
 	cursor: pointer;
 }
 
+#formUser {
+	width: 100%;
+}
+
 /*****Show Utilisateur*****/
 
 #showutilret {
@@ -400,18 +404,6 @@ body {
 	cursor: pointer;
 }
 
-#formedit {
-	position:absolute;
-	top: 0px;
-	left: 40em;
-}
-
-#formedit2 {
-	position:absolute;
-	top: 173px;
-	left: 40em;
-}
-
 .error ul li {
 	list-style-type: none; 
 	font-size: 0.9em;
@@ -424,4 +416,93 @@ body {
 
 .table {
 	background-color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************************************/
+/**************************Responsive Ajustement****************************/
+/***************************************************************************/
+
+/*Smartphones (portrait and landscape)*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles pour cette Media Queries */
+}
+
+/*Smartphones (landscape)*/
+@media only screen and (min-width : 321px) {
+/* Styles pour cette Media Queries */
+	#champs {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+}
+
+/*iPads (portrait and landscape)*/
+@media only screen and (max-width : 320px) {
+/* Styles pour cette Media Queries */
+	body {
+		font-size: 1.3em;
+	}
+}
+
+/*iPads (landscape)*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles pour cette Media Queries */
+}
+
+/*iPads (portrait)*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles pour cette Media Queries */
+}
+
+/*Desktops and laptops*/
+@media only screen and (min-width : 1224px){
+/* Styles pour cette Media Queries */
+}
+
+/*Large screens*/
+@media only screen and (min-width : 1824px) {
+/* Styles pour cette Media Queries */
+}
+
+/*iPhone 4*/
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5){
+/* Styles pour cette Media Queries */
+}
+
+/*iPhone 3G*/
+@media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1){
+/* Styles pour cette Media Queries */
+}
+
+/*iPhone 5*/
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
+/* Styles pour cette Media Queries */
+}
+
+/*iPad Mini*/
+@media screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1){
+/* Styles pour cette Media Queries */
+}
+
+/*iPad 2 Landscape*/
+@media (max-device-width: 1024px) and (orientation: landscape) {
+/* Styles pour cette Media Queries */
+}
+
+/*iPad 2 Portrait*/
+@media (max-device-width: 768px) and (orientation: portrait) {
+/* Styles pour cette Media Queries */
 }

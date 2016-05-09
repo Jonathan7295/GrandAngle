@@ -21,19 +21,17 @@ class Telephone
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = 10)
      */
-     /**
-     * @Assert\Type(
-     *     type="integer",
-     *     message="La valeur {{ value }} est de type {{ type }} qui est non valide."
-     * )
-     */
-    public $numero;
+    private $numero;
 
     /**
      * @var string
+     * @Assert\Length(
+     *      max = 30)
      */
-    public $libelle;
+    private $libelle;
     
     /**
      * Get id

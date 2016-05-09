@@ -8,3 +8,9 @@ services:
         class: ModuleGestionBundle\Form\UtilisateurType
         tags:
             - { name: form.type, alias: app_user_registration }
+            
+    # modulegestion.password_resetting:
+    #     class: ModuleGestionBundle\EventListener\PasswordResettingListener
+    #     arguments: [ '@router' ]
+    #     tags:
+    #         - { name: 'kernel.event_subscriber' }

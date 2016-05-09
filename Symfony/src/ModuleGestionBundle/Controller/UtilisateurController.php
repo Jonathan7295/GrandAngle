@@ -120,17 +120,30 @@ class UtilisateurController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            // $id = $utilisateur->getId();
+            // if (isset($request->request->All()['utilisateur']['telephones'])) {
 
-            // $telephones = $em->getRepository('ModuleGestionBundle:Telephone')->findBy(
-            //     array('utilisateur_id' => '9'));
+            //     $telephone = new Telephone();
 
-            // foreach ($telephones as $value) {
-            //     var_dump($value->getId().'<br>');
+            //     $telephone  = $utilisateur->getTelephones();
+            //     $em->remove($telephone);
+            //     $em->flush();
+
+            //     $telephones = $request->request->All()['utilisateur']['telephones'];
+
+            //     foreach ($telephones as $value) {
+
+            //         $telephone = new Telephone();
+
+            //         $telephone->setLibelle($value['libelle']);
+            //         $telephone->setNumero($value['numero']);
+            //         $telephone->setUtilisateur($utilisateur);
+
+            //         $em->persist($telephone);
+
+            //         $utilisateur->addTelephone($telephone);
+            //     }
+                
             // }
-
-            // die();
-            // var_dump($request->request->All());die();
 
             $em->persist($utilisateur);
 
