@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Utilisateur extends BaseUser
 {
     /**
-     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"remove", "persist"})
+     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"remove"})
      */
     protected $telephones;
 

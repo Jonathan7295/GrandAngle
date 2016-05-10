@@ -110,8 +110,6 @@ class UtilisateurController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
-        // var_dump("\$nbreRequest = ".$nbreRequest." \$nbreData = ".$nbreData);die();
-
         $deleteForm = $this->createDeleteForm($utilisateur);
 
         $editForm = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
@@ -120,40 +118,39 @@ class UtilisateurController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
+            if(isset($request->request->All()["utilisateur"]["telephones"])){
 
-            if (isset($request->request->All()['utilisateur']['telephones'])) {
+               $em = $this->getDoctrine()->getManager();
 
-                $nbreRequest = count($request->request->All()['utilisateur']['telephones']);
+                $telephone = new telephone();
 
-                $nbreData = count($utilisateur->getTelephones()->getSnapshot());
+                foreach ($utilisateur->getTelephones()->getSnapshot() as $value) {
 
-                    if($nbreRequest == $nbreData) {
+                    $telephone = $value;
+                    $em->remove($telephone);
 
-                        $em->persist($utilisateur);
+                    $utilisateur->removeTelephone($telephone);
+                    $em->persist($utilisateur);
+            
+                }
 
-                        $em->flush();
 
-                    }else{
+                foreach ($request->request->All()['utilisateur']['telephones'] as $value) {
+                   $telephone = new telephone();
+                   $telephone->setLibelle($value['libelle']);
+                   $telephone->setNumero($value['numero']);
+                   $telephone->setUtilisateur($utilisateur);
+                   $em->persist($telephone);
+                   $utilisateur->addTelephone($telephone);
+                   $em->persist($utilisateur);
+                   
+                }
 
-                        $telephone = new telephone();
-                       
-                        foreach ($request->request->All()['utilisateur']['telephones'] as $value) {
-
-                            $telephone->setLibelle($value['libelle']);
-                            $telephone->setNumero($value['numero']);
-                            $telephone->setUtilisateur($utilisateur);
-                            $em->persist($telephone);
-
-                            $utilisateur->addTelephone($telephone);
-                        }
-
-                        $em->persist($utilisateur);
-
-                        $em->flush();
-                    }
+                $em->flush();
 
             }else{
+
+                $em = $this->getDoctrine()->getManager();
 
                 $telephone = new telephone();
 
@@ -166,6 +163,7 @@ class UtilisateurController extends Controller
                     $em->persist($utilisateur);
 
                     $em->flush();
+            
                 }
 
             }
@@ -174,7 +172,6 @@ class UtilisateurController extends Controller
                 'id' => $utilisateur->getId(),
             ));
         }
-
         return $this->render('utilisateur/edit.html.twig', array(
             'utilisateur' => $utilisateur,
             'edit_form' => $editForm->createView(),
@@ -182,7 +179,6 @@ class UtilisateurController extends Controller
             'role'        => $role,
         ));
     }
-
     /**
      * Deletes a Utilisateur entity.
      *
