@@ -9,22 +9,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Nomexposition</th>
                     <th>Dateheuredebutexposition</th>
                     <th>Dateheurefinexpositon</th>
-                    <th>Nombrevisiteexposition</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for exposition in expositions %}
                 <tr>
-                    <td><a href="{{ path('exposition_show', { 'id': exposition.id }) }}">{{ exposition.id }}</a></td>
                     <td>{{ exposition.nomExposition }}</td>
                     <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if exposition.dateHeureFinExpositon %}{{ exposition.dateHeureFinExpositon|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{{ exposition.nombreVisiteExposition }}</td>
                     <td>
                         <ul>
                             <li>
