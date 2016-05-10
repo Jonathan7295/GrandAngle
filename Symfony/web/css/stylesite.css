@@ -184,6 +184,13 @@ body {
 	margin-left: 25%;
 }
 
+#nom {
+	position: relative;
+	bottom: 40px;
+	color:red;
+	font-weight: bold;
+}
+
 
 /*****New Utilisateur******/
 #newutilval {

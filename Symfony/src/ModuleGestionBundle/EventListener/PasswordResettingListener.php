@@ -1,4 +1,5 @@
 <?php
+ // ModuleGestionBundle/EventListener/PasswordResettingListener.php
 
 namespace ModuleGestionBundle\EventListener;
 
@@ -11,22 +12,30 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * Listener responsible to change the redirection at the end of the password resetting
  */
-class PasswordResettingListener implements EventSubscriberInterface {
+class PasswordResettingListener implements EventSubscriberInterface
+{
     private $router;
 
-    public function __construct(UrlGeneratorInterface $router) {
+    public function __construct(UrlGeneratorInterface $router)
+    {
         $this->router = $router;
     }
 
-    public static function getSubscribedEvents() {
-        return [
+    /**
+     * {@inheritDoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return array(
             FOSUserEvents::RESETTING_RESET_SUCCESS => 'onPasswordResettingSuccess',
-        ];
+        );
     }
 
-    public function onPasswordResettingSuccess(FormEvent $event) {
-        $url = $this->router->generate('accueil');
+    public function onPasswordResettingSuccess(FormEvent $event)
+    {
+        $url = $this->router->generate('module_gestion_index');
+
         $event->setResponse(new RedirectResponse($url));
     }
 }
- ?>
+?>

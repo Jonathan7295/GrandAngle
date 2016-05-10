@@ -23,7 +23,7 @@ class UtilisateurController extends Controller
      */
     public function indexAction()
     {
-         // On récupère le role de la personne connectée
+        // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
         $em = $this->getDoctrine()->getManager();
@@ -110,6 +110,8 @@ class UtilisateurController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
+        // var_dump("\$nbreRequest = ".$nbreRequest." \$nbreData = ".$nbreData);die();
+
         $deleteForm = $this->createDeleteForm($utilisateur);
 
         $editForm = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
@@ -120,34 +122,53 @@ class UtilisateurController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            // if (isset($request->request->All()['utilisateur']['telephones'])) {
+            if (isset($request->request->All()['utilisateur']['telephones'])) {
 
-            //     $telephone = new Telephone();
+                $nbreRequest = count($request->request->All()['utilisateur']['telephones']);
 
-            //     $telephone  = $utilisateur->getTelephones();
-            //     $em->remove($telephone);
-            //     $em->flush();
+                $nbreData = count($utilisateur->getTelephones()->getSnapshot());
 
-            //     $telephones = $request->request->All()['utilisateur']['telephones'];
+                    if($nbreRequest == $nbreData) {
 
-            //     foreach ($telephones as $value) {
+                        $em->persist($utilisateur);
 
-            //         $telephone = new Telephone();
+                        $em->flush();
 
-            //         $telephone->setLibelle($value['libelle']);
-            //         $telephone->setNumero($value['numero']);
-            //         $telephone->setUtilisateur($utilisateur);
+                    }else{
 
-            //         $em->persist($telephone);
+                        $telephone = new telephone();
+                       
+                        foreach ($request->request->All()['utilisateur']['telephones'] as $value) {
 
-            //         $utilisateur->addTelephone($telephone);
-            //     }
-                
-            // }
+                            $telephone->setLibelle($value['libelle']);
+                            $telephone->setNumero($value['numero']);
+                            $telephone->setUtilisateur($utilisateur);
+                            $em->persist($telephone);
 
-            $em->persist($utilisateur);
+                            $utilisateur->addTelephone($telephone);
+                        }
 
-            $em->flush();
+                        $em->persist($utilisateur);
+
+                        $em->flush();
+                    }
+
+            }else{
+
+                $telephone = new telephone();
+
+                foreach ($utilisateur->getTelephones()->getSnapshot() as $value) {
+
+                    $telephone = $value;
+                    $em->remove($telephone);
+
+                    $utilisateur->removeTelephone($telephone);
+                    $em->persist($utilisateur);
+
+                    $em->flush();
+                }
+
+            }
 
             return $this->redirectToRoute('utilisateur_edit', array(
                 'id' => $utilisateur->getId(),

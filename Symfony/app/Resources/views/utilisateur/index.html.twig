@@ -29,7 +29,7 @@
                         <td>
                             <a id="searchindex" class="glyphicon glyphicon-search" href="{{ path('utilisateur_show', { 'id': utilisateur.id }) }}"></a>
                             <a id="editindex" class="glyphicon glyphicon-pencil" href="{{ path('utilisateur_edit', { 'id': utilisateur.id }) }}"></a>
-                            <a id="delindex" name="{{ path('utilisateur_delete', { 'id': utilisateur.id }) }}" class="glyphicon glyphicon-trash" href="#"></a>
+                            <a id="delindex" name="{{ path('utilisateur_delete', { 'id': utilisateur.id }) }}" class="glyphicon glyphicon-trash" href="{{ utilisateur.firstname|upper ~ ' ' ~ utilisateur.lastname|capitalize }}"></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -38,9 +38,10 @@
         </div>
         <div id="modal-form">
             <div class="head-form">
-                <span id="icone">Confirmez-vous la suppression ?</span>
+                <span id="icone">Confirmez-vous la suppression de l'utilisateur ?</span>
             </div>
             <div class="content-form">
+                <p id="nom"></p>
                 <a id="oui" href="#" class="btn btn-success" type="button">Oui</a>
                 <a id="non" href="#" class="btn btn-danger" type="button">Non</a>
             </div>
@@ -70,6 +71,11 @@
 
             // On définit le chemin dans le bouton oui
             $('#oui').attr('href', path);
+
+            // On récupère le nom de la personne
+            var nom = $(this).attr('href');
+            // On l'ajoute dans la balise <p> du pop-up
+            $('p#nom').html(nom);
 
             // On affiche la pop-up
             $('#back').css('display','block');
