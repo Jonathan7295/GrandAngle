@@ -1,0 +1,18 @@
+ModuleGestionBundle\Entity\TextExposition:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\TextExpositionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        description:
+            type: string
+            length: 255
+        langue:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

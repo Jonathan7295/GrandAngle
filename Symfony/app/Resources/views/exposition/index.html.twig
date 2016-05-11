@@ -4,14 +4,14 @@
 {% block body %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            Exposition list
+            Liste d'exposition
         </div>
         <table class="table">
             <thead>
                 <tr>
                     <th>Nomexposition</th>
-                    <th>Dateheuredebutexposition</th>
-                    <th>Dateheurefinexpositon</th>
+                    <th>Date et heure début</th>
+                    <th>Date et heure fin</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -22,14 +22,9 @@
                     <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if exposition.dateHeureFinExpositon %}{{ exposition.dateHeureFinExpositon|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('exposition_show', { 'id': exposition.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('exposition_edit', { 'id': exposition.id }) }}">edit</a>
-                            </li>
-                        </ul>
+                        <a id="searchindex" class="glyphicon glyphicon-search" href="{{ path('exposition_show', { 'id': exposition.id }) }}"></a>
+                        <a id="editindex" class="glyphicon glyphicon-pencil" href="{{ path('exposition_edit', { 'id': exposition.id }) }}"></a>
+                        <a id="delindex" name="{{ path('exposition_delete', { 'id': exposition.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('exposition_delete', { 'id': exposition.id }) }}"></a>
                     </td>
                 </tr>
             {% endfor %}

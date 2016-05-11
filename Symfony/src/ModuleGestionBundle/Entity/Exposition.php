@@ -35,59 +35,6 @@ class Exposition
     private $nombreVisiteExposition;
 
     /**
-     * @ORM\OneToMany(targetEntity="TraductionExpo", mappedBy="exposition",cascade={"remove", "persist"})
-     */
-    private $traductionexpos;
-
-    /**
-    * Get traductionexpo
-    * @return  
-    */
-    public function getTraductionExpo()
-    {
-        return $this->traductionexpos;
-    }
-    
-    /**
-    * Set traductionexpo 
-    * @return $this
-    */
-    public function setTraductionExpo($traductionexpos)
-    {
-        $this->traductionexpos = $traductionexpos;
-        return $this;
-    }
-
-    public function __construct()
-    {
-        $this->traductionexpos = new ArrayCollection();
-    }
-
-    /**
-     * Add traductionexpo
-     *
-     * @param ModuleGestionBundle\Entity\TraductionExpo $traductionexpo
-     * @return Exposition
-     */
-    public function addTraductionExpo(\ModuleGestionBundle\Entity\TraductionExpo $traductionexpo)
-    {
-        $this->traductionexpos[] = $traductionexpo;
- 
-        return $this;
-    }
- 
-    /**
-     * Remove traductionexpo
-     *
-     * @param ModuleGestionBundle\Entity\TraductionExpo $traductionexpo
-     */
-    public function removeTraductionExpo(\ModuleGestionBundle\Entity\TraductionExpo $traductionexpo)
-    {
-        $this->traductionexpos->removeElement($traductionexpo);
-    }
-
-
-    /**
      * Get id
      *
      * @return integer
