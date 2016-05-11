@@ -64,10 +64,13 @@ class UtilisateurController extends Controller
                 $telephone->setLibelle($value['libelle']);
                 $telephone->setNumero($value['numero']);
                 $telephone->setUtilisateur($utilisateur);
-                $em->persist($telephone);
-
-                $utilisateur->addTelephone($telephone);
+                
+                
             }
+
+            $em->persist($telephone);
+
+            $utilisateur->addTelephone($telephone);
 
             $em->persist($utilisateur);
 
@@ -120,31 +123,23 @@ class UtilisateurController extends Controller
 
             if(isset($request->request->All()["utilisateur"]["telephones"])){
 
-               $em = $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager();
 
-                $telephone = new telephone();
+                $telephones = $request->request->All()["utilisateur"]["telephones"];
 
-                foreach ($utilisateur->getTelephones()->getSnapshot() as $value) {
+                foreach ($telephones as $value) {
+                    
+                    $telephone = new Telephone();
 
-                    $telephone = $value;
-                    $em->remove($telephone);
+                    $telephone->setLibelle($value['libelle']);
+                    $telephone->setNumero($value['numero']);
+                    $telephone->setUtilisateur($utilisateur);
+                    $em->persist($telephone);
 
-                    $utilisateur->removeTelephone($telephone);
-                    $em->persist($utilisateur);
-            
+                    $utilisateur->addTelephone($telephone);
                 }
 
-
-                foreach ($request->request->All()['utilisateur']['telephones'] as $value) {
-                   $telephone = new telephone();
-                   $telephone->setLibelle($value['libelle']);
-                   $telephone->setNumero($value['numero']);
-                   $telephone->setUtilisateur($utilisateur);
-                   $em->persist($telephone);
-                   $utilisateur->addTelephone($telephone);
-                   $em->persist($utilisateur);
-                   
-                }
+                $em->persist($utilisateur);
 
                 $em->flush();
 

@@ -19,7 +19,7 @@ ModuleGestionBundle\Entity\Telephone:
         utilisateur:
             targetEntity: ModuleGestionBundle\Entity\Utilisateur
             inversedBy: telephones
-            cascade: ["remove"]
+            cascade: ["remove","persist"]
             joinColumn:
                 name: utilisateur_id
                 referencedColumnName: id
