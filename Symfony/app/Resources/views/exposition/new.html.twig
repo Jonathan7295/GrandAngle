@@ -1,18 +1,137 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
+{{ form_start(form) }}
     <div class="panel panel-default">
         <div class="panel-heading">
-            Exposition creation
+            Ajout d'une nouvelle exposition
         </div>
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input class="btn btn-danger" type="submit" value="Create" />
-        {{ form_end(form) }}
-        <ul id="btn_ul">
-            <li id="btn_li">
-                <a class="btn btn-info" href="{{ path('exposition_index') }}">Back to the list</a>
-            </li>
-        </ul>
-    </dv>
+        <div class="container">
+        <div id="lienrow" class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        {# Erreurs générales du formulaire #}
+                        {{ form_errors(form) }}
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.nomExposition, "Nom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.nomExposition) }}
+
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.nomExposition, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.dateHeureDebutExposition, "Date Début", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.dateHeureDebutExposition) }}
+
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.dateHeureDebutExposition, {'attr': {'class': 'form-control ajust calendar'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.dateHeureFinExpositon, "Date Fin", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.dateHeureFinExpositon) }}
+
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.dateHeureFinExpositon, {'attr': {'class': 'form-control ajust calendar'}}) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.nombreVisiteExposition, "Nombres visites", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.nombreVisiteExposition) }}
+
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.nombreVisiteExposition, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                    <input type="submit" value="Enregistrer" />
+                    <a href="{{ path('exposition_index') }}">Back to the list</a>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+    {# <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    {% javascripts 'js/datepicker-fr.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        $(document).ready(function() {
+            $( ".calendar" ).datepicker({
+                dateFormat: 'dd/mm/yy', 
+                firstDay:1,
+            });
+            $( ".calendar" ).datepicker($.datepicker.regional[ "fr" ]);
+        });
+    </script>#}
+    {#{% javascripts 'js/jquery-1.3.2.min.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts 'js/jquery-ui-1.7.2.custom.min.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts 'js/timepicker.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts 'js/datepicker-fr.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.calendar').datepicker({
+                dateFormat: 'dd/mm/yy', 
+                firstDay:1,
+                duration: '',
+                showTime: true,
+                constrainInput: false,
+                language: 'fr',
+             });
+             $( ".calendar" ).datepicker($.datepicker.regional[ "fr" ]);
+        });
+    </script>#}
+    {% javascripts 'js/jquery.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% javascripts 'js/jquery.datetimepicker.full.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.datetimepicker.setLocale('fr');
+            $('.calendar').datetimepicker({
+                dayOfWeekStart : 1,
+                lang:'fr',
+                format:'d/m/Y H:i',
+            });
+        });
+    </script>
 {% endblock %}

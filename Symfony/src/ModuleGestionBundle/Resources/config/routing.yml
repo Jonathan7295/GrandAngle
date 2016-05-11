@@ -13,7 +13,3 @@ module_gestion_exposition:
 module_gestion_utilisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/utilisateur.yml"
     prefix:    /utilisateur
-
-module_gestion_traductionexpo:
-    resource: "@ModuleGestionBundle/Resources/config/routing/traductionexpo.yml"
-    prefix:   /traductionexpo

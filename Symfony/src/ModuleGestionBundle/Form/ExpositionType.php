@@ -4,7 +4,7 @@ namespace ModuleGestionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ExpositionType extends AbstractType
@@ -17,16 +17,16 @@ class ExpositionType extends AbstractType
     {
         $builder
             ->add('nomExposition')
-            ->add('dateHeureDebutExposition', DateType::class , array(
+            ->add('dateHeureDebutExposition', DateTimeType::class , array(
                                                 'widget' => 'single_text',
                                                 'input' => 'datetime',
-                                                'format' => 'dd/MM/yyyy',
+                                                'format' => 'dd-MM-yyyy HH:mm',
                                                 'attr' => array('class' => 'calendar'),
                                                 ))
-            ->add('dateHeureFinExpositon', DateType::class , array(
+            ->add('dateHeureFinExpositon', DateTimeType::class , array(
                                                 'widget' => 'single_text',
                                                 'input' => 'datetime',
-                                                'format' => 'dd/MM/yyyy',
+                                                'format' => 'dd-MM-yyyy HH:mm',
                                                 'attr' => array('class' => 'calendar'),
                                                 ))
             ->add('nombreVisiteExposition')

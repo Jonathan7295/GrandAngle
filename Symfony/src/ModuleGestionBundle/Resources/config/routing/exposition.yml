@@ -21,4 +21,4 @@ exposition_edit:
 exposition_delete:
     path:     /{id}/delete
     defaults: { _controller: "ModuleGestionBundle:Exposition:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]
