@@ -15,4 +15,12 @@ ModuleGestionBundle\Entity\TextExposition:
         langue:
             type: string
             length: 255
+
+    manyToOne:
+        exposition:
+            targetEntity: ModuleGestionBundle\Entity\Exposition
+            inversedBy: telephones
+            joinColumn:
+                name: exposition_id
+                referencedColumnName: id
     lifecycleCallbacks: {  }
