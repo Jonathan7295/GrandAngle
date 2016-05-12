@@ -57,13 +57,13 @@ class UtilisateurController extends Controller
 
             $telephones = $request->request->All()["utilisateur"]["telephones"];
 
-            foreach ($telephones as $value) {
-                
-                $telephone = new Telephone();
+            $telephone = new Telephone();
 
-                $telephone->setLibelle($value['libelle']);
-                $telephone->setNumero($value['numero']);
-                $telephone->setUtilisateur($utilisateur);
+            foreach ($telephones as $value) {
+
+                $telephone->setLibelle($value['libelle'])
+                          ->setNumero($value['numero'])
+                          ->setUtilisateur($utilisateur);
                 
                 
             }
@@ -127,17 +127,19 @@ class UtilisateurController extends Controller
 
                 $telephones = $request->request->All()["utilisateur"]["telephones"];
 
+                $telephone = new Telephone();
+
                 foreach ($telephones as $value) {
                     
-                    $telephone = new Telephone();
+                    $telephone->setLibelle($value['libelle'])
+                              ->setNumero($value['numero'])
+                              ->setUtilisateur($utilisateur);
 
-                    $telephone->setLibelle($value['libelle']);
-                    $telephone->setNumero($value['numero']);
-                    $telephone->setUtilisateur($utilisateur);
-                    $em->persist($telephone);
-
-                    $utilisateur->addTelephone($telephone);
                 }
+
+                $utilisateur->addTelephone($telephone);
+
+                $em->persist($telephone);
 
                 $em->persist($utilisateur);
 

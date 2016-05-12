@@ -12,10 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Utilisateur extends BaseUser
 {
-    /**
-     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"remove"})
-     */
-    protected $telephones;
 
     /**
      * @ORM\Column(name="firstname", type="string", length=255)
@@ -49,6 +45,14 @@ class Utilisateur extends BaseUser
         $this->role = "USER";
         $this->telephones = new ArrayCollection();
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="ModuleGestionBundle\Entity\Telephone", mappedBy="utilisateur", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $telephones;
+
+
     /**
      * Set firstname
      *
