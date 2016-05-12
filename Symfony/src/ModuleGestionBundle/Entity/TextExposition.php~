@@ -86,28 +86,5 @@ class TextExposition
     {
         return $this->langue;
     }
-
-    /**
-     * Set exposition
-     *
-     * @param \ModuleGestionBundle\Entity\Exposition $exposition
-     *
-     * @return TextExposition
-     */
-    public function setExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
-    {
-        $this->exposition = $exposition;
-    
-        return $this;
-    }
-
-    /**
-     * Get exposition
-     *
-     * @return \ModuleGestionBundle\Entity\Exposition
-     */
-    public function getExposition()
-    {
-        return $this->exposition;
-    }
 }
+
