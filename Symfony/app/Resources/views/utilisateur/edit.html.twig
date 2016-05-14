@@ -8,7 +8,7 @@
         </div>
         <div class="container">
             <div id="lienrow" class="row">
-                <div class="col-md-5">
+                <div id="new" class="col-md-5">
                     <div class="form-group">
 
                         {# Erreurs générales du formulaire #}
@@ -113,7 +113,7 @@
                             // On ajoute le lien pour ajouter un nouveau téléphone
                             var $addLink = $('<a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>');
 
-                            $('#tel').append($addLink);
+                            $('#new').append($addLink);
 
                             // Nombre de champs téléphone généré
                             var nbElements = $('#utilisateur_telephones_1').length;
@@ -147,7 +147,7 @@
                                
                             }
                             // Puis on intègre tout ça dans le formulaire
-                                $('#lienrow').append($('#formedit'));
+                            $('#lienrow').append($('#formedit'));
 
                             // Quand on clique pour supprimer un numéro
                             $('a.editlienred').click(function(e){
@@ -270,7 +270,7 @@
                             // On ajoute le lien pour ajouter un nouveau téléphone
                             var $addLink = $('<a id="newlien" type="button" title="Ajouter un numéro" alt="Ajouter un numéro" class="glyphicon glyphicon-earphone"></a>');
 
-                            $('#tel').append($addLink);
+                            $('#new').append($addLink);
 
                             // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
                             $addLink.click(function(e){

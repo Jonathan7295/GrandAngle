@@ -3,16 +3,17 @@ namespace ModuleGestionBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Telephone
  */
 class Telephone
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="telephones", cascade={"remove"})
-     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Utilisateur", inversedBy="telephones")
+     * @ORM\JoinColumn(nullable=true)
      */
-    protected $utilisateur;
+    private $utilisateur;
     
     /**
      * @var int
@@ -94,7 +95,7 @@ class Telephone
      *
      * @return Telephone
      */
-    public function setUtilisateur(\ModuleGestionBundle\Entity\utilisateur $utilisateur = null)
+    public function setUtilisateur(\ModuleGestionBundle\Entity\utilisateur $utilisateur)
     {
         $this->utilisateur = $utilisateur;
     

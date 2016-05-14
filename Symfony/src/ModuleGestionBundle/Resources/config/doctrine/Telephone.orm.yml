@@ -19,9 +19,7 @@ ModuleGestionBundle\Entity\Telephone:
         utilisateur:
             targetEntity: ModuleGestionBundle\Entity\Utilisateur
             inversedBy: telephones
-            cascade: ["remove"]
             joinColumn:
-                name: utilisateur_id
-                referencedColumnName: id
+                nullable: true
                
     lifecycleCallbacks: {  }

@@ -57,17 +57,20 @@ class UtilisateurController extends Controller
 
             $telephones = $request->request->All()["utilisateur"]["telephones"];
 
+            $telephone = new Telephone();
+
             foreach ($telephones as $value) {
+
+                $telephone->setLibelle($value['libelle'])
+                          ->setNumero($value['numero'])
+                          ->setUtilisateur($utilisateur);
                 
-                $telephone = new Telephone();
-
-                $telephone->setLibelle($value['libelle']);
-                $telephone->setNumero($value['numero']);
-                $telephone->setUtilisateur($utilisateur);
-                $em->persist($telephone);
-
-                $utilisateur->addTelephone($telephone);
+                
             }
+
+            $em->persist($telephone);
+
+            $utilisateur->addTelephone($telephone);
 
             $em->persist($utilisateur);
 
@@ -120,31 +123,25 @@ class UtilisateurController extends Controller
 
             if(isset($request->request->All()["utilisateur"]["telephones"])){
 
-               $em = $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager();
 
-                $telephone = new telephone();
+                $telephones = $request->request->All()["utilisateur"]["telephones"];
 
-                foreach ($utilisateur->getTelephones()->getSnapshot() as $value) {
+                $telephone = new Telephone();
 
-                    $telephone = $value;
-                    $em->remove($telephone);
+                foreach ($telephones as $value) {
+                    
+                    $telephone->setLibelle($value['libelle'])
+                              ->setNumero($value['numero'])
+                              ->setUtilisateur($utilisateur);
 
-                    $utilisateur->removeTelephone($telephone);
-                    $em->persist($utilisateur);
-            
                 }
 
+                $utilisateur->addTelephone($telephone);
 
-                foreach ($request->request->All()['utilisateur']['telephones'] as $value) {
-                   $telephone = new telephone();
-                   $telephone->setLibelle($value['libelle']);
-                   $telephone->setNumero($value['numero']);
-                   $telephone->setUtilisateur($utilisateur);
-                   $em->persist($telephone);
-                   $utilisateur->addTelephone($telephone);
-                   $em->persist($utilisateur);
-                   
-                }
+                $em->persist($telephone);
+
+                $em->persist($utilisateur);
 
                 $em->flush();
 
