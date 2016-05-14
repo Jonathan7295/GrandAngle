@@ -23,9 +23,15 @@ body {
 }
 
 label {
+	margin: 2em 4em;
 	font-size: 1.6em;
 	text-shadow:1px 1px white;
 }
+
+.center {
+	margin: 10% 25%; 
+}
+
 /* message d'erreur */
 #red {
 	font-size: 12px;

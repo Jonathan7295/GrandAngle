@@ -3,8 +3,8 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        {% block stylesheet %}
-        {% endblock %}
+        <title>{% block title %}Connexion{% endblock %}</title>
+        {% block stylesheet %}{% endblock %}
     </head>
     <body>
        {% if app.request.hasPreviousSession %}
@@ -20,7 +20,11 @@
             {% block fos_user_content %}
             {% endblock fos_user_content %}
             {% block javascript %}
-                {% javascripts 'js/*' %}
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"type="text/javascript"></script>
+                {% javascripts 'js/bsa.js' %}
+                    <script type="text/javascript" src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                {% javascripts 'js/script.js' %}
                     <script type="text/javascript" src="{{ asset_url }}"></script>
                 {% endjavascripts %}
             {% endblock javascript %}

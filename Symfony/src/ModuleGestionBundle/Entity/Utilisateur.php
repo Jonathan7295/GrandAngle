@@ -48,7 +48,7 @@ class Utilisateur extends BaseUser
 
     /**
      * @ORM\OneToMany(targetEntity="ModuleGestionBundle\Entity\Telephone", mappedBy="utilisateur", cascade={"persist","remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $telephones;
 
