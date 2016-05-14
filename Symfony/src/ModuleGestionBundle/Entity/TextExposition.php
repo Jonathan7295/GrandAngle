@@ -2,6 +2,8 @@
 
 namespace ModuleGestionBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * TextExposition
  */
