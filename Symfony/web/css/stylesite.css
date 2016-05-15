@@ -380,12 +380,13 @@ body {
 }
 
 
-.labelLib label,.labelnum label {
+.labelLib label,.labelnum label, .labeldes label, .labellang label {
 	line-height: 33px;
 	margin-bottom: 16px;
 }
 
-.champslib input,.champsnum input {
+
+.champslib input,.champsnum input, .champsdes input, .champslang select {
 	width:100%;
 	padding: 6px 12px;
 	border:1px solid #ccc;
@@ -394,6 +395,11 @@ body {
 	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	margin-bottom: 16px;
 }
+
+.champslang select{
+	width: 125px;
+}
+
 
 .editlienred {
 	background-color: #BD3329;
@@ -406,6 +412,38 @@ body {
 
 .editlienred:hover {
 	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.red {
+	background-color: #BD3329;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 16px;
+}
+
+.red:hover{
+	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.vert {
+	background-color: #5cb85c;
+	font-size: 16px;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 16px;
+}
+
+.vert:hover{
+	background-color: #5cb85c;
 	color : white;
 	text-decoration: none;
 	cursor: pointer;

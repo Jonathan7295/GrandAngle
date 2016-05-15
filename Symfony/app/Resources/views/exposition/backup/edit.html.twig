@@ -70,9 +70,6 @@
             </div>
         </div>
         <div class="row">
-            <div id="expo" class="form-group col-md-12"></div>
-        </div>
-        <div class="row">
             <div class="col-md-5">
                     <input type="submit" value="Enregistrer" />
                     <a href="{{ path('exposition_index') }}">Back to the list</a>
@@ -100,19 +97,12 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-
             //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
             var $container = $('div#exposition_textexpositions');
-            //On repositionne sur la page
-            $('#expo').append($container);
-            var $newcontainer = $('#expo');
-            $('form#formExpo').append($newcontainer);
-            
 
             //On ajoute un lien pour ajouter un nouveau textexposition
             var $addLink =$('<a href="#" id="add_textexposition" class="btn btn-default">Ajouter un texte</a>');
-
-            $('form#formExpo').append($addLink);
+            $container.append($addLink);
 
             //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
             $addLink.click(function(e) {
@@ -166,7 +156,7 @@
                     e.preventDefault(); // évite qu'un # apparaisse dans l'url
                     return false;
                 });
-;           }
+;            }
         });
     </script>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace ModuleGestionBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class TextExpositionType extends AbstractType
 {
@@ -16,8 +17,14 @@ class TextExpositionType extends AbstractType
     {
         $builder
             ->add('description')
-            ->add('langue')
-            ->add('exposition')
+            ->add('langue', ChoiceType::class, array(
+                'choices'  => array(
+                    'français' => 'fr',
+                    'anglais' => 'en',
+                    'espagnol' => 'es',
+                    'chinois' => 'ch',
+                    'russe' => 'ru',
+                )))
         ;
     }
     
