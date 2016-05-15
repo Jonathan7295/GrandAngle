@@ -5,6 +5,7 @@ namespace ModuleGestionBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use ModuleGestionBundle\Entity\Utilisateur;
 use ModuleGestionBundle\Entity\Telephone;
@@ -55,23 +56,6 @@ class UtilisateurController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $telephones = $request->request->All()["utilisateur"]["telephones"];
-
-            $telephone = new Telephone();
-
-            foreach ($telephones as $value) {
-
-                $telephone->setLibelle($value['libelle'])
-                          ->setNumero($value['numero'])
-                          ->setUtilisateur($utilisateur);
-                
-                
-            }
-
-            $em->persist($telephone);
-
-            $utilisateur->addTelephone($telephone);
-
             $em->persist($utilisateur);
 
             $em->flush();
@@ -113,66 +97,59 @@ class UtilisateurController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
-        $deleteForm = $this->createDeleteForm($utilisateur);
+        // On stocke son id
+        $id = $utilisateur->getId();
 
+        // On appelle l'entity manager
+        $em = $this->getDoctrine()->getManager();
+
+        // On fait une requête pour récupérer les infos de l'utilisateur
+        $utilisateur = $em->getRepository('ModuleGestionBundle:Utilisateur')->find($id);
+
+        // Si il n'existe pas on déclenche une erreur
+        if(!$utilisateur) {
+            throw $this->createNotFoundException('Aucun utilisateur avec l\'id '.$id);
+        }
+
+        // On créé un tableau 
+        $originalTelephones = new ArrayCollection();
+
+        // On boucle sur l'utilisateur pour récupérer ses numéros existants
+        foreach ($utilisateur->getTelephones() as $telephone) {
+            $originalTelephones->add($telephone);
+        }
+
+        // On prépare le formulaire
         $editForm = $this->createForm('ModuleGestionBundle\Form\UtilisateurType', $utilisateur);
 
+        // On récupère la requête
         $editForm->handleRequest($request);
 
+        // Si le formulaire a été soumi et qu'il est valide
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            if(isset($request->request->All()["utilisateur"]["telephones"])){
+            // On parcourt chacun des numéros existants 
+            foreach ($originalTelephones as $telephone) {
 
-                $em = $this->getDoctrine()->getManager();
+                // Si le numéro existant n'est pas contenu dans le formulaire on l'efface
+                if(false === $utilisateur->getTelephones()->contains($telephone)) {
 
-                $telephones = $request->request->All()["utilisateur"]["telephones"];
-
-                $telephone = new Telephone();
-
-                foreach ($telephones as $value) {
-                    
-                    $telephone->setLibelle($value['libelle'])
-                              ->setNumero($value['numero'])
-                              ->setUtilisateur($utilisateur);
-
-                }
-
-                $utilisateur->addTelephone($telephone);
-
-                $em->persist($telephone);
-
-                $em->persist($utilisateur);
-
-                $em->flush();
-
-            }else{
-
-                $em = $this->getDoctrine()->getManager();
-
-                $telephone = new telephone();
-
-                foreach ($utilisateur->getTelephones()->getSnapshot() as $value) {
-
-                    $telephone = $value;
                     $em->remove($telephone);
-
-                    $utilisateur->removeTelephone($telephone);
-                    $em->persist($utilisateur);
-
-                    $em->flush();
-            
-                }
-
+                }    
             }
 
+            // On persist le changement
+            $em->persist($utilisateur);
+            // On exécute
+            $em->flush();
+
             return $this->redirectToRoute('utilisateur_edit', array(
-                'id' => $utilisateur->getId(),
+                'id' => $id,
             ));
         }
         return $this->render('utilisateur/edit.html.twig', array(
             'utilisateur' => $utilisateur,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
             'role'        => $role,
         ));
     }

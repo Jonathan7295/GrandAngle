@@ -27,7 +27,8 @@ class UtilisateurType extends AbstractType
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'label'         => false,
-                'prototype'     => true))
+                'prototype'     => true,
+                'by_reference'  => false))
             ->add('role', ChoiceType::class, array(
                   'choices' => array(
                       'Utilisateur' => 'USER',

@@ -17,9 +17,10 @@ ModuleGestionBundle\Entity\Telephone:
             length: 255
     manyToOne:
         utilisateur:
-            targetEntity: ModuleGestionBundle\Entity\Utilisateur
+            targetEntity: Utilisateur
             inversedBy: telephones
             joinColumn:
-                nullable: true
+                name: utilisateur_id
+                referencedColumnName: id
                
     lifecycleCallbacks: {  }

@@ -37,7 +37,12 @@ class Utilisateur extends BaseUser
      * @ORM\Column(name="role", type="string", length=255)
      */
     private $role;
-    
+
+    /**
+     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur")
+     */
+    private $telephones;
+
     public function __construct()
     {
         parent::__construct();
@@ -46,12 +51,7 @@ class Utilisateur extends BaseUser
         $this->telephones = new ArrayCollection();
     }
 
-    /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBundle\Entity\Telephone", mappedBy="utilisateur", cascade={"persist","remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $telephones;
-
+    
 
     /**
      * Set firstname
@@ -66,6 +66,7 @@ class Utilisateur extends BaseUser
     
         return $this;
     }
+
     /**
      * Get firstname
      *
@@ -75,6 +76,7 @@ class Utilisateur extends BaseUser
     {
         return $this->firstname;
     }
+
     /**
      * Set lastname
      *
@@ -88,6 +90,7 @@ class Utilisateur extends BaseUser
     
         return $this;
     }
+
     /**
      * Get lastname
      *
@@ -97,6 +100,7 @@ class Utilisateur extends BaseUser
     {
         return $this->lastname;
     }
+
     /**
      * Set role
      *
@@ -110,6 +114,7 @@ class Utilisateur extends BaseUser
     
         return $this;
     }
+
     /**
      * Get role
      *
@@ -129,9 +134,9 @@ class Utilisateur extends BaseUser
      */
     public function addTelephone(\ModuleGestionBundle\Entity\Telephone $telephone)
     {
-        $this->telephones[] = $telephone;
-    
-        return $this;
+        $telephone->setUtilisateur($this);
+
+        $this->telephones->add($telephone);
     }
 
     /**
@@ -142,16 +147,6 @@ class Utilisateur extends BaseUser
     public function removeTelephone(\ModuleGestionBundle\Entity\Telephone $telephone)
     {
         $this->telephones->removeElement($telephone);
-    }
-
-    /**
-      * Set telephones
-      *
-      * @param \Doctrine\Common\Collections\Collection $telephones
-      */
-    public function setTelephones(\Doctrine\Common\Collections\Collection $telephones)
-    {
-        $this->telephones = $telephones;
     }
 
     /**
