@@ -4,7 +4,9 @@ namespace ModuleGestionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ExpositionType extends AbstractType
@@ -30,6 +32,13 @@ class ExpositionType extends AbstractType
                                                 'attr' => array('class' => 'calendar'),
                                                 ))
             ->add('nombreVisiteExposition')
+            ->add('textexpositions', CollectionType::class, array(
+                'entry_type'   => TextExpositionType::class,
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'prototype'    => true,
+                'label'        => false
+      ))
         ;
     }
     

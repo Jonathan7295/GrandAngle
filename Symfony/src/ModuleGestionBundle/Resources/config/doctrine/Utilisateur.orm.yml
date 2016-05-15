@@ -26,5 +26,4 @@ ModuleGestionBundle\Entity\Utilisateur:
             targetEntity: Telephone
             mappedBy: utilisateur
             cascade: ['persist']
-    
     lifecycleCallbacks: {  }

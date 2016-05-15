@@ -2,7 +2,7 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
-    {{ form_start(edit_form) }}
+    {{ form_start(edit_form, {'attr': {'id': 'formExpo'}}) }}
     <div class="panel panel-default">
         <div class="panel-heading">
             Modification d'une exposition
@@ -79,46 +79,9 @@
     {{ form_end(edit_form) }}
 {% endblock %}
 {% block javascripts %}
-    {# <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    {% javascripts 'js/datepicker-fr.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <script>
-        $(document).ready(function() {
-            $( ".calendar" ).datepicker({
-                dateFormat: 'dd/mm/yy', 
-                firstDay:1,
-            });
-            $( ".calendar" ).datepicker($.datepicker.regional[ "fr" ]);
-        });
-    </script>#}
-    {#{% javascripts 'js/jquery-1.3.2.min.js' %}
+    {% javascripts 'js/jquery.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    {% javascripts 'js/jquery-ui-1.7.2.custom.min.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    {% javascripts 'js/timepicker.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    {% javascripts 'js/datepicker-fr.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.calendar').datepicker({
-                dateFormat: 'dd/mm/yy', 
-                firstDay:1,
-                duration: '',
-                showTime: true,
-                constrainInput: false,
-                language: 'fr',
-             });
-             $( ".calendar" ).datepicker($.datepicker.regional[ "fr" ]);
-        });
-    </script>#}
     {% javascripts 'js/jquery.datetimepicker.full.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

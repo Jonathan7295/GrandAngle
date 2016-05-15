@@ -148,45 +148,4 @@ class Exposition
     {
         return strval($this->id);
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->textexpositions = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add textexposition
-     *
-     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
-     *
-     * @return Exposition
-     */
-    public function addTextexposition(\ModuleGestionBundle\Entity\TextExpositions $textexposition)
-    {
-        $this->textexpositions[] = $textexposition;
-    
-        return $this;
-    }
-
-    /**
-     * Remove textexposition
-     *
-     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
-     */
-    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExpositions $textexposition)
-    {
-        $this->textexpositions->removeElement($textexposition);
-    }
-
-    /**
-     * Get textexpositions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTextexpositions()
-    {
-        return $this->textexpositions;
-    }
 }
