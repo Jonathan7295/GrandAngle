@@ -23,10 +23,8 @@ ModuleGestionBundle\Entity\Utilisateur:
             column: role
     oneToMany:
         telephones:
-            targetEntity: ModuleGestionBundle\Entity\Telephone
+            targetEntity: Telephone
             mappedBy: utilisateur
-            cascade: ["persist","remove"]
-            joinColumn:
-                nullable: true 
+            cascade: ['persist']
     
     lifecycleCallbacks: {  }

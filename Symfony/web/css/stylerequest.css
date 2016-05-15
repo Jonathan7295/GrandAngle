@@ -23,7 +23,6 @@ body {
 }
 
 label {
-	margin: 2em 4em;
 	font-size: 1.6em;
 	text-shadow:1px 1px white;
 }
@@ -53,6 +52,10 @@ label.control-label {
 
 
 /*Resetting mot de passe*/
+label#reseting{
+	margin: 2em 4em;
+}
+
 #reset h1 {
 	margin-bottom: 50px;
 	text-align: center;
@@ -84,4 +87,14 @@ label.inline-label {
 }
 #debloc {
 	display:none;
+}
+
+/*confirmed*/
+div#confirm p {
+	margin: auto;
+	margin-top: 23em;
+	width: 50%;
+	padding: 3em;
+	background-color: rgba(41, 202, 179, 0.68);
+	color: rgb(247, 235, 235);
 }

@@ -10,8 +10,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Telephone
 {
     /**
-     * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Utilisateur", inversedBy="telephones")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="telephones")
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
      */
     private $utilisateur;
     
@@ -34,6 +34,8 @@ class Telephone
      */
     private $libelle;
     
+    
+
     /**
      * Get id
      *
@@ -43,10 +45,11 @@ class Telephone
     {
         return $this->id;
     }
+
     /**
      * Set numero
      *
-     * @param integer $numero
+     * @param string $numero
      *
      * @return Telephone
      */
@@ -56,15 +59,17 @@ class Telephone
     
         return $this;
     }
+
     /**
      * Get numero
      *
-     * @return integer
+     * @return string
      */
     public function getNumero()
     {
         return $this->numero;
     }
+
     /**
      * Set libelle
      *
@@ -78,6 +83,7 @@ class Telephone
     
         return $this;
     }
+
     /**
      * Get libelle
      *
@@ -91,11 +97,11 @@ class Telephone
     /**
      * Set utilisateur
      *
-     * @param \ModuleGestionBundle\Entity\utilisateur $utilisateur
+     * @param \ModuleGestionBundle\Entity\Utilisateur $utilisateur
      *
      * @return Telephone
      */
-    public function setUtilisateur(\ModuleGestionBundle\Entity\utilisateur $utilisateur)
+    public function setUtilisateur(\ModuleGestionBundle\Entity\Utilisateur $utilisateur = null)
     {
         $this->utilisateur = $utilisateur;
     
@@ -105,7 +111,7 @@ class Telephone
     /**
      * Get utilisateur
      *
-     * @return \ModuleGestionBundle\Entity\utilisateur
+     * @return \ModuleGestionBundle\Entity\Utilisateur
      */
     public function getUtilisateur()
     {

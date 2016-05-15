@@ -149,7 +149,7 @@ body {
 	overflow-y: scroll;
 }
 
-/*Fond le pop-up de suppression*/
+/*Fond du pop-up de suppression*/
 #back {
 	display:none;
 	position:absolute;

@@ -26,13 +26,13 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
     <body>
-        {# <div id="back"></div> #}
+        <div id="back"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-default">
                         <ul class="nav nav-pills">
-                            <li class="col-md-"role="presentation"><a id="acce" href="{{ path("module_gestion_index") }}">Accueil</a></li>
+                            <li role="presentation"><a id="acce" href="{{ path("module_gestion_index") }}">Accueil</a></li>
                             <li role="presentation"><a id="expo" href="{{ path("exposition_index") }}">Gestion Exposition</a></li>
                             <li role="presentation"><a id="oeuv" href="#">Gestion Oeuvre</a></li>
                             {% if role == "ADMIN" %}
