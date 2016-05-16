@@ -22,6 +22,10 @@ ModuleGestionBundle\Entity\Exposition:
         nombreVisiteExposition:
             type: integer
             column: nombre_visite_exposition
+        evenement:
+            type: string
+            length: 255
+            column: evenement
     oneToMany:
         textexpositions:
             targetEntity: ModuleGestionBundle\Entity\TextExposition

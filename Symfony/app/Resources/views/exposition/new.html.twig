@@ -64,6 +64,19 @@
                                 {{ form_widget(form.nombreVisiteExposition, {'attr': {'class': 'form-control ajust'}}) }}
                             </div>
                         </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.evenement, "Evenement", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.evenement) }}
+
+                            <div class="col-md-12">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.evenement, {'attr': {'class': 'ajust'}}) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
