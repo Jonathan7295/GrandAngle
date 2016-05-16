@@ -3,9 +3,11 @@
 namespace ModuleGestionBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use ModuleGestionBundle\Entity\Exposition;
+use ModuleGestionBundle\Entity\TextExposition;
 use ModuleGestionBundle\Form\ExpositionType;
 
 /**
@@ -88,22 +90,48 @@ class ExpositionController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
-        $deleteForm = $this->createDeleteForm($exposition);
+        // On stock son id
+        $id = $exposition->getId();
+        // On appelle l'entity manager
+        $em = $this->getDoctrine()->getManager();
+        // On fait une requête pour récupérer les info de l'expo
+        $exposition = $em->getRepository('ModuleGestionBundle:Exposition')->find($id);
+        // Si il n'existe pas on déclenche une erreur
+        if(!$exposition) {
+            throw $this->createNotFoundException('Aucune Exposition avec l\'id '.$id);
+        }
+        // On créé un tableau 
+        $originalTextExpositions = new ArrayCollection();
+        // On boucle sur l'exposition pour récupérer ses traduction existante
+        foreach ($exposition->getTextExpositions() as $textexposition) {
+            $originalTextExpositions->add($textexposition);
+        }
+
         $editForm = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            // On parcourt chacun des traduction existants 
+            foreach ($originalTextExpositions as $textexposition) {
+
+                // Si la traduction existant n'est pas contenu dans le formulaire on l'efface
+                if(false === $exposition->getTextExpositions()->contains($textexposition)) {
+
+                    $em->remove($textexposition);
+                }    
+            }
+
             $em->persist($exposition);
             $em->flush();
 
-            return $this->redirectToRoute('exposition_edit', array('id' => $exposition->getId()));
+            return $this->redirectToRoute('exposition_edit', array(
+                'id' => $id,
+            ));
         }
 
         return $this->render('exposition/edit.html.twig', array(
             'exposition' => $exposition,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
             'role'        => $role,
         ));
     }
@@ -116,15 +144,10 @@ class ExpositionController extends Controller
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
-        
-        $form = $this->createDeleteForm($exposition);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($exposition);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($exposition);
+        $em->flush();
 
         return $this->redirectToRoute('exposition_index');
     }

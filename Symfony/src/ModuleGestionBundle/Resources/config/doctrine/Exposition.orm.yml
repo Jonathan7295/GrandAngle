@@ -22,10 +22,15 @@ ModuleGestionBundle\Entity\Exposition:
         nombreVisiteExposition:
             type: integer
             column: nombre_visite_exposition
+        evenement:
+            type: string
+            length: 255
+            column: evenement
     oneToMany:
         textexpositions:
             targetEntity: ModuleGestionBundle\Entity\TextExposition
             mappedBy: exposition
+<<<<<<< HEAD
             cascade: ["remove","persist"]
     manyToOne:
         emplacement:
@@ -33,4 +38,7 @@ ModuleGestionBundle\Entity\Exposition:
             joinColumn:
                 nullable: false
                         
+=======
+            cascade: ["persist"] 
+>>>>>>> 24188c87c7cc666fa5345ec9fb5ef8d853d521e7
     lifecycleCallbacks: {  }

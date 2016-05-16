@@ -2,43 +2,59 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
-    <h1>Exposition</h1>
-    <table  class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ exposition.id }}</td>
-            </tr>
-            <tr>
-                <th>Nomexposition</th>
-                <td>{{ exposition.nomExposition }}</td>
-            </tr>
-            <tr>
-                <th>Dateheuredebutexposition</th>
-                <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Dateheurefinexpositon</th>
-                <td>{% if exposition.dateHeureFinExpositon %}{{ exposition.dateHeureFinExpositon|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Nombrevisiteexposition</th>
-                <td>{{ exposition.nombreVisiteExposition }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul class="nav nav-pills">
-        <li role="presentation">
-            <a id="oeuv" href="{{ path('exposition_index') }}">Back to the list</a>
-        </li>
-        <li role="presentation">
-            <a id="deco" href="{{ path('exposition_edit', { 'id': exposition.id }) }}">Edit</a>
-        </li>
-        <li role="presentation">
-            {{ form_start(delete_form) }}
-                <input class="btn btn-danger" type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+ <div class="panel panel-default">
+        <div class="panel-heading show">
+            Fiche Exposition
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <a id="showexporet" href="{{ path('exposition_index') }}">Retour</a>
+                    <a id="showexpoedit" href="{{ path('exposition_edit', { 'id': exposition.id }) }}">Modifier</a>
+                </div>
+                <div class="col-md-5">
+                    <table class="table showexpo">
+                        <tbody>
+                            <tr>
+                                <th>Nom exposition</th>
+                                <td>{{ exposition.nomExposition }}</td>
+                            </tr>
+                            <tr>
+                                <th>Dateheuredebutexposition</th>
+                                <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Dateheurefinexpositon</th>
+                                <td>{% if exposition.dateHeureFinExpositon %}{{ exposition.dateHeureFinExpositon|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Nombrevisiteexposition</th>
+                                <td>{{ exposition.nombreVisiteExposition }}</td>
+                            </tr>
+                            <tr>
+                                <th>Evenement</th>
+                                <td>{{ exposition.evenement }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Description</th>
+                                <th>Langue</th>
+                            </tr>
+                        {% for textexposition in exposition.textexpositions %}
+                            <tr>
+                                <td>{{ textexposition.description }}</td>
+                                <td>{{ textexposition.langue }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

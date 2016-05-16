@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ExpositionType extends AbstractType
@@ -33,12 +34,24 @@ class ExpositionType extends AbstractType
                                                 ))
             ->add('nombreVisiteExposition')
             ->add('textexpositions', CollectionType::class, array(
-                'entry_type'   => TextExpositionType::class,
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'prototype'    => true,
-                'label'        => false
-      ))
+                                                'entry_type'   => TextExpositionType::class,
+                                                'allow_add'    => true,
+                                                'allow_delete' => true,
+                                                'prototype'    => true,
+                                                'label'        => false,
+                                                'by_reference' => false
+                                                ))
+            ->add('evenement', ChoiceType::class, array(
+                                                'choices'  => array(
+                                                    'Teaser&Affiche' => 'teaser',
+                                                    'Déploiment' => 'deploie',
+                                                    'Inauguration' => 'inaugurer',
+                                                    'Fermeture' => 'fermer'
+                                                    ),
+                                                'expanded' => true,
+                                                'multiple' => false,
+                                                'required' => true
+                                                ))
         ;
     }
     

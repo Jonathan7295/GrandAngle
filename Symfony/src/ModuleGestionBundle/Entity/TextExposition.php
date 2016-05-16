@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class TextExposition
 {
     /**
-    * @ORM\ManyToOne(targetEntity="ModuleGestionBundle\Entity\Exposition")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManyToOne(targetEntity="Exposition", inversedBy="textexpositions")
+    * @ORM\JoinColumn(name="exposition_id", referencedColumnName="id")
     */
     private $exposition;
 

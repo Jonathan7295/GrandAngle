@@ -21,6 +21,11 @@ class Exposition
     private $nomExposition;
 
     /**
+     * @var string
+     */
+    private $evenement;
+
+    /**
      * @var \DateTime
      */
     private $dateHeureDebutExposition;
@@ -194,6 +199,25 @@ class Exposition
         return $this->nombreVisiteExposition;
     }
 
+    /**
+    * Get evenement
+    * @return  
+    */
+    public function getEvenement()
+    {
+        return $this->evenement;
+    }
+    
+    /**
+    * Set evenement
+    * @return $this
+    */
+    public function setEvenement($evenement)
+    {
+        $this->evenement = $evenement;
+        return $this;
+    }
+
     public function __toString()
     {
         return strval($this->id);
@@ -203,23 +227,16 @@ class Exposition
     /**
      * Set emplacement
      *
-     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
      *
      * @return Exposition
      */
-    public function setEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
     {
-        $this->emplacement = $emplacement;
-    
-        return $this;
     }
 
     /**
      * Get emplacement
      *
-     * @return \ModuleGestionBundle\Entity\Emplacement
      */
-    public function getEmplacement()
     {
         return $this->emplacement;
     }

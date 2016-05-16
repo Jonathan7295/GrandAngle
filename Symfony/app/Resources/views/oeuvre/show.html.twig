@@ -1,0 +1,48 @@
+{% extends ':layout:layout.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Détail de l'oeuvre
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ oeuvre.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ oeuvre.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Imgflashcode</th>
+                    <td>{{ oeuvre.imgFlashcode }}</td>
+                </tr>
+                <tr>
+                    <th>Etat</th>
+                    <td>{{ oeuvre.etat }}</td>
+                </tr>
+                <tr>
+                    <th>Nombrevisite</th>
+                    <td>{{ oeuvre.nombreVisite }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('oeuvre_index') }}">Back to the list</a>
+            </li>
+            <li>
+                <a href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
