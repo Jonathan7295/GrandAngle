@@ -25,7 +25,7 @@
             </div>
             {# Affichage de la liste des oeuvres #}
             <div class="row">
-                <div id="scrolloeuv" class="col-md-8">
+                <div id="scrolloeuv" class="col-md-10">
                     <table class="table">
                         <thead>
                             <tr>
@@ -33,6 +33,7 @@
                                 <th>Artiste</th>
                                 <th>Type</th>
                                 <th>Etat</th>
+                                <th>Nombre de visite</th>
                                 <th>Position</th>
                                 <th>Actions</th>
                                 <th>Imprimer</th>
@@ -45,11 +46,12 @@
                                 <td>Artiste</td>
                                 <td>Type</td>
                                 <td>{{ oeuvre.etat }}</td>
-                                <td>Position 1</td>
+                                <td>{{ oeuvre.nombreVisite }}</td>
+                                <td>{{ oeuvre.emplacement.position }}</td>
                                 <td>
                                     <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
                                     <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
-                                    <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ oeuvre.nom|upper }}"></a> 
+                                    <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a> 
                                 </td>
                                 <td><a id="qrcindex" title="Imprimer un Qrcode" href="" class="glyphicon glyphicon-qrcode"></a> </td>
                             </tr>
@@ -59,9 +61,8 @@
                 </div>
             </div>
             {# Emplacement des oeuvres dans la salle #}
-            <div class="row">
-                <div id="imgoeuv" class="col-md-8">
-                    <span class='round-red'>&nbsp;&nbsp;1</span>
+            <div id="iconew" class="row">
+                <div class="col-md-8">
                     {% image 'image/emplacement.png' %}
                         <img id="place" class="img-responsive" title="Emplacements" src="{{ asset_url }}"/>
                     {% endimage %}
@@ -95,20 +96,7 @@
             expo = 'Exposition '+expo;
             alert(expo);
         });
-
-
-        // Affichage des emplacements
-        var emplacement = "<span class='round-red'></span>";
-
-        // On récupère la position initiale de l'image
-        var x = $('#place').position().left; // -->  15
-        var y = $('#place').position().top; // | 0
-
-        // On prépare les rajouts de couleur
-        var red = "-red";
-        var green = "-green";
-        var blue = "-blue";
-
+        
     });
     
   </script>  

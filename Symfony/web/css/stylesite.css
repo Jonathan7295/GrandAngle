@@ -463,7 +463,7 @@ body {
 	background-color: white;
 }
 
-<<<<<<< HEAD
+
 /*****New exposition******/
 
 /*****Show exposition*****/
@@ -492,25 +492,6 @@ div#imgoeuv {
 #choiceexpo {
 	margin-top: 10px;
 	margin-bottom: 10px;
-}
-
-/*Emplacement*/
-.round-red {
-	position: absolute;
-    background-color: rgba(251, 250, 250, 0.82);
-    border: 3px solid red;
-    border-radius: 25px;
-    width: 30px;
-    height: 30px;
-}
-    
-    
-.round-green {
-	
-}
-
-.round-blue {
-	
 }
 
 /*****New Oeuvre******/
@@ -575,7 +556,7 @@ div#progressbar {
 /*****Show Statistique*****/
 
 /*****Edit Statistique*****/
-=======
+
 /****Show exposition*****/
 #showexpo{
 
@@ -587,7 +568,7 @@ div#progressbar {
 	border-radius:4px;
 	padding: 10px 15px;
 }
->>>>>>> 24188c87c7cc666fa5345ec9fb5ef8d853d521e7
+
 
 #showexporet:hover{
 	text-decoration: none;

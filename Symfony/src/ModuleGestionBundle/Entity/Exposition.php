@@ -47,7 +47,7 @@ class Exposition
 
     /**
      * @ORM\ManyToOne(targetEntity="Emplacement")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $emplacement;
 
@@ -66,11 +66,11 @@ class Exposition
      *
      * @return Exposition
      */
-    public function addTextexposition(\ModuleGestionBundle\Entity\TextExpositions $textexposition)
+    public function addTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
     {
-        $this->textexpositions[] = $textexposition;
-    
-        return $this;
+        $textexposition->setExposition($this);
+
+        $this->textexpositions->add($textexposition);
     }
 
     /**
@@ -78,7 +78,7 @@ class Exposition
      *
      * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
      */
-    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExpositions $textexposition)
+    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
     {
         $this->textexpositions->removeElement($textexposition);
     }
@@ -227,16 +227,23 @@ class Exposition
     /**
      * Set emplacement
      *
+     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
      *
      * @return Exposition
      */
+    public function setEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
     {
+        $this->emplacement = $emplacement;
+    
+        return $this;
     }
 
     /**
      * Get emplacement
      *
+     * @return \ModuleGestionBundle\Entity\Emplacement
      */
+    public function getEmplacement()
     {
         return $this->emplacement;
     }

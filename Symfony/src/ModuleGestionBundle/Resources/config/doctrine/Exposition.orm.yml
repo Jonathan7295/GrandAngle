@@ -30,15 +30,12 @@ ModuleGestionBundle\Entity\Exposition:
         textexpositions:
             targetEntity: ModuleGestionBundle\Entity\TextExposition
             mappedBy: exposition
-<<<<<<< HEAD
             cascade: ["remove","persist"]
     manyToOne:
         emplacement:
             targetEntity: Emplacement
             joinColumn:
-                nullable: false
-                        
-=======
+                nullable: true
             cascade: ["persist"] 
->>>>>>> 24188c87c7cc666fa5345ec9fb5ef8d853d521e7
+
     lifecycleCallbacks: {  }
