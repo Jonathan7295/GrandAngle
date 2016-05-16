@@ -144,7 +144,8 @@ class UtilisateurController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('utilisateur_edit', array(
-                'id' => $id,
+                'id'   => $id,
+                'role' => $role,
             ));
         }
         return $this->render('utilisateur/edit.html.twig', array(
@@ -159,9 +160,6 @@ class UtilisateurController extends Controller
      */
     public function deleteAction(Request $request, Utilisateur $utilisateur)
     {
-        
-        // On récupère le role de la personne connectée
-        $role = $this->getUser()->getRole();
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($utilisateur);

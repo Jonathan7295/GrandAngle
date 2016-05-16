@@ -10,6 +10,10 @@ module_gestion_exposition:
     resource: "@ModuleGestionBundle/Resources/config/routing/exposition.yml"
     prefix:   /exposition
 
+module_gestion_oeuvre:
+    resource: "@ModuleGestionBundle/Resources/config/routing/oeuvre.yml"
+    prefix:   /oeuvre
+
 module_gestion_utilisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/utilisateur.yml"
     prefix:    /utilisateur
