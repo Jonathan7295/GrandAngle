@@ -24,6 +24,11 @@ class Exposition
     private $nomExposition;
 
     /**
+     * @var string
+     */
+    private $evenement;
+
+    /**
      * @var \DateTime
      */
     private $dateHeureDebutExposition;
@@ -142,6 +147,25 @@ class Exposition
     public function getNombreVisiteExposition()
     {
         return $this->nombreVisiteExposition;
+    }
+
+    /**
+    * Get evenement
+    * @return  
+    */
+    public function getEvenement()
+    {
+        return $this->evenement;
+    }
+    
+    /**
+    * Set evenement
+    * @return $this
+    */
+    public function setEvenement($evenement)
+    {
+        $this->evenement = $evenement;
+        return $this;
     }
 
     public function __toString()
