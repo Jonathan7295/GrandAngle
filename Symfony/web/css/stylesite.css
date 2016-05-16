@@ -463,18 +463,42 @@ body {
 	background-color: white;
 }
 
+/****Show exposition*****/
+#showexpo{
 
+}
 
+#showexporet{
+	background-color: #777;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+}
 
+#showexporet:hover{
+	text-decoration: none;
+	color: #373737;
+}
 
+#showexpoedit{
+	background-color: #2B8948;
+	color : white;  
+	border-radius:4px;
+	padding: 10px 15px;
+}
 
+#showexpoedit:hover{
+	text-decoration: none;
+	color: #214F77;
+}
 
+.showexpo tr:nth-child(odd) {
+	background-color: #337AB7;
+}
 
-
-
-
-
-
+.showexpo tr:nth-child(even) {
+	background-color: #538FB7;
+}
 
 /****************************************************************************/
 /**************************Responsive Ajustement****************************/

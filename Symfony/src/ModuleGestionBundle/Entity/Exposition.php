@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Exposition
 {
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/TextExposition", mappedBy="exposition", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/Entity/TextExposition", mappedBy="exposition")
      */
     private $textexpositions;
     /**
@@ -153,29 +153,29 @@ class Exposition
      */
     public function __construct()
     {
-        $this->textexpositions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->textexpositions = new ArrayCollection();
     }
 
     /**
      * Add textexposition
      *
-     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
+     * @param \ModuleGestionBundle\Entity\TextExposition $textexposition
      *
      * @return Exposition
      */
-    public function addTextexposition(\ModuleGestionBundle\Entity\TextExpositions $textexposition)
+    public function addTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
     {
-        $this->textexpositions[] = $textexposition;
-    
-        return $this;
+        $textexposition->setExposition($this);
+
+        $this->textexpositions->add($textexposition);
     }
 
     /**
      * Remove textexposition
      *
-     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
+     * @param \ModuleGestionBundle\Entity\TextExposition $textexposition
      */
-    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExpositions $textexposition)
+    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
     {
         $this->textexpositions->removeElement($textexposition);
     }

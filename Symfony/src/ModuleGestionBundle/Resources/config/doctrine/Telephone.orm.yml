@@ -22,5 +22,4 @@ ModuleGestionBundle\Entity\Telephone:
             joinColumn:
                 name: utilisateur_id
                 referencedColumnName: id
-               
     lifecycleCallbacks: {  }

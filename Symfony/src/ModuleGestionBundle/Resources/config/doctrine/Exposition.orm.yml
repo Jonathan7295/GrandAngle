@@ -26,5 +26,5 @@ ModuleGestionBundle\Entity\Exposition:
         textexpositions:
             targetEntity: ModuleGestionBundle\Entity\TextExposition
             mappedBy: exposition
-            cascade: ["remove","persist"] 
+            cascade: ["persist"] 
     lifecycleCallbacks: {  }

@@ -37,7 +37,8 @@ class ExpositionType extends AbstractType
                 'allow_add'    => true,
                 'allow_delete' => true,
                 'prototype'    => true,
-                'label'        => false
+                'label'        => false,
+                'by_reference' => false
       ))
         ;
     }
