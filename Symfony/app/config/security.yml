@@ -35,3 +35,4 @@ security:
         - { path: ^/accueil, role: ROLE_USER }
         - { path: ^/exposition, role: ROLE_USER }
         - { path: ^/utilisateur, role: ROLE_USER }
+        - { path: ^/oeuvre, role: ROLE_USER }

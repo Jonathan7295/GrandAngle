@@ -30,5 +30,12 @@ ModuleGestionBundle\Entity\Exposition:
         textexpositions:
             targetEntity: ModuleGestionBundle\Entity\TextExposition
             mappedBy: exposition
+            cascade: ["remove","persist"]
+    manyToOne:
+        emplacement:
+            targetEntity: Emplacement
+            joinColumn:
+                nullable: true
             cascade: ["persist"] 
+
     lifecycleCallbacks: {  }

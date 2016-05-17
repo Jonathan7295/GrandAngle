@@ -1,0 +1,103 @@
+{% extends ':layout:layout.html.twig' %}
+
+{% block body %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Liste des oeuvres
+        </div>
+        <div class="container">
+            {# Selection de l'exposition #}
+            <div id="choiceexpo" class="row">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label for="Expo">Choisissez une exposition</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="choixExpo" class="form-control" name="expo">
+                            <option value="1">Exposition 1</option>
+                            <option value="2">Exposition 2</option>
+                            <option value="3">Exposition 3</option>
+                            <option value="4">Exposition 4</option>
+                            <option value="5">Exposition 5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            {# Affichage de la liste des oeuvres #}
+            <div class="row">
+                <div id="scrolloeuv" class="col-md-10">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Artiste</th>
+                                <th>Type</th>
+                                <th>Etat</th>
+                                <th>Nombre de visite</th>
+                                <th>Position</th>
+                                <th>Actions</th>
+                                <th>Imprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for oeuvre in oeuvres %}
+                            <tr>
+                                <td>{{ oeuvre.nom }}</td>
+                                <td>Artiste</td>
+                                <td>Type</td>
+                                <td>{{ oeuvre.etat }}</td>
+                                <td>{{ oeuvre.nombreVisite }}</td>
+                                <td>{{ oeuvre.emplacement.position }}</td>
+                                <td>
+                                    <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
+                                    <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
+                                    <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a> 
+                                </td>
+                                <td><a id="qrcindex" title="Imprimer un Qrcode" href="" class="glyphicon glyphicon-qrcode"></a> </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {# Emplacement des oeuvres dans la salle #}
+            <div id="iconew" class="row">
+                <div class="col-md-8">
+                    {% image 'image/emplacement.png' %}
+                        <img id="place" class="img-responsive" title="Emplacements" src="{{ asset_url }}"/>
+                    {% endimage %}
+                </div>
+                <div class="col-md-4">
+                    <ul class="nav nav-pills">
+                        <li role="presentation">
+                            <a id="newoeuv" title="Nouvelle oeuvre" href="{{ path('oeuvre_new') }}">Nouvelle</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+  <script>
+
+    $(document).ready(function(){
+
+        // Gestion de l'ascenseur si il dépasse la hauteur du tableau
+        if ($(".table").height() < $("#scrolloeuv").height()) {
+            $("#scrolloeuv").css("overflow-y" , "hidden");
+        }else{
+            $("#scrolloeuv").css("overflow-y" , "scroll");
+        }
+
+        // Choix d'une exposition
+        $('#choixExpo').change(function(){
+            var expo = $(this).val();
+            expo = 'Exposition '+expo;
+            alert(expo);
+        });
+        
+    });
+    
+  </script>  
+{% endblock %}

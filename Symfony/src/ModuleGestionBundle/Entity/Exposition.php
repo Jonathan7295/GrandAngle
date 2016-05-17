@@ -1,6 +1,7 @@
 <?php
 
 namespace ModuleGestionBundle\Entity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,10 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Exposition
 {
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/Entity/TextExposition", mappedBy="exposition")
-     */
-    private $textexpositions;
-    /**
      * @var int
      */
     private $id;
@@ -22,11 +19,6 @@ class Exposition
      * @var string
      */
     private $nomExposition;
-
-    /**
-     * @var string
-     */
-    private $evenement;
 
     /**
      * @var \DateTime
@@ -42,6 +34,59 @@ class Exposition
      * @var int
      */
     private $nombreVisiteExposition;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/TextExposition", mappedBy="exposition", cascade={"remove"})
+     */
+    private $textexpositions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Emplacement")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $emplacement;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->textexpositions = new ArrayCollection();
+    }
+
+    /**
+     * Add textexposition
+     *
+     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
+     *
+     * @return Exposition
+     */
+    public function addTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
+    {
+        $textexposition->setExposition($this);
+
+        $this->textexpositions->add($textexposition);
+    }
+
+    /**
+     * Remove textexposition
+     *
+     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
+     */
+    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
+    {
+        $this->textexpositions->removeElement($textexposition);
+    }
+
+    /**
+     * Get textexpositions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTextexpositions()
+    {
+        return $this->textexpositions;
+    }
 
     /**
      * Get id
@@ -149,11 +194,7 @@ class Exposition
         return $this->nombreVisiteExposition;
     }
 
-    /**
-    * Get evenement
-    * @return  
-    */
-    public function getEvenement()
+    public function __toString()
     {
         return $this->evenement;
     }
@@ -172,45 +213,29 @@ class Exposition
     {
         return strval($this->id);
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->textexpositions = new ArrayCollection();
-    }
+
 
     /**
-     * Add textexposition
+     * Set emplacement
      *
-     * @param \ModuleGestionBundle\Entity\TextExposition $textexposition
+     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
      *
      * @return Exposition
      */
-    public function addTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
+    public function setEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
     {
-        $textexposition->setExposition($this);
-
-        $this->textexpositions->add($textexposition);
+        $this->emplacement = $emplacement;
+    
+        return $this;
     }
 
     /**
-     * Remove textexposition
+     * Get emplacement
      *
-     * @param \ModuleGestionBundle\Entity\TextExposition $textexposition
+     * @return \ModuleGestionBundle\Entity\Emplacement
      */
-    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
+    public function getEmplacement()
     {
-        $this->textexpositions->removeElement($textexposition);
-    }
-
-    /**
-     * Get textexpositions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTextexpositions()
-    {
-        return $this->textexpositions;
+        return $this->emplacement;
     }
 }

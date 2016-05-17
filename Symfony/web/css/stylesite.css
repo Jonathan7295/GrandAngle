@@ -325,14 +325,14 @@ body {
 }
 
 #showutiledit {
-	background-color: #2B8948;
+	background-color: #5BC0DE;
 	color : white;  
 	border-radius:4px;
 	padding: 10px 15px;
 }
 
 #showutiledit:hover {
-	background-color: #42995D;
+	background-color: #41899E;
 	color : #E3E3E3;
 	text-decoration: none;
 }
@@ -463,6 +463,100 @@ body {
 	background-color: white;
 }
 
+
+/*****New exposition******/
+
+/*****Show exposition*****/
+
+/*****Edit exposition*****/
+
+
+/***************Style Gestion oeuvre*******************/
+
+/****Index Oeuvre*****/
+#newoeuv {
+	background-color: #5CB85C;
+	color : #E3E3E3;
+}
+#newoeuv:hover {
+	background-color: #41899E;
+	color : white;
+}
+#scrolloeuv {
+	height: 375px;
+	overflow-y: scroll;
+}
+div#imgoeuv {
+	margin-bottom: 20px;
+}
+#choiceexpo {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+/*****New Oeuvre******/
+
+/*progress barre*/
+.ui-progressbar {
+    position: relative;
+}
+.progress-label {
+	position: absolute;
+	left: 30%;
+	top: 4px;
+	font-weight: bold;
+	text-shadow: 1px 1px 0 #fff;
+}
+div#progressbar {
+    margin-top: 10px;
+}
+/*end progrees barre*/
+
+
+#choiceart {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#oeuvre_etat label {
+	display: block;
+}
+
+#oeuvre_etat input {
+    float: left;
+    margin-right: 15px;
+}
+
+#qrcindex {
+    width: 30px;
+    height: 30px;
+    padding: 8px 8px;
+    border-radius: 4px;
+    color: #337ab7;
+    background-color: rgba(8, 8, 8, 0.61)
+}
+#qrcindex:hover {
+    text-decoration:none;
+    color: #080808;
+    background-color: rgba(8, 8, 8, 0.61)
+}
+
+
+/*****Show Oeuvre*****/
+
+/*****Edit Oeuvre*****/
+
+
+/***************Style Gestion Statistique*******************/
+
+/****Index Statistique*****/
+
+/*****New Statistique******/
+
+/*****Show Statistique*****/
+
+/*****Edit Statistique*****/
+
 /****Show exposition*****/
 #showexpo{
 
@@ -474,6 +568,7 @@ body {
 	border-radius:4px;
 	padding: 10px 15px;
 }
+
 
 #showexporet:hover{
 	text-decoration: none;

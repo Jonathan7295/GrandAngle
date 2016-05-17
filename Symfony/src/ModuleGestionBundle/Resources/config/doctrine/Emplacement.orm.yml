@@ -1,0 +1,15 @@
+ModuleGestionBundle\Entity\Emplacement:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\EmplacementRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        position:
+            type: integer
+
+    lifecycleCallbacks: {  }

@@ -1,0 +1,37 @@
+ModuleGestionBundle\Entity\Oeuvre:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\OeuvreRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: 255
+            column: nom
+        imgFlashcode:
+            type: blob
+            column: img_flashcode
+        etat:
+            type: string
+            length: 255
+        nombreVisite:
+            type: integer
+            column: nombre_visite
+    oneToMany:
+        texteoeuvres:
+            targetEntity: TexteOeuvre
+            mappedBy: oeuvre
+            cascade: ['persist']
+    manyToOne:
+        emplacement:
+            targetEntity: Emplacement
+            joinColumn:
+                nullable: false
+            cascade: ['persist']
+            
+    lifecycleCallbacks: {  }

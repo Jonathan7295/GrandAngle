@@ -27,6 +27,11 @@ class UtilisateurController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
+        // Si l'utilisateur n'est pas ADMIN 
+        if($role == "USER"){
+            return $this->redirectToRoute('module_gestion_index');
+        }   
+
         $em = $this->getDoctrine()->getManager();
 
         $utilisateurs = $em->getRepository('ModuleGestionBundle:Utilisateur')->findAll();
@@ -45,6 +50,11 @@ class UtilisateurController extends Controller
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
+
+        // Si l'utilisateur n'est pas ADMIN 
+        if($role == "USER"){
+            return $this->redirectToRoute('module_gestion_index');
+        }   
 
         $utilisateur = new Utilisateur();
 
@@ -79,6 +89,11 @@ class UtilisateurController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
+        // Si l'utilisateur n'est pas ADMIN 
+        if($role == "USER"){
+            return $this->redirectToRoute('module_gestion_index');
+        }   
+
         $deleteForm = $this->createDeleteForm($utilisateur);
 
         return $this->render('utilisateur/show.html.twig', array(
@@ -96,6 +111,11 @@ class UtilisateurController extends Controller
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
+
+        // Si l'utilisateur n'est pas ADMIN 
+        if($role == "USER"){
+            return $this->redirectToRoute('module_gestion_index');
+        }   
 
         // On stocke son id
         $id = $utilisateur->getId();
@@ -144,7 +164,8 @@ class UtilisateurController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('utilisateur_edit', array(
-                'id' => $id,
+                'id'   => $id,
+                'role' => $role,
             ));
         }
         return $this->render('utilisateur/edit.html.twig', array(
@@ -159,9 +180,6 @@ class UtilisateurController extends Controller
      */
     public function deleteAction(Request $request, Utilisateur $utilisateur)
     {
-        
-        // On récupère le role de la personne connectée
-        $role = $this->getUser()->getRole();
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($utilisateur);
