@@ -11,5 +11,15 @@ ModuleGestionBundle\Entity\Emplacement:
     fields:
         position:
             type: integer
+    manyToOne:
+        exposition:
+            targetEntity: ModuleGestionBundle\Entity\Exposition
+            joinColumn:
+                nullable: false
+    manyToOne:
+        oeuvre:
+            targetEntity: ModuleGestionBundle\Entity\Oeuvre
+            joinColumn:
+                nullable: false
 
     lifecycleCallbacks: {  }

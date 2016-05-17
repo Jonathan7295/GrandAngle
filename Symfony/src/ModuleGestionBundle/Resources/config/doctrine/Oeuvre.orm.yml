@@ -27,11 +27,5 @@ ModuleGestionBundle\Entity\Oeuvre:
             targetEntity: TexteOeuvre
             mappedBy: oeuvre
             cascade: ['persist']
-    manyToOne:
-        emplacement:
-            targetEntity: Emplacement
-            joinColumn:
-                nullable: false
-            cascade: ['persist']
             
     lifecycleCallbacks: {  }

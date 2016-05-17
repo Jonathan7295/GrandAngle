@@ -27,7 +27,7 @@ class OeuvreType extends AbstractType
                 'multiple' => false,
                 'expanded' => true))
             ->add('nombreVisite')
-            // ->add('emplacements', EmplacementType::class)
+            ->add('emplacement', EmplacementType::class)
         ;
     }
     

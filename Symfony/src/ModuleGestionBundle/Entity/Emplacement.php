@@ -2,13 +2,14 @@
 
 namespace ModuleGestionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Emplacement
  */
 class Emplacement
-{
+{   
     /**
      * @var int
      */
@@ -19,6 +20,17 @@ class Emplacement
      */
     private $position;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Exposition")
+     * @ORM\JoinColumn(nullable=FALSE)
+     */
+    private $exposition;
+
+    /**
+      * @ORM\ManyToOne(targetEntity="Oeuvre")
+      * @ORM\JoinColumn(nullable=FALSE)
+      */
+    private $oeuvre;
 
     /**
      * Get id
@@ -52,5 +64,30 @@ class Emplacement
     public function getPosition()
     {
         return $this->position;
+    }
+
+
+    /**
+     * Set exposition
+     *
+     * @param \ModuleGestionBundle\Entity\Exposition $exposition
+     *
+     * @return Emplacement
+     */
+    public function setExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
+    {
+        $this->exposition = $exposition;
+    
+        return $this;
+    }
+
+    /**
+     * Get exposition
+     *
+     * @return \ModuleGestionBundle\Entity\Exposition
+     */
+    public function getExposition()
+    {
+        return $this->exposition;
     }
 }

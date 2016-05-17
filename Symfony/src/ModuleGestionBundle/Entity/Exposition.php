@@ -41,15 +41,9 @@ class Exposition
     private $nombreVisiteExposition;
 
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/TextExposition", mappedBy="exposition", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="TextExposition", mappedBy="exposition", cascade={"remove"})
      */
     private $textexpositions;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Emplacement")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $emplacement;
 
     /**
      * Constructor
@@ -221,30 +215,5 @@ class Exposition
     public function __toString()
     {
         return strval($this->id);
-    }
-
-
-    /**
-     * Set emplacement
-     *
-     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
-     *
-     * @return Exposition
-     */
-    public function setEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
-    {
-        $this->emplacement = $emplacement;
-    
-        return $this;
-    }
-
-    /**
-     * Get emplacement
-     *
-     * @return \ModuleGestionBundle\Entity\Emplacement
-     */
-    public function getEmplacement()
-    {
-        return $this->emplacement;
     }
 }
