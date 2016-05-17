@@ -218,16 +218,6 @@ class Exposition
         return $this;
     }
 
-    /**
-    * Set evenement
-    * @return $this
-    */
-    public function setEvenement($evenement)
-    {
-        $this->evenement = $evenement;
-        return $this;
-    }
-
     public function __toString()
     {
         return strval($this->id);
