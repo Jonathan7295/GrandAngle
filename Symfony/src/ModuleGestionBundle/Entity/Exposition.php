@@ -194,11 +194,6 @@ class Exposition
         return $this->nombreVisiteExposition;
     }
 
-    public function __toString()
-    {
-        return $this->evenement;
-    }
-    
     /**
     * Set evenement
     * @return $this
