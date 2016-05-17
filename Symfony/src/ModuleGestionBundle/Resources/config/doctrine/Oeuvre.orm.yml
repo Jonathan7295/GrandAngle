@@ -26,6 +26,11 @@ ModuleGestionBundle\Entity\Oeuvre:
         texteoeuvres:
             targetEntity: TexteOeuvre
             mappedBy: oeuvre
-            cascade: ['persist']
+            cascade: ["persist","remove"]
+    oneToMany:
+        emplacements:
+            targetEntity: Emplacement
+            mappedBy: oeuvre
+            cascade: ["persist","remove"]
             
     lifecycleCallbacks: {  }

@@ -41,9 +41,14 @@ class Exposition
     private $nombreVisiteExposition;
 
     /**
-     * @ORM\OneToMany(targetEntity="TextExposition", mappedBy="exposition", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="TextExposition", mappedBy="exposition", cascade={"persist","remove"})
      */
     private $textexpositions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Emplacement", mappedBy="exposition", cascade={"persist","remove"})
+     */
+    private $emplacements;
 
     /**
      * Constructor
@@ -51,6 +56,7 @@ class Exposition
     public function __construct()
     {
         $this->textexpositions = new ArrayCollection();
+        $this->emplacements = new ArrayCollection();
     }
 
     /**

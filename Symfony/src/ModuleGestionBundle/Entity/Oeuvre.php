@@ -41,9 +41,15 @@ class Oeuvre
      */
     private $texteoeuvres;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Emplacement", mappedBy="oeuvre")
+     */
+    private $emplacements;
+
     public function __construct()
     {
         $this->texteoeuvres = new ArrayCollection();
+        $this->emplacements = new ArrayCollection();
     }
 
     /**
