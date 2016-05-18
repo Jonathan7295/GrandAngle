@@ -77,15 +77,28 @@
                                 {{ form_widget(form.evenement, {'attr': {'class': 'ajust'}}) }}
                             </div>
                         </div>
+                        <div class="form-group">
+
+                            {# Génération du label #}
+                            {{ form_label(form.organisateur, "Organisateur", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.organisateur) }}
+
+                            <div class="col-md-12">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.organisateur, {'attr': {'class': 'ajust'}}) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="champs" class="col-md-8 col-sm-10 col-xs-10">
+            <div id="champs" class="col-md-10 col-sm-10 col-xs-10">
                     <div class="form-group">
                         <div class="form-group">
                         <div class="col-md-2 col-sm-2 col-xs-2 labeldes"></div>
-                        <div class="col-md-3 col-sm-3 col-xs-10 champsdes"></div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 labellang"></div>
+                        <div class="col-md-4 col-sm-3 col-xs-10 champsdes"></div>
+                        <div class="col-md-1 col-sm-2 col-xs-2 labellang"></div>
                         <div class="col-md-3 col-sm-3 col-xs-10 champslang"></div>
                         <div class="col-md-1 col-sm-1 col-xs-1 deplace"></div>
                     </div>

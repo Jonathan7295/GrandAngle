@@ -1,0 +1,11 @@
+ModuleGestionBundle\Entity\Auteur:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\AuteurRepository
+    fields:
+        nationalite:
+            type: string
+            length: '20'
+        datenaissance:
+            type: datetime
+    lifecycleCallbacks: {  }

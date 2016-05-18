@@ -1,0 +1,8 @@
+ModuleGestionBundle\Entity\Collectif:
+    type: entity
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\CollectifRepository
+    fields:
+        datecreation:
+            type: datetime
+    lifecycleCallbacks: {  }

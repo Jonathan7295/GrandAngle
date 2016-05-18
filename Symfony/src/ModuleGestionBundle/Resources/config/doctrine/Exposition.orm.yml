@@ -37,5 +37,8 @@ ModuleGestionBundle\Entity\Exposition:
             joinColumn:
                 nullable: true
             cascade: ["persist"] 
-
+    oneToOne:
+        organisateur:
+            targetEntity: Organisateur
+            cascade: ["persist"] 
     lifecycleCallbacks: {  }

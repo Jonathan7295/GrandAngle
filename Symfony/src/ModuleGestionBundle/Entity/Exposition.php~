@@ -252,28 +252,4 @@ class Exposition
     {
         return $this->emplacement;
     }
-
-    /**
-     * Set organisateur
-     *
-     * @param \ModuleGestionBundle\Entity\Organisateur $organisateur
-     *
-     * @return Exposition
-     */
-    public function setOrganisateur(\ModuleGestionBundle\Entity\Organisateur $organisateur = null)
-    {
-        $this->organisateur = $organisateur;
-    
-        return $this;
-    }
-
-    /**
-     * Get organisateur
-     *
-     * @return \ModuleGestionBundle\Entity\Organisateur
-     */
-    public function getOrganisateur()
-    {
-        return $this->organisateur;
-    }
 }

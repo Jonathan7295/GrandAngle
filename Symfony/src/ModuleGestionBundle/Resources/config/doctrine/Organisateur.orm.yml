@@ -1,0 +1,28 @@
+ModuleGestionBundle\Entity\Organisateur:
+    type: entity
+    inheritanceType: JOINED
+    discriminatorType:
+        name: discr
+        type: string
+    discriminatorMap:
+        organisateur: Organisateur
+        auteur: Auteur
+        collectif: Collectif
+    table: null
+    repositoryClass: ModuleGestionBundle\Repository\OrganisateurRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        nom:
+            type: string
+            length: '60'
+    oneToMany:
+        expositions:
+            targetEntity: ModuleGestionBundle\Entity\Exposition
+            mappedBy: organisateur
+            cascade: ["remove","persist"]
+    lifecycleCallbacks: {  }
