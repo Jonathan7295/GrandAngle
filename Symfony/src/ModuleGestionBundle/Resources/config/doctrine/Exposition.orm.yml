@@ -28,11 +28,11 @@ ModuleGestionBundle\Entity\Exposition:
             column: evenement
     oneToMany:
         textexpositions:
-            targetEntity: ModuleGestionBundle\Entity\TextExposition
+            targetEntity: TextExposition
             mappedBy: exposition
-            cascade: ["remove","persist"]
-    manyToOne:
-        emplacement:
+            cascade: ["persist","remove"]
+    oneToMany:
+        emplacements:
             targetEntity: Emplacement
             joinColumn:
                 nullable: true

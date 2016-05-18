@@ -42,14 +42,14 @@ class Oeuvre
     private $texteoeuvres;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Emplacement")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToMany(targetEntity="Emplacement", mappedBy="oeuvre")
      */
-    private $emplacement;
+    private $emplacements;
 
     public function __construct()
     {
         $this->texteoeuvres = new ArrayCollection();
+        $this->emplacements = new ArrayCollection();
     }
 
     /**
@@ -192,27 +192,4 @@ class Oeuvre
         return $this->texteoeuvres;
     }
 
-    /**
-     * Set emplacement
-     *
-     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
-     *
-     * @return Oeuvre
-     */
-    public function setEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
-    {
-        $this->emplacement = $emplacement;
-    
-        return $this;
-    }
-
-    /**
-     * Get emplacement
-     *
-     * @return \ModuleGestionBundle\Entity\Emplacement
-     */
-    public function getEmplacement()
-    {
-        return $this->emplacement;
-    }
 }

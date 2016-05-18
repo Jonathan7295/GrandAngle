@@ -11,5 +11,21 @@ ModuleGestionBundle\Entity\Emplacement:
     fields:
         position:
             type: integer
+    manyToOne:
+        exposition:
+            targetEntity: Exposition
+            inversedBy: emplacements
+            joinColumn:
+                name: exposition_id
+                referencedColumnName: id
+                nullable: false
+    manyToOne:
+        oeuvre:
+            targetEntity: Oeuvre
+            inversedBy: emplacements
+            joinColumn:
+                name: oeuvre_id
+                referencedColumnName: id
+                nullable: false
 
     lifecycleCallbacks: {  }

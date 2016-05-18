@@ -26,12 +26,11 @@ ModuleGestionBundle\Entity\Oeuvre:
         texteoeuvres:
             targetEntity: TexteOeuvre
             mappedBy: oeuvre
-            cascade: ['persist']
-    manyToOne:
-        emplacement:
+            cascade: ["persist","remove"]
+    oneToMany:
+        emplacements:
             targetEntity: Emplacement
-            joinColumn:
-                nullable: false
-            cascade: ['persist']
+            mappedBy: oeuvre
+            cascade: ["persist","remove"]
             
     lifecycleCallbacks: {  }

@@ -41,15 +41,14 @@ class Exposition
     private $nombreVisiteExposition;
 
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/TextExposition", mappedBy="exposition", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="TextExposition", mappedBy="exposition", cascade={"persist","remove"})
      */
     private $textexpositions;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Emplacement")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="Emplacement", mappedBy="exposition", cascade={"persist","remove"})
      */
-    private $emplacement;
+    private $emplacements;
 
     /**
      * @ORM\OneToOne(targetEntity="ModuleGestionBundle\Entity\Organisateur", cascade={"persist"})
@@ -62,6 +61,7 @@ class Exposition
     public function __construct()
     {
         $this->textexpositions = new ArrayCollection();
+        $this->emplacements = new ArrayCollection();
     }
 
     /**
@@ -227,7 +227,6 @@ class Exposition
     {
         return strval($this->id);
     }
-
 
     /**
      * Set emplacement
