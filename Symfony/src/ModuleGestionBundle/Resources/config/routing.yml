@@ -17,3 +17,7 @@ module_gestion_oeuvre:
 module_gestion_utilisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/utilisateur.yml"
     prefix:    /utilisateur
+
+module_gestion_organisateur:
+    resource: "@ModuleGestionBundle/Resources/config/routing/organisateur.yml"
+    prefix:    /organisateur
