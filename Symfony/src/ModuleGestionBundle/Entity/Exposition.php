@@ -68,6 +68,11 @@ class Exposition
     private $emplacements;
 
     /**
+     * @ORM\OneToOne(targetEntity="ModuleGestionBundle\Entity\Organisateur", cascade={"persist"})
+     */
+    private $organisateur;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -277,5 +282,53 @@ class Exposition
     public function __toString()
     {
         return strval($this->id);
+    }
+
+    /**
+     * Set emplacement
+     *
+     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
+     *
+     * @return Exposition
+     */
+    public function setEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
+    {
+        $this->emplacement = $emplacement;
+    
+        return $this;
+    }
+
+    /**
+     * Get emplacement
+     *
+     * @return \ModuleGestionBundle\Entity\Emplacement
+     */
+    public function getEmplacement()
+    {
+        return $this->emplacement;
+    }
+
+    /**
+     * Set organisateur
+     *
+     * @param \ModuleGestionBundle\Entity\Organisateur $organisateur
+     *
+     * @return Exposition
+     */
+    public function setOrganisateur(\ModuleGestionBundle\Entity\Organisateur $organisateur = null)
+    {
+        $this->organisateur = $organisateur;
+    
+        return $this;
+    }
+
+    /**
+     * Get organisateur
+     *
+     * @return \ModuleGestionBundle\Entity\Organisateur
+     */
+    public function getOrganisateur()
+    {
+        return $this->organisateur;
     }
 }

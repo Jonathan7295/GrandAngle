@@ -17,7 +17,10 @@ class TextExpositionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, array(
+                'attr' => array(
+                    'rows' => '3',
+                    'cols' => '40')))
             ->add('langue', ChoiceType::class, array(
                 'choices'  => array(
                     'français' => 'fr',

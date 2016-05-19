@@ -466,6 +466,10 @@ body {
 
 /*****New exposition******/
 
+textarea {
+	resize : none;
+}
+
 /*****Show exposition*****/
 
 /*****Edit exposition*****/
