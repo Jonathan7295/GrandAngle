@@ -7,36 +7,53 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Exposition
+ *
+ * @ORM\Table(name="exposition")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\ExpositionRepository")
  */
 class Exposition
 {
     /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nomExposition", type="string", length=255)
      */
     private $nomExposition;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="evenement", type="string", length=255)
      */
     private $evenement;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="dateHeureDebutExposition", type="datetime")
      */
     private $dateHeureDebutExposition;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="dateHeureFinExposition", type="datetime")
      */
-    private $dateHeureFinExpositon;
+    private $dateHeureFinExposition;
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="nombreVisiteExposition", type="integer")
      */
     private $nombreVisiteExposition;
 
@@ -60,40 +77,6 @@ class Exposition
     }
 
     /**
-     * Add textexposition
-     *
-     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
-     *
-     * @return Exposition
-     */
-    public function addTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
-    {
-        $textexposition->setExposition($this);
-
-        $this->textexpositions->add($textexposition);
-    }
-
-    /**
-     * Remove textexposition
-     *
-     * @param \ModuleGestionBundle\Entity\TextExpositions $textexposition
-     */
-    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
-    {
-        $this->textexpositions->removeElement($textexposition);
-    }
-
-    /**
-     * Get textexpositions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTextexpositions()
-    {
-        return $this->textexpositions;
-    }
-
-    /**
      * Get id
      *
      * @return integer
@@ -113,7 +96,7 @@ class Exposition
     public function setNomExposition($nomExposition)
     {
         $this->nomExposition = $nomExposition;
-
+    
         return $this;
     }
 
@@ -125,6 +108,30 @@ class Exposition
     public function getNomExposition()
     {
         return $this->nomExposition;
+    }
+
+    /**
+     * Set evenement
+     *
+     * @param string $evenement
+     *
+     * @return Exposition
+     */
+    public function setEvenement($evenement)
+    {
+        $this->evenement = $evenement;
+    
+        return $this;
+    }
+
+    /**
+     * Get evenement
+     *
+     * @return string
+     */
+    public function getEvenement()
+    {
+        return $this->evenement;
     }
 
     /**
@@ -152,27 +159,27 @@ class Exposition
     }
 
     /**
-     * Set dateHeureFinExpositon
+     * Set dateHeureFinExposition
      *
-     * @param \DateTime $dateHeureFinExpositon
+     * @param \DateTime $dateHeureFinExposition
      *
      * @return Exposition
      */
-    public function setDateHeureFinExpositon($dateHeureFinExpositon)
+    public function setDateHeureFinExposition($dateHeureFinExposition)
     {
-        $this->dateHeureFinExpositon = $dateHeureFinExpositon;
+        $this->dateHeureFinExposition = $dateHeureFinExposition;
     
         return $this;
     }
 
     /**
-     * Get dateHeureFinExpositon
+     * Get dateHeureFinExposition
      *
      * @return \DateTime
      */
-    public function getDateHeureFinExpositon()
+    public function getDateHeureFinExposition()
     {
-        return $this->dateHeureFinExpositon;
+        return $this->dateHeureFinExposition;
     }
 
     /**
@@ -200,22 +207,71 @@ class Exposition
     }
 
     /**
-    * Get evenement
-    * @return  
-    */
-    public function getEvenement()
+     * Add textexposition
+     *
+     * @param \ModuleGestionBundle\Entity\TextExposition $textexposition
+     *
+     * @return Exposition
+     */
+    public function addTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
     {
-        return $this->evenement;
+        $textexposition->setExposition($this);
+
+        $this->textexpositions->add($textexposition);
     }
-    
+
     /**
-    * Set evenement
-    * @return $this
-    */
-    public function setEvenement($evenement)
+     * Remove textexposition
+     *
+     * @param \ModuleGestionBundle\Entity\TextExposition $textexposition
+     */
+    public function removeTextexposition(\ModuleGestionBundle\Entity\TextExposition $textexposition)
     {
-        $this->evenement = $evenement;
-        return $this;
+        $this->textexpositions->removeElement($textexposition);
+    }
+
+    /**
+     * Get textexpositions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTextexpositions()
+    {
+        return $this->textexpositions;
+    }
+
+    /**
+     * Add emplacement
+     *
+     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
+     *
+     * @return Exposition
+     */
+    public function addEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
+    {
+        $emplacement->setExposition($this);
+
+        $this->emplacements->add($emplacement);
+    }
+
+    /**
+     * Remove emplacement
+     *
+     * @param \ModuleGestionBundle\Entity\Emplacement $emplacement
+     */
+    public function removeEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
+    {
+        $this->emplacements->removeElement($emplacement);
+    }
+
+    /**
+     * Get emplacements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEmplacements()
+    {
+        return $this->emplacements;
     }
 
     public function __toString()

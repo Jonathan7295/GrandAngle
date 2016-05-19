@@ -1,5 +1,5 @@
 <?php
-// src/ModuleGestionBundle/Entity/Utilisateur.php
+
 namespace ModuleGestionBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -7,39 +7,43 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * Utilisateur
+ *
  * @ORM\Table(name="utilisateur")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\UtilisateurRepository")
  */
 class Utilisateur extends BaseUser
 {
+     /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
-    /**
-     * @Assert\Length(
-     *      max = 30,
-     *      maxMessage = "Votre nom ne doit pas excéder {{ limit }} caractères !"
-     * )
-     */
     private $firstname;
+
     /**
+     * @var string
+     *
      * @ORM\Column(name="lastname", type="string", length=255)
      */
-    /**
-     * @Assert\Length(
-     *      max = 30,
-     *      maxMessage = "Votre nom ne doit pas excéder {{ limit }} caractères !"
-     * )
-     */
     private $lastname;
+
     /**
+     * @var string
+     *
      * @ORM\Column(name="role", type="string", length=255)
      */
     private $role;
 
     /**
-     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"persist"})
      */
     private $telephones;
 
@@ -50,8 +54,6 @@ class Utilisateur extends BaseUser
         $this->role = "USER";
         $this->telephones = new ArrayCollection();
     }
-
-    
 
     /**
      * Set firstname

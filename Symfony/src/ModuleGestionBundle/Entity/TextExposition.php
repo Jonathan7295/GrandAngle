@@ -6,30 +6,40 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TextExposition
+ *
+ * @ORM\Table(name="text_exposition")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\TextExpositionRepository")
  */
 class TextExposition
 {
     /**
-    * @ORM\ManyToOne(targetEntity="Exposition", inversedBy="textexpositions")
-    * @ORM\JoinColumn(name="exposition_id", referencedColumnName="id")
-    */
-    private $exposition;
-
-    /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="langue", type="string", length=255)
      */
     private $langue;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Exposition", inversedBy="textexpositions")
+     * @ORM\JoinColumn(name="exposition_id", referencedColumnName="id")
+     */
+    private $exposition;
 
     /**
      * Get id
@@ -96,7 +106,7 @@ class TextExposition
      *
      * @return TextExposition
      */
-    public function setExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
+    public function setExposition(\ModuleGestionBundle\Entity\Exposition $exposition = null)
     {
         $this->exposition = $exposition;
     

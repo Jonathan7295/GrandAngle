@@ -7,16 +7,25 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Emplacement
+ *
+ * @ORM\Table(name="emplacement")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\EmplacementRepository")
  */
 class Emplacement
-{   
+{
     /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var int
+     *
+     * @ORM\Column(name="position", type="integer")
      */
     private $position;
 
@@ -25,7 +34,6 @@ class Emplacement
      * @ORM\JoinColumn(nullable=FALSE)
      */
     private $exposition;
-
     /**
       * @ORM\ManyToOne(targetEntity="Oeuvre")
       * @ORM\JoinColumn(nullable=FALSE)
@@ -66,7 +74,6 @@ class Emplacement
         return $this->position;
     }
 
-
     /**
      * Set exposition
      *
@@ -89,5 +96,29 @@ class Emplacement
     public function getExposition()
     {
         return $this->exposition;
+    }
+
+    /**
+     * Set oeuvre
+     *
+     * @param \ModuleGestionBundle\Entity\Oeuvre $oeuvre
+     *
+     * @return Emplacement
+     */
+    public function setOeuvre(\ModuleGestionBundle\Entity\Oeuvre $oeuvre)
+    {
+        $this->oeuvre = $oeuvre;
+    
+        return $this;
+    }
+
+    /**
+     * Get oeuvre
+     *
+     * @return \ModuleGestionBundle\Entity\Oeuvre
+     */
+    public function getOeuvre()
+    {
+        return $this->oeuvre;
     }
 }

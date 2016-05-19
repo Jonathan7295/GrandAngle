@@ -1,4 +1,5 @@
 <?php
+
 namespace ModuleGestionBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -6,35 +7,41 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Telephone
+ *
+ * @ORM\Table(name="telephone")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\TelephoneRepository")
  */
 class Telephone
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="telephones")
+     * @ORM\ManyToOne(targetEntity="Utilisateur", inversedBy="telephones", cascade={"persist"})
      * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
      */
     private $utilisateur;
     
     /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     * @Assert\Length(
-     *      max = 10)
+     *
+     * @ORM\Column(name="numero", type="string", length=255)
      */
     private $numero;
 
     /**
      * @var string
-     * @Assert\Length(
-     *      max = 30)
+     *
+     * @ORM\Column(name="libelle", type="string", length=255)
      */
     private $libelle;
-    
-    
+
 
     /**
      * Get id
@@ -116,5 +123,10 @@ class Telephone
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }

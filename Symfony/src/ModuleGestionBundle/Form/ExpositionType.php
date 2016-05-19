@@ -26,7 +26,7 @@ class ExpositionType extends AbstractType
                                                 'format' => 'dd-MM-yyyy HH:mm',
                                                 'attr' => array('class' => 'calendar'),
                                                 ))
-            ->add('dateHeureFinExpositon', DateTimeType::class , array(
+            ->add('dateHeureFinExposition', DateTimeType::class , array(
                                                 'widget' => 'single_text',
                                                 'input' => 'datetime',
                                                 'format' => 'dd-MM-yyyy HH:mm',

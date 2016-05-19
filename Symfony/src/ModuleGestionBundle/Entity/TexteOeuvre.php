@@ -2,28 +2,38 @@
 
 namespace ModuleGestionBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * TexteOeuvre
+ *
+ * @ORM\Table(name="texte_oeuvre")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\TexteOeuvreRepository")
  */
 class TexteOeuvre
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="texteoeuvres")
-     * @ORM\JoinColumn(name="oeuvre_id", referencedColumnName="id")
-     */
-    private $oeuvre;
-
-    /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="texteoeuvres")
+     * @ORM\JoinColumn(name="oeuvre_id", referencedColumnName="id")
+     */
+    private $oeuvre;
+    
     /**
      * Get id
      *
