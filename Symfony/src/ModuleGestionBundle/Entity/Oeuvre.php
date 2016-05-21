@@ -37,6 +37,11 @@ class Oeuvre
     private $imgFlashcode;
 
     /**
+     * @ORM\Column(name="genFlashcode", type="boolean")
+     */
+     private $genFlashcode;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="etat", type="string", length=255)
@@ -60,10 +65,22 @@ class Oeuvre
      */
     private $emplacements;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Artiste", inversedBy="oeuvres")
+     * @ORM\JoinColumn(name="artiste_id", referencedColumnName="id")
+     */
+    private $artiste;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Exposition", mappedBy="oeuvre")
+     */
+    private $expositions;
+
     public function __construct()
     {
         $this->texteoeuvres = new ArrayCollection();
         $this->emplacements = new ArrayCollection();
+        $this->expositions = new ArrayCollection();
     }
     
     /**
@@ -238,5 +255,87 @@ class Oeuvre
     public function getEmplacements()
     {
         return $this->emplacements;
+    }
+
+    /**
+     * Set genFlashcode
+     *
+     * @param boolean $genFlashcode
+     *
+     * @return Oeuvre
+     */
+    public function setGenFlashcode($genFlashcode)
+    {
+        $this->genFlashcode = $genFlashcode;
+    
+        return $this;
+    }
+
+    /**
+     * Get genFlashcode
+     *
+     * @return boolean
+     */
+    public function getGenFlashcode()
+    {
+        return $this->genFlashcode;
+    }
+
+    /**
+     * Set artiste
+     *
+     * @param \ModuleGestionBundle\Entity\Artiste $artiste
+     *
+     * @return Oeuvre
+     */
+    public function setArtiste(\ModuleGestionBundle\Entity\Artiste $artiste = null)
+    {
+        $this->artiste = $artiste;
+    
+        return $this;
+    }
+
+    /**
+     * Get artiste
+     *
+     * @return \ModuleGestionBundle\Entity\Artiste
+     */
+    public function getArtiste()
+    {
+        return $this->artiste;
+    }
+
+    /**
+     * Add exposition
+     *
+     * @param \ModuleGestionBundle\Entity\Exposition $exposition
+     *
+     * @return Oeuvre
+     */
+    public function addExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
+    {
+        $exposition->setOeuvre($this);
+
+        $this->expositions->add($exposition);
+    }
+
+    /**
+     * Remove exposition
+     *
+     * @param \ModuleGestionBundle\Entity\Exposition $exposition
+     */
+    public function removeExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
+    {
+        $this->expositions->removeElement($exposition);
+    }
+
+    /**
+     * Get expositions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpositions()
+    {
+        return $this->expositions;
     }
 }

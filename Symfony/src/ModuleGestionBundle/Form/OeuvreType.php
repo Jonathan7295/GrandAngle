@@ -2,8 +2,12 @@
 
 namespace ModuleGestionBundle\Form;
 
+use ModuleGestionBundle\Entity\Emplacement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +21,7 @@ class OeuvreType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('imgFlashcode')
+            ->add('genFlashcode')
             ->add('etat', ChoiceType::class, array(
                 'choices' => array(
                     'Pas livré' => 'Pas livré',
@@ -26,8 +30,16 @@ class OeuvreType extends AbstractType
                 ),
                 'multiple' => false,
                 'expanded' => true))
-            ->add('nombreVisite')
-            // ->add('emplacements', EmplacementType::class)
+            ->add('emplacements', TextType::class, array(
+                'label' => 'Position'))
+            ->add('artiste', EntityType::class, array(
+                'class' => 'ModuleGestionBundle:Artiste',
+                'label' => false,
+                'choice_label' => 'nom',))
+            ->add('expositions', EntityType::class, array(
+                'class' => 'ModuleGestionBundle:Exposition',
+                'label' => false,
+                'choice_label' => 'nomExposition',))
         ;
     }
     

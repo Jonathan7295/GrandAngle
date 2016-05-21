@@ -500,6 +500,10 @@ div#imgoeuv {
 
 /*****New Oeuvre******/
 
+#contnewOeuv {
+	margin-top: 10px;
+}
+
 /*progress barre*/
 .ui-progressbar {
     position: relative;

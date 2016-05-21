@@ -15,6 +15,10 @@ class Organisateur
 {
     /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -24,7 +28,7 @@ class Organisateur
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/Exposition", mappedBy="organisateur", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Exposition", mappedBy="organisateur", cascade={"remove"})
      */
     private $expositions;
 

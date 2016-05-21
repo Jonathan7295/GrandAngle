@@ -30,12 +30,13 @@ class Emplacement
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Exposition")
+     * @ORM\ManyToOne(targetEntity="Exposition", inversedBy="emplacements")
      * @ORM\JoinColumn(nullable=FALSE)
      */
     private $exposition;
+
     /**
-      * @ORM\ManyToOne(targetEntity="Oeuvre")
+      * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="emplacements")
       * @ORM\JoinColumn(nullable=FALSE)
       */
     private $oeuvre;
