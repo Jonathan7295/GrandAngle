@@ -13,18 +13,23 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Organisateur
 {
-    /**
+     /**
      * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="nationalite", type="string", length=255)
      */
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="ModuleGestionBunlde/Exposition", mappedBy="organisateur", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Exposition", mappedBy="organisateur", cascade={"remove"})
      */
     private $expositions;
 

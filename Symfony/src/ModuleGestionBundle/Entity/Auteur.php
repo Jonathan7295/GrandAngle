@@ -9,11 +9,13 @@ class Auteur extends Organisateur
 {
     /**
      * @var string
+     * @ORM\Column(name="nationalite", type="string", length=255)
      */
     private $nationalite;
 
     /**
      * @var \DateTime
+     * @ORM\Column(name="datenaissance", type="datetime")
      */
     private $datenaissance;
     
