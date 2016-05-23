@@ -7,41 +7,88 @@
         <div class="panel-heading">
             Création d'une nouvelle oeuvre
         </div>
-        <div class="container">
+        <div id="contnewOeuv" class="container">
             {# Selection de l'artiste et Etat de l'oeuvre #}
             <div class="row">
                 <div class="col-md-2">
-                    <label for="Art" class="control-label ajust">Choisissez un artiste</label>
+                    <label for="Art" class="control-label ajust">Choisir l'exposition</label>
+                    {# Génération du label #}
+                    {{ form_label(form.nom, "Nom", {'label_attr': {'class': ' control-label ajust'}})}}
+                </div>
+                <div class="col-md-4">
+                    {# Génération de l'input #}
+                    {{ form_widget(form.expositions, {'attr': {'class': 'col-md-2 form-control ajust'}}) }}
+                    {# Génération de l'input #}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control ajust'}}) }}
                 </div>
                 <div class="col-md-2">
-                    <select class="form-control" name="art">
-                        <option value="1">Artiste 1</option>
-                        <option value="2">Artiste 2</option>
-                        <option value="3">Artiste 3</option>
-                        <option value="4">Artiste 4</option>
-                        <option value="#">Nouvel artiste</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <div class="col-md-12">
-                        <input id="file" type="file" accept="image/*">
-                    </div>
-                    <div class="col-md-12">
-                        <div id="progressbar"><div class="progress-label">Loading...</div></div>
-                    </div>
+                    <label for="Art" class="control-label ajust">Choix de l'artiste</label>
                 </div>
                 <div class="col-md-2">
-                    {% image 'image/specimen.png' %}
-                        <img class="img-responsive" title="Image Oeuvre" src="{{ asset_url }}" width="141px" height="141px"/>
-                    {% endimage %}
+                    {# Génération de l'input #}
+                    {{ form_widget(form.artiste, {'attr': {'class': 'col-md-2 form-control ajust'}}) }}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     {{ form_label(form.etat)}}
                     {{ form_widget(form.etat) }}
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        
+                        <div class="col-md-6">
+                            
+                        </div>
+                        <div class="col-md-4">
+                            
+                        </div>
+                        <!-- <div class="col-md-2">
+                            
+                        </div>
+                            {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.nom) }}
+                        <div class="col-md-2">
+                            
+                        </div>
+                        <div class="col-md-2">
+                            {# Génération du label #}
+                                {{ form_label(form.emplacements, "Position", {'label_attr': {'class': ' control-label ajust'}}) }}
+                        </div>
+                            {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.emplacements) }}
+                        <div class="col-md-3">
+                            {# Génération de l'input #}
+                            {{ form_widget(form.emplacements, {'attr': {'class': 'form-control ajust'}}) }}
+                        </div>    -->
+                    <!-- </div> -->
+                    
+
+                       <!--  <div class="col-md-12">
+                            <input id="file" type="file" accept="image/*">
+                        </div>
+                        <div class="col-md-12">
+                            <div id="progressbar"><div class="progress-label">Loading...</div></div>
+                        </div> -->
+                   <!-- 
+                        {% image 'image/specimen.png' %}
+                            <img class="img-responsive" title="Image Oeuvre" src="{{ asset_url }}" width="141px" height="141px"/>
+                        {% endimage %} -->
+                    </div>
+                 </div>
+            </div>
             
             <div class="row">
+                <div class="col-md-6">
+                    
+                        
+                   
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                         
+                    </div>
+                </div>
             </div>
                 {{ form_widget(form) }}
                 <input type="submit" value="Create" />
@@ -53,4 +100,12 @@
         </div>
     </div>
     {{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#oeuvre_artiste').append("<option>Nouvel artiste</option>");
+    });
+    </script>
 {% endblock %}

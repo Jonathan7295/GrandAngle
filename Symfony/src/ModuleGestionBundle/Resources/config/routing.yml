@@ -14,6 +14,11 @@ module_gestion_oeuvre:
     resource: "@ModuleGestionBundle/Resources/config/routing/oeuvre.yml"
     prefix:   /oeuvre
 
+list_oeuvre:
+    path:    /list/oeuvre
+    defaults: { _controller: "ModuleGestionBundle:Oeuvre:listOeuvre" }
+    methods: [POST]
+
 module_gestion_utilisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/utilisateur.yml"
     prefix:    /utilisateur

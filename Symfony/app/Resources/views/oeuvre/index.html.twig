@@ -9,16 +9,12 @@
             {# Selection de l'exposition #}
             <div id="choiceexpo" class="row">
                 <div class="form-group">
-                    <div class="col-md-3">
-                        <label for="Expo">Choisissez une exposition</label>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6 col-md-offset-3">
                         <select id="choixExpo" class="form-control" name="expo">
-                            <option value="1">Exposition 1</option>
-                            <option value="2">Exposition 2</option>
-                            <option value="3">Exposition 3</option>
-                            <option value="4">Exposition 4</option>
-                            <option value="5">Exposition 5</option>
+                            <option value="choix">Choisissez une exposition</option>
+                        {% for exposition in expositions %}
+                            <option value="{{ exposition.id }}">{{ exposition.nomExposition }}</option>
+                        {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -30,9 +26,9 @@
                         <thead>
                             <tr>
                                 <th>Nom</th>
+                                <th>Etat</th>
                                 <th>Artiste</th>
                                 <th>Type</th>
-                                <th>Etat</th>
                                 <th>Nombre de visite</th>
                                 <th>Position</th>
                                 <th>Actions</th>
@@ -40,22 +36,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {% for oeuvre in oeuvres %}
-                            <tr>
-                                <td>{{ oeuvre.nom }}</td>
+                        {#<!-- {% if oeuvres is defined %}#}
+                            {#{% for oeuvre in oeuvres %} -->#}
+                            <tr id="list">
+                                <td>{#{ oeuvre.nom }#}</td>
                                 <td>Artiste</td>
                                 <td>Type</td>
-                                <td>{{ oeuvre.etat }}</td>
-                                <td>{{ oeuvre.nombreVisite }}</td>
+                                <td>{#{ oeuvre.etat }#}</td>
+                                <td>{#{ oeuvre.nombreVisite }#}</td>
                                 <td></td>
                                 <td>
-                                    <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
-                                    <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
-                                    <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a> 
+                                    <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{#{ path('oeuvre_show', { 'id': oeuvre.id }) }#}"></a>
+                                    <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{#{ path('oeuvre_edit', { 'id': oeuvre.id }) }#}"></a>
+                                    <a id="delindex" title="Supprimer" name="{#{ path('oeuvre_delete', { 'id': oeuvre.id }) }#}" class="glyphicon glyphicon-trash" href="{#{ path('oeuvre_delete', { 'id': oeuvre.id }) }#}"></a> 
                                 </td>
                                 <td><a id="qrcindex" title="Imprimer un Qrcode" href="" class="glyphicon glyphicon-qrcode"></a> </td>
                             </tr>
-                        {% endfor %}
+                           {#<!--  {% endfor %}#}
+                        {#{% endif %} -->#}
                         </tbody>
                     </table>
                 </div>
@@ -92,11 +90,44 @@
 
         // Choix d'une exposition
         $('#choixExpo').change(function(){
-            var expo = $(this).val();
-            expo = 'Exposition '+expo;
-            alert(expo);
+            var id = $(this).val();
+            if (id != 'choix') {
+
+               function ajaxCall(id){
+                    var list = $('#list'); // récupérer l'élément liste du code HTML
+                    $.ajax({
+                        url: "{{ path('list_oeuvre') }}", // On renseigne l'url TWIG
+                        method: "post",
+                        data: {id: id} // On passe l'id dans la requête
+                    }).done(function(msg){
+                        refreshList(msg);
+                    });
+               }
+
+               function refreshList(msg){
+                    // mettre à jour les données de la page
+                    list.innerHTML = ""; // Efface la liste
+                    // Pour chaque élément trouvé dans le document JSON, on peuple la liste
+                    $.each(JSON.parse(msg['data']), function(i, item) {
+                        var li = document.createElement('td');
+                        var li2 = document.createElement('td');
+                        var text = document.createTextNode(item.nom);
+                        var text2 = document.createTextNode(item.etat);
+                        li.appendChild(text);
+                        li2.appendChild(text2);
+                        list.appendChild(li);
+                        list.appendChild(li2);
+
+                    });
+               }
+
+               ajaxCall(id);
+            }else{
+                list.innerHTML = ""; // Efface la liste
+            }
         });
         
+
     });
     
   </script>  

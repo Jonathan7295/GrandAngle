@@ -2,9 +2,10 @@
 
 namespace ModuleGestionBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use ModuleGestionBundle\Entity\Oeuvre;
 use ModuleGestionBundle\Form\OeuvreType;
 
@@ -21,12 +22,40 @@ class OeuvreController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
+        // $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
+        $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
 
         return $this->render('oeuvre/index.html.twig', array(
-            'oeuvres' => $oeuvres,
-            'role'    => $role,
+            // 'oeuvres'     => $oeuvres,
+            'expositions' => $expositions,
+            'role'        => $role,
         ));
+    }
+
+    public function listOeuvreAction(Request $req)
+    {
+         // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
+
+        if($req->isXMLHttpRequest()) {
+            $id = $req->get('id');
+            $connection = $this->get('database_connection');
+            // récupérer la liste des oeuvres
+            $query = "select * from exposition as e inner join oeuvre as o on e.oeuvre_id = o.id where e.id = " . $id;
+            $rows = $connection->fetchAll($query);
+
+            // return $this->render('oeuvre/index.html.twig', array(
+            //     'expositions' => $expositions,
+            //     'oeuvres'     => $rows,
+            //     'role'        => $role,
+            // ));
+            return new JsonResponse(array('data' => json_encode($rows)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
 
     /**
