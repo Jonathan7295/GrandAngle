@@ -1,9 +1,13 @@
 <?php
 
 namespace ModuleGestionBundle\Entity;
+use ModuleGestionBundle\Entity\Organisateur;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Auteur
+ * @ORM\Entity
+ * @ORM\Table(name="Auteur")
+ * @ORM\MappedSuperclass
  */
 class Auteur extends Organisateur
 {

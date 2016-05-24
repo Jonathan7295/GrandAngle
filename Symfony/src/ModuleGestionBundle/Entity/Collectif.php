@@ -1,14 +1,19 @@
 <?php
 
 namespace ModuleGestionBundle\Entity;
+use ModuleGestionBundle\Entity\Organisateur;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Collectif
+ * @ORM\MappedSuperclass
+ * @ORM\Entity
+ * @ORM\Table(name="Collectif")
  */
 class Collectif extends Organisateur
 {
     /**
      * @var \DateTime
+     * @ORM\Column(name="datecreation", type="datetime")
      */
     private $datecreation;
 

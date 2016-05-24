@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Organisateur
 {
-     /**
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -24,7 +24,7 @@ class Organisateur
 
     /**
      * @var string
-     * @ORM\Column(name="nationalite", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
