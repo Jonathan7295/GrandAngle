@@ -44,16 +44,16 @@ class Artiste
     private $nationalite;
 
     /**
-     * @var \DateTime
+     * @var String
      *
-     * @ORM\Column(name="date_naissance", type="date")
+     * @ORM\Column(name="date_naissance", type="string")
      */
     private $dateNaissance;
 
     /**
-     * @var \DateTime
+     * @var String
      *
-     * @ORM\Column(name="date_mort", type="date")
+     * @ORM\Column(name="date_mort", type="string")
      */
     private $dateMort;
 
@@ -127,6 +127,16 @@ class Artiste
     }
 
     /**
+     * Get nomcomplet
+     *
+     * @return string
+     */
+    public function getnomComplet()
+    {
+        return $this->nom.' '.$this->prenom;
+    }
+
+    /**
      * Set nationalite
      *
      * @param string $nationalite
@@ -153,7 +163,7 @@ class Artiste
     /**
      * Set dateNaissance
      *
-     * @param \DateTime $dateNaissance
+     * @param String $dateNaissance
      *
      * @return Artiste
      */
@@ -167,7 +177,7 @@ class Artiste
     /**
      * Get dateNaissance
      *
-     * @return \DateTime
+     * @return String
      */
     public function getDateNaissance()
     {
@@ -177,7 +187,7 @@ class Artiste
     /**
      * Set dateMort
      *
-     * @param \DateTime $dateMort
+     * @param String $dateMort
      *
      * @return Artiste
      */
@@ -191,7 +201,7 @@ class Artiste
     /**
      * Get dateMort
      *
-     * @return \DateTime
+     * @return String
      */
     public function getDateMort()
     {

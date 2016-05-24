@@ -2,8 +2,13 @@
 
 namespace ModuleGestionBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Collectif
+ *
+ * @ORM\Table(name="collectif")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\CollectifRepository")
  */
 class Collectif extends Organisateur
 {
@@ -36,4 +41,3 @@ class Collectif extends Organisateur
         return $this->datecreation;
     }
 }
-

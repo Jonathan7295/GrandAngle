@@ -3,6 +3,7 @@
 namespace ModuleGestionBundle\Form;
 
 use ModuleGestionBundle\Entity\Emplacement;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -30,16 +31,34 @@ class OeuvreType extends AbstractType
                 ),
                 'multiple' => false,
                 'expanded' => true))
-            ->add('emplacements', TextType::class, array(
-                'label' => 'Position'))
+            // ->add('emplacements', CollectionType::class, array(
+            //     'entry_type'   => EmplacementType::class,
+            //     'allow_add'    => true,
+            //     'allow_delete' => true,
+            //     'label'        => false,
+            //     'prototype'    => true,
+            //     'by_reference' => false))
             ->add('artiste', EntityType::class, array(
                 'class' => 'ModuleGestionBundle:Artiste',
                 'label' => false,
-                'choice_label' => 'nom',))
-            ->add('expositions', EntityType::class, array(
-                'class' => 'ModuleGestionBundle:Exposition',
-                'label' => false,
-                'choice_label' => 'nomExposition',))
+                'query_builder' => function(EntityRepository $er){
+                    return $er->createQueryBuilder('a')
+                              ->orderBy('a.nom', 'ASC');
+                },
+                'choice_label' => 'nomcomplet',))
+            ->add('texteoeuvres', CollectionType::class, array(
+                'entry_type'    => TexteOeuvreType::class,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'label'         => false,
+                'prototype'     => true,
+                'by_reference'  => false))
+            // ->add('multimedias', CollectionType::class, array(
+            //     'entry_type' => MultimediaType::class,
+            //     'allow_add'     => true,
+            //     'label'      => false,
+            //     'prototype'  => true,
+            //     'by_reference' => false))
         ;
     }
     

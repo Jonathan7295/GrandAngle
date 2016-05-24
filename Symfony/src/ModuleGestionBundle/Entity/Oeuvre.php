@@ -32,12 +32,12 @@ class Oeuvre
     /**
      * @var string
      *
-     * @ORM\Column(name="imgFlashcode", type="string", length=255)
+     * @ORM\Column(name="imgFlashcode", type="string", length=255, nullable=true)
      */
     private $imgFlashcode;
 
     /**
-     * @ORM\Column(name="genFlashcode", type="boolean")
+     * @ORM\Column(name="genFlashcode", type="boolean", nullable=true)
      */
      private $genFlashcode;
 
@@ -51,19 +51,19 @@ class Oeuvre
     /**
      * @var int
      *
-     * @ORM\Column(name="nombreVisite", type="integer")
+     * @ORM\Column(name="nombreVisite", type="integer", nullable=true)
      */
     private $nombreVisite;
 
      /**
-     * @ORM\OneToMany(targetEntity="TexteOeuvre", mappedBy="oeuvre")
+     * @ORM\OneToMany(targetEntity="TexteOeuvre", mappedBy="oeuvre", cascade={"persist","remove"})
      */
     private $texteoeuvres;
 
     /**
-     * @ORM\OneToMany(targetEntity="Emplacement", mappedBy="oeuvre")
+     * @ORM\OneToMany(targetEntity="Emplacement", mappedBy="oeuvre", cascade={"persist","remove"})
      */
-    private $emplacements;
+    public $emplacements;
 
     /**
      * @ORM\ManyToOne(targetEntity="Artiste", inversedBy="oeuvres")
@@ -72,15 +72,15 @@ class Oeuvre
     private $artiste;
 
     /**
-     * @ORM\OneToMany(targetEntity="Exposition", mappedBy="oeuvre")
+     * @ORM\OneToMany(targetEntity="Multimedia", mappedBy="oeuvre")
      */
-    private $expositions;
+    private $multimedias;
 
     public function __construct()
     {
         $this->texteoeuvres = new ArrayCollection();
         $this->emplacements = new ArrayCollection();
-        $this->expositions = new ArrayCollection();
+        // $this->multimedias = new ArrayCollection();
     }
     
     /**
@@ -142,6 +142,30 @@ class Oeuvre
     }
 
     /**
+     * Set genFlashcode
+     *
+     * @param boolean $genFlashcode
+     *
+     * @return Oeuvre
+     */
+    public function setGenFlashcode($genFlashcode)
+    {
+        $this->genFlashcode = $genFlashcode;
+    
+        return $this;
+    }
+
+    /**
+     * Get genFlashcode
+     *
+     * @return boolean
+     */
+    public function getGenFlashcode()
+    {
+        return $this->genFlashcode;
+    }
+
+    /**
      * Set etat
      *
      * @param string $etat
@@ -198,9 +222,9 @@ class Oeuvre
      */
     public function addTexteoeuvre(\ModuleGestionBundle\Entity\TexteOeuvre $texteoeuvre)
     {
-        $texteoeuvre->setOeuvre($this);
-
-        $this->texteoeuvres->add($texteoeuvre);
+        $this->texteoeuvres[] = $texteoeuvre;
+    
+        return $this;
     }
 
     /**
@@ -232,9 +256,9 @@ class Oeuvre
      */
     public function addEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
     {
-        $emplacement->setOeuvre($this);
-
-        $this->emplacements->add($emplacement);
+        $this->emplacements[] = $emplacement;
+    
+        return $this;
     }
 
     /**
@@ -255,30 +279,6 @@ class Oeuvre
     public function getEmplacements()
     {
         return $this->emplacements;
-    }
-
-    /**
-     * Set genFlashcode
-     *
-     * @param boolean $genFlashcode
-     *
-     * @return Oeuvre
-     */
-    public function setGenFlashcode($genFlashcode)
-    {
-        $this->genFlashcode = $genFlashcode;
-    
-        return $this;
-    }
-
-    /**
-     * Get genFlashcode
-     *
-     * @return boolean
-     */
-    public function getGenFlashcode()
-    {
-        return $this->genFlashcode;
     }
 
     /**
@@ -306,36 +306,36 @@ class Oeuvre
     }
 
     /**
-     * Add exposition
+     * Add multimedia
      *
-     * @param \ModuleGestionBundle\Entity\Exposition $exposition
+     * @param \ModuleGestionBundle\Entity\Multimedia $multimedia
      *
      * @return Oeuvre
      */
-    public function addExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
+    public function addMultimedia(\ModuleGestionBundle\Entity\Multimedia $multimedia)
     {
-        $exposition->setOeuvre($this);
-
-        $this->expositions->add($exposition);
+        $this->multimedias[] = $multimedia;
+    
+        return $this;
     }
 
     /**
-     * Remove exposition
+     * Remove multimedia
      *
-     * @param \ModuleGestionBundle\Entity\Exposition $exposition
+     * @param \ModuleGestionBundle\Entity\Multimedia $multimedia
      */
-    public function removeExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
+    public function removeMultimedia(\ModuleGestionBundle\Entity\Multimedia $multimedia)
     {
-        $this->expositions->removeElement($exposition);
+        $this->multimedias->removeElement($multimedia);
     }
 
     /**
-     * Get expositions
+     * Get multimedias
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getExpositions()
+    public function getMultimedias()
     {
-        return $this->expositions;
+        return $this->multimedias;
     }
 }

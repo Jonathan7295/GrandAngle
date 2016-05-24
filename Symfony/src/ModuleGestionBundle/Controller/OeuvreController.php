@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use ModuleGestionBundle\Entity\Oeuvre;
+use ModuleGestionBundle\Entity\Emplacement;
 use ModuleGestionBundle\Form\OeuvreType;
 
 /**
@@ -45,14 +46,8 @@ class OeuvreController extends Controller
             $id = $req->get('id');
             $connection = $this->get('database_connection');
             // récupérer la liste des oeuvres
-            $query = "select * from exposition as e inner join oeuvre as o on e.oeuvre_id = o.id where e.id = " . $id;
+            $query = "select * from oeuvre as o inner join emplacement as e on e.oeuvre_id = o.id where e.exposition_id = " . $id;
             $rows = $connection->fetchAll($query);
-
-            // return $this->render('oeuvre/index.html.twig', array(
-            //     'expositions' => $expositions,
-            //     'oeuvres'     => $rows,
-            //     'role'        => $role,
-            // ));
             return new JsonResponse(array('data' => json_encode($rows)));
         }
         return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
@@ -69,15 +64,14 @@ class OeuvreController extends Controller
         $role = $this->getUser()->getRole();
 
         $oeuvre = new Oeuvre();
+        
         $form = $this->createForm('ModuleGestionBundle\Form\OeuvreType', $oeuvre);
-    
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $em = $this->getDoctrine()->getManager();
-
 
             $em->persist($oeuvre);
             $em->flush();

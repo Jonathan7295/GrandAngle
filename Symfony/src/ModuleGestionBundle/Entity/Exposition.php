@@ -74,12 +74,6 @@ class Exposition
     private $organisateur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="expositions")
-     * @ORM\JoinColumn(name="oeuvre_id", referencedColumnName="id")
-     */
-    private $oeuvre;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -337,29 +331,5 @@ class Exposition
     public function getOrganisateur()
     {
         return $this->organisateur;
-    }
-
-    /**
-     * Set oeuvre
-     *
-     * @param \ModuleGestionBundle\Entity\Oeuvre $oeuvre
-     *
-     * @return Exposition
-     */
-    public function setOeuvre(\ModuleGestionBundle\Entity\Oeuvre $oeuvre = null)
-    {
-        $this->oeuvre = $oeuvre;
-    
-        return $this;
-    }
-
-    /**
-     * Get oeuvre
-     *
-     * @return \ModuleGestionBundle\Entity\Oeuvre
-     */
-    public function getOeuvre()
-    {
-        return $this->oeuvre;
     }
 }
