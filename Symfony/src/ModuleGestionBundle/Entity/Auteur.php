@@ -1,11 +1,15 @@
 <?php
 
 namespace ModuleGestionBundle\Entity;
+use ModuleGestionBundle\Entity\Organisateur;
+use Doctrine\ORM\Mapping as ORM;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Auteur
+ * @ORM\Entity
+ * @ORM\Table(name="Auteur")
+ * @ORM\MappedSuperclass
  *
  * @ORM\Table(name="auteur")
  * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\AuteurRepository")
@@ -14,11 +18,13 @@ class Auteur extends Organisateur
 {
     /**
      * @var string
+     * @ORM\Column(name="nationalite", type="string", length=255)
      */
     private $nationalite;
 
     /**
      * @var \DateTime
+     * @ORM\Column(name="datenaissance", type="datetime")
      */
     private $datenaissance;
     

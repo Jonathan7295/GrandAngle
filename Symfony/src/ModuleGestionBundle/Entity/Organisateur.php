@@ -24,6 +24,7 @@ class Organisateur
 
     /**
      * @var string
+     * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
