@@ -4,10 +4,15 @@ namespace ModuleGestionBundle\Entity;
 use ModuleGestionBundle\Entity\Organisateur;
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="Auteur")
  * @ORM\MappedSuperclass
+ *
+ * @ORM\Table(name="auteur")
+ * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\AuteurRepository")
  */
 class Auteur extends Organisateur
 {
@@ -124,4 +129,3 @@ class Auteur extends Organisateur
         return $this->datenaissance;
     }
 }
-

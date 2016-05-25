@@ -2,47 +2,58 @@
 
 {% block body %}
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading show">
             Détail de l'oeuvre
         </div>
-        <table>
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ oeuvre.id }}</td>
-                </tr>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ oeuvre.nom }}</td>
-                </tr>
-                <tr>
-                    <th>Imgflashcode</th>
-                    <td>{{ oeuvre.imgFlashcode }}</td>
-                </tr>
-                <tr>
-                    <th>Etat</th>
-                    <td>{{ oeuvre.etat }}</td>
-                </tr>
-                <tr>
-                    <th>Nombrevisite</th>
-                    <td>{{ oeuvre.nombreVisite }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <ul>
-            <li>
-                <a href="{{ path('oeuvre_index') }}">Back to the list</a>
-            </li>
-            <li>
-                <a href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}">Edit</a>
-            </li>
-            <li>
-                {{ form_start(delete_form) }}
-                    <input type="submit" value="Delete">
-                {{ form_end(delete_form) }}
-            </li>
-        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <a id="showutilret" href="{{path('oeuvre_index')}}">Retour</a>
+                    <a id="showutiledit" href="">Modifier</a>
+                </div>
+                <div class="col-md-5">
+                    <table class="table sho">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ oeuvre.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ oeuvre.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Edition du flashCode</th>
+                                <td>
+                                    {% if oeuvre.genFlashcode %}
+                                        Oui
+                                    {% else %}
+                                        Non
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Image du flashCode</th>
+                                <td>{{ oeuvre.imgFlashcode }}</td>
+                            </tr>
+                            <tr>
+                                <th>Etat</th>
+                                <td>{{ oeuvre.etat }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nombre de visite</th>
+                                <td>
+                                    {% if oeuvre.nombreVisite is empty %}
+                                        Non Défini
+                                    {% else %}
+                                        {{ oeuvre.nombreVisite }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

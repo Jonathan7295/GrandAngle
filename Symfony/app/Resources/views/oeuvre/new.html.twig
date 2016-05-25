@@ -11,13 +11,13 @@
             {# Selection de l'artiste et Etat de l'oeuvre #}
             <div class="row">
                 <div class="col-md-2">
-                    <label for="Art" class="control-label ajust">Choisir l'exposition</label>
+                    <label for="Art" class="control-label ajust">Générer un FlashCode</label>
                     {# Génération du label #}
                     {{ form_label(form.nom, "Nom", {'label_attr': {'class': ' control-label ajust'}})}}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     {# Génération de l'input #}
-                    {{ form_widget(form.expositions, {'attr': {'class': 'col-md-2 form-control ajust'}}) }}
+                    {{ form_widget(form.genFlashcode, {'attr': {'class': 'form-control ajust'}}) }}
                     {# Génération de l'input #}
                     {{ form_widget(form.nom, {'attr': {'class': 'form-control ajust'}}) }}
                 </div>
@@ -34,69 +34,51 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group">
-                    <div class="col-md-6">
-                        
-                        <div class="col-md-6">
-                            
-                        </div>
-                        <div class="col-md-4">
-                            
-                        </div>
-                        <!-- <div class="col-md-2">
-                            
-                        </div>
-                            {# Affichage des erreurs pour ce champs précis #}
-                                {{ form_errors(form.nom) }}
-                        <div class="col-md-2">
-                            
-                        </div>
-                        <div class="col-md-2">
-                            {# Génération du label #}
-                                {{ form_label(form.emplacements, "Position", {'label_attr': {'class': ' control-label ajust'}}) }}
-                        </div>
-                            {# Affichage des erreurs pour ce champs précis #}
-                                {{ form_errors(form.emplacements) }}
-                        <div class="col-md-3">
-                            {# Génération de l'input #}
-                            {{ form_widget(form.emplacements, {'attr': {'class': 'form-control ajust'}}) }}
-                        </div>    -->
-                    <!-- </div> -->
-                    
-
-                       <!--  <div class="col-md-12">
-                            <input id="file" type="file" accept="image/*">
-                        </div>
-                        <div class="col-md-12">
-                            <div id="progressbar"><div class="progress-label">Loading...</div></div>
-                        </div> -->
-                   <!-- 
-                        {% image 'image/specimen.png' %}
-                            <img class="img-responsive" title="Image Oeuvre" src="{{ asset_url }}" width="141px" height="141px"/>
-                        {% endimage %} -->
-                    </div>
-                 </div>
+                <div class="col-md-2">
+                    {# Génération du label #}
+                    {# {{ form_label(form.emplacements, "Position de l'oeuvre", {'label_attr': {'class': 'control-label ajust'}}) }} #}
+                    {# {{ form_label(form.emplacements.vars.prototype, "Position de l'oeuvre", {'label_attr': {'class': 'control-label ajust'}}) }} #}
+                </div>
+                {# Affichage des erreurs pour ce champs précis #}
+                {# {{ form_errors(form.emplacements) }} #}
+                <div class="col-md-1">
+                    {# Génération de l'input #}
+                    {# {{ form_widget(form.emplacements.vars.prototype, {'attr': {'class': 'form-control ajust'}}) }} #}
+                    {# {{ form_widget(form.emplacements.vars.prototype) }} #}
+                </div>
+                <div class="col-md-3">
+                    {# Génération de l'input #}
+                    {# {{ form_widget(form.multimedias.vars.prototype) }} #}
+                </div>
+                <div id="previsu" class="col-md-3">
+                    {# {% image 'image/specimen.png' %}
+                        <img class="img-responsive" title="Image Oeuvre" src="{{ asset_url }}" width="141px" height="141px"/>
+                    {% endimage %} #}
+                </div>
             </div>
-            
             <div class="row">
-                <div class="col-md-6">
-                    
-                        
-                   
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                         
-                    </div>
+                <div class="col-md-9">
+                    {% image 'image/emplacement.png' %}
+                        <img id="placenew" class="img-responsive" title="Emplacements" src="{{ asset_url }}"/>
+                    {% endimage %}
                 </div>
             </div>
-                {{ form_widget(form) }}
-                <input type="submit" value="Create" />
-            <ul>
-                <li>
-                    <a href="{{ path('oeuvre_index') }}">Back to the list</a>
-                </li>
-            </ul>
+            <div id="adddes" class="row">
+                <div class="col-md-1 fixlabel labeldes"></div>
+                <div class="col-md-3 champsdes"></div>
+                <div class="fixlang">
+                    <div class="col-md-1 labellang"></div>
+                    <div class="col-md-2 champslang"></div>
+                    <div class="col-md-1 deplace"></div>
+                </div>        
+            </div>
+            {# <div id="progressbar">
+                <div class="progress-label">Loading...</div>
+            </div> #}
+            <div class="row">
+                <input type="submit" value="Enregistrer" />
+                <a href="{{ path('oeuvre_index') }}">Retour à la liste</a>
+            </div>
         </div>
     </div>
     {{ form_end(form) }}
@@ -105,7 +87,109 @@
     <script type="text/javascript">
 
     $(document).ready(function(){
-        $('#oeuvre_artiste').append("<option>Nouvel artiste</option>");
+
+        // On ajoute le choix d'un nouvel artiste
+        $('#oeuvre_artiste').append('<option id="newart" value="new">Nouvel artiste</option>');
+        // Quand on clique sur le choix précédent on est redirigé vers le formulaire
+        $('#oeuvre_artiste').attr('onchange','myFunction()');
+
+        //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
+        var $container = $('div#oeuvre_texteoeuvres');
+
+        $('#adddes').append($container);
+        
+        //On ajoute un lien pour ajouter un nouveau textexposition
+        var $addLink =$('<a type="button" id="add_textoeuvre" class="glyphicon glyphicon-plus vert"></a>');
+        $container.append($addLink);
+
+        //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
+        $addLink.click(function(e) {
+            addTexteOeuvre($container);
+            e.preventDefault(); // évite qu'un # apparaisse dans l'url
+            return false;
+        });
+
+        //On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement 
+        var index = $container.find(':input').length;
+       
+        //On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle exposition par exemple).
+        if (index==0) {
+            addTexteOeuvre($container);
+        } else {
+            //Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+            $container.children('div').each(function () {
+                addDeleteLink($(this));
+            });
+        }
+
+        //La function qui ajoute un formulaire textexposition
+        function addTexteOeuvre($Container) {
+            // Dans le contenu de l'attribut "Data-prototype", on remplace
+
+            // le texte "__name__label__" qu'il contient par le label du champ
+
+            // le texte "__name__" qu'il contient par le numro du champ
+            var $prototype = $($container.attr('data-prototype').replace(/__name__label_/g, 'Texte n°' + (index+1)).replace(/__name__/g, index));
+
+            $newprototype = $($prototype);
+
+            var descendant = $newprototype.find('*');
+
+            
+            // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+            $('.labeldes').append(descendant[3]);
+            $('.champsdes').append(descendant[4]);
+            $('.labellang').append(descendant[6]);
+            $('.champslang').append(descendant[7]);
+
+            // On ajoute au prototype un lien pour pouvoir supprimer le telephone
+            addDeleteLink($('.deplace'));
+
+            //on ajoute le prototype modifié à la fin de la balise <div>
+            $('#lienrow').append($('#add_textexposition'));
+
+            //enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+            index++;
+        }
+        //la fonction qui ajoute un lien de suppression d'un text
+        function addDeleteLink($prototype) {
+            //création du lien 
+            $deleteLink = $('<a type="button" name="'+index+'" class="glyphicon glyphicon-minus red"></a>');
+
+            //Ajout du lien
+            $prototype.append($deleteLink);
+
+            //Ajout du listener sur le clic du lien
+            $deleteLink.click(function(e) {
+
+                // On récupère l'index du champs à supprimer
+                var num = $(this).attr('name');
+                // On supprime les champs un à un
+                // Label descript
+                $('[for="oeuvre_texteoeuvres_'+num+'_description"]').remove();
+                // Champs descript
+                $('[id="oeuvre_texteoeuvres_'+num+'_description"]').remove();
+                 // Label langue
+                $('[for="oeuvre_texteoeuvres_'+num+'_langue"]').remove();
+                // Champs langue
+                $('[id="oeuvre_texteoeuvres_'+num+'_langue"]').remove();
+                $(this).remove();
+                
+                e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
+                index--;
+                return false;
+            });
+        }
     });
+
+    // Fonction afin de rediriger sur la page new artist
+    function myFunction() {
+
+        if($('#oeuvre_artiste').val() == "new"){
+            document.location.href="{{ path('artiste_new') }}";
+        }
+    }
+
+
     </script>
 {% endblock %}

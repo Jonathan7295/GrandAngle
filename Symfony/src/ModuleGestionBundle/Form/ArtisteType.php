@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EmplacementType extends AbstractType
+class ArtisteType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,10 +16,11 @@ class EmplacementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('position', TextType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'class' => 'form-control ajust')))
+            ->add('nom')
+            ->add('prenom')
+            ->add('nationalite')
+            ->add('dateNaissance', TextType::class)
+            ->add('dateMort', TextType::class)
         ;
     }
     
@@ -29,7 +30,7 @@ class EmplacementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ModuleGestionBundle\Entity\Emplacement'
+            'data_class' => 'ModuleGestionBundle\Entity\Artiste'
         ));
     }
 }

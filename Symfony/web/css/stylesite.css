@@ -5,6 +5,11 @@ body {
 .container {
 	
 }
+
+select {
+	cursor:pointer;
+}
+
 /***************style du cadre de navbar*******************/
 .navbar {
 	margin-top: 20px;
@@ -471,6 +476,42 @@ textarea {
 }
 
 /*****Show exposition*****/
+#showexpo{
+
+}
+
+#showexporet{
+	background-color: #777;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+
+#showexporet:hover{
+	text-decoration: none;
+	color: #373737;
+}
+
+#showexpoedit{
+	background-color: #2B8948;
+	color : white;  
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#showexpoedit:hover{
+	text-decoration: none;
+	color: #214F77;
+}
+
+.showexpo tr:nth-child(odd) {
+	background-color: #337AB7;
+}
+
+.showexpo tr:nth-child(even) {
+	background-color: #538FB7;
+}
 
 /*****Edit exposition*****/
 
@@ -502,6 +543,24 @@ div#imgoeuv {
 
 #contnewOeuv {
 	margin-top: 10px;
+}
+
+#newart {
+	color:#5CB85C;
+	font-weight:bolder;
+}
+
+.fixlabel {
+	line-height: 5em;
+}
+
+.fixlang {
+	line-height: 5em;
+}
+
+#placenew {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 /*progress barre*/
@@ -549,6 +608,35 @@ div#progressbar {
     background-color: rgba(8, 8, 8, 0.61)
 }
 
+/*Artiste*/
+#newartval {
+	background-color: #5CB85C;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 6px 15px;
+}
+
+#newartval:hover {
+	background-color: #3A793A;
+	color : black;
+}
+
+#newartret {
+	background-color: #777;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#newartret:hover {
+	background-color: #171616;
+	color : white;
+	text-decoration: none;
+}
+
+#formartnew {
+	padding: 20px;
+}
 
 /*****Show Oeuvre*****/
 
@@ -565,43 +653,7 @@ div#progressbar {
 
 /*****Edit Statistique*****/
 
-/****Show exposition*****/
-#showexpo{
 
-}
-
-#showexporet{
-	background-color: #777;
-	color : #E3E3E3;
-	border-radius:4px;
-	padding: 10px 15px;
-}
-
-
-#showexporet:hover{
-	text-decoration: none;
-	color: #373737;
-}
-
-#showexpoedit{
-	background-color: #2B8948;
-	color : white;  
-	border-radius:4px;
-	padding: 10px 15px;
-}
-
-#showexpoedit:hover{
-	text-decoration: none;
-	color: #214F77;
-}
-
-.showexpo tr:nth-child(odd) {
-	background-color: #337AB7;
-}
-
-.showexpo tr:nth-child(even) {
-	background-color: #538FB7;
-}
 
 /****************************************************************************/
 /**************************Responsive Ajustement****************************/

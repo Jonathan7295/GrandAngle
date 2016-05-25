@@ -29,6 +29,13 @@ class TexteOeuvre
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="langue", type="string", length=255)
+     */
+    private $langue;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="texteoeuvres")
      * @ORM\JoinColumn(name="oeuvre_id", referencedColumnName="id")
      */
@@ -90,5 +97,29 @@ class TexteOeuvre
     public function getOeuvre()
     {
         return $this->oeuvre;
+    }
+
+    /**
+     * Set langue
+     *
+     * @param string $langue
+     *
+     * @return TexteOeuvre
+     */
+    public function setLangue($langue)
+    {
+        $this->langue = $langue;
+    
+        return $this;
+    }
+
+    /**
+     * Get langue
+     *
+     * @return string
+     */
+    public function getLangue()
+    {
+        return $this->langue;
     }
 }
