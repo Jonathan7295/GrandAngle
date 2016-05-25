@@ -135,7 +135,7 @@
 
         $(document).ready(function() {
             $('#exposition_auteur').append('<option value="NewAut"> Nouvel Auteur </option>');
-            $('#exposition_auteur').attr('onchange','FunctionNewAuteur()');
+            $('#exposition_auteur').attr('onclick','FunctionNewAuteur()');
 
             //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
             var $container = $('div#exposition_textexpositions');
