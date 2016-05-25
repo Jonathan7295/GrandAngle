@@ -15,14 +15,14 @@
                         <div class="form-group">
 
                             {# Génération du label #}
-                            {# {{ form_label(form.nom, "Nom de l'auteur", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}} #}
+                            {{ form_label(form.organisateur, "Nom de l'auteur", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
                             
-                           {#  Affichage des erreurs pour ce champs précis
-                            {{ form_errors(form.nom) }} #}
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.organisateur) }}
 
                             <div class="col-md-8">
                                 {# Génération de l'input #}
-                                {# {{ form_widget(form.nom, {'attr': {'class': 'form-control ajust'}}) }} #}
+                                {{ form_widget(form.organisateur, {'attr': {'class': 'form-control ajust'}}) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -35,7 +35,7 @@
 
                             <div class="col-md-8">
                                 {# Génération de l'input #}
-                                {{ form_widget(form.nationalite, {'attr': {'class': 'form-control ajust'}}) }}
+                                {{ form_widget(form.nationalite, {'attr': {'class': 'form-control ajust calendar'}}) }}
                             </div>
                         </div>
                         <div class="form-group">
