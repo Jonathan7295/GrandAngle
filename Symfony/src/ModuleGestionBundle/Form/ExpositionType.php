@@ -53,8 +53,8 @@ class ExpositionType extends AbstractType
                                                 'multiple' => false,
                                                 'required' => true
                                                 ))
-            ->add('organisateur', EntityType::class, array(
-                                                'class' => 'ModuleGestionBundle:Organisateur',
+            ->add('auteur', EntityType::class, array(
+                                                'class' => 'ModuleGestionBundle:Auteur',
                                                 'choice_label' => 'nom',
                                                 ))
         ;

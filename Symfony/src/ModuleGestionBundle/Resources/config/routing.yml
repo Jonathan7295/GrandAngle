@@ -26,3 +26,7 @@ module_gestion_utilisateur:
 module_gestion_organisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/organisateur.yml"
     prefix:    /organisateur
+
+module_gestion_auteur:
+    resource: "@ModuleGestionBundle/Resources/config/routing/auteur.yml"
+    prefix:   /auteur

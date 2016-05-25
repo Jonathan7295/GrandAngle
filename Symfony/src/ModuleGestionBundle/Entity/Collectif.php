@@ -12,11 +12,30 @@ use Doctrine\ORM\Mapping as ORM;
 class Collectif extends Organisateur
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="datecreation", type="datetime")
      */
     private $datecreation;
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     /**
      * Set datecreation
      *

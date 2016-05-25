@@ -80,15 +80,15 @@
                         <div class="form-group">
 
                             {# Génération du label #}
-                            {{ form_label(form.organisateur, "Organisateur", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            {{ form_label(form.auteur, "Auteur", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
                             
                             {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.organisateur) }}
+                            {{ form_errors(form.auteur) }}
 
                             <div class="col-md-12">
                                 {# Génération de l'input #}
-                                {{ form_widget(form.organisateur, {'attr': {'class': 'ajust'}}) }}
-                                <a href="{{ path('organisateur_index') }}" type="button" id="add_orga" class="glyphicon glyphicon-plus vert"></a>
+                                {{ form_widget(form.auteur, {'attr': {'class': 'ajust'}}) }}
+                                <a href="{{ path('auteur_index') }}" type="button" id="add_orga" class="glyphicon glyphicon-plus vert"></a>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,10 @@
         });
     </script>
     <script type="text/javascript">
+
         $(document).ready(function() {
+            $('#exposition_auteur').append('<option value="NewAut"> Nouvel Auteur </option>');
+
             //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
             var $container = $('div#exposition_textexpositions');
             //On repositionne sur la page
