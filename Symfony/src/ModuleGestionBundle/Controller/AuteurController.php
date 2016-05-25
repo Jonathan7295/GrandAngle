@@ -20,11 +20,14 @@ class AuteurController extends Controller
      */
     public function indexAction()
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
         $em = $this->getDoctrine()->getManager();
 
         $auteurs = $em->getRepository('ModuleGestionBundle:Auteur')->findAll();
         return $this->render('auteur/index.html.twig', array(
             'auteurs' => $auteurs,
+            'role' => $role,
         ));
     }
 
@@ -34,6 +37,8 @@ class AuteurController extends Controller
      */
     public function newAction(Request $request)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
         $auteur = new Auteur();
         $form = $this->createForm('ModuleGestionBundle\Form\AuteurType', $auteur);
         $form->handleRequest($request);
@@ -48,6 +53,7 @@ class AuteurController extends Controller
         return $this->render('auteur/new.html.twig', array(
             'auteur' => $auteur,
             'form' => $form->createView(),
+            'role' => $role,
         ));
     }
 
@@ -57,11 +63,14 @@ class AuteurController extends Controller
      */
     public function showAction(Auteur $auteur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
         $deleteForm = $this->createDeleteForm($auteur);
 
         return $this->render('auteur/show.html.twig', array(
             'auteur' => $auteur,
             'delete_form' => $deleteForm->createView(),
+            'role' => $role,
         ));
     }
 
@@ -71,6 +80,8 @@ class AuteurController extends Controller
      */
     public function editAction(Request $request, Auteur $auteur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
         $deleteForm = $this->createDeleteForm($auteur);
         $editForm = $this->createForm('ModuleGestionBundle\Form\AuteurType', $auteur);
         $editForm->handleRequest($request);
@@ -87,6 +98,7 @@ class AuteurController extends Controller
             'auteur' => $auteur,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'role' => $role,
         ));
     }
 
@@ -96,6 +108,8 @@ class AuteurController extends Controller
      */
     public function deleteAction(Request $request, Auteur $auteur)
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
         $form = $this->createDeleteForm($auteur);
         $form->handleRequest($request);
 

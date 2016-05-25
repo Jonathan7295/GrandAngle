@@ -3,9 +3,6 @@
 namespace ModuleGestionBundle\Entity;
 use ModuleGestionBundle\Entity\Organisateur;
 use Doctrine\ORM\Mapping as ORM;
-
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="Auteur")

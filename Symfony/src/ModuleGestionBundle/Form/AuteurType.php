@@ -16,15 +16,16 @@ class AuteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('organisateur', OrganisateurType::class, array(
+                                                'data_class' => 'ModuleGestionBundle\Entity\Organisateur',
+                                                'label'   =>  false
+                                                ))
             ->add('nationalite')
             ->add('datenaissance', DateTimeType::class , array(
                                                 'widget' => 'single_text',
                                                 'input' => 'datetime',
                                                 'format' => 'dd-MM-yyyy HH:mm',
                                                 'attr' => array('class' => 'calendar'),
-                                                ))
-            ->add('organisateur', OrganisateurType::class, array(
-                                                'data_class' => 'ModuleGestionBundle\Entity\Organisateur'
                                                 ))
         ;
     }

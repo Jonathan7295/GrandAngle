@@ -88,7 +88,6 @@
                             <div class="col-md-12">
                                 {# Génération de l'input #}
                                 {{ form_widget(form.auteur, {'attr': {'class': 'ajust'}}) }}
-                                <a href="{{ path('auteur_index') }}" type="button" id="add_orga" class="glyphicon glyphicon-plus vert"></a>
                             </div>
                         </div>
                     </div>
@@ -112,7 +111,7 @@
         <div class="row">
             <div class="col-md-5">
                     <input type="submit" value="Enregistrer" />
-                    <a href="{{ path('exposition_index') }}">Back to the list</a>
+                    <a href="{{ path('exposition_index') }}">retour</a>
             </div>
         </div>
     </div>
@@ -136,6 +135,7 @@
 
         $(document).ready(function() {
             $('#exposition_auteur').append('<option value="NewAut"> Nouvel Auteur </option>');
+            $('#exposition_auteur').attr('onchange','FunctionNewAuteur()');
 
             //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
             var $container = $('div#exposition_textexpositions');
@@ -228,5 +228,12 @@
                 });
 ;            }
         });
+
+        function FunctionNewAuteur() {
+
+            if($('#exposition_auteur').val() == "NewAut"){
+                document.location.href="{{ path('auteur_new') }}";
+            }
+        }
     </script>
 {% endblock %}
