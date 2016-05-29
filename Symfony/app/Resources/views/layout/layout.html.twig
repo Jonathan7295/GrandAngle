@@ -24,40 +24,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
         <!-- Script Bootstrap -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        {% if progress is defined %}
-        <!-- Script progresse barre  -->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script>
-            $(function() {
-                var progressbar = $( "#progressbar" ),
-                  progressLabel = $( ".progress-label" );
-             
-                progressbar.progressbar({
-                  value: false,
-                  change: function() {
-                    progressLabel.text( progressbar.progressbar( "value" ) + "%" );
-                  },
-                  complete: function() {
-                    progressLabel.text( "Complete!" );
-                  }
-                });
-             
-                function progress() {
-                  var val = progressbar.progressbar( "value" ) || 0;
-             
-                  progressbar.progressbar( "value", val + 2 );
-             
-                  if ( val < 99 ) {
-                    setTimeout( progress, 80 );
-                  }
-                }
-             
-                setTimeout( progress, 2000 );
-              });
-        </script>
-        {% endif %}
     </head>
     <body>
         <div id="back"></div>
@@ -66,17 +32,21 @@
                 <div class="col-md-12">
                     <nav class="navbar navbar-default">
                         <ul class="nav nav-pills">
-                            <li role="presentation"><a id="acce" href="{{ path("module_gestion_index") }}">Accueil</a></li>
-                            <li role="presentation"><a id="expo" href="{{ path("exposition_index") }}">Gestion Exposition</a></li>
-                            <li role="presentation"><a id="oeuv" href="{{ path("oeuvre_index") }}">Gestion Oeuvre</a></li>
-                            {% if role == "ADMIN" %}
-                            <li id="droit" role="presentation"><a id="util" href="{{ path("utilisateur_index") }}">Gestion Utilisateur</a></li>
+                            <li role="presentation"><a id="acce" title="Accueil" href="{{ path("module_gestion_index") }}">Accueil</a></li>
+                            <li role="presentation"><a id="expo" title="Exposition" href="{{ path("exposition_index") }}">Gestion Exposition</a></li>
+                            <li role="presentation"><a id="oeuv" title="Oeuvre" href="{{ path("oeuvre_index") }}">Gestion Oeuvre</a></li>
+                            {% if role is defined %}
+                                {% if role == "ADMIN" %}
+                                <li id="droit" role="presentation"><a id="util" title="Utilisateur" href="{{ path("utilisateur_index") }}">Gestion Utilisateur</a></li>
+                                {% endif %}
                             {% endif %}
-                            <li role="presentation"><a id="stat" href="#">Gestion Statistique</a></li>
-                            <li role="presentation"><a id="deco" href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
+                            <li role="presentation"><a id="stat" title="Statistiques" href="#">Gestion Statistique</a></li>
+                            <li role="presentation"><a id="deco" title="Deconnexion" href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
+                            <li role="presentation">
                             {% image 'image/logo2.png' %}
                             <img class="img-responsive" title="Grand Angle" src="{{ asset_url }}" width="140" height:"90" />
                             {% endimage %}
+                            </li>
                         </ul>
                     </nav>
                 </div>

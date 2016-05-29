@@ -25,7 +25,7 @@ security:
             logout:
                 path: /logout
                 target: /login
-            anonymous:    true
+            anonymous:   true
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -36,3 +36,7 @@ security:
         - { path: ^/exposition, role: ROLE_USER }
         - { path: ^/utilisateur, role: ROLE_USER }
         - { path: ^/oeuvre, role: ROLE_USER }
+        - { path: ^/auteur, role: ROLE_USER }
+        - { path: ^/artiste, role: ROLE_USER }
+        - { path: ^/emplacement, role: ROLE_USER }
+        # - { allow_if: "'127.0.0.1' == request.getClientIp()" }

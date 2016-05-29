@@ -21,7 +21,7 @@
             </div>
             {# Affichage de la liste des oeuvres #}
             <div class="row">
-                <div id="scrolloeuv" class="col-md-10">
+                <div id="scrolloeuv" class="col-md-11">
                     <table class="table">
                         <thead>
                             <tr>
@@ -35,35 +35,38 @@
                                 <th>Imprimer</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        {#<!-- {% if oeuvres is defined %}#}
-                            {#{% for oeuvre in oeuvres %} -->#}
-                            <tr id="list">
-                                <td>{#{ oeuvre.nom }#}</td>
-                                <td>Artiste</td>
-                                <td>Type</td>
-                                <td>{#{ oeuvre.etat }#}</td>
-                                <td>{#{ oeuvre.nombreVisite }#}</td>
-                                <td></td>
-                                <td>
-                                    <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{#{ path('oeuvre_show', { 'id': oeuvre.id }) }#}"></a>
-                                    <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{#{ path('oeuvre_edit', { 'id': oeuvre.id }) }#}"></a>
-                                    <a id="delindex" title="Supprimer" name="{#{ path('oeuvre_delete', { 'id': oeuvre.id }) }#}" class="glyphicon glyphicon-trash" href="{#{ path('oeuvre_delete', { 'id': oeuvre.id }) }#}"></a> 
-                                </td>
-                                <td><a id="qrcindex" title="Imprimer un Qrcode" href="" class="glyphicon glyphicon-qrcode"></a> </td>
-                            </tr>
-                           {#<!--  {% endfor %}#}
-                        {#{% endif %} -->#}
-                        </tbody>
+                        {% if oeuvres is defined %}
+                            <tbody id="list">
+                            {% for oeuvre in oeuvres %}
+                                <tr>
+                                    <td>{{ oeuvre.nom }}</td>
+                                    <td>{{ oeuvre.etat }}</td>
+                                    <td>{{ oeuvre.artiste.nomComplet }}</td>
+                                    <td>Type</td>
+                                    <td>{{ oeuvre.nombreVisite }}</td>
+                                    <td>Position</td>
+                                    <td>
+                                        <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
+                                        <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
+                                        <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a> 
+                                    </td>
+                                    <td><a id="qrcindex" title="Imprimer un Qrcode" href="{{ oeuvre.imgFlashCode }}" class="glyphicon glyphicon-qrcode"></a> </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        {% else %}
+                            <tbody id="list"></tbody>
+                        {% endif %}
+                        
                     </table>
                 </div>
             </div>
             {# Emplacement des oeuvres dans la salle #}
             <div id="iconew" class="row">
                 <div class="col-md-8">
-                    {% image 'image/emplacement.png' %}
+                    {# {% image 'image/emplacement.png' %}
                         <img id="place" class="img-responsive" title="Emplacements" src="{{ asset_url }}"/>
-                    {% endimage %}
+                    {% endimage %} #}
                 </div>
                 <div class="col-md-4">
                     <ul class="nav nav-pills">
@@ -77,24 +80,40 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-  <script>
+    <!-- Script Jquery printElement -->
+    {% javascripts 'js/printElement.min.js'%}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
     
     $(document).ready(function(){
 
-        // Gestion de l'ascenseur si il dépasse la hauteur du tableau
-        if ($(".table").height() < $("#scrolloeuv").height()) {
-            $("#scrolloeuv").css("overflow-y" , "hidden");
-        }else{
-            $("#scrolloeuv").css("overflow-y" , "scroll");
+        scroll();
+
+        function scroll(){
+
+            // Gestion de l'ascenseur si il dépasse la hauteur du tableau
+            if ($(".table").height() < $("#scrolloeuv").height()) {
+                $("#scrolloeuv").css("overflow-y" , "hidden");
+            }else{
+                $("#scrolloeuv").css("overflow-y" , "scroll");
+            }
+
+        }
+
+        function qrcode(){
+
         }
 
         // Choix d'une exposition
         $('#choixExpo').change(function(){
             var id = $(this).val();
             if (id != 'choix') {
+                list = $('#list'); // récupérer l'élément liste du code HTML
+                
+                tr = document.createElement('tr'); 
 
                function ajaxCall(id){
-                    var list = $('#list'); // récupérer l'élément liste du code HTML
                     $.ajax({
                         url: "{{ path('list_oeuvre') }}", // On renseigne l'url TWIG
                         method: "post",
@@ -106,24 +125,99 @@
 
                function refreshList(msg){
                     // mettre à jour les données de la page
-                    list.innerHTML = ""; // Efface la liste
+                    list[0].innerHTML = ""; // Efface la liste
+
                     // Pour chaque élément trouvé dans le document JSON, on peuple la liste
                     $.each(JSON.parse(msg['data']), function(i, item) {
-                        var li = document.createElement('td');
-                        var li2 = document.createElement('td');
-                        var text = document.createTextNode(item.nom);
-                        var text2 = document.createTextNode(item.etat);
-                        li.appendChild(text);
-                        li2.appendChild(text2);
-                        list.appendChild(li);
-                        list.appendChild(li2);
+
+
+                        // On créé une colonne pour chacun des champs
+                        li = document.createElement('td');
+                        li1 = document.createElement('td');
+                        li2 = document.createElement('td');
+                        li3 = document.createElement('td');
+                        li4 = document.createElement('td');
+                        li5 = document.createElement('td');
+                        li6 = document.createElement('td');
+                        li7 = document.createElement('td');
+                        li8 = document.createElement('td');
+
+                        // On récupère les données
+                        nom = document.createTextNode(item.nom);
+                        etat = document.createTextNode(item.etat);
+                        artiste = document.createTextNode(item.nomArt+' '+item.preNomArt);
+                        type = document.createTextNode('Type');
+                        nbVisite = document.createTextNode(item.nombreVisite);
+                        position = document.createTextNode(item.position);
+
+                        // On créé les boutons
+                        var show = document.createElement('a');
+                        show.id = 'searchindex';
+                        show.href = '/oeuvre/'+item.id+'/show';
+                        show.title = 'Voir détail';
+                        show.setAttribute('class','glyphicon glyphicon-search');
+
+                        var edit = document.createElement('a');
+                        edit.id = 'editindex';
+                        edit.href = '/oeuvre/'+item.id+'/edit';
+                        edit.title = 'Modifier';
+                        edit.setAttribute('class','glyphicon glyphicon-pencil');
+
+                        var del  = document.createElement('a');
+                        del.id = 'delindex';
+                        del.href = '/oeuvre/'+item.id+'/delete';
+                        del.title = 'Supprimer';
+                        del.setAttribute('class','glyphicon glyphicon-trash');
+
+                        var code = document.createElement('a');
+                        code.id = 'qrcindex';
+                        code.href = item.img;
+                        code.title = 'Imprimer un Qrcode';
+                        code.setAttribute('class','glyphicon glyphicon-qrcode');
+                        // code.setAttribute('onClick', '$(\'.qrimg.a'+i+'\').css(\'display\',\'block\');$(\'.qrimg.a'+i+'\').printElement({leaveOpen:true,printMode:\'popup\'});');
+
+                        // On créé l'image du qrcode
+                        var img = document.createElement('img');
+                        img.setAttribute('class', 'qrimg'+' '+'a'+i);
+                        img.src = item.img;
+                        // img.src = "/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/"+item.id+"/show.png";
+
+                        // On insère les données dans chacune des colonnes
+                        li.appendChild(nom);
+                        li1.appendChild(etat);
+                        li2.appendChild(artiste);
+                        li3.appendChild(type);
+                        li4.appendChild(nbVisite);
+                        li5.appendChild(position);
+                        li6.appendChild(show);
+                        li6.appendChild(edit);
+                        li6.appendChild(del);
+                        li7.appendChild(code);
+                        li8.appendChild(img);
+
+                        //On insère dans la ligne les différentes colonnes
+                        tr.appendChild(li);
+                        tr.appendChild(li1);
+                        tr.appendChild(li2);
+                        tr.appendChild(li3);
+                        tr.appendChild(li4);
+                        tr.appendChild(li5);
+                        tr.appendChild(li6);
+                        tr.appendChild(li7);
+                        tr.appendChild(li8);
+
+                        list[0].appendChild(tr);
+
+                        tr = document.createElement('tr');
 
                     });
+                    scroll();             
                }
 
                ajaxCall(id);
             }else{
-                list.innerHTML = ""; // Efface la liste
+                list[0].innerHTML = ""; // Efface la liste
+                scroll();
             }
         });
     });

@@ -23,6 +23,11 @@ list_oeuvre:
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:listOeuvre" }
     methods: [POST]
 
+test_oeuvre:
+    path:    /testoeuvre/{id}/show
+    defaults: { _controller: "ModuleGestionBundle:Oeuvre:testOeuvre" }
+    methods: [GET]
+
 module_gestion_utilisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/utilisateur.yml"
     prefix:    /utilisateur
@@ -35,4 +40,7 @@ module_gestion_auteur:
     resource: "@ModuleGestionBundle/Resources/config/routing/auteur.yml"
     prefix:   /auteur
 
-
+EndroidQrCodeBundle:
+    resource:   "@EndroidQrCodeBundle/Controller/"
+    type:       annotation
+    prefix:     /qrcode
