@@ -35,4 +35,8 @@ module_gestion_auteur:
     resource: "@ModuleGestionBundle/Resources/config/routing/auteur.yml"
     prefix:   /auteur
 
+module_gestion_collectif:
+    resource: "@ModuleGestionBundle/Resources/config/routing/collectif.yml"
+    prefix:   /collectif
+
 

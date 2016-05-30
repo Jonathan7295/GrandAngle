@@ -36,3 +36,6 @@ security:
         - { path: ^/exposition, role: ROLE_USER }
         - { path: ^/utilisateur, role: ROLE_USER }
         - { path: ^/oeuvre, role: ROLE_USER }
+        - { path: ^/auteur, role: ROLE_USER }
+        - { path: ^/collectif, role: ROLE_USER }
+        - { path: ^/organisateur, role: ROLE_USER }

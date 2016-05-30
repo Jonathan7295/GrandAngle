@@ -1,10 +1,10 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
-{{ form_start(form, {'attr': {'id': 'formAut'}}) }}
+{{ form_start(form, {'attr': {'id': 'formCol'}}) }}
     <div class="panel panel-default">
         <div class="panel-heading">
-            Création d'un Auteur
+            Création d'un Collectif
         </div>
         <div class="container">
             <div class="row">
@@ -15,7 +15,7 @@
                         <div class="form-group">
 
                             {# Génération du label #}
-                            {{ form_label(form.organisateur.nom, "Nom de l'auteur", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            {{ form_label(form.organisateur.nom, "Nom du collectif", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
                             
                             {# Affichage des erreurs pour ce champs précis #}
                             {{ form_errors(form.organisateur.nom) }}
@@ -28,27 +28,14 @@
                         <div class="form-group">
 
                             {# Génération du label #}
-                            {{ form_label(form.nationalite, "Nationalité", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            {{ form_label(form.datecreation, "Date création", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
                             
                             {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.nationalite) }}
+                            {{ form_errors(form.datecreation) }}
 
                             <div class="col-md-8">
                                 {# Génération de l'input #}
-                                {{ form_widget(form.nationalite, {'attr': {'class': 'form-control ajust'}}) }}
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            {# Génération du label #}
-                            {{ form_label(form.datenaissance, "Date naissance", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
-                            
-                            {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.datenaissance) }}
-
-                            <div class="col-md-8">
-                                {# Génération de l'input #}
-                                {{ form_widget(form.datenaissance, {'attr': {'class': 'form-control ajust calendar'}}) }}
+                                {{ form_widget(form.datecreation, {'attr': {'class': 'form-control ajust calendar'}}) }}
                             </div>
                         </div>
                     </div>

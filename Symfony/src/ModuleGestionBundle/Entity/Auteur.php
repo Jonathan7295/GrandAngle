@@ -31,52 +31,6 @@ class Auteur extends Organisateur
      * @ORM\Column(name="datenaissance", type="datetime")
      */
     private $datenaissance;
-        /**
-     * @ORM\OneToMany(targetEntity="Exposition", mappedBy="organisateur", cascade={"remove"})
-     */
-    private $expositions;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->expositions = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add exposition
-     *
-     * @param \ModuleGestionBundle\Entity\Exposition $exposition
-     *
-     * @return Organisateur
-     */
-    public function addExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
-    {
-        $this->expositions[] = $exposition;
-    
-        return $this;
-    }
-
-    /**
-     * Remove exposition
-     *
-     * @param \ModuleGestionBundle\Entity\Exposition $exposition
-     */
-    public function removeExposition(\ModuleGestionBundle\Entity\Exposition $exposition)
-    {
-        $this->expositions->removeElement($exposition);
-    }
-
-    /**
-     * Get expositions
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getExpositions()
-    {
-        return $this->expositions;
-    }
 
     /**
      * Set nationalite

@@ -5,97 +5,103 @@ namespace ModuleGestionBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use ModuleGestionBundle\Entity\Auteur;
-use ModuleGestionBundle\Form\AuteurType;
+use ModuleGestionBundle\Entity\Collectif;
+use ModuleGestionBundle\Form\CollectifType;
 
 /**
- * Auteur controller.
+ * Collectif controller.
  *
  */
-class AuteurController extends Controller
+class CollectifController extends Controller
 {
     /**
-     * Lists all Auteur entities.
+     * Lists all Collectif entities.
      *
      */
     public function indexAction()
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
+
         $em = $this->getDoctrine()->getManager();
 
-        $auteurs = $em->getRepository('ModuleGestionBundle:Auteur')->findAll();
-        return $this->render('auteur/index.html.twig', array(
-            'auteurs' => $auteurs,
+        $collectifs = $em->getRepository('ModuleGestionBundle:Collectif')->findAll();
+
+        return $this->render('collectif/index.html.twig', array(
+            'collectifs' => $collectifs,
             'role' => $role,
         ));
     }
 
     /**
-     * Creates a new Auteur entity.
+     * Creates a new Collectif entity.
      *
      */
     public function newAction(Request $request)
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
-        $auteur = new Auteur();
-        $form = $this->createForm('ModuleGestionBundle\Form\AuteurType', $auteur);
+
+        $collectif = new Collectif();
+        $form = $this->createForm('ModuleGestionBundle\Form\CollectifType', $collectif);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($auteur);
+            $em->persist($collectif);
             $em->flush();
-            return $this->redirectToRoute('exposition_new', array('id' => $auteur->getId()));
+
+            return $this->redirectToRoute('exposition_new', array('id' => $collectif->getId()));
         }
 
-        return $this->render('auteur/new.html.twig', array(
-            'auteur' => $auteur,
+        return $this->render('collectif/new.html.twig', array(
+            'collectif' => $collectif,
             'form' => $form->createView(),
             'role' => $role,
         ));
     }
 
     /**
-     * Finds and displays a Auteur entity.
+     * Finds and displays a Collectif entity.
      *
      */
-    public function showAction(Auteur $auteur)
+    public function showAction(Collectif $collectif)
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
-        $deleteForm = $this->createDeleteForm($auteur);
 
-        return $this->render('auteur/show.html.twig', array(
-            'auteur' => $auteur,
+        $deleteForm = $this->createDeleteForm($collectif);
+
+        return $this->render('collectif/show.html.twig', array(
+            'collectif' => $collectif,
             'delete_form' => $deleteForm->createView(),
             'role' => $role,
         ));
     }
 
     /**
-     * Displays a form to edit an existing Auteur entity.
+     * Displays a form to edit an existing Collectif entity.
      *
      */
-    public function editAction(Request $request, Auteur $auteur)
+    public function editAction(Request $request, Collectif $collectif)
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
-        $deleteForm = $this->createDeleteForm($auteur);
-        $editForm = $this->createForm('ModuleGestionBundle\Form\AuteurType', $auteur);
+
+        $deleteForm = $this->createDeleteForm($collectif);
+        $editForm = $this->createForm('ModuleGestionBundle\Form\CollectifType', $collectif);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($auteur);
+            $em->persist($collectif);
             $em->flush();
 
-            return $this->redirectToRoute('auteur_edit', array('id' => $auteur->getId()));
+            return $this->redirectToRoute('collectif_edit', array('id' => $collectif->getId()));
         }
 
-        return $this->render('auteur/edit.html.twig', array(
-            'auteur' => $auteur,
+        return $this->render('collectif/edit.html.twig', array(
+            'collectif' => $collectif,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'role' => $role,
@@ -103,36 +109,37 @@ class AuteurController extends Controller
     }
 
     /**
-     * Deletes a Auteur entity.
+     * Deletes a Collectif entity.
      *
      */
-    public function deleteAction(Request $request, Auteur $auteur)
+    public function deleteAction(Request $request, Collectif $collectif)
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
-        $form = $this->createDeleteForm($auteur);
+
+        $form = $this->createDeleteForm($collectif);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($auteur);
+            $em->remove($collectif);
             $em->flush();
         }
 
-        return $this->redirectToRoute('auteur_index');
+        return $this->redirectToRoute('collectif_index');
     }
 
     /**
-     * Creates a form to delete a Auteur entity.
+     * Creates a form to delete a Collectif entity.
      *
-     * @param Auteur $auteur The Auteur entity
+     * @param Collectif $collectif The Collectif entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Auteur $auteur)
+    private function createDeleteForm(Collectif $collectif)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('auteur_delete', array('id' => $auteur->getId())))
+            ->setAction($this->generateUrl('collectif_delete', array('id' => $collectif->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

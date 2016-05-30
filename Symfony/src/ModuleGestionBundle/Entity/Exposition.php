@@ -68,10 +68,10 @@ class Exposition
     private $emplacements;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Auteur", inversedBy="expositions")
-     * @ORM\JoinColumn(name="auteur_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Organisateur", inversedBy="expositions")
+     * @ORM\JoinColumn(name="organisateur_id", referencedColumnName="id")
      */
-    private $auteur;
+    private $organisateur;
 
     /**
      * Constructor
@@ -310,26 +310,26 @@ class Exposition
     }
 
     /**
-     * Set auteur
+     * Set organisateur
      *
-     * @param \ModuleGestionBundle\Entity\Auteur $auteur
+     * @param \ModuleGestionBundle\Entity\Auteur $organisateur
      *
      * @return Auteur
      */
-    public function setAuteur(\ModuleGestionBundle\Entity\Auteur $auteur = null)
+    public function setOrganisateur(\ModuleGestionBundle\Entity\Organisateur $organisateur = null)
     {
-        $this->auteur = $auteur;
+        $this->organisateur = $organisateur;
     
         return $this;
     }
 
     /**
-     * Get auteur
+     * Get organisateur
      *
-     * @return \ModuleGestionBundle\Entity\auteur
+     * @return \ModuleGestionBundle\Entity\organisateur
      */
-    public function getAuteur()
+    public function getOrganisateur()
     {
-        return $this->auteur;
+        return $this->organisateur;
     }
 }
