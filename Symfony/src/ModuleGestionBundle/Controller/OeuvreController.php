@@ -2,7 +2,8 @@
 
 namespace ModuleGestionBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+// use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Endroid\Bundle\QrCodeBundle\Controller\QrCodeController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,11 +24,11 @@ class OeuvreController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        // $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
+        $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
         $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
 
         return $this->render('oeuvre/index.html.twig', array(
-            // 'oeuvres'     => $oeuvres,
+            'oeuvres'     => $oeuvres,
             'expositions' => $expositions,
             'role'        => $role,
         ));
@@ -46,11 +47,25 @@ class OeuvreController extends Controller
             $id = $req->get('id');
             $connection = $this->get('database_connection');
             // récupérer la liste des oeuvres
-            $query = "select * from oeuvre as o inner join emplacement as e on e.oeuvre_id = o.id where e.exposition_id = " . $id;
+            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img from oeuvre as o
+                                    inner join emplacement as e on e.oeuvre_id = o.id
+                                    inner join artiste as a on o.artiste_id = a.id 
+                                    where e.exposition_id = " . $id;
             $rows = $connection->fetchAll($query);
             return new JsonResponse(array('data' => json_encode($rows)));
         }
         return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
+    }
+
+    // Methode non sécurisée pour test qrcode
+    public function testOeuvreAction(Oeuvre $oeuvre)
+    {
+        $deleteForm = $this->createDeleteForm($oeuvre);
+
+        return $this->render('oeuvre/testshow.html.twig', array(
+            'oeuvre' => $oeuvre,
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**
@@ -59,7 +74,7 @@ class OeuvreController extends Controller
      */
     public function newAction(Request $request)
     {
-        $progress = true;
+
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
@@ -76,10 +91,22 @@ class OeuvreController extends Controller
             $em->persist($oeuvre);
             $em->flush();
 
+            // Si on a coché pour générer un Qrcode
+            if($request->request->All()["oeuvre"]["genFlashcode"] == 1){
+
+               // On récupère l'id de l'oeuvre enregistrée
+               $id = $oeuvre->getId();
+               // Puis on l'intègre dans le lien de redirection
+               $oeuvre->setImgFlashcode('/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/'.$id.'/show.png');
+               // On persist le changement
+               $em->persist($oeuvre);
+               // On enregistre
+               $em->flush();
+            }
+
             return $this->redirectToRoute('oeuvre_show', array(
-                'id'   => $oeuvre->getId(),
+                'id'   => $id,
                 'role' => $role,
-                'progress' => $progress,
             ));
         }
 
@@ -87,7 +114,6 @@ class OeuvreController extends Controller
             'oeuvre' => $oeuvre,
             'form' => $form->createView(),
             'role' => $role,
-            'progress' => $progress,
         ));
     }
 
@@ -115,6 +141,8 @@ class OeuvreController extends Controller
      */
     public function editAction(Request $request, Oeuvre $oeuvre)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 

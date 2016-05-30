@@ -539,6 +539,13 @@ div#imgoeuv {
 	margin-bottom: 10px;
 }
 
+img.qrimg {
+	display:none;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+}
+
 /*****New Oeuvre******/
 
 #contnewOeuv {
@@ -563,22 +570,10 @@ div#imgoeuv {
 	margin-bottom: 20px;
 }
 
-/*progress barre*/
-.ui-progressbar {
-    position: relative;
+.ajustgenFlash {
+	margin-left: 20px !important;
+	margin-top: 0px !important;
 }
-.progress-label {
-	position: absolute;
-	left: 30%;
-	top: 4px;
-	font-weight: bold;
-	text-shadow: 1px 1px 0 #fff;
-}
-div#progressbar {
-    margin-top: 10px;
-}
-/*end progrees barre*/
-
 
 #choiceart {
 	margin-top: 10px;
@@ -638,7 +633,45 @@ div#progressbar {
 	padding: 20px;
 }
 
+#newoeuvfond {
+	margin-top: 25px;
+}
+
 /*****Show Oeuvre*****/
+
+#showoeuvedit {
+	background-color: #5CB85C;
+	color : #E3E3E3;  
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#showoeuvedit:hover {
+	background-color: #3C783C;
+	color : white;
+	text-decoration: none;
+}
+
+#showoeuvret {
+	background-color: #777;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#showoeuvret:hover {
+	background-color: #373737;
+	color : white;
+	text-decoration: none;
+}
+
+.shooeuv tr:nth-child(odd) {
+	background-color: #5CB85C;
+}
+
+.shooeuv tr:nth-child(even) {
+	background-color: #D2E1E2;
+}
 
 /*****Edit Oeuvre*****/
 

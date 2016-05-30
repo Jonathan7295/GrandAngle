@@ -11,13 +11,10 @@
             {# Selection de l'artiste et Etat de l'oeuvre #}
             <div class="row">
                 <div class="col-md-2">
-                    <label for="Art" class="control-label ajust">Générer un FlashCode</label>
                     {# Génération du label #}
                     {{ form_label(form.nom, "Nom", {'label_attr': {'class': ' control-label ajust'}})}}
                 </div>
                 <div class="col-md-3">
-                    {# Génération de l'input #}
-                    {{ form_widget(form.genFlashcode, {'attr': {'class': 'form-control ajust'}}) }}
                     {# Génération de l'input #}
                     {{ form_widget(form.nom, {'attr': {'class': 'form-control ajust'}}) }}
                 </div>
@@ -56,13 +53,6 @@
                     {% endimage %} #}
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-9">
-                    {% image 'image/emplacement.png' %}
-                        <img id="placenew" class="img-responsive" title="Emplacements" src="{{ asset_url }}"/>
-                    {% endimage %}
-                </div>
-            </div>
             <div id="adddes" class="row">
                 <div class="col-md-1 fixlabel labeldes"></div>
                 <div class="col-md-3 champsdes"></div>
@@ -72,12 +62,16 @@
                     <div class="col-md-1 deplace"></div>
                 </div>        
             </div>
-            {# <div id="progressbar">
-                <div class="progress-label">Loading...</div>
-            </div> #}
-            <div class="row">
-                <input type="submit" value="Enregistrer" />
-                <a href="{{ path('oeuvre_index') }}">Retour à la liste</a>
+            <div id="newoeuvfond" class="row">
+                <div class="col-md-4">
+                    <label for="Art" class="control-label ajust">Générer un FlashCode</label>
+                    {# Génération de l'input #}
+                    {{ form_widget(form.genFlashcode, {'attr': {'class': 'ajustgenFlash'}}) }}
+                </div>
+                <div class="col-md-4">
+                    <input id="newartval" type="submit" value="Enregistrer" />
+                    <a id="newartret" href="{{ path('oeuvre_index') }}">Retour à la liste</a>
+                </div>
             </div>
         </div>
     </div>
@@ -91,7 +85,7 @@
         // On ajoute le choix d'un nouvel artiste
         $('#oeuvre_artiste').append('<option id="newart" value="new">Nouvel artiste</option>');
         // Quand on clique sur le choix précédent on est redirigé vers le formulaire
-        $('#oeuvre_artiste').attr('onchange','myFunction()');
+        $('#oeuvre_artiste').attr('onclick','myFunction()');
 
         //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
         var $container = $('div#oeuvre_texteoeuvres');

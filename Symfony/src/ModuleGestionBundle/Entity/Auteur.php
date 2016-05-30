@@ -79,4 +79,18 @@ class Auteur extends Organisateur
     {
         return $this->datenaissance;
     }
+
+    /**
+     * Set id
+     *
+     * @param integer $id
+     *
+     * @return Auteur
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    
+        return $this;
+    }
 }
