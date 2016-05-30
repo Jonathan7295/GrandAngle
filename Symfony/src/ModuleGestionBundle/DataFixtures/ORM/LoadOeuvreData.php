@@ -86,13 +86,13 @@ class LoadOeuvreData implements FixtureInterface
 		$manager->flush();
 
         // J'enregistre les flashsCode
-        $oeuvre->setImgFlashcode('92.156.227.65/GrandAngle/Symfony/web/app_dev.php/testoeuvre/'.$oeuvre->getId().'/show');
+        $oeuvre->setImgFlashcode('/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/'.$oeuvre->getId().'/show');
         $oeuvre->setGenFlashcode('1');
-        $oeuvre1->setImgFlashcode('92.156.227.65/GrandAngle/Symfony/web/app_dev.php/testoeuvre/'.$oeuvre1->getId().'/show');
+        $oeuvre1->setImgFlashcode('/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/'.$oeuvre1->getId().'/show');
         $oeuvre1->setGenFlashcode('1');
-        $oeuvre2->setImgFlashcode('92.156.227.65/GrandAngle/Symfony/web/app_dev.php/testoeuvre/'.$oeuvre2->getId().'/show');
+        $oeuvre2->setImgFlashcode('/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/'.$oeuvre2->getId().'/show');
         $oeuvre2->setGenFlashcode('1');
-        $oeuvre3->setImgFlashcode('92.156.227.65/GrandAngle/Symfony/web/app_dev.php/testoeuvre/'.$oeuvre3->getId().'/show');
+        $oeuvre3->setImgFlashcode('/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/'.$oeuvre3->getId().'/show');
         $oeuvre3->setGenFlashcode('1');
 
         // Je persiste les oeuvres
