@@ -66,13 +66,13 @@ class Oeuvre
     public $emplacements;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Artiste", inversedBy="oeuvres")
+     * @ORM\ManyToOne(targetEntity="Artiste", inversedBy="oeuvres", cascade={"persist"})
      * @ORM\JoinColumn(name="artiste_id", referencedColumnName="id")
      */
     private $artiste;
 
     /**
-     * @ORM\OneToMany(targetEntity="Multimedia", mappedBy="oeuvre")
+     * @ORM\OneToMany(targetEntity="Multimedia", mappedBy="oeuvre", cascade={"persist"})
      */
     private $multimedias;
 
@@ -80,7 +80,7 @@ class Oeuvre
     {
         $this->texteoeuvres = new ArrayCollection();
         $this->emplacements = new ArrayCollection();
-        // $this->multimedias = new ArrayCollection();
+        $this->multimedias = new ArrayCollection();
     }
     
     /**
@@ -222,9 +222,9 @@ class Oeuvre
      */
     public function addTexteoeuvre(\ModuleGestionBundle\Entity\TexteOeuvre $texteoeuvre)
     {
-        $this->texteoeuvres[] = $texteoeuvre;
-    
-        return $this;
+        $texteoeuvre->setOeuvre($this);
+
+        $this->texteoeuvres->add($texteoeuvre);
     }
 
     /**
@@ -256,9 +256,9 @@ class Oeuvre
      */
     public function addEmplacement(\ModuleGestionBundle\Entity\Emplacement $emplacement)
     {
-        $this->emplacements[] = $emplacement;
-    
-        return $this;
+        $emplacement->setOeuvre($this);
+
+        $this->emplacements->add($emplacement);
     }
 
     /**
@@ -314,9 +314,9 @@ class Oeuvre
      */
     public function addMultimedia(\ModuleGestionBundle\Entity\Multimedia $multimedia)
     {
-        $this->multimedias[] = $multimedia;
-    
-        return $this;
+        $multimedia->setOeuvre($this);
+
+        $this->multimedias->add($multimedia);
     }
 
     /**

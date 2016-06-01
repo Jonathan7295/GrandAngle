@@ -3,8 +3,8 @@
 namespace ModuleGestionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MultimediaType extends AbstractType
@@ -16,10 +16,7 @@ class MultimediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('image', FileType::class, array(
-                'label' =>  'Importer une image',
-                'attr' =>  array(
-                    'class' => 'file',)))
+            ->add('lien', TextType::class, array('label' => 'Lien multimédia oeuvre'))
         ;
     }
     

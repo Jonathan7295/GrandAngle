@@ -31,13 +31,6 @@ class OeuvreType extends AbstractType
                 ),
                 'multiple' => false,
                 'expanded' => true))
-            // ->add('emplacements', CollectionType::class, array(
-            //     'entry_type'   => EmplacementType::class,
-            //     'allow_add'    => true,
-            //     'allow_delete' => true,
-            //     'label'        => false,
-            //     'prototype'    => true,
-            //     'by_reference' => false))
             ->add('artiste', EntityType::class, array(
                 'class' => 'ModuleGestionBundle:Artiste',
                 'label' => false,
@@ -53,12 +46,13 @@ class OeuvreType extends AbstractType
                 'label'         => false,
                 'prototype'     => true,
                 'by_reference'  => false))
-            // ->add('multimedias', CollectionType::class, array(
-            //     'entry_type' => MultimediaType::class,
-            //     'allow_add'     => true,
-            //     'label'      => false,
-            //     'prototype'  => true,
-            //     'by_reference' => false))
+            ->add('multimedias', CollectionType::class, array(
+                'entry_type' => MultimediaType::class,
+                'allow_add'     => true,
+                'allow_delete' => true,
+                'label'      => false,
+                'prototype'  => true,
+                'by_reference' => false))
         ;
     }
     

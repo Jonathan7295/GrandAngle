@@ -97,7 +97,7 @@ class OeuvreController extends Controller
                // On récupère l'id de l'oeuvre enregistrée
                $id = $oeuvre->getId();
                // Puis on l'intègre dans le lien de redirection
-               $oeuvre->setImgFlashcode('/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/'.$id.'/show.png');
+               $oeuvre->setImgFlashcode('/qrcode/92.156.227.65/GrandAngle/Symfony/web/testoeuvre/'.$id.'/show');
                // On persist le changement
                $em->persist($oeuvre);
                // On enregistre

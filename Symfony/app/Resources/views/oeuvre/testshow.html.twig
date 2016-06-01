@@ -36,7 +36,7 @@
                                 <th>Image du flashCode</th>
                                 <td>
                                     {% if oeuvre.imgFlashcode is defined and oeuvre.imgFlashcode is not null %}
-                                    <img src="{{ qrcode_url(oeuvre.imgFlashcode, extension='png') }}" alt="">
+                                    <img src="{{ qrcode_url(oeuvre.imgFlashcode, { extension: 'png' }) }}" alt="FlashCode">
                                     {% endif %}
                                 </td>
                             </tr>
