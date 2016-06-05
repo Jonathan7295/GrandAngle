@@ -21,13 +21,24 @@
                     </div>
                     <div class="col-md-2 form-group">
                         <label for="Art" class="control-label ajust">Artiste</label>
+                        {% if idArtist is empty %}
+                        {% else %}
+                            <script>
+                                $(document).ready(function(){
+                                    if ({{ idArtist }} != "") {
+                                        var idArtist = "{{ idArtist }}";
+                                        $('#oeuvre_artiste option[value='+idArtist+']').prop('selected', true);
+                                    } 
+                                });
+                            </script>
+                        {% endif %}
                     </div>
                     <div class="col-md-4 form-group">
                         {# Génération de l'input #}
                         {{ form_widget(form.artiste, {'attr': {'class': 'col-md-2 form-control ajust'}}) }}
                     </div>
                     <div id="addmulti" class="form-group">
-                        <div class="col-md-4 labelmulti"></div>
+                        <div class="col-md-4 champsnom"></div>
                         <div class="col-md-6 champsmulti"></div>
                         <div class="col-md-1 deplacemulti"></div>   
                     </div>
@@ -41,7 +52,7 @@
                     <img class="specimen img-responsive" title="Image Oeuvre" src="{{ asset_url }}" width="141px" height="141px"/>
                 {% endimage %}
                 </div>
-                <div id="adddes" class="col-md-12">
+                <div id="adddes" class="col-md-12 form-group">
                         <div class="col-md-1 fixlabel labeldes"></div>
                         <div class="col-md-3 champsdes"></div>
                     <div class="fixlang">
@@ -50,6 +61,37 @@
                         <div class="col-md-1 deplace"></div>
                     </div>        
                 </div>
+                <div class="col-md-8">
+                    <div class="col-md-4 form-group">
+                        {# Génération du label #}
+                        <label for="typeoeuvre" class="control-label ajust">Choix du type d'oeuvre</label>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        {# Génération de l'input #}
+                        <select id="oeuvre_typeoeuvre" class="form-control ajust">
+                            <option value="0">Tableau</option>
+                            <option value="1">Statut</option>
+                            <option value="2">Multimédia</option>
+                        </select>
+                    </div>
+                    {# Gestion des formulaires de Type d'oeuvre #}
+                    <script>
+                        $(document).ready(function(){
+                            $('#oeuvre_typeoeuvre').change(function(){
+                                if($(this).val() == 0){
+                                    alert('Tableau');
+                                }else if ($(this).val() == 1) {
+                                    alert('Statut');
+                                }else if ($(this).val() == 2) {
+                                    alert('Multimédia');
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+                <div id="formTableau" class="col-md-12"></div>
+                <div id="formStatut" class="col-md-12"></div>
+                <div id="formMulti" class="col-md-12"></div>
                 <div id="newoeuvfond" class="col-md-12">
                     <div class="col-md-4">
                         <label for="Art" class="control-label ajust">Générer un FlashCode</label>
@@ -204,14 +246,19 @@
             var descendant2 = $newprototype2.find('*');
 
             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-            $('.labelmulti').append(descendant2[3]);
-            $('.champsmulti').append(descendant2[2]);
+            $('.champsnom').append(descendant2[3]);
+            $('.champsmulti').append(descendant2[5]);
 
-            // Label lien
-            $('[for="oeuvre_multimedias_'+index2+'_lien"]').attr('class','control-label ajust multi');
+            // Champs nom
+            $('[id="oeuvre_multimedias_'+index2+'_nom"]').attr({
+                class: 'form-control ajust multi',
+                placeholder: 'Nom du lien....'
+            });
             // Champs lien
-            $('[id="oeuvre_multimedias_'+index2+'_lien"]').attr('class','form-control ajust linkshow');
-
+            $('[id="oeuvre_multimedias_'+index2+'_lien"]').attr({
+                class: 'form-control ajust linkshow',
+                placeholder: 'Ajouter un lien...'
+            });
             // Quand on colle un lien dans le champs on affiche sa miniature
             $('.linkshow').attr('onchange','myImageFunction(this)');
 
@@ -235,8 +282,8 @@
                 // On récupère l'index du champs à supprimer
                 var num2 = $(this).attr('name');
                 // On supprime les champs un à un
-                 // Label lien
-                $('[for="oeuvre_multimedias_'+num2+'_lien"]').remove();
+                 // Champs nom
+                $('[id="oeuvre_multimedias_'+num2+'_nom"]').remove();
                 // Champs lien
                 $('[id="oeuvre_multimedias_'+num2+'_lien"]').remove();
                 $(this).remove();
@@ -258,17 +305,20 @@
     
     // Fonction pour afficher une miniature du lien
     function myImageFunction(valeur) {
+
         // On récupère la valeur à partir de l'id du champs sélectionné
         var val = $("#"+valeur.id).val();
+       
         // On retire l'image par défaut
         $('.specimen').remove();
+
         // On créé une nouvelle image
         $img = document.createElement('img');
         $img.setAttribute('class','specimen img-responsive');
         $img.src = "http://www.robothumb.com/src/?url="+val+"&size=560x420.png";
-        $('#previsu').append($img);
+
+        $('#previsu').append($img); 
         
     }
-    
     </script>
 {% endblock %}

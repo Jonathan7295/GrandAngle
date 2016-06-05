@@ -1,7 +1,7 @@
 oeuvre_index:
     path:     /
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:index" }
-    methods:  GET
+    methods:  [GET, POST]
 
 oeuvre_show:
     path:     /{id}/show

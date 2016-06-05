@@ -53,6 +53,20 @@ class OeuvreType extends AbstractType
                 'label'      => false,
                 'prototype'  => true,
                 'by_reference' => false))
+            ->add('typeoeuvre', CollectionType::class, array(
+                'entry_type' => TableauType::class,
+                'allow_add'  => true,
+                'allow_delete' => true,
+                'label' => false,
+                'prototype' => true,
+                'by_reference' => false))
+            ->add('typeoeuvre', CollectionType::class, array(
+                'entry_type' => StatutType::class,
+                'allow_add'  => true,
+                'allow_delete' => true,
+                'label' => false,
+                'prototype' => true,
+                'by_reference' => false))
         ;
     }
     

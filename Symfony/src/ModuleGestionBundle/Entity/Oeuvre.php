@@ -76,6 +76,12 @@ class Oeuvre
      */
     private $multimedias;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="TypeOeuvre")
+     * @ORM\JoinColumn(name="typeoeuvre", referencedColumnName="id")
+     */
+    private $typeoeuvre;
+
     public function __construct()
     {
         $this->texteoeuvres = new ArrayCollection();
@@ -337,5 +343,29 @@ class Oeuvre
     public function getMultimedias()
     {
         return $this->multimedias;
+    }
+
+    /**
+     * Set typeoeuvre
+     *
+     * @param \ModuleGestionBundle\Entity\TypeOeuvre $typeoeuvre
+     *
+     * @return Oeuvre
+     */
+    public function setTypeoeuvre(\ModuleGestionBundle\Entity\TypeOeuvre $typeoeuvre = null)
+    {
+        $this->typeoeuvre = $typeoeuvre;
+    
+        return $this;
+    }
+
+    /**
+     * Get typeoeuvre
+     *
+     * @return \ModuleGestionBundle\Entity\TypeOeuvre
+     */
+    public function getTypeoeuvre()
+    {
+        return $this->typeoeuvre;
     }
 }

@@ -522,6 +522,7 @@ textarea {
 #newoeuv {
 	background-color: #5CB85C;
 	color : #E3E3E3;
+	margin-top: 0;
 }
 #newoeuv:hover {
 	background-color: #41899E;
@@ -537,13 +538,6 @@ div#imgoeuv {
 #choiceexpo {
 	margin-top: 10px;
 	margin-bottom: 10px;
-}
-
-img.qrimg {
-	display:none;
-	position: absolute;
-	top: 25%;
-	left: 50%;
 }
 
 /*****New Oeuvre******/
@@ -669,6 +663,16 @@ img.qrimg {
 	color : white;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+#formTableau {
+	display:none;
+}
+#formStatut {
+	display:none;
+}
+#formMulti {
+	display:none;
 }
 
 /*****Show Oeuvre*****/

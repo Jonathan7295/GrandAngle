@@ -6,12 +6,12 @@
             Détail de l'oeuvre
         </div>
         <div class="container">
+            <div class="form-group">
+                <a id="showoeuvret" href="{{path('oeuvre_index')}}">Retour</a>
+                <a id="showoeuvedit" href="">Modifier</a>
+            </div>
             <div class="row">
-                <div class="col-md-2">
-                    <a id="showoeuvret" href="{{path('oeuvre_index')}}">Retour</a>
-                    <a id="showoeuvedit" href="">Modifier</a>
-                </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <table class="table shooeuv">
                         <tbody>
                             <tr>
@@ -57,6 +57,24 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="col-md-5">
+                    {% if oeuvre.texteoeuvres is defined %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Langue</th>
+                                </tr>
+                            {% for texteoeuvre in oeuvre.texteoeuvres %}
+                                <tr>
+                                    <td>{{ texteoeuvre.description }}</td>
+                                    <td>{{ texteoeuvre.langue }}</td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

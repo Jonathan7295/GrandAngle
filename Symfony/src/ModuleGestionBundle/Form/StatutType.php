@@ -4,10 +4,9 @@ namespace ModuleGestionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MultimediaType extends AbstractType
+class StatutType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,8 +17,10 @@ class MultimediaType extends AbstractType
         parent::buildForm($builder, $options);
         
         $builder
-            ->add('nom', TextType::class, array('label' => false))
-            ->add('lien', TextType::class, array('label' => false))
+            ->add('hauteur')
+            ->add('longueur')
+            ->add('largeur')
+            ->add('profondeur')
         ;
     }
     
@@ -29,7 +30,7 @@ class MultimediaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ModuleGestionBundle\Entity\Multimedia'
+            'data_class' => 'ModuleGestionBundle\Entity\Statut'
         ));
     }
 }
