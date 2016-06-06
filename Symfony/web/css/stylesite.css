@@ -576,6 +576,7 @@ textarea {
 #newoeuv {
 	background-color: #5CB85C;
 	color : #E3E3E3;
+	margin-top: 0;
 }
 #newoeuv:hover {
 	background-color: #41899E;
@@ -593,17 +594,10 @@ div#imgoeuv {
 	margin-bottom: 10px;
 }
 
-img.qrimg {
-	display:none;
-	position: absolute;
-	top: 25%;
-	left: 50%;
-}
-
 /*****New Oeuvre******/
 
 #contnewOeuv {
-	margin-top: 10px;
+	padding: 20px;
 }
 
 #newart {
@@ -689,6 +683,50 @@ img.qrimg {
 
 #newoeuvfond {
 	margin-top: 25px;
+}
+
+.multi {
+	line-height:2.8em !important;
+}
+
+.red2 {
+	background-color: #BD3329;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 12px;
+}
+
+.red2:hover{
+	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.vert2 {
+	background-color: #5cb85c;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 16px;
+}
+
+.vert2:hover{
+	background-color: #5cb85c;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#formTableau {
+	display:none;
+}
+#formStatut {
+	display:none;
+}
+#formMulti {
+	display:none;
 }
 
 /*****Show Oeuvre*****/

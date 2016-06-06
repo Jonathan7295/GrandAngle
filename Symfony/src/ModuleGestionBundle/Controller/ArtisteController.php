@@ -3,6 +3,7 @@
 namespace ModuleGestionBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use ModuleGestionBundle\Entity\Artiste;
@@ -44,13 +45,37 @@ class ArtisteController extends Controller
 
         $artiste = new Artiste();
         $form = $this->createForm('ModuleGestionBundle\Form\ArtisteType', $artiste);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($artiste);
-            $em->flush();
 
-            return $this->redirectToRoute('oeuvre_new', array('id' => $artiste->getId()));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $nom = $artiste->getNom();
+            $prenom = $artiste->getPrenom();
+
+            $criteria = array_filter(array(
+                'nom'    => $nom,
+                'prenom' => $prenom));
+
+            $artisteFind = $em->getRepository('ModuleGestionBundle:Artiste')->findBy($criteria);
+
+            if(!$artisteFind){
+
+                $em->persist($artiste);
+                $em->flush();
+
+                return $this->redirectToRoute('oeuvre_new', array('id' => $artiste->getId()));
+            }else{
+                $find = $nom." ".$prenom;
+                return $this->render('artiste/new.html.twig', array(
+                    'artiste' => $artiste,
+                    'form' => $form->createView(),
+                    'role' => $role,
+                    'find' => $find,
+                ));
+            }  
         }
 
         return $this->render('artiste/new.html.twig', array(
