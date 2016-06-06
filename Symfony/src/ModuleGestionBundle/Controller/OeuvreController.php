@@ -141,6 +141,7 @@ class OeuvreController extends Controller
      */
     public function editAction(Request $request, Oeuvre $oeuvre)
     {
+        //En dessous du rolle user, on ne peut pas y accèder
         $this->denyAccessUnlessGranted('ROLE_USER');
 
         // On récupère le role de la personne connectée

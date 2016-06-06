@@ -225,11 +225,15 @@ select {
 }
 
 .form-control.ajust {
-	margin-bottom:10px;
+	margin-bottom:10px;	
 }
 
 .control-label.ajust {
 	line-height: 35px
+}
+
+.control-label.ajust.ajust2{
+	line-height: 72px
 }
 
 .form-control.tel {
@@ -471,8 +475,58 @@ select {
 
 /*****New exposition******/
 
+#containerExpo {
+	padding-top: 10px;
+}
+
 textarea {
 	resize : none;
+}
+
+#newexpo{
+	margin-top: 25px;
+}
+
+#newsub{
+	background-color: #337ab7;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 6px 15px; 
+}
+
+#newsub:hover{
+	background-color: #214F77;
+	color : black;
+}
+
+
+#newret{
+	background-color: #777;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#newret:hover{
+	background-color: #171616;
+	color : white;
+	text-decoration: none;
+}
+
+#exposition_evenement_0{
+	margin-right: 5px;
+}
+#exposition_evenement_1{
+	margin-left: 15px;
+	margin-right: 5px;
+}
+#exposition_evenement_2{
+	margin-left: 15px;
+	margin-right: 5px;
+}
+#exposition_evenement_3{
+	margin-left: 15px;
+	margin-right: 5px;
 }
 
 /*****Show exposition*****/

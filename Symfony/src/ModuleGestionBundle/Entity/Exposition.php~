@@ -86,7 +86,6 @@ class Exposition
     {
         $this->textexpositions = new ArrayCollection();
         $this->emplacements = new ArrayCollection();
-        $this->themes = new ArrayCollection();
     }
 
     /**
@@ -338,39 +337,5 @@ class Exposition
     public function getOrganisateur()
     {
         return $this->organisateur;
-    }
-
-    /**
-     * Add theme
-     *
-     * @param \ModuleGestionBundle\Entity\Theme $theme
-     *
-     * @return Exposition
-     */
-    public function addTheme(\ModuleGestionBundle\Entity\Theme $theme)
-    {
-        $this->themes[] = $theme;
-    
-        return $this;
-    }
-
-    /**
-     * Remove theme
-     *
-     * @param \ModuleGestionBundle\Entity\Theme $theme
-     */
-    public function removeTheme(\ModuleGestionBundle\Entity\Theme $theme)
-    {
-        $this->themes->removeElement($theme);
-    }
-
-    /**
-     * Get themes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getThemes()
-    {
-        return $this->themes;
     }
 }

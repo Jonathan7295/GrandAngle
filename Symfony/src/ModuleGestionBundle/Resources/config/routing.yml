@@ -49,3 +49,6 @@ EndroidQrCodeBundle:
     type:       annotation
     prefix:     /qrcode
 
+module_gestion_theme:
+    resource: "@ModuleGestionBundle/Resources/config/routing/theme.yml"
+    prefix:   /theme

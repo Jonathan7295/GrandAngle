@@ -6,89 +6,113 @@
         <div class="panel-heading">
             Ajout d'une nouvelle exposition
         </div>
-        <div class="container">
+        <div id="containerExpo" class="container">
             <div class="row">
-                <div id="lienrow" class="col-md-8 col-sm-11">
+                <div id="lienrow" class="col-md-12 col-sm-11">
                     <div class="form-group">
                         {# Erreurs générales du formulaire #}
                         {{ form_errors(form) }}
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="form-group">
 
-                            {# Génération du label #}
-                            {{ form_label(form.nomExposition, "Nom", {'label_attr': {'class': 'col-md-3 control-label ajust'}})}}
-                            
-                            {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.nomExposition) }}
+                                {# Génération du label #}
+                                {{ form_label(form.nomExposition, "Nom", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
+                                
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.nomExposition) }}
 
-                            <div class="col-md-9">
-                                {# Génération de l'input #}
-                                {{ form_widget(form.nomExposition, {'attr': {'class': 'form-control ajust'}}) }}
+                                <div class="col-md-3">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.nomExposition, {'attr': {'class': 'form-control ajust'}}) }}
+                                </div>
+                                {# Génération du label #}
+                                {{ form_label(form.themes, "Thème", {'label_attr': {'class': 'col-md-1 col-md-offset-1 control-label ajust ajust2'}})}}
+                                
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.themes) }}
+
+                                <div class="col-md-3">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.themes, {'attr': {'class': 'form-control ajust'}}) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="form-group">
 
-                            {# Génération du label #}
-                            {{ form_label(form.dateHeureDebutExposition, "Date Début", {'label_attr': {'class': 'col-md-3 control-label ajust'}})}}
-                            
-                            {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.dateHeureDebutExposition) }}
+                                {# Génération du label #}
+                                {{ form_label(form.dateHeureDebutExposition, "Date Début", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
+                                
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.dateHeureDebutExposition) }}
 
-                            <div class="col-md-9">
-                                {# Génération de l'input #}
-                                {{ form_widget(form.dateHeureDebutExposition, {'attr': {'class': 'form-control ajust calendar'}}) }}
+                                <div class="col-md-3">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.dateHeureDebutExposition, {'attr': {'class': 'form-control ajust calendar'}}) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="form-group">
 
-                            {# Génération du label #}
-                            {{ form_label(form.dateHeureFinExposition, "Date Fin", {'label_attr': {'class': 'col-md-3 control-label ajust'}})}}
-                            
-                            {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.dateHeureFinExposition) }}
+                                {# Génération du label #}
+                                {{ form_label(form.dateHeureFinExposition, "Date Fin", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
+                                
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.dateHeureFinExposition) }}
 
-                            <div class="col-md-9">
-                                {# Génération de l'input #}
-                                {{ form_widget(form.dateHeureFinExposition, {'attr': {'class': 'form-control ajust calendar'}}) }}
+                                <div class="col-md-3">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.dateHeureFinExposition, {'attr': {'class': 'form-control ajust calendar'}}) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="form-group">
 
-                            {# Génération du label #}
-                            {{ form_label(form.nombreVisiteExposition, "Nombres visites", {'label_attr': {'class': 'col-md-3 control-label ajust'}})}}
-                            
-                            {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.nombreVisiteExposition) }}
+                                {# Génération du label #}
+                                {{ form_label(form.nombreVisiteExposition, "Nombres visites", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
+                                
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.nombreVisiteExposition) }}
 
-                            <div class="col-md-9">
-                                {# Génération de l'input #}
-                                {{ form_widget(form.nombreVisiteExposition, {'attr': {'class': 'form-control ajust'}}) }}
+                                <div class="col-md-3">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.nombreVisiteExposition, {'attr': {'class': 'form-control ajust'}}) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="form-group">
 
-                            {# Génération du label #}
-                            {{ form_label(form.evenement, "Evenement", {'label_attr': {'class': 'col-md-3 control-label ajust'}})}}
-                            
-                            {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.evenement) }}
+                                {# Génération du label #}
+                                {{ form_label(form.evenement, "Evenement", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
+                                
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.evenement) }}
 
-                            <div class="col-md-9">
-                                {# Génération de l'input #}
-                                {{ form_widget(form.evenement, {'attr': {'class': 'ajust'}}) }}
+                                <div class="col-md-9">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.evenement, {'attr': {'class': 'control-label ajust'}}) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="form-group">
+                                {# Génération du label #}
+                                {{ form_label(form.organisateur, "Organisateur", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
+                                
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.organisateur) }}
 
-                            {# Génération du label #}
-                            {{ form_label(form.organisateur, "Organisateur", {'label_attr': {'class': 'col-md-3 control-label ajust'}})}}
-                            
-                            {# Affichage des erreurs pour ce champs précis #}
-                            {{ form_errors(form.organisateur) }}
-
-                            <div class="col-md-9">
-                                {# Génération de l'input #}
-                                {{ form_widget(form.organisateur, {'attr': {'class': 'ajust'}}) }}
+                                <div class="col-md-3 control-label ajust">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.organisateur, {'attr': {'class': 'form-control ajust'}}) }}
+                                </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            
                         </div>
                     </div>
                 </div>
@@ -96,11 +120,11 @@
             <div id="champs" class="col-md-10 col-sm-10 col-xs-10">
                 <div class="form-group">
                     <div class="form-group">
-                        <div class="col-md-2 col-sm-2 col-xs-2 labeldes"></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 labeldes control-label ajust ajust2"></div>
                         <div class="col-md-4 col-sm-3 col-xs-10 champsdes"></div>
-                        <div class="col-md-1 col-sm-2 col-xs-2 labellang"></div>
-                        <div class="col-md-3 col-sm-3 col-xs-10 champslang"></div>
-                        <div class="col-md-1 col-sm-1 col-xs-1 deplace"></div>
+                        <div class="col-md-1 col-sm-2 col-xs-2 labellang control-label ajust ajust2"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-10 champslang control-label ajust ajust2"></div>
+                        <div class="col-md-1 col-sm-1 col-xs-1 deplace control-label ajust ajust2"></div>
                     </div>
                 </div>
             </div>
@@ -109,9 +133,12 @@
             <div id="exposition" class="form-group col-md-12"></div>
         </div>
         <div class="row">
-            <div class="col-md-5">
-                    <input type="submit" value="Enregistrer" />
-                    <a href="{{ path('exposition_index') }}">retour</a>
+            <div id="theme" class="form-group col-md-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-md-offset-4">
+                <input id="newsub" type="submit" value="Enregistrer" />
+                <a id="newret" href="{{ path('exposition_index') }}">retour</a>
             </div>
         </div>
     </div>
@@ -132,12 +159,16 @@
         });
     </script>
     <script type="text/javascript">
-
         $(document).ready(function() {
             $('#exposition_organisateur').append('<option value="NewAut"> Nouvel Auteur </option>');
-            $('#exposition_organisateur').append('<option value="NewCol"> Nouvau Collectif </option>');
+            $('#exposition_organisateur').append('<option value="NewCol"> Nouveau Collectif </option>');
             $('#exposition_organisateur').attr('onclick','FunctionNewAuteur()');
 
+            $('#exposition_themes').append('<option value="NewTheme"> Nouveau Thème </option>');
+            $('#exposition_themes').attr('onclick','FunctionNewTheme()');
+
+
+            //Génération des input pour les traductions
             //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
             var $container = $('div#exposition_textexpositions');
             //On repositionne sur la page
@@ -228,6 +259,8 @@
                     return false;
                 });
 ;            }
+            
+            //Génération des input pour les thème
         });
 
         function FunctionNewAuteur() {
@@ -237,6 +270,12 @@
             }
             if($('#exposition_organisateur').val() == "NewCol"){
                 document.location.href="{{ path('collectif_new') }}";
+            }
+        }
+
+        function FunctionNewTheme() {
+            if($('#exposition_themes').val() == "NewTheme"){
+                document.location.href="{{ path('theme_new') }}";
             }
         }
     </script>
