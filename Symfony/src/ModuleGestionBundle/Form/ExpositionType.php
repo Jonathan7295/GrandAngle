@@ -45,7 +45,7 @@ class ExpositionType extends AbstractType
             ->add('evenement', ChoiceType::class, array(
                                                 'choices'  => array(
                                                     'Teaser&Affiche' => 'teaser',
-                                                    'Déploiment' => 'deploie',
+                                                    'Déploiement' => 'deploie',
                                                     'Inauguration' => 'inaugurer',
                                                     'Fermeture' => 'fermer'
                                                     ),
@@ -57,7 +57,13 @@ class ExpositionType extends AbstractType
                                                 'class' => 'ModuleGestionBundle:organisateur',
                                                 'choice_label' => 'nom',
                                                 ))
-        ;
+            ->add('themes', EntityType::class, array(
+                                                'class' => 'ModuleGestionBundle:Theme',
+                                                'choice_label' => 'libelle',
+                                                'expanded' => false,
+                                                'required'    => true,
+                                                'multiple' => true
+                                                ));
     }
     
     /**

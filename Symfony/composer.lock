@@ -823,7 +823,11 @@
                 "qr",
                 "qrcode"
             ],
+<<<<<<< HEAD
+            "time": "2016-05-29 20:41:55"
+=======
             "time": "2016-05-31 12:48:19"
+>>>>>>> dcea59716d86b918ef1f341b83643ab21b77fc11
         },
         {
             "name": "endroid/qrcode-bundle",
