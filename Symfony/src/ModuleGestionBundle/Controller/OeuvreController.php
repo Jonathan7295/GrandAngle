@@ -90,7 +90,12 @@ class OeuvreController extends Controller
         $oeuvre = new Oeuvre();
         
         $form = $this->createForm('ModuleGestionBundle\Form\OeuvreType', $oeuvre);
-        
+
+        // echo "<pre>";
+        // var_dump($request->request->All());
+        // echo "</pre>";
+        // die();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

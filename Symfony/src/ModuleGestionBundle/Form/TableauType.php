@@ -19,6 +19,10 @@ class TableauType extends AbstractType
         $builder
             ->add('largeur')
             ->add('hauteur')
+            ->add('tableau', TypeOeuvreType::class, array(
+                'data_class' => 'ModuleGestionBundle\Entity\TypeOeuvre',
+                'label'         => false,
+                ))
         ;
     }
     

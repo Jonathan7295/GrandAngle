@@ -3,6 +3,7 @@
 namespace ModuleGestionBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,11 +15,17 @@ class MultimediaTypeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+        
         $builder
             ->add('duree')
             ->add('stockage')
             ->add('video')
-            ->add('lien')
+            ->add('lien', FileType::class, array('label' => 'Multimédia (JPEG ou PNG file)'))
+            ->add('multi', TypeOeuvreType::class, array(
+                'data_class' => 'ModuleGestionBundle\Entity\TypeOeuvre',
+                'label'         => false,
+                ))
         ;
     }
     
