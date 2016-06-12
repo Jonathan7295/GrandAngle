@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use ModuleGestionBundle\Entity\Oeuvre;
 use ModuleGestionBundle\Entity\Emplacement;
+use ModuleGestionBundle\Entity\MultimediaType;
 use ModuleGestionBundle\Form\OeuvreType;
 
 /**
@@ -26,9 +27,11 @@ class OeuvreController extends Controller
         if($req->isXMLHttpRequest()){
             $connection = $this->get('database_connection');
             // récupérer la liste complète des oeuvres
-            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img from oeuvre as o
-                                    inner join emplacement as e on e.oeuvre_id = o.id
-                                    inner join artiste as a on o.artiste_id = a.id";
+            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
+                            left join emplacement as e on e.oeuvre_id = o.id
+                            inner join artiste as a on o.artiste_id = a.id
+                            inner join typeoeuvre as t on o.typeoeuvre = t.id";
+
             $rows = $connection->fetchAll($query);
             return new JsonResponse(array('data' => json_encode($rows)));
         }else{
@@ -54,9 +57,10 @@ class OeuvreController extends Controller
             $id = $req->get('id');
             $connection = $this->get('database_connection');
             // récupérer la liste des oeuvres
-            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img from oeuvre as o
-                                    inner join emplacement as e on e.oeuvre_id = o.id
-                                    inner join artiste as a on o.artiste_id = a.id 
+            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
+                            left join emplacement as e on e.oeuvre_id = o.id
+                            inner join artiste as a on o.artiste_id = a.id
+                            inner join typeoeuvre as t on o.typeoeuvre = t.id  
                                     where e.exposition_id = " . $id;
             $rows = $connection->fetchAll($query);
             return new JsonResponse(array('data' => json_encode($rows)));
@@ -91,32 +95,86 @@ class OeuvreController extends Controller
         
         $form = $this->createForm('ModuleGestionBundle\Form\OeuvreType', $oeuvre);
 
-        // echo "<pre>";
-        // var_dump($request->request->All());
-        // echo "</pre>";
-        // die();
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
 
+            // Si on a un fichier multimedia
+            if($request->files->count() > 0){
+
+                // On récupère le fichier 
+                $file = $request->files->get("oeuvre")["multi"][1]["fichier"];
+
+                // On génère un nom unique pour ce fichier 
+                $filename = md5(uniqid()).'.'.$file->getClientOriginalExtension();
+
+                // Fonction pour calculer la taille du fichier
+                function taille_fichier($octets) {
+                    $resultat = $octets;
+                    for ($i=0; $i < 8 && $resultat >= 1024; $i++) {
+                        $resultat = $resultat / 1024;
+                    }
+                    if ($i > 0) {
+                        return preg_replace('/,00$/', '', number_format($resultat, 2, ',', '')) 
+                . ' ' . substr('KMGTPEZY',$i-1,1) . 'o';
+                    } else {
+                        return $resultat . ' o';
+                    }
+                }
+
+                // On déplace ensuite le fichier dans le dossier prévu à cette effet
+                $file->move(
+                    $this->container->getParameter('multimedias_directory'),
+                    $filename
+                );
+
+                $titre = pathinfo($file->getClientOriginalName())["filename"];
+                $dateCreation = $request->request->all()["oeuvre"]["multi"][1]["multi"]["dateCreation"];
+                $duree = $request->request->all()["oeuvre"]["multi"][1]["duree"];
+                $stockage = taille_fichier($file->getClientSize());
+                // Si on a une video
+                if(isset($request->request->all()["oeuvre"]["multi"][1]["video"]))
+                    $video = $request->request->all()["oeuvre"]["multi"][1]["video"];
+                else
+                    $video = 0;
+
+                // On instancie un objet MultimediaType
+                $multimedia =  new MultimediaType();
+                $multimedia->setTitre($titre);
+                $multimedia->setDateCreation($dateCreation);
+                $multimedia->setDuree($duree);
+                $multimedia->setStockage($stockage);
+                $multimedia->setVideo($video);
+                $multimedia->setFichier($filename);
+
+                // Je persiste le multimedia et je l'enregistre
+                $em->persist($multimedia);
+                $em->flush();
+
+                // Puis je définis le type d'oeuvre
+                $oeuvre->setTypeOeuvre($multimedia);
+            }
             $em->persist($oeuvre);
             $em->flush();
 
-            // Si on a coché pour générer un Qrcode
-            if($request->request->All()["oeuvre"]["genFlashcode"] == 1){
+            // On récupère l'id de l'oeuvre enregistrée
+            $id = $oeuvre->getId();
 
-               $IP = "localhost"; // Adresse en local par défaut modifiable ex: 92.156.227.65
-               // On récupère l'id de l'oeuvre enregistrée
-               $id = $oeuvre->getId();
-               // Puis on l'intègre dans le lien de redirection
-               $oeuvre->setImgFlashcode('/qrcode/'.$IP.'/GrandAngle/Symfony/web/testoeuvre/'.$id.'/show');
-               // On persist le changement
-               $em->persist($oeuvre);
-               // On enregistre
-               $em->flush();
+            // Si le champs genFlashcode existe
+            if(isset($request->request->All()["oeuvre"]["genFlashcode"])){
+                // Si on a coché pour générer un Qrcode
+                if($request->request->All()["oeuvre"]["genFlashcode"] == 1){
+
+                   $IP = "localhost"; // Adresse en local par défaut modifiable ex: 92.156.227.65
+                   // Puis on l'intègre dans le lien de redirection
+                   $oeuvre->setImgFlashcode('/qrcode/'.$IP.'/GrandAngle/Symfony/web/testoeuvre/'.$id.'/show');
+                   // On persist le changement
+                   $em->persist($oeuvre);
+                   // On enregistre
+                   $em->flush();
+                }
             }
 
             return $this->redirectToRoute('oeuvre_show', array(

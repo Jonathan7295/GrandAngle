@@ -53,7 +53,7 @@ class OeuvreType extends AbstractType
                 'label'      => false,
                 'prototype'  => true,
                 'by_reference' => false))
-            ->add('tableaux', CollectionType::class, array(
+            ->add('tableau', CollectionType::class, array(
                 'entry_type' => TableauType::class,
                 'allow_add'  => true,
                 'allow_delete' => true,
