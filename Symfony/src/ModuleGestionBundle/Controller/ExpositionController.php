@@ -73,7 +73,7 @@ class ExpositionController extends Controller
         $role = $this->getUser()->getRole();
 
         $deleteForm = $this->createDeleteForm($exposition);
-
+        //var_dump($exposition);
         return $this->render('exposition/show.html.twig', array(
             'exposition' => $exposition,
             'delete_form' => $deleteForm->createView(),
