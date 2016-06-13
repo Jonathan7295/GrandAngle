@@ -569,6 +569,23 @@ textarea {
 
 /*****Edit exposition*****/
 
+#formedit {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#formedit2 {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#labeldescrip{
+	padding-left: 0px;
+}
 
 /***************Style Gestion oeuvre*******************/
 
