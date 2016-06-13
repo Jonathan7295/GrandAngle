@@ -54,6 +54,36 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Thèmes</th>
+                            </tr>
+                        {% for theme in exposition.themes %}
+                            <tr>
+                                <td>{{ theme.libelle }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Organisateur</th>
+                            </tr>
+                        {% for expositions in exposition %}
+                            {% for expositions in expositions.organisateur %}
+                                <tr>
+                                    <td>{{ expositions.organisateur }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
