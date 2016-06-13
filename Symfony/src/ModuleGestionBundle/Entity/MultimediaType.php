@@ -47,9 +47,9 @@ class MultimediaType extends TypeOeuvre
     /**
      * @var string
      *
-     * @ORM\Column(name="lien", type="string", length=255)
+     * @ORM\Column(name="fichier", type="string", length=255)
      */
-    private $lien;
+    private $fichier;
 
 
     /**
@@ -135,26 +135,26 @@ class MultimediaType extends TypeOeuvre
     }
 
     /**
-     * Set lien
+     * Set fichier
      *
-     * @param string $lien
+     * @param string $fichier
      *
      * @return MultimediaType
      */
-    public function setLien($lien)
+    public function setFichier($fichier)
     {
-        $this->lien = $lien;
+        $this->fichier = $fichier;
     
         return $this;
     }
 
     /**
-     * Get lien
+     * Get fichier
      *
      * @return string
      */
-    public function getLien()
+    public function getFichier()
     {
-        return $this->lien;
+        return $this->fichier;
     }
 }

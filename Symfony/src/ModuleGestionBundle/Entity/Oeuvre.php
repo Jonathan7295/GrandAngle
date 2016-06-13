@@ -77,16 +77,26 @@ class Oeuvre
     private $multimedias;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TypeOeuvre")
+     * @ORM\ManyToOne(targetEntity="TypeOeuvre", inversedBy="oeuvres", cascade={"persist"})
      * @ORM\JoinColumn(name="typeoeuvre", referencedColumnName="id")
      */
     private $typeoeuvre;
+
+    private $tableau;
+
+    private $multi;
+
+    private $statut;
 
     public function __construct()
     {
         $this->texteoeuvres = new ArrayCollection();
         $this->emplacements = new ArrayCollection();
         $this->multimedias = new ArrayCollection();
+        $this->tableau = new ArrayCollection();
+        $this->multi = new ArrayCollection();
+        $this->statut = new ArrayCollection();
+        $this->genFlashcode = false;
     }
     
     /**
@@ -344,6 +354,39 @@ class Oeuvre
     {
         return $this->multimedias;
     }
+
+
+    public function setTableau(\Doctrine\Common\Collections\ArrayCollection $tableau)
+    {
+        $this->setTypeoeuvre($tableau->get(1));
+    }
+
+    public function getTableau()
+    {
+        return $this->tableau;
+    }
+
+
+    public function setMulti(\Doctrine\Common\Collections\ArrayCollection $multi)
+    {
+        $this->setTypeoeuvre($multi->get(1));
+    }
+
+    public function getMulti()
+    {
+        return $this->multi;
+    }
+
+     public function setStatut(\Doctrine\Common\Collections\ArrayCollection $statut)
+    {
+        $this->setTypeoeuvre($statut->get(1));
+    }
+
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
 
     /**
      * Set typeoeuvre

@@ -49,7 +49,7 @@
                                     <td>{{ oeuvre.nom }}</td>
                                     <td>{{ oeuvre.etat }}</td>
                                     <td>{{ oeuvre.artiste.nomComplet }}</td>
-                                    <td>Type</td>
+                                    <td>{{ oeuvre.typeoeuvre }}</td>
                                     <td>{{ oeuvre.nombreVisite }}</td>
                                     <td>Position</td>
                                     <td>
@@ -149,7 +149,7 @@
                 nom = document.createTextNode(item.nom);
                 etat = document.createTextNode(item.etat);
                 artiste = document.createTextNode(item.nomArt+' '+item.preNomArt);
-                type = document.createTextNode('Type');
+                type = document.createTextNode(item.type);
                 nbVisite = document.createTextNode(item.nombreVisite);
                 position = document.createTextNode(item.position);
 

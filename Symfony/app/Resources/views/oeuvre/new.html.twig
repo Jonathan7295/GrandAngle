@@ -47,7 +47,7 @@
                     {{ form_label(form.etat)}}
                     {{ form_widget(form.etat)}}
                 </div>
-                <div id="previsu" class="col-md-2">
+                <div id="previsu" class="col-md-3">
                 {% image 'image/specimen.png' %}
                     <img class="specimen img-responsive" title="Image Oeuvre" src="{{ asset_url }}" width="141px" height="141px"/>
                 {% endimage %}
@@ -69,29 +69,242 @@
                     <div class="col-md-4 form-group">
                         {# Génération de l'input #}
                         <select id="oeuvre_typeoeuvre" class="form-control ajust">
+                            <option value="sel">Sélectionnez</option>
                             <option value="0">Tableau</option>
                             <option value="1">Statut</option>
                             <option value="2">Multimédia</option>
                         </select>
                     </div>
                     {# Gestion des formulaires de Type d'oeuvre #}
+                    {% javascripts 'js/jquery.datetimepicker.full.js' %}
+                        <script type="text/javascript" src="{{ asset_url }}"></script>
+                    {% endjavascripts %}
                     <script>
                         $(document).ready(function(){
+
                             $('#oeuvre_typeoeuvre').change(function(){
                                 if($(this).val() == 0){
-                                    alert('Tableau');
+
+                                    //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
+                                    var $contTableau = $('div#oeuvre_tableau');
+
+                                    // On définit le prototype 
+                                    var $prototype = $($contTableau.attr('data-prototype').replace(/__name__label_/g, 'Choix tableau').replace(/__name__/g, 1));
+
+                                    // On vérifie si il n'y a pas déjà une série de champs créés
+                                    var index = $('#formTableau').find(':input').length;
+
+                                    if(index == 0)
+                                    addTableau($prototype);
+
+                                    function addTableau($prototype){
+                                        // On récupère tout ce qu'il y a dedans
+                                        var descendant = $prototype.find('*');
+                                        // On positionne les différents champs
+                                        $('.label2').append(descendant[3]);
+                                        $('.label3').append(descendant[6]);
+                                        $('.label5').append(descendant[12]);
+                                        $('.label6').append(descendant[15]);
+                                        $('.champs2').append(descendant[4]);
+                                        $('.champs3').append(descendant[7]);
+                                        $('.champs4').append(descendant[10]);
+                                        $('.champs5').append(descendant[13]);
+
+                                        // On définit les classes pour la mise en forme
+                                        $('[for="oeuvre_tableau_1_largeur"]').attr('class','label-control');
+                                        $('#oeuvre_tableau_1_largeur').attr('class', 'form-control');
+                                        $('[for="oeuvre_tableau_1_hauteur"]').attr('class','label-control');
+                                        $('#oeuvre_tableau_1_hauteur').attr('class', 'form-control');
+                                        $('[for="oeuvre_tableau_1_tableau_titre"]').attr('class','label-control');
+                                        $('#oeuvre_tableau_1_tableau_titre').attr('class', 'form-control');
+                                         $('[for="oeuvre_tableau_1_tableau_dateCreation"]').attr('class','label-control');
+                                        $('#oeuvre_tableau_1_tableau_dateCreation').attr('class', 'form-control calendar');
+                                    }
+
+                                    // Calendrier
+                                    $.datetimepicker.setLocale('fr');
+                                    $('.calendar').datetimepicker({
+                                        dayOfWeekStart : 1,
+                                        lang:'fr',
+                                        format:'d/m/Y H:i',
+                                    });
+                                   
+                                    // On affiche à l'écran
+                                    $('#formTableau').css('display', 'block');
+                                    // On cache les autres
+                                    $('#formStatut').css('display', 'none');
+                                    $('#formMulti').css('display', 'none');
+
                                 }else if ($(this).val() == 1) {
-                                    alert('Statut');
+                                    //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
+                                    var $contStatut = $('div#oeuvre_statut');
+
+                                    // On définit le prototype 
+                                    var $prototype = $($contStatut.attr('data-prototype').replace(/__name__label_/g, 'Choix statut').replace(/__name__/g, 1));
+
+                                    // On vérifie si il n'y a pas déjà une série de champs créés
+                                    var index = $('#formStatut').find(':input').length;
+
+                                    if(index == 0)
+                                    addStatut($prototype);
+
+                                    function addStatut($prototype){
+                                        // On récupère tout ce qu'il y a dedans
+                                        var descendant = $prototype.find('*');
+                                        // On positionne les différents champs
+                                        $('.label11').append(descendant[10]);
+                                        $('.champs11').append(descendant[9]);
+                                        $('.label21').append(descendant[3]);
+                                        $('.label31').append(descendant[6]);
+                                        $('.label51').append(descendant[18]);
+                                        $('.label61').append(descendant[13]);
+                                        $('.champs21').append(descendant[4]);
+                                        $('.champs31').append(descendant[7]);
+                                        $('.champs41').append(descendant[17]);
+                                        $('.champs51').append(descendant[12]);
+                                        $('.champs71').append(descendant[20]);
+                                        $('.label71').append(descendant[21]);
+
+                                        // On définit les classes pour la mise en forme
+                                        $('[for="oeuvre_statut_1_largeur"]').attr('class','label-control');
+                                        $('#oeuvre_statut_1_largeur').attr('class', 'form-control');
+                                        $('[for="oeuvre_statut_1_profondeur"]').attr('class','label-control');
+                                        $('#oeuvre_statut_1_profondeur').attr('class', 'form-control');
+                                        $('[for="oeuvre_statut_1_hauteur"]').attr('class','label-control');
+                                        $('#oeuvre_statut_1_hauteur').attr('class', 'form-control');
+                                        $('[for="oeuvre_statut_1_longueur"]').attr('class','label-control');
+                                        $('#oeuvre_statut_1_longueur').attr('class', 'form-control');
+                                        $('[for="oeuvre_statut_1_statut_titre"]').attr('class','label-control');
+                                        $('#oeuvre_statut_1_statut_titre').attr('class', 'form-control');
+
+                                        $('[for="oeuvre_statut_1_statut_dateCreation"]').attr('class','label-control');
+                                        $('#oeuvre_statut_1_statut_dateCreation').attr('class', 'form-control calendar');
+                                    }
+
+                                     // Calendrier
+                                    $.datetimepicker.setLocale('fr');
+                                    $('.calendar').datetimepicker({
+                                        dayOfWeekStart : 1,
+                                        lang:'fr',
+                                        format:'d/m/Y H:i',
+                                    });
+
+                                    // On affiche à l'écran
+                                    $('#formStatut').css('display', 'block');
+                                    // On cache les autres
+                                    $('#formTableau').css('display', 'none');
+                                    $('#formMulti').css('display', 'none');
+
                                 }else if ($(this).val() == 2) {
-                                    alert('Multimédia');
+                                    //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
+                                    var $contMulti = $('div#oeuvre_multi');
+                                    
+                                    // On définit le prototype 
+                                    var $prototype = $($contMulti.attr('data-prototype').replace(/__name__label_/g, 'Choix multimedia').replace(/__name__/g, 1));
+
+                                    // On vérifie si il n'y a pas déjà une série de champs créés
+                                    var index = $('#formMulti').find(':input').length;
+
+                                    if(index == 0)
+                                    addMulti($prototype);
+
+                                    function addMulti($prototype){
+                                        // On récupère tout ce qu'il y a dedans
+                                        var descendant = $prototype.find('*');
+                                        // On positionne les différents champs
+                                        $('.label12').append(descendant[3]);
+                                        $('.champs12').append(descendant[4]);
+                                        $('.label22').append(descendant[6]);
+                                        $('.label32').append(descendant[7]);
+                                        $('.label52').append(descendant[12]);
+                                        $('.label62').append(descendant[13]);
+                                        $('.champs22').append(descendant[9]);
+                                        $('.champs32').append(descendant[10]);
+                                        $('.champs42').append(descendant[17]);
+                                        $('.champs52').append(descendant[18]);
+                                        $('.champs72').append(descendant[20]);
+                                        $('.label72').append(descendant[21]);
+
+                                        // On définit les classes pour la mise en forme
+                                        $('[for="oeuvre_multi_1_video"]').attr('class','label-control');
+                                        $('#oeuvre_multi_1_video').attr('class', 'form-control');
+
+                                        $('[for="oeuvre_multi_1_stockage"]').attr('class','label-control');
+                                        $('#oeuvre_multi_1_stockage').attr('class', 'form-control');
+
+                                        $('[for="oeuvre_multi_1_duree"]').attr('class','label-control');
+                                        $('#oeuvre_multi_1_duree').attr('class', 'form-control');
+
+                                        $('[for="oeuvre_multi_1_fichier"]').attr('class','label-control');
+                                        $('#oeuvre_multi_1_fichier').attr('class', 'uploadControl');
+
+                                        $('[for="oeuvre_multi_1_multi_titre"]').attr('class','label-control');
+                                        $('#oeuvre_multi_1_multi_titre').attr('class', 'form-control');
+
+                                        $('[for="oeuvre_multi_1_multi_dateCreation"]').attr('class','label-control');
+                                        $('#oeuvre_multi_1_multi_dateCreation').attr('class', 'form-control calendar');
+                                    }
+
+                                     // Calendrier
+                                    $.datetimepicker.setLocale('fr');
+                                    $('.calendar').datetimepicker({
+                                        dayOfWeekStart : 1,
+                                        lang:'fr',
+                                        format:'d/m/Y H:i',
+                                    });
+                                    // On affiche à l'écran
+                                    $('#formMulti').css('display', 'block');
+                                    // On cache les autres
+                                    $('#formTableau').css('display', 'none');
+                                    $('#formStatut').css('display', 'none');
+                                }else{
+                                    $('#formTableau').css('display', 'none');
+                                    $('#formStatut').css('display', 'none');
+                                    $('#formMulti').css('display', 'none');
                                 }
                             });
                         });
                     </script>
                 </div>
-                <div id="formTableau" class="col-md-12"></div>
-                <div id="formStatut" class="col-md-12"></div>
-                <div id="formMulti" class="col-md-12"></div>
+                <div id="formTableau" class="col-md-10">
+                    <div class="col-md-4 ajust champs4"></div> {# Label Titre #}
+                    <div class="col-md-5 label5"></div> {# Champs Titre #}
+                    <div class="col-md-4 ajust label2"></div> {# Label Largeur #}
+                    <div class="col-md-5 champs2"></div> {# Champs Largeur #}
+                    <div class="col-md-4 ajust label3"></div> {# Label Hauteur #}
+                    <div class="col-md-5 champs3"></div> {# Champs Hauteur #}
+                    <div class="col-md-4 ajust champs5"></div> {# Label Date Création #}
+                    <div class="col-md-5 label6"></div> {# Champs Date Création #}
+                </div>
+                
+                <div id="formStatut" class="col-md-10">
+                    <div class="col-md-4 ajust champs41"></div> {# Label Titre #}
+                    <div class="col-md-5 label51"></div> {# Champs Titre #}
+                    <div class="col-md-4 ajust champs11"></div> {# Label Largeur #}
+                    <div class="col-md-5 label11"></div> {# Champs Largeur #}
+                    <div class="col-md-4 ajust label21"></div> {# Label Hauteur #}
+                    <div class="col-md-5 champs21"></div> {# Champs Hauteur #}
+                    <div class="col-md-4 ajust label31"></div> {# Label Longueur #}
+                    <div class="col-md-5 champs31"></div> {# Champs Longueur #}
+                    <div class="col-md-4 ajust champs51"></div> {# Label Profondeur #}
+                    <div class="col-md-5 label61"></div> {# Champs Profondeur #}
+                    <div class="col-md-4 ajust champs71"></div> {# Label Date Création #}
+                    <div class="col-md-5 label71"></div> {# Champs Date Création #}
+                </div>
+                <div id="formMulti" class="col-md-12">
+                    {# <div class="col-md-4 ajust champs42"></div> {# Label Titre #}
+                    {# <div class="col-md-5 champs52"></div> {# Champs Titre #}
+                    <div class="col-md-4 ajust champs22"></div> {# Label Video #}
+                    <div class="col-md-5 champs32"></div> {# Champs Video #}
+                    {# <div class="col-md-4 ajust label22"></div> {# Label Stockage #}
+                    {# <div class="col-md-5 label32"></div> {# Champs Stockage #}
+                    <div class="col-md-4 ajust label12"></div> {# Label Durée #}
+                    <div class="col-md-5 champs12"></div> {# Champs Durée #}
+                    <div class="col-md-4 ajust label52"></div> {# Label Fichier #}
+                    <div class="col-md-5 label62"></div> {# Champs Fichier #}
+                    <div class="col-md-4 ajust champs72"></div> {# Label Date Création #}
+                    <div class="col-md-5 label72"></div> {# Champs Date Création #}
+                </div>
                 <div id="newoeuvfond" class="col-md-12">
                     <div class="col-md-4">
                         <label for="Art" class="control-label ajust">Générer un FlashCode</label>
@@ -110,7 +323,6 @@
 {% endblock %}
 {% block javascripts %}
     <script type="text/javascript">
-
     $(document).ready(function(){
 
         // On ajoute le choix d'un nouvel artiste
@@ -315,7 +527,8 @@
         // On créé une nouvelle image
         $img = document.createElement('img');
         $img.setAttribute('class','specimen img-responsive');
-        $img.src = "http://www.robothumb.com/src/?url="+val+"&size=560x420.png";
+        // $img.src = "http://www.robothumb.com/src/?url="+val+"&size=560x420.png";
+        $img.src = "http://api.screenshotmachine.com/?key=0d99fd&size=S&format=PNG&url="+val;
 
         $('#previsu').append($img); 
         

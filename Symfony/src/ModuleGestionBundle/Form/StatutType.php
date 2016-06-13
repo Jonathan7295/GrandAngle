@@ -21,6 +21,10 @@ class StatutType extends AbstractType
             ->add('longueur')
             ->add('largeur')
             ->add('profondeur')
+            ->add('statut', TypeOeuvreType::class, array(
+                'data_class' => 'ModuleGestionBundle\Entity\TypeOeuvre',
+                'label'         => false,
+                ))
         ;
     }
     

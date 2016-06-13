@@ -30,14 +30,14 @@ class TypeOeuvre
     private $titre;
 
     /**
-     * @var \DateTime
+     * @var \String
      *
-     * @ORM\Column(name="date_creation", type="datetime")
+     * @ORM\Column(name="date_creation", type="string")
      */
     private $dateCreation;
 
     /**
-     * @ORM\OneToMany(targetEntity="Oeuvre", mappedBy="typeoeuvre", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Oeuvre", mappedBy="typeoeuvre", cascade={"persist"})
      */
     private $oeuvres;
 
@@ -46,7 +46,7 @@ class TypeOeuvre
      */
     public function __construct()
     {
-        $this->oeuvres = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->oeuvres = new ArrayCollection();
     }
 
     /**
@@ -86,7 +86,7 @@ class TypeOeuvre
     /**
      * Set dateCreation
      *
-     * @param \DateTime $dateCreation
+     * @param \String $dateCreation
      *
      * @return TypeOeuvre
      */
@@ -100,7 +100,7 @@ class TypeOeuvre
     /**
      * Get dateCreation
      *
-     * @return \DateTime
+     * @return \String
      */
     public function getDateCreation()
     {
@@ -139,5 +139,10 @@ class TypeOeuvre
     public function getOeuvres()
     {
         return $this->oeuvres;
+    }
+
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }

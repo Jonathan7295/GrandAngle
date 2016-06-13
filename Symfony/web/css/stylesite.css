@@ -729,6 +729,12 @@ div#imgoeuv {
 	display:none;
 }
 
+.uploadControl {
+	width: 100%;
+    height: 34px;
+    line-height: 1.42857143;
+}
+
 /*****Show Oeuvre*****/
 
 #showoeuvedit {
@@ -754,6 +760,19 @@ div#imgoeuv {
 #showoeuvret:hover {
 	background-color: #373737;
 	color : white;
+	text-decoration: none;
+}
+
+#shownewoeuv {
+	background-color: #d2e1e2;
+	color : #777777;
+	border-radius:4px;
+	padding: 10px 15px;
+}
+
+#shownewoeuv:hover {
+	background-color: #777777;
+	color : #d2e1e2;
 	text-decoration: none;
 }
 

@@ -11,6 +11,7 @@ use ModuleGestionBundle\Entity\Oeuvre;
 use ModuleGestionBundle\Entity\TexteOeuvre;
 use ModuleGestionBundle\Entity\Artiste;
 use ModuleGestionBundle\Entity\Multimedia;
+use ModuleGestionBundle\Entity\Tableau;
 
 class LoadOeuvreData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -37,6 +38,54 @@ class LoadOeuvreData extends AbstractFixture implements OrderedFixtureInterface
         $oeuvre3->setNom('White Center');
         $oeuvre3->setEtat('Livré');
         $oeuvre3->setNombreVisite('150');
+
+        // Puis je définis les types des oeuvres
+        // Tableau
+        $tableau = new Tableau();
+        $tableau->setTitre("Garçon à la pipe");
+        $tableau->setDateCreation("01/01/1517 00:00");
+        $tableau->setLargeur("77 cm");
+        $tableau->setHauteur("53 cm");
+
+        $tableau1 = new Tableau();
+        $tableau1->setTitre("La Joconde");
+        $tableau1->setDateCreation("01/01/1856 00:00");
+        $tableau1->setLargeur("195 cm");
+        $tableau1->setHauteur("35 cm");
+
+        $tableau2 = new Tableau();
+        $tableau2->setTitre("L'astronome");
+        $tableau2->setDateCreation("01/01/2011 00:00");
+        $tableau2->setLargeur("110 cm");
+        $tableau2->setHauteur("85 cm");
+
+        $tableau3 = new Tableau();
+        $tableau3->setTitre("White Center");
+        $tableau3->setDateCreation("01/01/1998 00:00");
+        $tableau3->setLargeur("95 cm");
+        $tableau3->setHauteur("120 cm");
+
+        // Statut
+
+        // Multimedia (Son)
+
+        // Multimedia (Video)
+
+        // Je persist mes types d'oeuvre
+        $manager->persist($tableau);
+        $manager->persist($tableau1);
+        $manager->persist($tableau2);
+        $manager->persist($tableau3);
+
+        // Puis j'enregistre
+        $manager->flush();
+
+
+        // Puis je met à jour les champs Typeoeuvre dans oeuvre
+        $oeuvre->setTypeoeuvre($tableau);
+        $oeuvre1->setTypeoeuvre($tableau1);
+        $oeuvre2->setTypeoeuvre($tableau2);
+        $oeuvre3->setTypeoeuvre($tableau3);
 
         // Puis je créé les artistes correspondant
         $artiste = new Artiste();
