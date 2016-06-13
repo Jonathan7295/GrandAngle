@@ -74,13 +74,9 @@
                             <tr>
                                 <th>Organisateur</th>
                             </tr>
-                        {% for expositions in exposition %}
-                            {% for expositions in expositions.organisateur %}
-                                <tr>
-                                    <td>{{ expositions.organisateur }}</td>
-                                </tr>
-                            {% endfor %}
-                        {% endfor %}
+                            <tr>
+                                <td>{{ exposition.organisateur.nom }}</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
