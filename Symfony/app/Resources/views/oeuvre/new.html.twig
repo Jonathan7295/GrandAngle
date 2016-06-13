@@ -1,7 +1,9 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
-
+    {% stylesheets 'css/fileinput.min.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
     {{ form_start(form) }}
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -196,6 +198,7 @@
                                     $('#formMulti').css('display', 'none');
 
                                 }else if ($(this).val() == 2) {
+
                                     //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
                                     var $contMulti = $('div#oeuvre_multi');
                                     
@@ -228,6 +231,7 @@
                                         // On définit les classes pour la mise en forme
                                         $('[for="oeuvre_multi_1_video"]').attr('class','label-control');
                                         $('#oeuvre_multi_1_video').attr('class', 'form-control');
+                                        $(':checkbox').checkboxpicker();
 
                                         $('[for="oeuvre_multi_1_stockage"]').attr('class','label-control');
                                         $('#oeuvre_multi_1_stockage').attr('class', 'form-control');
@@ -236,7 +240,10 @@
                                         $('#oeuvre_multi_1_duree').attr('class', 'form-control');
 
                                         $('[for="oeuvre_multi_1_fichier"]').attr('class','label-control');
-                                        $('#oeuvre_multi_1_fichier').attr('class', 'uploadControl');
+                                        $('#oeuvre_multi_1_fichier').attr('id', 'input-id');
+                                        $('#input-id').attr('class', 'file');
+                                        $('#input-id').attr('data-preview-file-type', 'text');
+                                        $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
 
                                         $('[for="oeuvre_multi_1_multi_titre"]').attr('class','label-control');
                                         $('#oeuvre_multi_1_multi_titre').attr('class', 'form-control');
@@ -291,13 +298,15 @@
                     <div class="col-md-4 ajust champs71"></div> {# Label Date Création #}
                     <div class="col-md-5 label71"></div> {# Champs Date Création #}
                 </div>
+                {% javascripts 'js/fileinput.min.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                {% javascripts 'js/bootstrap-checkbox.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
                 <div id="formMulti" class="col-md-12">
-                    {# <div class="col-md-4 ajust champs42"></div> {# Label Titre #}
-                    {# <div class="col-md-5 champs52"></div> {# Champs Titre #}
                     <div class="col-md-4 ajust champs22"></div> {# Label Video #}
                     <div class="col-md-5 champs32"></div> {# Champs Video #}
-                    {# <div class="col-md-4 ajust label22"></div> {# Label Stockage #}
-                    {# <div class="col-md-5 label32"></div> {# Champs Stockage #}
                     <div class="col-md-4 ajust label12"></div> {# Label Durée #}
                     <div class="col-md-5 champs12"></div> {# Champs Durée #}
                     <div class="col-md-4 ajust label52"></div> {# Label Fichier #}
@@ -309,7 +318,7 @@
                     <div class="col-md-4">
                         <label for="Art" class="control-label ajust">Générer un FlashCode</label>
                         {# Génération de l'input #}
-                        {{ form_widget(form.genFlashcode, {'attr': {'class': 'ajustgenFlash'}}) }}
+                        {{ form_widget(form.genFlashcode, {'attr': {'id': 'input-1'}}) }}
                     </div>
                     <div class="col-md-4">
                         <input id="newartval" type="submit" value="Enregistrer" />
@@ -322,6 +331,14 @@
     {{ form_end(form) }}
 {% endblock %}
 {% block javascripts %}
+    <script>
+        $('#oeuvre_genFlashcode').attr('id', 'input-1');
+        $('#input-1').checkboxpicker({
+          html: true,
+          offLabel: '<span class="glyphicon glyphicon-remove">',
+          onLabel: '<span class="glyphicon glyphicon-ok">'
+        });
+    </script>
     <script type="text/javascript">
     $(document).ready(function(){
 
