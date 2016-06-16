@@ -35,6 +35,10 @@
                                 <th>Evenement</th>
                                 <td>{{ exposition.evenement }}</td>
                             </tr>
+                            <tr>
+                                <th>Organisateur</th>
+                                <td>{{ exposition.organisateur.nom }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -64,22 +68,6 @@
                             <tr>
                                 <td>{{ theme.libelle }}</td>
                             </tr>
-                        {% endfor %}
-                        </table>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th>Organisateur</th>
-                            </tr>
-                        {% for expositions in exposition %}
-                            {% for expositions in expositions.organisateur %}
-                                <tr>
-                                    <td>{{ expositions }}</td>
-                                </tr>
-                            {% endfor %}
                         {% endfor %}
                         </table>
                     </div>

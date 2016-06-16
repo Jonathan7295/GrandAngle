@@ -63,6 +63,14 @@ class ExpositionType extends AbstractType
                                                 'expanded' => false,
                                                 'required'    => true,
                                                 'multiple' => true
+                                                ))
+            ->add('emplacements', CollectionType::class, array(
+                                                'entry_type'   => EmplacementType::class,
+                                                'allow_add'    => true,
+                                                'allow_delete' => true,
+                                                'prototype'    => true,
+                                                'label'        => false,
+                                                'by_reference' => false
                                                 ));
     }
     
