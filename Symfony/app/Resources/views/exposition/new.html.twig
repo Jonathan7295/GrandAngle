@@ -112,7 +112,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            
+                            <div class="form-group">
+                                <select name="type" id="TypePret" size="6" multiple>
+                                    {% for oeuvre in oeuvres %}
+                                        <option>{{ oeuvre.nom }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>

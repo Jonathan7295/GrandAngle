@@ -56,10 +56,14 @@ class ExpositionController extends Controller
             return $this->redirectToRoute('exposition_show', array('id' => $exposition->getId()));
         }
 
+        $em = $this->getDoctrine()->getManager();
+        $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
+
         return $this->render('exposition/new.html.twig', array(
             'exposition' => $exposition,
             'form' => $form->createView(),
             'role' => $role,
+            'oeuvres' => $oeuvres,
         ));
     }
 
