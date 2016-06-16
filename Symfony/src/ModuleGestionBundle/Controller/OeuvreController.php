@@ -30,7 +30,7 @@ class OeuvreController extends Controller
             $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             left join emplacement as e on e.oeuvre_id = o.id
                             inner join artiste as a on o.artiste_id = a.id
-                            inner join typeoeuvre as t on o.typeoeuvre = t.id";
+                            left join typeoeuvre as t on o.typeoeuvre = t.id";
 
             $rows = $connection->fetchAll($query);
             return new JsonResponse(array('data' => json_encode($rows)));

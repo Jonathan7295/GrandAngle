@@ -63,4 +63,3 @@ class Theme
         return $this->libelle;
     }
 }
-
