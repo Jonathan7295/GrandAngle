@@ -5,12 +5,9 @@ use ModuleGestionBundle\Entity\TypeOeuvre;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="Tableau")
- * @ORM\MappedSuperclass
- *
  * @ORM\Table(name="tableau")
  * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\TableauRepository")
+ * @ORM\MappedSuperclass
  */
 class Tableau extends TypeOeuvre
 {
@@ -37,6 +34,7 @@ class Tableau extends TypeOeuvre
      */
     private $hauteur;
 
+    private $discr = 'Tableau';
 
     /**
      * Get id
@@ -94,5 +92,10 @@ class Tableau extends TypeOeuvre
     public function getHauteur()
     {
         return $this->hauteur;
+    }
+
+    public function getDiscr()
+    {
+        return $this->discr;
     }
 }

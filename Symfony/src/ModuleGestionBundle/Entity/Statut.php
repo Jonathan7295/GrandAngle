@@ -5,12 +5,9 @@ use ModuleGestionBundle\Entity\TypeOeuvre;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="Statut")
- * @ORM\MappedSuperclass
- *
  * @ORM\Table(name="statut")
  * @ORM\Entity(repositoryClass="ModuleGestionBundle\Repository\StatutRepository")
+ * @ORM\MappedSuperclass
  */
 class Statut extends TypeOeuvre
 {
@@ -51,6 +48,7 @@ class Statut extends TypeOeuvre
      */
     private $profondeur;
 
+    private $discr = 'Statut';
 
     /**
      * Get id
@@ -156,5 +154,10 @@ class Statut extends TypeOeuvre
     public function getProfondeur()
     {
         return $this->profondeur;
+    }
+
+    public function getDiscr()
+    {
+        return $this->discr;
     }
 }

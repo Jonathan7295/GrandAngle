@@ -8,7 +8,7 @@
         <div class="container">
             <div class="form-group">
                 <a id="showoeuvret" href="{{path('oeuvre_index')}}">Retour</a>
-                <a id="showoeuvedit" href="">Modifier</a>
+                <a id="showoeuvedit" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}">Modifier</a>
                 <a id="shownewoeuv" title="Nouvelle oeuvre" href="{{ path('oeuvre_new') }}">Nouvelle</a>            
             </div>
             <div class="row">
@@ -38,7 +38,6 @@
                                 <td>
                                     {% if oeuvre.imgFlashcode is defined and oeuvre.imgFlashcode is not null %}
                                     <img src="{{ qrcode_url(oeuvre.imgFlashcode, { extension: 'png'}) }}" alt="FlashCode">
-                                    {# <img src="{{ oeuvre.imgFlashcode }}" alt="FlashCode"> #}
                                     {% endif %}
                                 </td>
                             </tr>
@@ -56,6 +55,26 @@
                                     {% endif %}
                                 </td>
                             </tr>
+                            <tr>
+                                <th>Artiste</th>
+                                <td>
+                                    {{ oeuvre.artiste.nomComplet }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Type d'oeuvre</th>
+                                <td>
+                                    {{ oeuvre.typeoeuvre.discr }}
+                                </td>
+                            </tr>
+                                {% set new = 1 %}
+                                {% for multimedia in oeuvre.multimedias %}
+                            <tr>
+                                <th>Lien numéro {{ new }}</th>
+                                <td><a href="{{ multimedia.lien }}" target="_blank">{{ multimedia.nom }}</a></td>
+                            </tr>
+                                {% set new = new + 1 %}
+                                {% endfor %}
                         </tbody>
                     </table>
                 </div>

@@ -5,69 +5,67 @@
         <div class="panel-heading">
             Liste des oeuvres
         </div>
-        <div class="container">
-            {# Selection de l'exposition #}
-            <div id="choiceexpo" class="row">
-                <div class="form-group">
-                    <div class="col-md-6 col-md-offset-1">
-                        <select id="choixExpo" class="form-control" name="expo">
-                            <option value="choix">Choisissez une exposition</option>
-                        {% for exposition in expositions %}
-                            <option value="{{ exposition.id }}">{{ exposition.nomExposition }}</option>
-                        {% endfor %}
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="nav nav-pills">
-                            <li>
-                            <a id="newoeuv" title="Nouvelle oeuvre" href="{{ path('oeuvre_new') }}">Nouvelle</a>
-                            </li>
-                        </ul>
-                    </div>
+        {# Selection de l'exposition #}
+        <div id="choiceexpo" class="row">
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-1">
+                    <select id="choixExpo" class="form-control" name="expo">
+                        <option value="choix">Choisissez une exposition</option>
+                    {% for exposition in expositions %}
+                        <option value="{{ exposition.id }}">{{ exposition.nomExposition }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <ul class="nav nav-pills">
+                        <li>
+                        <a id="newoeuv" title="Nouvelle oeuvre" href="{{ path('oeuvre_new') }}">Nouvelle</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            {# Affichage de la liste des oeuvres #}
-            <div class="row">
-                <div id="scrolloeuv" class="col-md-11">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Etat</th>
-                                <th>Artiste</th>
-                                <th>Type</th>
-                                <th>Nombre de visite</th>
-                                <th>Position</th>
-                                <th>Actions</th>
-                                <th>Imprimer</th>
-                            </tr>
-                        </thead>
-                        {% if oeuvres is defined %}
-                            <tbody id="list">
-                            {% for oeuvre in oeuvres %}
-                                <tr>
-                                    <td>{{ oeuvre.nom }}</td>
-                                    <td>{{ oeuvre.etat }}</td>
-                                    <td>{{ oeuvre.artiste.nomComplet }}</td>
-                                    <td>{{ oeuvre.typeoeuvre }}</td>
-                                    <td>{{ oeuvre.nombreVisite }}</td>
-                                    <td>Position</td>
-                                    <td>
-                                        <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
-                                        <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
-                                        <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a> 
-                                    </td>
-                                    <td><a id="qrcindex" title="Imprimer un Qrcode" href="{{ oeuvre.imgFlashCode ~ '.png'}}" class="glyphicon glyphicon-qrcode"></a> </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        {% else %}
-                            <tbody id="list"></tbody>
-                        {% endif %}
-                        
-                    </table>
-                </div>
-            </div>
+        </div>
+        {# Affichage de la liste des oeuvres #}
+        <div id="scrolloeuv" class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Etat</th>
+                        <th>Artiste</th>
+                        <th>Type</th>
+                        <th>Nombre de visite</th>
+                        <th>Position</th>
+                        <th>Actions</th>
+                        <th>Imprimer</th>
+                    </tr>
+                </thead>
+                {% if oeuvres is defined %}
+                    <tbody id="list">
+                    {% for oeuvre in oeuvres %}
+                        <tr>
+                            <td>{{ oeuvre.nom }}</td>
+                            <td>{{ oeuvre.etat }}</td>
+                            <td>{{ oeuvre.artiste.nomComplet }}</td>
+                            <td>{{ oeuvre.typeoeuvre }}</td>
+                            <td>{{ oeuvre.nombreVisite }}</td>
+                            <td>Position</td>
+                            <td>
+                                <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
+                                <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
+                                <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a>
+                            </td>
+                            <td><a id="qrcindex" title="Imprimer un Qrcode" href="{{ oeuvre.imgFlashCode ~ '.png'}}" class="glyphicon glyphicon-qrcode"></a> </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% else %}
+                    <tbody id="list"></tbody>
+                {% endif %}
+                
+            </table>
+        </div>
+            
             {# Emplacement des oeuvres dans la salle #}
             <div id="iconew" class="row">
                 <div class="col-md-8">
@@ -76,7 +74,7 @@
                     {% endimage %} #}
                 </div>
             </div>
-        </div>
+        
     </div>
 {% endblock %}
 {% block javascripts %}
