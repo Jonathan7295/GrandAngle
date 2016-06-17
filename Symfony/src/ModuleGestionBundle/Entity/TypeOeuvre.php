@@ -37,7 +37,7 @@ class TypeOeuvre
     private $dateCreation;
 
     /**
-     * @ORM\OneToMany(targetEntity="Oeuvre", mappedBy="typeoeuvre", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Oeuvre", mappedBy="typeoeuvre", cascade={"remove"})
      */
     private $oeuvres;
 

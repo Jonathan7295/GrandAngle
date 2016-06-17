@@ -51,7 +51,8 @@ class MultimediaType extends TypeOeuvre
      */
     private $fichier;
 
-
+    private $discr = 'Multimédia';
+    
     /**
      * Get id
      *
@@ -156,5 +157,10 @@ class MultimediaType extends TypeOeuvre
     public function getFichier()
     {
         return $this->fichier;
+    }
+
+    public function getDiscr()
+    {
+        return $this->discr;
     }
 }

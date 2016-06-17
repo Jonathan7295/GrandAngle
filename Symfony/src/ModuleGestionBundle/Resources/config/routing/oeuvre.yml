@@ -21,4 +21,4 @@ oeuvre_edit:
 oeuvre_delete:
     path:     /{id}/delete
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:delete" }
-    methods:  DELETE
+    methods:  [GET, DELETE]

@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use ModuleGestionBundle\Entity\Oeuvre;
+use ModuleGestionBundle\Entity\Statut;
+use ModuleGestionBundle\Entity\Tableau;
 use ModuleGestionBundle\Entity\Emplacement;
 use ModuleGestionBundle\Entity\MultimediaType;
 use ModuleGestionBundle\Form\OeuvreType;
@@ -24,16 +26,21 @@ class OeuvreController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
+        // Si on reçoit une requête Ajax
         if($req->isXMLHttpRequest()){
+            // Connection à la base de données
             $connection = $this->get('database_connection');
             // récupérer la liste complète des oeuvres
             $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             left join emplacement as e on e.oeuvre_id = o.id
                             inner join artiste as a on o.artiste_id = a.id
-                            inner join typeoeuvre as t on o.typeoeuvre = t.id";
-
+                            left join typeoeuvre as t on o.typeoeuvre_id = t.id";
+            // On stocke le résultat
             $rows = $connection->fetchAll($query);
+            // Puis on le renvoie dans un tableau en Json
             return new JsonResponse(array('data' => json_encode($rows)));
+
+        // Sinon on charge normalement
         }else{
             $em = $this->getDoctrine()->getManager();
 
@@ -60,7 +67,7 @@ class OeuvreController extends Controller
             $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             left join emplacement as e on e.oeuvre_id = o.id
                             inner join artiste as a on o.artiste_id = a.id
-                            inner join typeoeuvre as t on o.typeoeuvre = t.id  
+                            inner join typeoeuvre as t on o.typeoeuvre_id = t.id  
                                     where e.exposition_id = " . $id;
             $rows = $connection->fetchAll($query);
             return new JsonResponse(array('data' => json_encode($rows)));
@@ -100,8 +107,60 @@ class OeuvreController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+            // Si on a un tableau
+            if (isset($request->request->All()["oeuvre"]["tableau"])) {
 
-            // Si on a un fichier multimedia
+                $tableau = new Tableau();
+                // On stocke le nom des différents champs
+                $titre = $request->request->get("oeuvre")["tableau"][1]["tableau"]["titre"];
+                $dateCreation = $request->request->get("oeuvre")["tableau"][1]["tableau"]["dateCreation"];
+                $largeur = $request->request->get("oeuvre")["tableau"][1]["largeur"];
+                $hauteur = $request->request->get("oeuvre")["tableau"][1]["hauteur"];
+
+                // On alimente l'objet tableau
+                $tableau->setTitre($titre);
+                $tableau->setDateCreation($dateCreation);
+                $tableau->setLargeur($largeur);
+                $tableau->setHauteur($hauteur);
+
+                // On persist
+                $em->persist($tableau);
+                // Puis on enregistre
+                $em->flush();
+
+                // Puis je définis le type d'oeuvre
+                $oeuvre->setTypeOeuvre($tableau);
+            }
+            // Si on a une statut
+            if (isset($request->request->All()["oeuvre"]["statut"])) {
+
+                $statut = new Statut();
+                // On stocke le nom des différents champs
+                $titre = $request->request->get("oeuvre")["statut"][1]["statut"]["titre"];
+                $dateCreation = $request->request->get("oeuvre")["statut"][1]["statut"]["dateCreation"];
+                $largeur = $request->request->get("oeuvre")["statut"][1]["largeur"];
+                $hauteur = $request->request->get("oeuvre")["statut"][1]["hauteur"];
+                $longueur = $request->request->get("oeuvre")["statut"][1]["longueur"];
+                $profondeur = $request->request->get("oeuvre")["statut"][1]["profondeur"];
+
+                // On alimente l'objet statut
+                $statut->setTitre($titre);
+                $statut->setDateCreation($dateCreation);
+                $statut->setLargeur($largeur);
+                $statut->setHauteur($hauteur);
+                $statut->setLongueur($longueur);
+                $statut->setProfondeur($profondeur);
+
+                // On persist
+                $em->persist($statut);
+                // Puis on enregistre
+                $em->flush();
+
+                // Puis je définis le type d'oeuvre
+                $oeuvre->setTypeOeuvre($statut);
+            }
+          
+            //Si on a un fichier multimedia
             if($request->files->count() > 0){
 
                 // On récupère le fichier 
@@ -201,7 +260,6 @@ class OeuvreController extends Controller
         $role = $this->getUser()->getRole();
 
         $deleteForm = $this->createDeleteForm($oeuvre);
-
         return $this->render('oeuvre/show.html.twig', array(
             'oeuvre' => $oeuvre,
             'delete_form' => $deleteForm->createView(),

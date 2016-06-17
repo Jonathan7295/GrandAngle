@@ -72,13 +72,13 @@ class Oeuvre
     private $artiste;
 
     /**
-     * @ORM\OneToMany(targetEntity="Multimedia", mappedBy="oeuvre", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Multimedia", mappedBy="oeuvre", cascade={"persist","remove"})
      */
     private $multimedias;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TypeOeuvre", inversedBy="oeuvres", cascade={"persist"})
-     * @ORM\JoinColumn(name="typeoeuvre", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="TypeOeuvre", inversedBy="oeuvres", cascade={"persist","remove"})
+     * @ORM\JoinColumn(name="typeoeuvre_id", referencedColumnName="id")
      */
     private $typeoeuvre;
 
@@ -97,6 +97,7 @@ class Oeuvre
         $this->multi = new ArrayCollection();
         $this->statut = new ArrayCollection();
         $this->genFlashcode = false;
+        $this->nombreVisite = 0;
     }
     
     /**
