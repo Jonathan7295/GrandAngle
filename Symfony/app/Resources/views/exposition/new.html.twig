@@ -112,12 +112,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group">
-                                <select name="type" id="TypePret" size="6" multiple>
-                                    {% for oeuvre in oeuvres %}
-                                        <option>{{ oeuvre.nom }}</option>
-                                    {% endfor %}
-                                </select>
+                            <a type="button" id="add_oeuvre" class="glyphicon glyphicon-plus vert"></a>
+                            <div id="original">
+                                <div class="form-group" id="newoeuvre0" name="0">
+                                    <select name="oeuv0" id="oeuvre0" size="1">
+                                        {% for oeuvre in oeuvres %}
+                                            <option value="{{ oeuvre.id }}">{{ oeuvre.nom }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="pos0" id="position0" size="1">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                    <a type="button" name="supp0" id="suppr0" class="glyphicon glyphicon-minus red" onClick="FunctionDelete(this.name)"></a>
+                                </div>
+                            </div>
+                            <div id="copie">
+
                             </div>
                         </div>
                     </div>
@@ -265,9 +277,33 @@
                     return false;
                 });
 ;            }
-            
-            //Génération des input pour les thème
+
+            $('#original').hide();
+            var cloneCount = 1;
+            $('#add_oeuvre').click(function(){
+                $("#newoeuvre0").clone().attr('id', 'newoeuvre'+ cloneCount).insertAfter("#newoeuvre0").appendTo('#copie');
+                $("#newoeuvre"+cloneCount).attr('name',cloneCount);
+                $("#newoeuvre"+cloneCount+" #oeuvre0").attr('id','oeuvre'+cloneCount);
+                $("#newoeuvre"+cloneCount+" #oeuvre"+cloneCount).attr('name','oeuv'+cloneCount);
+                $("#newoeuvre"+cloneCount+" #position0").attr('id','position'+cloneCount);
+                $("#newoeuvre"+cloneCount+" #position"+cloneCount).attr('name','pos'+cloneCount);
+                $("#newoeuvre"+cloneCount+" #suppr0").attr('id','suppr'+cloneCount);
+                $("#newoeuvre"+cloneCount+" #suppr"+cloneCount).attr('name','supp'+cloneCount);
+                cloneCount++;
+            }); 
         });
+            
+        var name;
+        function FunctionDelete(name){
+            var num = name;
+            if(num > 0)
+            {
+                $('#oeuvre'+num).remove();
+                $('#position'+num).remove();
+                $('#suppr'+num).remove();
+                $('#newoeuvre'+num).remove();
+            }
+        }
 
         function FunctionNewAuteur() {
 
