@@ -51,6 +51,7 @@ class ExpositionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             var_dump($request->request);
             die();
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($exposition);
             $em->flush();
