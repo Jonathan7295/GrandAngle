@@ -12,20 +12,16 @@ use Doctrine\ORM\QueryBuilder;
  */
 class OeuvreRepository extends \Doctrine\ORM\EntityRepository
 {
-	// public function getFindAllOeuv(){
+	public function getFindAllOeuv(){
 
-	// 	$query = $this->_em->createQuery('SELECT o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type 
-	// 			FROM ModuleGestionBundle:Oeuvre o 
-	// 			LEFT JOIN ModuleGestionBundle:Emplacement e 
-	// 				ON e.oeuvre_id = o.id
-	// 			INNER JOIN ModuleGestionBundle:Artiste a 
-	// 				ON o.artiste_id = a.id
-	// 			LEFT JOIN ModuleGestionBundle:TypeOeuvre t
-	// 				ON o.typeoeuvre = t.id');
+		$query = $this->_em->createQuery('
+			SELECT o, e, a, t
+			FROM ModuleGestionBundle:Oeuvre o
+			LEFT JOIN o.emplacements e
+			INNER JOIN o.artiste a
+			LEFT JOIN o.typeoeuvre t');
 
-	// 	$results = $query->getResult();
+		return $query->getResult();
 
-	// 	return $results;
-
-	// }
+	}
 }

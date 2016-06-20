@@ -21,7 +21,8 @@ class MultimediaTypeType extends AbstractType
             ->add('duree')
             ->add('stockage')
             ->add('video')
-            ->add('fichier', FileType::class, array('label' => 'Multimédia (Image, Vidéo ou Son)'))
+            ->add('fichier', FileType::class, array('label' => 'Multimédia (Image, Vidéo ou Son)',
+                                                    'data_class' => null))
             ->add('multi', TypeOeuvreType::class, array(
                 'data_class' => 'ModuleGestionBundle\Entity\TypeOeuvre',
                 'label'         => false,

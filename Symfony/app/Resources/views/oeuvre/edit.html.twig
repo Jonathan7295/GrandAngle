@@ -1,7 +1,9 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
-
+    {% stylesheets 'css/fileinput.min.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
     {{ form_start(edit_form) }}
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -78,6 +80,13 @@
                                 // On incrémente après chaque disposition de champs
                                 index2++;
                             }
+
+                            // On récupère le numero du dernier lien chargé
+                            var position = $('.linkshow').length - 1;
+                            // On récupère sa valeur
+                            var valeur = $('#oeuvre_multimedias_'+position+'_lien').val();
+                            // On exécute la fonction pour afficher la miniature
+                            myImageFunction(valeur);
 
                             // Quand on clique pour supprimer un numéro
                             $('a.red2').click(function(e){
@@ -413,7 +422,7 @@
 
                         });
                     </script>
-                    <div id="adddes" class="col-md-12">
+                    <div id="adddes" class="col-md-12 form-group">
                         <div class="col-md-1 fixlabel labeldes"></div>
                         <div class="col-md-3 champsdes"></div>
                     <div class="fixlang">
@@ -517,7 +526,7 @@
                         } 
                     });
                     </script>
-                    <div id="adddes" class="col-md-12">
+                    <div id="adddes" class="col-md-12 form-group">
                         <div class="col-md-1 fixlabel labeldes"></div>
                         <div class="col-md-3 champsdes"></div>
                     <div class="fixlang">
@@ -527,12 +536,196 @@
                     </div>        
                 {% endif %}
                 {# Fin de la condition textes de l'oeuvre #}
+                {% javascripts 'js/fileinput.min.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                {% javascripts 'js/bootstrap-checkbox.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
                 </div>
-                <div id="newoeuvfond" class="col-md-12">
+                <div class="container">
+                {# Tableau existant #}
+                {% if edit_form.vars.value.typeoeuvre.discr == "Tableau" %}
+
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.tableau.titre, "Titre", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-4 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.tableau.titre, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.largeur, "Largeur", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.largeur, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.hauteur, "Hauteur", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.hauteur, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.tableau.dateCreation, "Date de création", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-5 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.tableau.dateCreation, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+
+                {# Statut existant #}
+                {% elseif edit_form.vars.value.typeoeuvre.discr == "Statut" %}
+                
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.statut.titre, "Titre", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-4 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.statut.titre, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.hauteur, "Hauteur", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.hauteur, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.largeur, "Largeur", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.largeur, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 col-md-offset-5 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.longueur, "Longueur", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.longueur, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.profondeur, "Profondeur", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.profondeur, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.statut.dateCreation, "Date de création", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-5 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.statut.dateCreation, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+
+                {# Multimedia existant #}
+                {% elseif edit_form.vars.value.typeoeuvre.discr == "Multimédia" %}
+                
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.multi.titre, "Titre", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-6 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.multi.titre, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.duree, "Durée", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-3 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.duree, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.stockage, "Stockage", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.stockage, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.video, "Video", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.video, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-1 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.fichier, "Fichier", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-3 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.fichier, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+                <div class="col-md-9 form-group">
+                {# Génération du label #}
+                {{ form_label(editTypeForm.multi.dateCreation, "Date de création", {'label_attr': {'class': 'control-label ajust'}})}}
+                </div>
+                <div class="col-md-2 form-group">
+                {# Génération de l'input #}
+                {{ form_widget(editTypeForm.multi.dateCreation, {'attr': {'class': 'form-control ajust'}}) }}
+                </div>
+               
+                {% endif %}
+                <script>
+                $(document).ready(function(){
+                    // On met en forme le sélecteur de fichier
+                    $('#multimedia_type_fichier').attr('id', 'input-id');
+                    $('#input-id').attr('class', 'file');
+                    $('#input-id').attr('data-preview-file-type', 'text');
+                    $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
+                });
+                </script>
+                </div>
+                <div id="newoeuvfond" class="col-md-12"> 
                     <div class="col-md-4">
-                        <label for="Art" class="control-label ajust">Générer un FlashCode</label>
-                        {# Génération de l'input #}
-                        {{ form_widget(edit_form.genFlashcode, {'attr': {'class': 'ajustgenFlash'}}) }}
+                        {# Si la génération du flashcode a déjà été faite #}
+                        {% if edit_form.genFlashcode.vars.checked %}
+                            {# On ne l'affiche pas #}
+                            <script>
+                                $(document).ready(function(){
+                                    // On cache le bouton Flashcode
+                                    $('[for="oeuvre_genFlashcode"]').hide();
+                                    $('#oeuvre_genFlashcode').hide();
+                                    // On met en forme le bouton Video
+                                    $('#multimedia_type_video:checkbox').checkboxpicker();
+                                });   
+                            </script>
+                        {% else %}
+                            <label for="Art" class="control-label ajust">Générer un FlashCode</label>
+                            {# Génération de l'input #}
+                            {{ form_widget(edit_form.genFlashcode, {'attr': {'id': 'input-1'}}) }}
+                            <script>
+                                $(document).ready(function(){
+                                    // On met en forme le bouton Video
+                                    $(':checkbox').checkboxpicker();
+                                    // On met en forme le bouton Flashcode
+                                    $('#input-1').checkboxpicker({
+                                      html: true,
+                                      offLabel: '<span class="glyphicon glyphicon-remove">',
+                                      onLabel: '<span class="glyphicon glyphicon-ok">'
+                                    });
+                                });
+                            </script>
+                        {% endif %}
                     </div>
                     <div class="col-md-4">
                         <input id="newartval" type="submit" value="Enregistrer" />
@@ -553,19 +746,29 @@
                 document.location.href="{{ path('artiste_new') }}";
             }
         }
-        
+
         // Fonction pour afficher une miniature du lien
         function myImageFunction(valeur) {
             // On récupère la valeur à partir de l'id du champs sélectionné
             var val = $("#"+valeur.id).val();
            
-            if(val != ""){
+            if(val != "" && val != undefined){
                 // On retire l'image par défaut
                 $('.specimen').remove();
                 // On créé une nouvelle image
                 $img = document.createElement('img');
                 $img.setAttribute('class','specimen img-responsive');
-                $img.src = "http://www.robothumb.com/src/?url="+val+"&size=560x420.png";
+                // $img.src = "http://www.robothumb.com/src/?url="+val+"&size=560x420.png";
+                $img.src = "http://api.screenshotmachine.com/?key=0d99fd&size=S&format=PNG&url="+val;
+                $('#previsu').append($img);
+            }else{
+                 // On retire l'image par défaut
+                $('.specimen').remove();
+                // On créé une nouvelle image
+                $img = document.createElement('img');
+                $img.setAttribute('class','specimen img-responsive');
+                // $img.src = "http://www.robothumb.com/src/?url="+val+"&size=560x420.png";
+                $img.src = "http://api.screenshotmachine.com/?key=0d99fd&size=S&format=PNG&url="+valeur;
                 $('#previsu').append($img);
             }  
         }

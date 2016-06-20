@@ -47,15 +47,23 @@
                             <td>{{ oeuvre.nom }}</td>
                             <td>{{ oeuvre.etat }}</td>
                             <td>{{ oeuvre.artiste.nomComplet }}</td>
-                            <td>{{ oeuvre.typeoeuvre }}</td>
+                            <td>{{ oeuvre.typeoeuvre.discr }}</td>
                             <td>{{ oeuvre.nombreVisite }}</td>
-                            <td>Position</td>
                             <td>
+                                {% for item in oeuvre.emplacements %}
+                                     {{ item.position }}
+                                {% endfor %}
+                            </td>
+                            <td class="buttonTab">
                                 <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
                                 <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
                                 <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a>
                             </td>
-                            <td><a id="qrcindex" title="Imprimer un Qrcode" href="{{ oeuvre.imgFlashCode ~ '.png'}}" class="glyphicon glyphicon-qrcode"></a> </td>
+                            <td>
+                                {% if oeuvre.genFlashCode %}
+                                    <a id="qrcindex" title="Imprimer un Qrcode" href="{{ oeuvre.imgFlashCode ~ '.png'}}" class="glyphicon glyphicon-qrcode"></a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -141,13 +149,23 @@
                 li4 = document.createElement('td');
                 li5 = document.createElement('td');
                 li6 = document.createElement('td');
+                li6.setAttribute('class', 'buttonTab');
                 li7 = document.createElement('td');
 
                 // On récupère les données
                 nom = document.createTextNode(item.nom);
                 etat = document.createTextNode(item.etat);
                 artiste = document.createTextNode(item.nomArt+' '+item.preNomArt);
+
+                // On reformate le nom des types correctement
+                if(item.type == "multimediatype")
+                    item.type = "Multimédia";
+                else if(item.type == "tableau")
+                    item.type = "Tableau";
+                else if(item.type == "statut")
+                    item.type = "Statut";
                 type = document.createTextNode(item.type);
+
                 nbVisite = document.createTextNode(item.nombreVisite);
                 position = document.createTextNode(item.position);
 
@@ -170,12 +188,15 @@
                 del.title = 'Supprimer';
                 del.setAttribute('class','glyphicon glyphicon-trash');
 
-                var code = document.createElement('a');
-                code.id = 'qrcindex';
-                code.href = item.img+'.png';
-                code.title = 'Imprimer un Qrcode';
-                code.setAttribute('class','glyphicon glyphicon-qrcode');
-
+                // On vérifie si un qrcode a été généré avant de créé le bouton
+                if(item.img != ""){
+                    var code = document.createElement('a');
+                    code.id = 'qrcindex';
+                    code.href = item.img+'.png';
+                    code.title = 'Imprimer un Qrcode';
+                    code.setAttribute('class','glyphicon glyphicon-qrcode');
+                }
+                
                 // On insère les données dans chacune des colonnes
                 li.appendChild(nom);
                 li1.appendChild(etat);
@@ -186,7 +207,8 @@
                 li6.appendChild(show);
                 li6.appendChild(edit);
                 li6.appendChild(del);
-                li7.appendChild(code);
+                if(item.img != "")
+                    li7.appendChild(code);
 
                 //On insère dans la ligne les différentes colonnes
                 tr.appendChild(li);
@@ -196,7 +218,8 @@
                 tr.appendChild(li4);
                 tr.appendChild(li5);
                 tr.appendChild(li6);
-                tr.appendChild(li7);
+                if(item.img != "")
+                    tr.appendChild(li7);
 
                 list[0].appendChild(tr);
 
