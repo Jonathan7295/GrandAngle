@@ -9,7 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use ModuleGestionBundle\Entity\Exposition;
 use ModuleGestionBundle\Entity\TextExposition;
 use ModuleGestionBundle\Form\ExpositionType;
-
+use ModuleGestionBundle\Entity\Emplacement;
+use ModuleGestionBundle\Entity\Oeuvre;
 /**
  * Exposition controller.
  *
@@ -45,13 +46,12 @@ class ExpositionController extends Controller
         $role = $this->getUser()->getRole();
 
         $exposition = new Exposition();
+        $emplacement = new Emplacement();
         $form = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            var_dump($request->request);
-            die();
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($exposition);
             $em->flush();
