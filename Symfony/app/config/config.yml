@@ -9,7 +9,10 @@ imports:
 parameters:
     locale: fr
     multimedias_directory: '%kernel.root_dir%/../web/upload'
-
+assetic:
+    filters:
+        jpegoptim:
+            bin: path/to/jpegoptim
 framework:
     #esi:             ~
     translator:       ~
