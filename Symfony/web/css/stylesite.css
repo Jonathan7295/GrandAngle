@@ -229,11 +229,15 @@ select {
 }
 
 .control-label.ajust {
-	line-height: 35px
+	line-height: 35px;
 }
 
 .control-label.ajust.ajust2{
-	line-height: 72px
+	line-height: 72px;
+}
+
+.control-label.ajust.ajust3{
+	line-height: 50px;
 }
 
 .form-control.tel {
