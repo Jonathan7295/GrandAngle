@@ -417,12 +417,6 @@ select {
 	height: 50px;
 }
 
-.champsoeuvre select, .champspos select{
-
-}
-
-
-
 .editlienred {
 	background-color: #BD3329;
 	font-size: 16px;
@@ -542,8 +536,17 @@ textarea {
 	margin-right: 5px;
 }
 
-.ajustSel {
+.ajustSel1 {
+	width:9%;
 	line-height: 37px;
+}
+
+.ajustSel2 {
+	line-height: 37px;
+}
+
+.ajustSel2 select {
+	width: 100%;
 }
 
 /*****Show exposition*****/
