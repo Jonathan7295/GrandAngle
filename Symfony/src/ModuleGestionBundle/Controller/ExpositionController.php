@@ -52,11 +52,42 @@ class ExpositionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($exposition);
-            $em->flush();
+            $emplacements = $request->request->get('exposition')['emplacements'];
+            if (is_array($emplacements))
+            {
+                $erreur = false;
+                $pos = array();
+                foreach ($emplacements as $emp => $value) {
+                    if(!in_array($value['position'], $pos))
+                    {
+                        array_push($pos, $value['position']);
+                    } else {
+                        $erreur = true;
+                        break;
+                    }
+                }
+            }
+            if ($erreur == true)
+            {
+                throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a des oeuvres qui possédent la même position.');
+                $em = $this->getDoctrine()->getManager();
+                $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
 
-            return $this->redirectToRoute('exposition_show', array('id' => $exposition->getId()));
+                return $this->render('exposition/new.html.twig', array(
+                    'exposition' => $exposition,
+                    'form' => $form->createView(),
+                    'role' => $role,
+                    'oeuvres' => $oeuvres,
+                ));
+            } 
+            else 
+            {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($exposition);
+                $em->flush();
+
+                return $this->redirectToRoute('exposition_show', array('id' => $exposition->getId()));
+            }
         }
 
         $em = $this->getDoctrine()->getManager();
