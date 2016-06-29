@@ -111,28 +111,39 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <img src="{{ asset('image/position.png') }}" alt="position_salle" heigth="250" width="500" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="oeuvre" class="col-md-10 col-sm-10 col-xs-10">
-                <div class="form-group">
-                    <div class="form-group">
-                        <div class="col-md-1 col-sm-1 col-xs-1 labelpos control-label ajust ajust3"></div>
-                        <div class="col-md-1 col-sm-1 col-xs-1 champspos control-label ajust ajust3"></div>
-                        <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust ajust3"></div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label ajust ajust3"></div>
-                        <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label ajust"></div>
+            <div class="row">
+                <div class="row">
+                    <div id="oeuvre" class="col-md-10 col-sm-10 col-xs-10">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-md-1 col-sm-1 col-xs-1 labelpos control-label ajust"></div>
+                                <div class="col-md-1 col-sm-1 col-xs-1 champspos control-label ajust"></div>
+                                <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust"></div>
+                                <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label ajust"></div>
+                                <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label ajust "></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="champs" class="col-md-10 col-sm-10 col-xs-10">
-                <div class="form-group">
+            <div class="row">
+                <div id="champs" class="col-md-10 col-sm-10 col-xs-10">
                     <div class="form-group">
-                        <div class="col-md-2 col-sm-2 col-xs-2 labeldes control-label ajust ajust2"></div>
-                        <div class="col-md-4 col-sm-3 col-xs-10 champsdes"></div>
-                        <div class="col-md-1 col-sm-2 col-xs-2 labellang control-label ajust ajust2"></div>
-                        <div class="col-md-3 col-sm-3 col-xs-10 champslang control-label ajust ajust2"></div>
-                        <div class="col-md-1 col-sm-1 col-xs-1 deplace control-label ajust ajust2"></div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-sm-2 col-xs-2 labeldes control-label ajust ajust2"></div>
+                            <div class="col-md-4 col-sm-3 col-xs-10 champsdes"></div>
+                            <div class="col-md-1 col-sm-2 col-xs-2 labellang control-label ajust ajust2"></div>
+                            <div class="col-md-3 col-sm-3 col-xs-10 champslang control-label ajust ajust2"></div>
+                            <div class="col-md-1 col-sm-1 col-xs-1 deplace control-label ajust ajust2"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,7 +196,7 @@
             $('form#formExpo').append($newcontainer2);
 
             //On ajoute un lien pour ajouter un nouveau oeuvre
-            var $addLink2 =$('<a type="button" id="add_oeuvre" class="glyphicon glyphicon-plus vert"></a>');
+            var $addLink2 =$('<a type="button" id="add_oeuvre" class="glyphicon glyphicon-ok-circle vert"></a>');
             $container2.append($addLink2);
 
             $('form#formExpo').append($addLink2);
@@ -226,8 +237,8 @@
                 // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
                 $('.labelpos').append(descendant2[3]);
                 $('.champspos').append(descendant2[4]);
-                $('.labeloeuvre').append(descendant2[6]);
-                $('.champsoeuvre').append(descendant2[7]);
+                $('.labeloeuvre').append(descendant2[36]);
+                $('.champsoeuvre').append(descendant2[37]);
 
                 // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                 addDeleteLink2($('.deplace2'));
@@ -241,7 +252,7 @@
             //la fonction qui ajoute un lien de suppression d'un text
             function addDeleteLink2($prototype2) {
                 //création du lien 
-                $deleteLink2 = $('<a type="button" name="'+index2+'" class="glyphicon glyphicon-minus red"></a>');
+                $deleteLink2 = $('<a type="button" name="'+index2+'" class="glyphicon glyphicon-remove-circle red"></a>');
 
                 //Ajout du lien
                 $prototype2.append($deleteLink2);
@@ -359,6 +370,11 @@
                     return false;
                 });
 ;            }
+            
+            var $select = $('#exposition_emplacements_1_position');
+            $select.onChange(function(e){
+                console.log('coucou');
+            });
         });
 
         function FunctionNewAuteur() {

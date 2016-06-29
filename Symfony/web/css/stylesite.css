@@ -393,13 +393,13 @@ select {
 }
 
 
-.labelLib label,.labelnum label, .labeldes label, .labellang label {
+.labelLib label,.labelnum label, .labeldes label, .labellang label, .labeloeuvre label, .labelpos label {
 	line-height: 33px;
 	margin-bottom: 16px;
 }
 
 
-.champslib input,.champsnum input, .champsdes input, .champslang select {
+.champslib input,.champsnum input, .champsdes input, .champslang select, .champsoeuvre select, .champspos select {
 	width:100%;
 	padding: 6px 12px;
 	border:1px solid #ccc;
@@ -409,9 +409,18 @@ select {
 	margin-bottom: 16px;
 }
 
-.champslang select{
+.champslang select, .champsoeuvre select{
 	width: 125px;
 }
+
+.champsoeuvre, .champspos{
+	height: 50px;
+}
+
+.champsoeuvre select, .champspos select{
+
+}
+
 
 
 .editlienred {
