@@ -624,6 +624,10 @@ div#imgoeuv {
 	margin-bottom: 10px;
 }
 
+td.buttonTab a {
+	margin-right: 5px;
+}
+
 /*****New Oeuvre******/
 
 #contnewOeuv {
@@ -646,11 +650,6 @@ div#imgoeuv {
 #placenew {
 	margin-top: 20px;
 	margin-bottom: 20px;
-}
-
-.ajustgenFlash {
-	/*margin-left: 20px !important;
-	margin-top: 0px !important;*/
 }
 
 #choiceart {

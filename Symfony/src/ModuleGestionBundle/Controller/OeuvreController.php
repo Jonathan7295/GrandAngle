@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use ModuleGestionBundle\Entity\Oeuvre;
 use ModuleGestionBundle\Entity\Statut;
 use ModuleGestionBundle\Entity\Tableau;
-use ModuleGestionBundle\Entity\Emplacement;
 use ModuleGestionBundle\Entity\MultimediaType;
 use ModuleGestionBundle\Form\OeuvreType;
 
@@ -44,7 +43,7 @@ class OeuvreController extends Controller
         }else{
             $em = $this->getDoctrine()->getManager();
 
-            $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
+            $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->getFindAllOeuv();
             $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
 
             return $this->render('oeuvre/index.html.twig', array(
@@ -279,8 +278,19 @@ class OeuvreController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
-        // On prépare le formulaire
+        // On prépare le formulaire Oeuvre
         $editForm = $this->createForm('ModuleGestionBundle\Form\OeuvreType', $oeuvre);
+
+        // On récupère le type d'oeuvre en cours
+        $typeOeuvreEnCours = $oeuvre->getTypeOeuvre()->getDiscr();
+
+        // On prépare le formulaire du type d'oeuvre en cours
+        if($typeOeuvreEnCours == "Statut")
+            $editTypeForm = $this->createForm('ModuleGestionBundle\Form\StatutType', $oeuvre->getTypeOeuvre());
+        elseif($typeOeuvreEnCours == "Tableau")
+            $editTypeForm = $this->createForm('ModuleGestionBundle\Form\TableauType', $oeuvre->getTypeOeuvre());
+        elseif($typeOeuvreEnCours == "Multimédia")
+            $editTypeForm = $this->createForm('ModuleGestionBundle\Form\MultimediaTypeType', $oeuvre->getTypeOeuvre());
 
         // On récupère la requête
         $editForm->handleRequest($request);
@@ -337,6 +347,21 @@ class OeuvreController extends Controller
                 }    
             }
 
+            // Si le champs genFlashcode existe
+            if(isset($request->request->All()["oeuvre"]["genFlashcode"])){
+                // Si on a coché pour générer un Qrcode
+                if($request->request->All()["oeuvre"]["genFlashcode"] == 1){
+
+                   $IP = "localhost"; // Adresse en local par défaut modifiable ex: 92.156.227.65
+                   // Puis on l'intègre dans le lien de redirection
+                   $oeuvre->setImgFlashcode('/qrcode/'.$IP.'/GrandAngle/Symfony/web/testoeuvre/'.$id.'/show');
+                   // On persist le changement
+                   $em->persist($oeuvre);
+                   // On enregistre
+                   $em->flush();
+                }
+            }
+
             // On persist le changement
             $em->persist($oeuvre);
             // On exécute
@@ -351,6 +376,7 @@ class OeuvreController extends Controller
         return $this->render('oeuvre/edit.html.twig', array(
             'oeuvre' => $oeuvre,
             'edit_form' => $editForm->createView(),
+            'editTypeForm' => $editTypeForm->createView(),
             'role'   => $role,
         ));
     }
