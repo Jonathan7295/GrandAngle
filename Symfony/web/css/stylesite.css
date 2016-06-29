@@ -542,6 +542,10 @@ textarea {
 	margin-right: 5px;
 }
 
+.ajustSel {
+	line-height: 37px;
+}
+
 /*****Show exposition*****/
 #showexpo{
 
