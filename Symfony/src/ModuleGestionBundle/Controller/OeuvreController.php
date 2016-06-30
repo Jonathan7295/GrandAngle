@@ -292,8 +292,13 @@ class OeuvreController extends Controller
         elseif($typeOeuvreEnCours == "Multimédia")
             $editTypeForm = $this->createForm('ModuleGestionBundle\Form\MultimediaTypeType', $oeuvre->getTypeOeuvre());
 
+        $editForm->remove("statut");
+        $editForm->remove("tableau");
+        $editForm->remove("multi");
+
         // On récupère la requête
         $editForm->handleRequest($request);
+        $editTypeForm->handleRequest($request);
 
         // Si le formulaire a été soumi et qu'il est valide
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -542,6 +542,10 @@
                 {% javascripts 'js/bootstrap-checkbox.js' %}
                     <script src="{{ asset_url }}"></script>
                 {% endjavascripts %}
+                {# Gestion des formulaires de Type d'oeuvre #}
+                {% javascripts 'js/jquery.datetimepicker.full.js' %}
+                    <script type="text/javascript" src="{{ asset_url }}"></script>
+                {% endjavascripts %}
                 </div>
                 <div class="container">
                 {# Tableau existant #}
@@ -577,7 +581,7 @@
                 </div>
                 <div class="col-md-5 form-group">
                 {# Génération de l'input #}
-                {{ form_widget(editTypeForm.tableau.dateCreation, {'attr': {'class': 'form-control ajust'}}) }}
+                {{ form_widget(editTypeForm.tableau.dateCreation, {'attr': {'class': 'form-control ajust calendar'}}) }}
                 </div>
 
                 {# Statut existant #}
@@ -629,7 +633,7 @@
                 </div>
                 <div class="col-md-5 form-group">
                 {# Génération de l'input #}
-                {{ form_widget(editTypeForm.statut.dateCreation, {'attr': {'class': 'form-control ajust'}}) }}
+                {{ form_widget(editTypeForm.statut.dateCreation, {'attr': {'class': 'form-control ajust calendar'}}) }}
                 </div>
 
                 {# Multimedia existant #}
@@ -681,17 +685,26 @@
                 </div>
                 <div class="col-md-2 form-group">
                 {# Génération de l'input #}
-                {{ form_widget(editTypeForm.multi.dateCreation, {'attr': {'class': 'form-control ajust'}}) }}
+                {{ form_widget(editTypeForm.multi.dateCreation, {'attr': {'class': 'form-control ajust calendar'}}) }}
                 </div>
                
                 {% endif %}
+
                 <script>
                 $(document).ready(function(){
+
                     // On met en forme le sélecteur de fichier
                     $('#multimedia_type_fichier').attr('id', 'input-id');
                     $('#input-id').attr('class', 'file');
                     $('#input-id').attr('data-preview-file-type', 'text');
                     $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
+                    // Calendrier
+                    $.datetimepicker.setLocale('fr');
+                    $('.calendar').datetimepicker({
+                        dayOfWeekStart : 1,
+                        lang:'fr',
+                        format:'d/m/Y H:i',
+                    }); 
                 });
                 </script>
                 </div>

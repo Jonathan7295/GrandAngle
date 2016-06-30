@@ -356,7 +356,7 @@ class Oeuvre
         return $this->multimedias;
     }
 
-
+   
     public function setTableau(\Doctrine\Common\Collections\ArrayCollection $tableau)
     {
         $this->setTypeoeuvre($tableau->get(1));
