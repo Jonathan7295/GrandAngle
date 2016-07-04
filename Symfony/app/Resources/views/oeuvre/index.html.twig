@@ -57,7 +57,7 @@
                             <td class="buttonTab">
                                 <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
                                 <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
-                                <a id="delindex" title="Supprimer" name="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a>
+                                <a id="delindex" title="Supprimer" name="{{ oeuvre.id }}" class="glyphicon glyphicon-trash del" href="{{ path('oeuvre_delete', { 'id': oeuvre.id }) }}"></a>
                             </td>
                             <td>
                                 {% if oeuvre.genFlashCode %}
@@ -70,7 +70,6 @@
                 {% else %}
                     <tbody id="list"></tbody>
                 {% endif %}
-                
             </table>
         </div>
             
@@ -102,7 +101,7 @@
             }
 
         }
-
+     
         // Choix d'une exposition
         $('#choixExpo').change(function(){
             var id = $(this).val();
@@ -186,7 +185,8 @@
                 del.id = 'delindex';
                 del.href = '/oeuvre/'+item.id+'/delete';
                 del.title = 'Supprimer';
-                del.setAttribute('class','glyphicon glyphicon-trash');
+                del.setAttribute('name', item.id);
+                del.setAttribute('class','glyphicon glyphicon-trash del');
 
                 // On vérifie si un qrcode a été généré avant de créé le bouton
                 if(item.img != ""){
@@ -224,7 +224,6 @@
                 list[0].appendChild(tr);
 
                 tr = document.createElement('tr');
-
             });
             scroll();             
        }

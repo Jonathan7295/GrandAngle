@@ -698,6 +698,10 @@
                     $('#input-id').attr('class', 'file');
                     $('#input-id').attr('data-preview-file-type', 'text');
                     $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
+
+                    // On désactive la validation formulaire du navigateur 
+                    $('form').attr('novalidate', '');
+                    
                     // Calendrier
                     $.datetimepicker.setLocale('fr');
                     $('.calendar').datetimepicker({
