@@ -36,7 +36,7 @@ class TexteOeuvre
     private $langue;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="texteoeuvres")
+     * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="texteoeuvres", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="oeuvre_id", referencedColumnName="id")
      */
     private $oeuvre;
