@@ -145,6 +145,13 @@ class ExpositionController extends Controller
             $originalTextExpositions->add($textexposition);
         }
 
+        // On créé un tableau 
+        $originalEmplacements = new ArrayCollection();
+        // On boucle sur l'exposition pour récupérer ses traduction existante
+        foreach ($exposition->getEmplacements() as $emplacement) {
+            $originalEmplacements->add($emplacement);
+        }
+
         $editForm = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
         $editForm->handleRequest($request);
 
@@ -156,6 +163,14 @@ class ExpositionController extends Controller
                 if(false === $exposition->getTextExpositions()->contains($textexposition)) {
 
                     $em->remove($textexposition);
+                }    
+            }
+            foreach ($originalEmplacements as $emplacement) {
+
+                // Si la traduction existant n'est pas contenu dans le formulaire on l'efface
+                if(false === $exposition->getEmplacements()->contains($emplacement)) {
+
+                    $em->remove($emplacement);
                 }    
             }
 

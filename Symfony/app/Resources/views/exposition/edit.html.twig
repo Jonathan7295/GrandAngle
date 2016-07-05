@@ -114,9 +114,270 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group">
+                                {% image 'image/position.png'
+                                    filter='jpegoptim' output='/image/position.png' %}
+                                    <img class="img" src="{{ asset_url }}" alt="Example" width="500" heugth="250"/>
+                                {% endimage %}
+                               {#  <img src="{{ asset('image/position.png') }}" alt="position_salle" heigth="250" width="500" /> #}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% if edit_form.emplacements.0 is defined %}
+                <script type="text/javascript">
+                    $(document).ready(function() {
+
+                        var $addLink =$('<a type="button" id="add_oeuvre" class="glyphicon glyphicon-ok-circle vert"></a>');
+                        $('#lienrow').append($addLink);
+                        var nbElements = $('#exposition_emplacements_1').length;
+                        var index = 0;
+                        while ($('#exposition_emplacements_'+index).length > 0) {
+                            // On récupère le lien de suppression
+                            var dellink = '<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red red2"></a>'
+
+                            // On désactive le label de l'indice de collection
+                            $('label.required:contains('+index+')').css('display','none');
+
+                            // On récupère le groupe de champs dans son div
+                            var enfant  = $('#exposition_emplacements_'+index).children();
+
+                            // On en extrait les balises descendantes
+                            var descendant = enfant.find("*");
+                             console.log(descendant);
+
+                            // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+                            $('.labelpos').append(descendant[0]);
+                            $('.champspos').append(descendant[1]);
+                            $('.labeloeuvre').append(descendant[32]);
+                            $('.champsoeuvre').append(descendant[33]);
+                            $('.deplace2 ').append(dellink);
+                            // On incremente après chaque disposition de champs
+                            index++;
+                        }
+                        // Puis on intègre tout ça dans le formulaire
+                        $('#lienrow').append($('#oeuvre'));
+
+                         // Quand on clique pour supprimer un numéro
+                        $('a.red2').click(function(e){
+
+                            // On récupère l'index du champs à supprimer
+                            var num = $(this).attr('name');
+
+                            // On supprime les champs un à un
+                            // Label descript
+                            $('[for="exposition_emplacements_'+num+'_position"]').remove();
+                            // Champs pos
+                            $('[id="exposition_emplacements_'+num+'_position"]').remove();
+                             // Label oeuvre
+                            $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                            // Champs oeuvre
+                            $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                            $(this).remove();
+
+                            e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
+                        });
+
+                        // On récupère la balise <div> qui contient le prototype
+                        var $container = $('div#exposition_emplacements');
+
+                        //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
+                        $('#add_oeuvre').click(function(e) {
+                            addOeuvre2($container);
+                            e.preventDefault(); // évite qu'un # apparaisse dans l'url
+                            return false;
+                        });
+
+                        //On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement 
+                        var index = $container.find(':input').length
+
+                        //On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle exposition par exemple).
+                        if (index==0) {
+                            addOeuvre2($container);
+                        } else {
+                            //Pour chaque texte déjà existante, on ajoute un lien de suppression
+                            $container.children('div').each(function () {
+                                addDeleteLinkOeuvre2($(this));
+                            });
+                        }
+
+                        function addOeuvre2($Container) {
+                            var $prototype = $($container.attr('data-prototype').replace(/__name__label_/g, 'Texte n°' + (index+2)).replace(/__name__/g, index+'2'));
+
+                            $newprototype = $($prototype);
+
+                            var descendant = $newprototype.find('*');
+                            console.log(descendant);
+                            // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+
+                            $('.labelpos').append(descendant[3]);
+                            $('.champspos').append(descendant[4]);
+                            $('.labeloeuvre').append(descendant[36]);
+                            $('.champsoeuvre').append(descendant[37]);
+
+                            // On ajoute au prototype un lien pour pouvoir supprimer le telephone
+                            addDeleteLinkOeuvre2($('.deplace2'));
+
+                            //on ajoute le prototype modifié à la fin de la balise <div>
+                            $('#oeuvre').append($('#add_oeuvre'));
+
+                            //enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                            index++;
+                        }
+                        //la fonction qui ajoute un lien de suppression d'un text
+                        function addDeleteLinkOeuvre2($prototype) {
+                            //création du lien 
+                            $deleteLink = $('<a type="button" name="'+index+'2'+'" class="glyphicon glyphicon-remove-circle red red2"></a>');
+
+                            //Ajout du lien
+                            $prototype.append($deleteLink);
+
+                            //Ajout du listener sur le clic du lien
+                            $deleteLink.click(function(e) {
+
+                                // On récupère l'index du champs à supprimer
+                                var num = $(this).attr('name');
+                                // On supprime les champs un à un
+                                // Label descript
+                                $('[for="exposition_emplacements_'+num+'_position"]').remove();
+                                // Champs pos
+                                $('[id="exposition_emplacements_'+num+'_position"]').remove();
+                                 // Label oeuvre
+                                $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                                // Champs oeuvre
+                                $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                                $(this).remove();
+                                
+                                e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
+                                index--;
+                                return false;
+                            });
+                        }
+                    });
+                </script>
+                <div class="row">
+                    <div class="row">
+                        <div id="oeuvre" class="col-md-10 col-sm-10 col-xs-10">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos control-label ajust"></div>
+                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label ajustSel"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label ajustSel"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label ajust "></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        //On récupére la balise <div> en question qui contient l'attribut "data-prototype" qui nous intéresse.
+                        var $container = $('div#exposition_emplacements');
+
+                        //On ajoute un lien pour ajouter un nouveau textexposition
+                        var $addLink =$('<a type="button" id="add_oeuvre" class="glyphicon glyphicon-ok-circle vert"></a>');
+
+                        $('#oeuvre').append($addLink);
+
+                        //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
+                        $addLink.click(function(e) {
+                            addOeuvre($container);
+                            e.preventDefault(); // évite qu'un # apparaisse dans l'url
+                            return false;
+                        });
+
+                        //On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement 
+                        var index = $container.find(':input').length
+
+                        //On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle exposition par exemple).
+                        if (index==0) {
+                            addOeuvre($container);
+                        } else {
+                            //Pour chaque déjà existante, on ajoute un lien de suppression
+                            $container.children('div').each(function () {
+                                addDeleteLinkOeuvre($(this));
+                            });
+                        }
+
+                        //La function qui ajoute un formulaire textexposition
+                        function addOeuvre($Container) {
+                            // Dans le contenu de l'attribut "Data-prototype", on remplace
+
+                            // le texte "__name__label__" qu'il contient par le label du champ
+
+                            // le texte "__name__" qu'il contient par le numro du champ
+                            var $prototype = $($container.attr('data-prototype').replace(/__name__label_/g, 'Texte n°' + (index+2)).replace(/__name__/g, index));
+
+                            $newprototype = $($prototype);
+
+                            var descendant = $newprototype.find('*');
+                           
+                            // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
+                            $('.labelpos').append(descendant[3]);
+                            $('.champspos').append(descendant[4]);
+                            $('.labeloeuvre').append(descendant[36]);
+                            $('.champsoeuvre').append(descendant[37]);
+
+                            // On ajoute au prototype un lien pour pouvoir supprimer le telephone
+                            addDeleteLinkOeuvre($('.deplace2'));
+
+                            //on ajoute le prototype modifié à la fin de la balise <div>
+                            $('#lienrow').append($('#add_oeuvre'));
+
+                            //enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                            index++;
+                        }
+                        //la fonction qui ajoute un lien de suppression d'un text
+                        function addDeleteLinkOeuvre($prototype) {
+                            //création du lien 
+                            $deleteLink = $('<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red red2"></a>');
+
+                            //Ajout du lien
+                            $prototype.append($deleteLink);
+
+                            //Ajout du listener sur le clic du lien
+                            $deleteLink.click(function(e) {
+
+                                // On récupère l'index du champs à supprimer
+                                var num = $(this).attr('name');
+                                // On supprime les champs un à un
+                                // Label descript
+                                $('[for="exposition_emplacements_'+num+'_position"]').remove();
+                                // Champs pos
+                                $('[id="exposition_emplacements_'+num+'_position"]').remove();
+                                 // Label oeuvre
+                                $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                                // Champs oeuvre
+                                $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                                $(this).remove();
+
+                                e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
+                                index--;
+                                return false;
+                            });
+                        }
+                    });
+                </script>
+                <div class="row">
+                    <div class="row">
+                        <div id="oeuvre2" class="col-md-10 col-sm-10 col-xs-10">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos control-label ajust"></div>
+                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label ajustSel"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label ajustSel"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label ajust "></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             {% if edit_form.textexpositions.0 is defined %}
                 <script type="text/javascript">
                     $(document).ready(function() {
@@ -157,7 +418,7 @@
                             index++;
                         }
                         // Puis on intègre tout ça dans le formulaire
-                        $('#lienrow').append($('#formedit'));
+                        $('#formedit').append($('#formedit'));
 
                          // Quand on clique pour supprimer un numéro
                         $('a.red').click(function(e){
@@ -190,7 +451,7 @@
                         });
 
                         //On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement 
-                        var index = $container.find(':textarea').length
+                        var index = $container.find(':input').length
 
                         //On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle exposition par exemple).
                         if (index==0) {
@@ -225,7 +486,7 @@
                             addDeleteLink2($('.deplace'));
 
                             //on ajoute le prototype modifié à la fin de la balise <div>
-                            $('#lienrow').append($('#add_textexposition'));
+                            $('#formedit').append($('#add_textexposition'));
 
                             //enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
                             index++;
