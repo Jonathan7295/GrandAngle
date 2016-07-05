@@ -66,6 +66,37 @@
                             </td>
                         </tr>
                     {% endfor %}
+                    <script type="text/javascript">
+                        $('a#delindex').click(function(event) {
+                            
+                            // On bloque le comportement du bouton
+                            event.preventDefault();
+
+                            // Message de confirmation
+                            var test = confirm("Etes vous sur de vouloir supprimer cette oeuvre ?");
+
+                            if(test){
+                                // On récupère l'id de l'oeuvre
+                                var id = $(this).attr('name');
+
+                                $.ajax({
+                                    url: "{{ path('oeuvre_delete') }}",  // On renseigne l'url TWIG
+                                    method: "post",
+                                    data: {id: id} // On passe l'id dans la requête
+                                }).done(function(msg){
+                                    // rechargement de la liste
+                                    $.ajax({
+                                        url: "{{ path('oeuvre_index') }}", // Ton fichier ou se trouve ton chat
+                                        success:
+                                            function(retour){
+                                            $('#list').html(retour); // rafraichi toute ta DIV "bien sur il lui faut un id "
+                                        }
+                                    });
+                                }); 
+                            }
+                           
+                        });
+                    </script>
                     </tbody>
                 {% else %}
                     <tbody id="list"></tbody>
@@ -92,16 +123,7 @@
             }
 
         }
-<<<<<<< HEAD
 
-        $('a#delindex').click(function(event) {
-            event.preventDefault();
-            alert($(this).attr('name'));
-        });
-
-=======
-     
->>>>>>> 838ab9670065873c6514cb2930406b6ecc590cb7
         // Choix d'une exposition
         $('#choixExpo').change(function(){
             var id = $(this).val();
@@ -139,6 +161,10 @@
             // Pour chaque élément trouvé dans le document JSON, on peuple la liste
             $.each(JSON.parse(msg['data']), function(i, item) {
 
+                // On prépare le script pour la suppression
+                var script = document.createElement("SCRIPT");
+                var content = document.createTextNode("$('a#delindex').click(function(event){event.preventDefault();alert($(this).attr('name'));});");
+                script.appendChild(content);
 
                 // On créé une colonne pour chacun des champs
                 li = document.createElement('td');
@@ -220,6 +246,8 @@
                 tr.appendChild(li6);
                 if(item.img != "")
                     tr.appendChild(li7);
+
+                tr.appendChild(script);
 
                 list[0].appendChild(tr);
 

@@ -389,18 +389,27 @@ class OeuvreController extends Controller
      * Deletes a Oeuvre entity.
      *
      */
-    public function deleteAction(Request $request, Oeuvre $oeuvre)
+    public function deleteAction(Request $request)
     {
-        $form = $this->createDeleteForm($oeuvre);
-        $form->handleRequest($request);
+        // Si on reçoit une requête Ajax
+        if($request->isXMLHttpRequest()){
+            
+            // On récupère l'id de l'oeuvre a supprimée
+            $id = $request->get('id');
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            // On fait une requête pour récupérer les infos de l'oeuvre
+            $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
+
+            // Suppression de l'oeuvre sélectionnée
             $em->remove($oeuvre);
             $em->flush();
-        }
 
-        return $this->redirectToRoute('oeuvre_index');
+            $message = "Suppression effectuée avec succès !";
+
+            // Puis on le renvoie dans un tableau en Json
+            return new JsonResponse(array('msg' => json_encode($message)));
+        }
     }
 
     /**
