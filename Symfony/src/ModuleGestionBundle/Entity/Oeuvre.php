@@ -56,7 +56,7 @@ class Oeuvre
     private $nombreVisite;
 
      /**
-     * @ORM\OneToMany(targetEntity="TexteOeuvre", mappedBy="oeuvre", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="TexteOeuvre", mappedBy="oeuvre", cascade={"persist", "remove"})
      */
     private $texteoeuvres;
 
@@ -72,7 +72,7 @@ class Oeuvre
     private $artiste;
 
     /**
-     * @ORM\OneToMany(targetEntity="Multimedia", mappedBy="oeuvre", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Multimedia", mappedBy="oeuvre", cascade={"persist", "remove"})
      */
     private $multimedias;
 
@@ -356,7 +356,7 @@ class Oeuvre
         return $this->multimedias;
     }
 
-
+   
     public function setTableau(\Doctrine\Common\Collections\ArrayCollection $tableau)
     {
         $this->setTypeoeuvre($tableau->get(1));

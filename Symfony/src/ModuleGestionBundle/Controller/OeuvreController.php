@@ -278,6 +278,34 @@ class OeuvreController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
+        // On stocke l'id de l'oeuvre
+        $id = $oeuvre->getId();
+
+        // On appelle l'entity manager
+        $em = $this->getDoctrine()->getManager();
+
+        // On fait une requête pour récupérer les infos de l'oeuvre
+        $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
+
+        // Si elle n'existe pas on déclenche une erreur
+        if(!$oeuvre) {
+            throw $this->createNotFoundException('Aucune oeuvre avec l\'id '.$id);
+        }
+
+        // On créé deux tableaux (Multimédia et TexteOeuvre)
+        $originalMultimedias =  new ArrayCollection();
+        $originalTexteOeuvres = new ArrayCollection();
+
+        // On boucle sur l'oeuvre pour récupérer ses multimédias existants
+        foreach ($oeuvre->getMultimedias() as $Multimedia) {
+            $originalMultimedias->add($Multimedia);
+        }
+
+        // On fait de même pour les textes existants
+        foreach ($oeuvre->getTexteoeuvres() as $TexteOeuvre) {
+            $originalTexteOeuvres->add($TexteOeuvre);
+        }
+
         // On prépare le formulaire Oeuvre
         $editForm = $this->createForm('ModuleGestionBundle\Form\OeuvreType', $oeuvre);
 
@@ -292,41 +320,17 @@ class OeuvreController extends Controller
         elseif($typeOeuvreEnCours == "Multimédia")
             $editTypeForm = $this->createForm('ModuleGestionBundle\Form\MultimediaTypeType', $oeuvre->getTypeOeuvre());
 
+        $editForm->remove("statut");
+        $editForm->remove("tableau");
+        $editForm->remove("multi");
+
         // On récupère la requête
         $editForm->handleRequest($request);
+        $editTypeForm->handleRequest($request);
 
         // Si le formulaire a été soumi et qu'il est valide
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-            // On stocke l'id de l'oeuvre
-            $id = $oeuvre->getId();
-
-            // On appelle l'entity manager
-            $em = $this->getDoctrine()->getManager();
-
-            // On fait une requête pour récupérer les infos de l'oeuvre
-            $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
-
-            // Si elle n'existe pas on déclenche une erreur
-            if(!$oeuvre) {
-                throw $this->createNotFoundException('Aucune oeuvre avec l\'id '.$id);
-            }
-
-            // On créé deux tableaux (Multimédia et TexteOeuvre)
-            $originalMultimedias =  new ArrayCollection();
-            $originalTexteOeuvres = new ArrayCollection();
-
-            // On boucle sur l'oeuvre pour récupérer ses multimédias existants
-            foreach ($oeuvre->getMultimedias() as $Multimedia) {
-                $originalMultimedias->add($Multimedia);
-            }
-
-            // On fait de même pour les textes existants
-            foreach ($oeuvre->getTexteoeuvres() as $TexteOeuvre) {
-                $originalTexteOeuvres->add($TexteOeuvre);
-            }
-
-            
             // On parcourt chacun des multimédias existants 
             foreach ($originalMultimedias as $Multimedia) {
 

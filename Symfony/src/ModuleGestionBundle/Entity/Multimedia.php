@@ -36,7 +36,7 @@ class Multimedia
     private $lien;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="multimedias", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Oeuvre", inversedBy="multimedias", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="oeuvre_id", referencedColumnName="id")
      */
     private $oeuvre;
