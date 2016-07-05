@@ -89,6 +89,7 @@
                                         url: "{{ path('oeuvre_index') }}", // Ton fichier ou se trouve ton chat
                                         success:
                                             function(retour){
+                                                console.log(retour);
                                             $('#list').html(retour); // rafraichi toute ta DIV "bien sur il lui faut un id "
                                         }
                                     });
