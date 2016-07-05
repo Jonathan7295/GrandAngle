@@ -84,15 +84,8 @@
                                     method: "post",
                                     data: {id: id} // On passe l'id dans la requête
                                 }).done(function(msg){
-                                    // rechargement de la liste
-                                    $.ajax({
-                                        url: "{{ path('oeuvre_index') }}", // Ton fichier ou se trouve ton chat
-                                        success:
-                                            function(retour){
-                                                console.log(retour);
-                                            $('#list').html(retour); // rafraichi toute ta DIV "bien sur il lui faut un id "
-                                        }
-                                    });
+                                    // Suppression de la ligne en cause
+                                    $('a[name="'+id+'"]').parent().parent().hide();
                                 }); 
                             }
                            
@@ -164,8 +157,9 @@
 
                 // On prépare le script pour la suppression
                 var script = document.createElement("SCRIPT");
-                var content = document.createTextNode("$('a#delindex').click(function(event){event.preventDefault();alert($(this).attr('name'));});");
-                script.appendChild(content);
+                // var content = document.createTextNode("$('a#delindex').click(function(event){event.preventDefault();var test = confirm('Etes vous sur de vouloir supprimer cette oeuvre ?');if(test){var id = $(this).attr('name');$.ajax({url: '{{ path('oeuvre_delete') }}',method: 'post',data: {id: id}}).done(function(msg){$('a[name='"+id+"']').parent().parent().hide();});}});");
+                 
+                // script.appendChild(content);
 
                 // On créé une colonne pour chacun des champs
                 li = document.createElement('td');

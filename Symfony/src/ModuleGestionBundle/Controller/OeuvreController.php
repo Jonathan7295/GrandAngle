@@ -398,13 +398,13 @@ class OeuvreController extends Controller
             $id = $request->get('id');
 
             if($id != ""){
-                $em = $this->getDoctrine()->getManager();
-                // On fait une requête pour récupérer les infos de l'oeuvre
-                $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
+                // $em = $this->getDoctrine()->getManager();
+                // // On fait une requête pour récupérer les infos de l'oeuvre
+                // $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
 
-                // Suppression de l'oeuvre sélectionnée
-                $em->remove($oeuvre);
-                $em->flush();
+                // // Suppression de l'oeuvre sélectionnée
+                // $em->remove($oeuvre);
+                // $em->flush();
 
                 $message = "Suppression effectuée avec succès !";
             }else{
@@ -412,7 +412,7 @@ class OeuvreController extends Controller
             }
 
             // Puis on le renvoie dans un tableau en Json
-            return new JsonResponse(array('msg' => json_encode($message)));
+            return new JsonResponse(array('msg' => json_encode($message, JSON_UNESCAPED_UNICODE)));
         }
     }
 
