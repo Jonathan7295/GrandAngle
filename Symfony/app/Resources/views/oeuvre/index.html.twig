@@ -73,16 +73,7 @@
                 
             </table>
         </div>
-            
-            {# Emplacement des oeuvres dans la salle #}
-            <div id="iconew" class="row">
-                <div class="col-md-8">
-                    {# {% image 'image/emplacement.png' %}
-                        <img id="place" class="img-responsive" title="Emplacements" src="{{ asset_url }}"/>
-                    {% endimage %} #}
-                </div>
-            </div>
-        
+        <div class="row"></div>
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -102,6 +93,11 @@
             }
 
         }
+
+        $('a#delindex').click(function(event) {
+            event.preventDefault();
+            alert($(this).attr('name'));
+        });
 
         // Choix d'une exposition
         $('#choixExpo').change(function(){
