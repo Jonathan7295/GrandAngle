@@ -27,7 +27,7 @@ class OeuvreController extends Controller
 
         // Si on reçoit une requête Ajax
         if($req->isXMLHttpRequest()){
-            // Connection à la base de données
+            //Connection à la base de données
             $connection = $this->get('database_connection');
             // récupérer la liste complète des oeuvres
             $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
@@ -36,6 +36,7 @@ class OeuvreController extends Controller
                             left join typeoeuvre as t on o.typeoeuvre_id = t.id";
             // On stocke le résultat
             $rows = $connection->fetchAll($query);
+                    
             // Puis on le renvoie dans un tableau en Json
             return new JsonResponse(array('data' => json_encode($rows)));
 
@@ -46,8 +47,15 @@ class OeuvreController extends Controller
             $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->getFindAllOeuv();
             $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
 
+            $paginator  = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $oeuvres,
+                $req->query->get('page', 1)/*page number*/,
+                10/*limit per page*/
+            );
+
             return $this->render('oeuvre/index.html.twig', array(
-                'oeuvres'     => $oeuvres,
+                'pagination' => $pagination,
                 'expositions' => $expositions,
                 'role'        => $role,
             ));

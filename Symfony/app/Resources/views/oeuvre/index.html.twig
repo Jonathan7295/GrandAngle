@@ -40,9 +40,9 @@
                         <th>Imprimer</th>
                     </tr>
                 </thead>
-                {% if oeuvres is defined %}
+                {% if pagination is defined %}
                     <tbody id="list">
-                    {% for oeuvre in oeuvres %}
+                    {% for oeuvre in pagination %}
                         <tr>
                             <td>{{ oeuvre.nom }}</td>
                             <td>{{ oeuvre.etat }}</td>
@@ -66,7 +66,14 @@
                             </td>
                         </tr>
                     {% endfor %}
+                    {# display navigation #}
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
                     <script type="text/javascript">
+
+                        $('#list').append($('.navigation'));
+
                         $('a#delindex').click(function(event) {
                             
                             // On bloque le comportement du bouton
@@ -171,7 +178,7 @@
                 li6 = document.createElement('td');
                 li6.setAttribute('class', 'buttonTab');
                 li7 = document.createElement('td');
-
+                
                 // On récupère les données
                 nom = document.createTextNode(item.nom);
                 etat = document.createTextNode(item.etat);
