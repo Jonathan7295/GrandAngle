@@ -125,10 +125,10 @@
             </div>
             <div class="row">
                 <div class="row">
-                    <div id="oeuvre" class="col-md-10 col-sm-10 col-xs-10">
+                    <div id="oeuvre" class="col-md-10 col-sm-10 col-xs-10 oeuvre2">
                         <div class="form-group">
                             <div class="form-group">
-                                <div class="col-md-1 col-sm-1 col-xs-1 labelpos control-label ajust"></div>
+                                <div class="col-md-1 col-sm-1 col-xs-1 labelpos position2 control-label ajust"></div>
                                 <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label ajustSel1"></div>
                                 <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust"></div>
                                 <div class="col-md-4 col-sm-2 col-xs-2 champsoeuvre control-label ajustSel2"></div>
@@ -208,7 +208,11 @@
 
             //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
             $addLink2.click(function(e) {
-                addOeuvre($container2);
+                var nbOeuvre= $('#oeuvre .form-group .form-group .deplace2').find('a').length;
+                if(nbOeuvre < 30)
+                {
+                    addOeuvre($container2);
+                }
                 e.preventDefault(); // évite qu'un # apparaisse dans l'url
                 return false;
             });
@@ -300,14 +304,17 @@
 
             //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
             $addLink.click(function(e) {
-                addTextExposition($container);
+                var nbTexte = $(document).find('textarea').length;
+                if(nbTexte < 5)
+                {
+                    addTextExposition($container);
+                }
                 e.preventDefault(); // évite qu'un # apparaisse dans l'url
                 return false;
             });
 
             //On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement 
             var index = $container.find(':input').length
-
             //On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle exposition par exemple).
             if (index==0) {
                 addTextExposition($container);
@@ -375,11 +382,6 @@
                     return false;
                 });
 ;            }
-            
-            var $select = $('#exposition_emplacements_1_position');
-            $select.onChange(function(e){
-                console.log('coucou');
-            });
         });
 
         function FunctionNewAuteur() {

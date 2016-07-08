@@ -58,6 +58,20 @@ class Exposition
     private $nombreVisiteExposition;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="stockage", type="string", length=255)
+     */
+    private $stockage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fichier", type="string", length=255)
+     */
+    private $fichier;
+
+    /**
      * @ORM\OneToMany(targetEntity="TextExposition", mappedBy="exposition", cascade={"persist","remove"})
      */
     private $textexpositions;
@@ -217,6 +231,30 @@ class Exposition
     public function getNombreVisiteExposition()
     {
         return $this->nombreVisiteExposition;
+    }
+
+    /**
+     * Set fichier
+     *
+     * @param string $fichier
+     *
+     * @return MultimediaType
+     */
+    public function setFichier($fichier)
+    {
+        $this->fichier = $fichier;
+    
+        return $this;
+    }
+
+    /**
+     * Get fichier
+     *
+     * @return string
+     */
+    public function getFichier()
+    {
+        return $this->fichier;
     }
 
     /**

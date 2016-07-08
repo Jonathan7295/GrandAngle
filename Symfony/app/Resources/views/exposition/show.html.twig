@@ -72,6 +72,22 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Oeuvre</th>
+                                <th>Position</th>
+                            </tr>
+                        {% for emplacement in exposition.emplacements %}
+                            <tr>
+                                <td>{{ emplacement.oeuvre.nom }}</td>
+                                <td>{{ emplacement.position }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
