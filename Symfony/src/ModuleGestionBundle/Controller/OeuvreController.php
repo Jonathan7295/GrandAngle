@@ -27,7 +27,7 @@ class OeuvreController extends Controller
 
         // Si on reçoit une requête Ajax
         if($req->isXMLHttpRequest()){
-            // Connection à la base de données
+            //Connection à la base de données
             $connection = $this->get('database_connection');
             // récupérer la liste complète des oeuvres
             $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
@@ -36,6 +36,7 @@ class OeuvreController extends Controller
                             left join typeoeuvre as t on o.typeoeuvre_id = t.id";
             // On stocke le résultat
             $rows = $connection->fetchAll($query);
+                    
             // Puis on le renvoie dans un tableau en Json
             return new JsonResponse(array('data' => json_encode($rows)));
 
@@ -46,8 +47,15 @@ class OeuvreController extends Controller
             $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->getFindAllOeuv();
             $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
 
+            $paginator  = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $oeuvres,
+                $req->query->get('page', 1)/*page number*/,
+                10/*limit per page*/
+            );
+
             return $this->render('oeuvre/index.html.twig', array(
-                'oeuvres'     => $oeuvres,
+                'pagination' => $pagination,
                 'expositions' => $expositions,
                 'role'        => $role,
             ));
@@ -389,18 +397,31 @@ class OeuvreController extends Controller
      * Deletes a Oeuvre entity.
      *
      */
-    public function deleteAction(Request $request, Oeuvre $oeuvre)
+    public function deleteAction(Request $request)
     {
-        $form = $this->createDeleteForm($oeuvre);
-        $form->handleRequest($request);
+        // Si on reçoit une requête Ajax
+        if($request->isXMLHttpRequest()){
+            
+            // On récupère l'id de l'oeuvre a supprimée
+            $id = $request->get('id');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($oeuvre);
-            $em->flush();
+            if($id != ""){
+                // $em = $this->getDoctrine()->getManager();
+                // // On fait une requête pour récupérer les infos de l'oeuvre
+                // $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
+
+                // // Suppression de l'oeuvre sélectionnée
+                // $em->remove($oeuvre);
+                // $em->flush();
+
+                $message = "Suppression effectuée avec succès !";
+            }else{
+                $message = "Erreur de suppression !";
+            }
+
+            // Puis on le renvoie dans un tableau en Json
+            return new JsonResponse(array('msg' => json_encode($message, JSON_UNESCAPED_UNICODE)));
         }
-
-        return $this->redirectToRoute('oeuvre_index');
     }
 
     /**

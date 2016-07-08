@@ -40,9 +40,9 @@
                         <th>Imprimer</th>
                     </tr>
                 </thead>
-                {% if oeuvres is defined %}
+                {% if pagination is defined %}
                     <tbody id="list">
-                    {% for oeuvre in oeuvres %}
+                    {% for oeuvre in pagination %}
                         <tr>
                             <td>{{ oeuvre.nom }}</td>
                             <td>{{ oeuvre.etat }}</td>
@@ -66,6 +66,38 @@
                             </td>
                         </tr>
                     {% endfor %}
+                    {# display navigation #}
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                    <script type="text/javascript">
+
+                        $('#list').append($('.navigation'));
+
+                        $('a#delindex').click(function(event) {
+                            
+                            // On bloque le comportement du bouton
+                            event.preventDefault();
+
+                            // Message de confirmation
+                            var test = confirm("Etes vous sur de vouloir supprimer cette oeuvre ?");
+
+                            if(test){
+                                // On récupère l'id de l'oeuvre
+                                var id = $(this).attr('name');
+
+                                $.ajax({
+                                    url: "{{ path('oeuvre_delete') }}",  // On renseigne l'url TWIG
+                                    method: "post",
+                                    data: {id: id} // On passe l'id dans la requête
+                                }).done(function(msg){
+                                    // Suppression de la ligne en cause
+                                    $('a[name="'+id+'"]').parent().parent().hide();
+                                }); 
+                            }
+                           
+                        });
+                    </script>
                     </tbody>
                 {% else %}
                     <tbody id="list"></tbody>
@@ -92,16 +124,7 @@
             }
 
         }
-<<<<<<< HEAD
 
-        $('a#delindex').click(function(event) {
-            event.preventDefault();
-            alert($(this).attr('name'));
-        });
-
-=======
-     
->>>>>>> 838ab9670065873c6514cb2930406b6ecc590cb7
         // Choix d'une exposition
         $('#choixExpo').change(function(){
             var id = $(this).val();
@@ -139,6 +162,11 @@
             // Pour chaque élément trouvé dans le document JSON, on peuple la liste
             $.each(JSON.parse(msg['data']), function(i, item) {
 
+                // On prépare le script pour la suppression
+                var script = document.createElement("SCRIPT");
+                // var content = document.createTextNode("$('a#delindex').click(function(event){event.preventDefault();var test = confirm('Etes vous sur de vouloir supprimer cette oeuvre ?');if(test){var id = $(this).attr('name');$.ajax({url: '{{ path('oeuvre_delete') }}',method: 'post',data: {id: id}}).done(function(msg){$('a[name='"+id+"']').parent().parent().hide();});}});");
+                 
+                // script.appendChild(content);
 
                 // On créé une colonne pour chacun des champs
                 li = document.createElement('td');
@@ -150,7 +178,7 @@
                 li6 = document.createElement('td');
                 li6.setAttribute('class', 'buttonTab');
                 li7 = document.createElement('td');
-
+                
                 // On récupère les données
                 nom = document.createTextNode(item.nom);
                 etat = document.createTextNode(item.etat);
@@ -220,6 +248,8 @@
                 tr.appendChild(li6);
                 if(item.img != "")
                     tr.appendChild(li7);
+
+                tr.appendChild(script);
 
                 list[0].appendChild(tr);
 
