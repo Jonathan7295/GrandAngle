@@ -34,6 +34,9 @@ class ExpositionType extends AbstractType
                                                 'attr' => array('class' => 'calendar'),
                                                 ))
             ->add('nombreVisiteExposition')
+            ->add('stockage')
+            ->add('fichier', FileType::class, array('label' => 'Image',
+                                                    'data_class' => null))
             ->add('textexpositions', CollectionType::class, array(
                                                 'entry_type'   => TextExpositionType::class,
                                                 'allow_add'    => true,

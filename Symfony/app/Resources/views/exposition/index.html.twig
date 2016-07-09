@@ -18,8 +18,8 @@
             {% for exposition in expositions %}
                 <tr>
                     <td>{{ exposition.nomExposition }}</td>
-                    <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    <td>{% if exposition.dateHeureFinExposition %}{{ exposition.dateHeureFinExposition|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('d M Y H:i') }}{% endif %}</td>
+                    <td>{% if exposition.dateHeureFinExposition %}{{ exposition.dateHeureFinExposition|date('d M Y H:i') }}{% endif %}</td>
                     <td>
                         <a id="searchindex" class="glyphicon glyphicon-search" href="{{ path('exposition_show', { 'id': exposition.id }) }}"></a>
                         <a id="editindex" class="glyphicon glyphicon-pencil" href="{{ path('exposition_edit', { 'id': exposition.id }) }}"></a>

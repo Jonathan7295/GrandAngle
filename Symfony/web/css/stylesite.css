@@ -409,12 +409,28 @@ select {
 	margin-bottom: 16px;
 }
 
+.labelpos {
+	padding-left: 0px;
+}
+
+#oeuvre {
+	padding-left: 0px;
+}
+
+.oeuvre2{
+	padding-left: 30px !important;
+}
+
 .champslang select, .champsoeuvre select{
 	width: 125px;
 }
 
 .champsoeuvre, .champspos{
 	height: 50px;
+}
+
+.champspos select{
+	width: 75px;
 }
 
 .editlienred {

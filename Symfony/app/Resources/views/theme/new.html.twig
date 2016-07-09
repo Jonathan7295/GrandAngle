@@ -1,16 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends ':layout:layout.html.twig' %}
 
 {% block body %}
-    <h1>Theme creation</h1>
+{{ form_start(form, {'attr': {'id': 'formTheme'}}) }}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Création d'un Théme
+        </div>
+        <div class="container">
+            <div class="row">
+                <div id="lienrow" class="col-md-5 col-sm-11">
+                    <div class="form-group">
+                        {# Erreurs générales du formulaire #}
+                        {{ form_errors(form) }}
+                        <div class="form-group">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+                            {# Génération du label #}
+                            {{ form_label(form.libelle, "Nom du théme", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            
+                            {# Affichage des erreurs pour ce champs précis #}
+                            {{ form_errors(form.libelle) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('exposition_new') }}">Back to the list</a>
-        </li>
-    </ul>
+                            <div class="col-md-8">
+                                {# Génération de l'input #}
+                                {{ form_widget(form.libelle, {'attr': {'class': 'form-control ajust'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <input type="submit" value="Enregistrer" />
+                <a href="{{ path('exposition_new') }}">retour</a>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}
 {% endblock %}

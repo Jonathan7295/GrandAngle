@@ -11,6 +11,7 @@ use ModuleGestionBundle\Entity\TextExposition;
 use ModuleGestionBundle\Form\ExpositionType;
 use ModuleGestionBundle\Entity\Emplacement;
 use ModuleGestionBundle\Entity\Oeuvre;
+use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * Exposition controller.
  *
@@ -49,45 +50,18 @@ class ExpositionController extends Controller
         $emplacement = new Emplacement();
         $form = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $emplacements = $request->request->get('exposition')['emplacements'];
-            if (is_array($emplacements))
-            {
-                $erreur = false;
-                $pos = array();
-                foreach ($emplacements as $emp => $value) {
-                    if(!in_array($value['position'], $pos))
-                    {
-                        array_push($pos, $value['position']);
-                    } else {
-                        $erreur = true;
-                        break;
-                    }
-                }
-            }
-            if ($erreur == true)
-            {
-                throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a des oeuvres qui possédent la même position.');
-                $em = $this->getDoctrine()->getManager();
-                $oeuvres = $em->getRepository('ModuleGestionBundle:Oeuvre')->findAll();
+            $id = 0;
+            $this->TestDebugExpoAction($request, $id);
 
-                return $this->render('exposition/new.html.twig', array(
-                    'exposition' => $exposition,
-                    'form' => $form->createView(),
-                    'role' => $role,
-                    'oeuvres' => $oeuvres,
-                ));
-            } 
-            else 
-            {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($exposition);
-                $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($exposition);
+            $em->flush();
 
-                return $this->redirectToRoute('exposition_show', array('id' => $exposition->getId()));
-            }
+            return $this->redirectToRoute('exposition_show', array(
+                'id' => $exposition->getId()
+            ));
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -145,6 +119,13 @@ class ExpositionController extends Controller
             $originalTextExpositions->add($textexposition);
         }
 
+        // On créé un tableau 
+        $originalEmplacements = new ArrayCollection();
+        // On boucle sur l'exposition pour récupérer ses traduction existante
+        foreach ($exposition->getEmplacements() as $emplacement) {
+            $originalEmplacements->add($emplacement);
+        }
+
         $editForm = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
         $editForm->handleRequest($request);
 
@@ -158,11 +139,21 @@ class ExpositionController extends Controller
                     $em->remove($textexposition);
                 }    
             }
+            foreach ($originalEmplacements as $emplacement) {
+
+                // Si la traduction existant n'est pas contenu dans le formulaire on l'efface
+                if(false === $exposition->getEmplacements()->contains($emplacement)) {
+
+                    $em->remove($emplacement);
+                }    
+            }
+
+            $this->TestDebugExpoAction($request, $id);
 
             $em->persist($exposition);
             $em->flush();
 
-            return $this->redirectToRoute('exposition_edit', array(
+            return $this->redirectToRoute('exposition_index', array(
                 'id' => $id,
             ));
         }
@@ -204,5 +195,113 @@ class ExpositionController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    private function TestDebugExpoAction(Request $request, $idExpo)
+    {
+        $emplacements = $request->request->get('exposition')['emplacements'];
+        //Test si plusieurs fois la même position
+        if (is_array($emplacements))
+        {
+            $pos = array();
+            foreach ($emplacements as $emp => $value) {
+                if(!in_array($value['position'], $pos))
+                {
+                    array_push($pos, $value['position']);
+                } else {
+                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a des oeuvres qui possédent la même position.');
+                    break;
+                }
+            }
+        }
+        //Test si plusieurs fois la même oeuvre
+        if (is_array($emplacements))
+        {
+            $pos = array();
+            foreach ($emplacements as $emp => $value) {
+                if(!in_array($value['oeuvre'], $pos))
+                {
+                    array_push($pos, $value['oeuvre']);
+                } else {
+                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a des oeuvres qui possédent le même nom.');
+                    break;
+                }
+            }
+        }
+        $dateDebut = $request->request->get('exposition')['dateHeureDebutExposition'];
+        $dateFin = $request->request->get('exposition')['dateHeureFinExposition'];
+        //Test si date de début inférieur à la date de fin 
+        if ($dateDebut > $dateFin)
+        {
+            throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a la date de fin supérieur à la date de début.');
+        }
+
+        //Test si date de début est bien supérieur de 3 jour par rapport à la dernière date
+        //de fin des expositions enregistrer
+        $connection = $this->get('database_connection');
+        $query = "SELECT e.dateHeureFinExposition as datefin, e.dateHeureDebutExposition as datedeb
+                  FROM Exposition as e
+                  WHERE id <> ".$idExpo;
+        $ExpoTrouve = $connection->fetchAll($query);
+        $verif = true;
+        foreach ($ExpoTrouve as $Expo)
+        {
+            if($Expo['datefin'] != "" && $Expo['datedeb'] != "")
+            {
+                $dateFinReq = date("Y-m-d H:i", strtotime($Expo['datefin']." +4 days"));
+                $date = new \DateTime($dateFinReq);
+
+                $dateDebutTrouve = $request->request->get('exposition')['dateHeureDebutExposition'];
+                $dateDebutTrouve = str_replace("/", "-", $dateDebutTrouve);
+                $dateDebut = new \DateTime($dateDebutTrouve);
+                if($date > $dateDebut)
+                {
+                    $verif = false;
+                }
+                $dateDebReq = $Expo['datedeb'];
+                $date = new \DateTime($dateDebReq);
+
+                $dateFinTrouve = $request->request->get('exposition')['dateHeureFinExposition'];
+                $dateFinTrouve = str_replace("/", "-", $dateDebutTrouve);
+                $dateFin = new \DateTime($dateDebutTrouve);
+                if($date > $dateFin)
+                {
+                    $verif = false;
+                }
+            }
+            if($verif == false)
+            {
+                break;
+            }
+        }
+        if ($verif == false)
+        {
+            throw $this->createNotFoundException('Vous ne pouvais pas créer une exposition avec moins de 3 jours de séparation avec la dernière');
+        }
+        //Test Le nom de l'exposition existe déjà
+        $nomExpo = $request->request->get('exposition')['nomExposition'];
+        $query = "SELECT e.nomExposition as nom
+                  FROM Exposition as e
+                  WHERE e.nomExposition ='".$nomExpo."'";
+        $nomExpoTrouve = $connection->fetchAll($query);
+        if(!empty($nomExpoTrouve))
+        {
+            throw $this->createNotFoundException('Vous ne pouvais pas créer une exposition dont le nom existe déjà.');
+        }
+        //Test si la langue est présente en plusieurs fois
+        $textexpositions = $request->request->get('exposition')['textexpositions'];
+        if (is_array($textexpositions))
+        {
+            $pos = array();
+            foreach ($textexpositions as $text => $value) {
+                if(!in_array($value['langue'], $pos))
+                {
+                    array_push($pos, $value['langue']);
+                } else {
+                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer posséde plusieurs fois la langue.');
+                    break;
+                }
+            }
+        }
     }
 }
