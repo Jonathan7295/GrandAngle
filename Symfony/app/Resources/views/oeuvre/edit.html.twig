@@ -768,7 +768,7 @@
         function myImageFunction(valeur) {
             // On récupère la valeur à partir de l'id du champs sélectionné
             var val = $("#"+valeur.id).val();
-           
+            
             if(val != "" && val != undefined){
                 // On retire l'image par défaut
                 $('.specimen').remove();
@@ -779,7 +779,7 @@
                 $img.src = "http://api.screenshotmachine.com/?key=0d99fd&size=S&format=PNG&url="+val;
                 $('#previsu').append($img);
             }else{
-                 // On retire l'image par défaut
+                // On retire l'image par défaut
                 $('.specimen').remove();
                 // On créé une nouvelle image
                 $img = document.createElement('img');

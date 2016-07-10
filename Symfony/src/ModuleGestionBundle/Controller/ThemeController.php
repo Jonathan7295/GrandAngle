@@ -44,7 +44,7 @@ class ThemeController extends Controller
             $em->persist($theme);
             $em->flush();
 
-            return $this->redirectToRoute('theme_show', array('id' => $theme->getId()));
+            return $this->redirectToRoute('exposition_new', array('id' => $theme->getId()));
         }
 
         return $this->render('theme/new.html.twig', array(

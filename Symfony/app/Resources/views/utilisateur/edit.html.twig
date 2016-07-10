@@ -383,7 +383,7 @@
 {% block javascripts %}
     <script type="text/javascript">
 
-        // Gestion du checked
+        // Gestion du checked au clic
         $('.editlocknew').click(function(){
             if ($( "input:checked" ).val()==1) {
                 $("#debloc").css('display','block');
@@ -393,6 +393,14 @@
                 $("#bloc").css('display','block');
             }
         });
+        // Gestion du checked au chargement
+        if ($( "input:checked" ).val()==1) {
+            $("#debloc").css('display','block');
+            $("#bloc").css('display','none');
+        }else{
+            $("#debloc").css('display','none');
+            $("#bloc").css('display','block');
+        }
        
     </script>
 {% endblock %}

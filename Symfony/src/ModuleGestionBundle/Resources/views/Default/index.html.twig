@@ -28,7 +28,7 @@
 						{% endimage %}
 				      <p><strong>Chevaliers et bombardes</strong></p>
 				      <p>Vendredi 27 juin 2016</p>
-				      <button class="btn">Voir détail</button>
+				      <button class="btn 1">Voir détail</button>
 				    </div>
 				  </div>
 				  <div class="col-md-3">
@@ -39,7 +39,7 @@
 						{% endimage %}
 				      <p><strong>Beaute congo</strong></p>
 				      <p>Lundi 14 Juillet 2016</p>
-				      <button class="btn">Voir détail</button>
+				      <button class="btn 1">Voir détail</button>
 				    </div>
 				  </div>
 				  <div class="col-md-3">
@@ -50,7 +50,7 @@
 						{% endimage %}
 				      <p><strong>Philippe halsman</strong></p>
 				      <p>Mercredi 29 Juillet 2016</p>
-				      <button class="btn">Voir détail</button>
+				      <button class="btn 1">Voir détail</button>
 				    </div>
 				  </div>
 				   <div class="col-md-3">
@@ -61,18 +61,24 @@
 						{% endimage %}
 				      <p><strong>Splendeurs et miseres</strong></p>
 				      <p>Lundi 13 Aout 2016</p>
-				      <button class="btn">Voir détail</button>
+				      <button class="btn 1">Voir détail</button>
 				    </div>
 				  </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<button class="btn btn-primary btn-lg"><a title="Scan" href="{{ path("test_scan_oeuvre") }}">Test des Oeuvres</a></button> 
 				</div>
 			</div>
     	</div>
     </div>
     <script>
 	    $(document).ready(function(){
-	    	$('.btn').click(function() {
+	    	$('.btn.1').click(function() {
 	    		alert('Option non disponible dans cette version veuillez nous contacter pour plus d\'informations concernant nos tarifs !')
 	    	});
+	    	$('.btn-lg a').css('color', 'white');
 	    });
     </script>
 {% endblock %}

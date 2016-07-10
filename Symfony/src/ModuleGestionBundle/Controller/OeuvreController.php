@@ -13,6 +13,7 @@ use ModuleGestionBundle\Entity\Statut;
 use ModuleGestionBundle\Entity\Tableau;
 use ModuleGestionBundle\Entity\MultimediaType;
 use ModuleGestionBundle\Form\OeuvreType;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Oeuvre controller.
@@ -410,7 +411,19 @@ class OeuvreController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 // On fait une requête pour récupérer les infos de l'oeuvre
                 $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
-
+                // On récupère le type d'oeuvre
+                $typeOeuvre = $oeuvre->getTypeOeuvre()->getDiscr();
+                // Si c'est un multimédia
+                if($typeOeuvre == "Multimédia"){
+                    // On instancie un objet fichier system
+                    $fs = new Filesystem();
+                    // On récupère le nom exact du fichier à supprimer
+                    $symlink = $oeuvre->getTypeOeuvre()->getFichier();
+                    // On définit le chemin de la suppression du fichier
+                    $path = $this->container->getParameter('multimedias_directory')."/".$symlink;
+                    // On supprime
+                    $fs->remove($path);
+                }
                 // Suppression de l'oeuvre sélectionnée
                 $em->remove($oeuvre);
                 $em->flush();

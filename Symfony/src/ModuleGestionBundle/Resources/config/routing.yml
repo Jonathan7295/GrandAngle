@@ -23,6 +23,11 @@ list_oeuvre:
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:listOeuvre" }
     methods: [POST]
 
+test_scan_oeuvre:
+    path:   /scan
+    defaults: { _controller: "ModuleGestionBundle:Scan:TestScan" }
+    methods: [GET]
+
 test_oeuvre:
     path:    /testoeuvre/{id}/show
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:testOeuvre" }
