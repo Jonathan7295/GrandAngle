@@ -1,7 +1,10 @@
 {% extends ':layout:layout.html.twig' %}
 
 {% block body %}
-{{ form_start(form, {'attr': {'id': 'formExpo'}}) }}
+    {% stylesheets 'css/fileinput.min.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {{ form_start(form, {'attr': {'id': 'formExpo'}}) }}
     <div class="panel panel-default">
         <div class="panel-heading">
             Ajout d'une nouvelle exposition
@@ -113,6 +116,20 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                {# Génération du label #}
+                                {{ form_label(form.fichier, "Image", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
+
+                                {# Affichage des erreurs pour ce champs précis #}
+                                {{ form_errors(form.fichier) }}
+
+                                <div class="col-md-3 control-label ajust file">
+                                    {# Génération de l'input #}
+                                    {{ form_widget(form.fichier, {'id': 'input-id', 'attr': {'class': 'file'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
                                 {% image 'image/position.png'
                                     filter='jpegoptim' output='/image/position.png' %}
                                     <img class="img" src="{{ asset_url }}" alt="Example" width="500" heugth="250"/>
@@ -170,9 +187,18 @@
     {{ form_end(form) }}
 {% endblock %}
 {% block javascripts %}
+    {# Gestion des formulaires de Type d'oeuvre #}
     {% javascripts 'js/jquery.datetimepicker.full.js' %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    {% javascripts 'js/fileinput.min.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#input-id").fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $.datetimepicker.setLocale('fr');

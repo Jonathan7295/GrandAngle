@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ExpositionType extends AbstractType
 {
@@ -34,9 +35,11 @@ class ExpositionType extends AbstractType
                                                 'attr' => array('class' => 'calendar'),
                                                 ))
             ->add('nombreVisiteExposition')
-            ->add('stockage')
             ->add('fichier', FileType::class, array('label' => 'Image',
-                                                    'data_class' => null))
+                                                    'data_class' => null,
+                                                    'attr' => array('data-preview-file-type' => 'text',
+                                                                    'id' => 'input-id')
+                                                    ))
             ->add('textexpositions', CollectionType::class, array(
                                                 'entry_type'   => TextExpositionType::class,
                                                 'allow_add'    => true,

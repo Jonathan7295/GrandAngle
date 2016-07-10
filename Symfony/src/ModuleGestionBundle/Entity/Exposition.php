@@ -234,6 +234,31 @@ class Exposition
     }
 
     /**
+     * Set stockage
+     *
+     * @param string $stockage
+     *
+     * @return MultimediaType
+     */
+    public function setStockage($stockage)
+    {
+        $this->stockage = $stockage;
+    
+        return $this;
+    }
+
+    /**
+     * Get stockage
+     *
+     * @return string
+     */
+    public function getStockage()
+    {
+        return $this->stockage;
+    }
+
+    
+    /**
      * Set fichier
      *
      * @param string $fichier

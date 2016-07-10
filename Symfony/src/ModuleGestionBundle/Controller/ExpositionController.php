@@ -55,6 +55,33 @@ class ExpositionController extends Controller
             $id = 0;
             $this->TestDebugExpoAction($request, $id);
 
+            $file = $request->files->get("exposition")["fichier"];
+            // On génère un nom unique pour ce fichier 
+            $filename = md5(uniqid()).'.'.$file->getClientOriginalExtension();
+            // Fonction pour calculer la taille du fichier
+            function taille_fichier($octets) {
+                $resultat = $octets;
+                for ($i=0; $i < 8 && $resultat >= 1024; $i++) {
+                    $resultat = $resultat / 1024;
+                }
+                if ($i > 0) {
+                    return preg_replace('/,00$/', '', number_format($resultat, 2, ',', '')) 
+            . ' ' . substr('KMGTPEZY',$i-1,1) . 'o';
+                } else {
+                    return $resultat . ' o';
+                }
+            }
+
+            // On déplace ensuite le fichier dans le dossier prévu à cette effet
+            $file->move(
+                $this->container->getParameter('multimedias_directory'),
+                $filename
+            );
+
+            $stockage = taille_fichier($file->getClientSize());
+            $exposition->setStockage($stockage);
+            $exposition->setFichier($filename);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($exposition);
             $em->flush();
@@ -127,6 +154,7 @@ class ExpositionController extends Controller
         }
 
         $editForm = $this->createForm('ModuleGestionBundle\Form\ExpositionType', $exposition);
+        $editForm->remove("fichier");
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -229,11 +257,17 @@ class ExpositionController extends Controller
             }
         }
         $dateDebut = $request->request->get('exposition')['dateHeureDebutExposition'];
+        $dateDebut = str_replace("/", "-", $dateDebut);
+        $dateDebut = date("Y-m-d H:i", strtotime($dateDebut));
+        $dateD = new \DateTime($dateDebut);
         $dateFin = $request->request->get('exposition')['dateHeureFinExposition'];
+        $dateFin = str_replace("/", "-", $dateFin);
+        $dateFin = date("Y-m-d H:i", strtotime($dateFin));
+        $dateF = new \DateTime($dateFin);
         //Test si date de début inférieur à la date de fin 
-        if ($dateDebut > $dateFin)
+        if ($dateD > $dateF)
         {
-            throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a la date de fin supérieur à la date de début.');
+            throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a la date de fin inférieur à la date de début.');
         }
 
         //Test si date de début est bien supérieur de 3 jour par rapport à la dernière date
@@ -282,7 +316,8 @@ class ExpositionController extends Controller
         $nomExpo = $request->request->get('exposition')['nomExposition'];
         $query = "SELECT e.nomExposition as nom
                   FROM Exposition as e
-                  WHERE e.nomExposition ='".$nomExpo."'";
+                  WHERE e.id <> ".$idExpo."
+                  AND e.nomExposition ='".$nomExpo."'";
         $nomExpoTrouve = $connection->fetchAll($query);
         if(!empty($nomExpoTrouve))
         {
