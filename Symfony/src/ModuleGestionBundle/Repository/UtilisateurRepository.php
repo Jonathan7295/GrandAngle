@@ -2,6 +2,8 @@
 
 namespace ModuleGestionBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
+
 /**
  * ExpositionRepository
  *
@@ -10,4 +12,13 @@ namespace ModuleGestionBundle\Repository;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
+
+	public function findMailUser(){
+
+		$query = $this->_em->createQuery('
+			SELECT u.firstname,u.lastname,u.email
+			FROM ModuleGestionBundle:Utilisateur u');
+
+		return $query->getResult();
+	}
 }

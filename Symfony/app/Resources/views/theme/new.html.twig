@@ -4,7 +4,7 @@
 {{ form_start(form, {'attr': {'id': 'formTheme'}}) }}
     <div class="panel panel-default">
         <div class="panel-heading">
-            Création d'un Théme
+            Création d'un Thème
         </div>
         <div class="container">
             <div class="row">
@@ -15,7 +15,7 @@
                         <div class="form-group">
 
                             {# Génération du label #}
-                            {{ form_label(form.libelle, "Nom du théme", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
+                            {{ form_label(form.libelle, "Nom", {'label_attr': {'class': 'col-md-4 control-label ajust'}})}}
                             
                             {# Affichage des erreurs pour ce champs précis #}
                             {{ form_errors(form.libelle) }}
@@ -30,9 +30,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
-                <input type="submit" value="Enregistrer" />
-                <a href="{{ path('exposition_new') }}">retour</a>
+            <div class="col-md-6 col-md-offset-3">
+                <input id="newsub" type="submit" value="Enregistrer" />
+                <a id="newret" href="{{ path('exposition_new') }}">retour</a>
             </div>
         </div>
     </div>

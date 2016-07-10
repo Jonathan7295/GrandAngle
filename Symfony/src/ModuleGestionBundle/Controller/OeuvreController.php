@@ -13,6 +13,7 @@ use ModuleGestionBundle\Entity\Statut;
 use ModuleGestionBundle\Entity\Tableau;
 use ModuleGestionBundle\Entity\MultimediaType;
 use ModuleGestionBundle\Form\OeuvreType;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Oeuvre controller.
@@ -27,10 +28,11 @@ class OeuvreController extends Controller
 
         // Si on reçoit une requête Ajax
         if($req->isXMLHttpRequest()){
+
             //Connection à la base de données
             $connection = $this->get('database_connection');
             // récupérer la liste complète des oeuvres
-            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
+            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             left join emplacement as e on e.oeuvre_id = o.id
                             inner join artiste as a on o.artiste_id = a.id
                             left join typeoeuvre as t on o.typeoeuvre_id = t.id";
@@ -71,7 +73,7 @@ class OeuvreController extends Controller
             $id = $req->get('id');
             $connection = $this->get('database_connection');
             // récupérer la liste des oeuvres
-            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,e.position,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
+            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             left join emplacement as e on e.oeuvre_id = o.id
                             inner join artiste as a on o.artiste_id = a.id
                             inner join typeoeuvre as t on o.typeoeuvre_id = t.id  
@@ -406,13 +408,25 @@ class OeuvreController extends Controller
             $id = $request->get('id');
 
             if($id != ""){
-                // $em = $this->getDoctrine()->getManager();
-                // // On fait une requête pour récupérer les infos de l'oeuvre
-                // $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
-
-                // // Suppression de l'oeuvre sélectionnée
-                // $em->remove($oeuvre);
-                // $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                // On fait une requête pour récupérer les infos de l'oeuvre
+                $oeuvre = $em->getRepository('ModuleGestionBundle:Oeuvre')->find($id);
+                // On récupère le type d'oeuvre
+                $typeOeuvre = $oeuvre->getTypeOeuvre()->getDiscr();
+                // Si c'est un multimédia
+                if($typeOeuvre == "Multimédia"){
+                    // On instancie un objet fichier system
+                    $fs = new Filesystem();
+                    // On récupère le nom exact du fichier à supprimer
+                    $symlink = $oeuvre->getTypeOeuvre()->getFichier();
+                    // On définit le chemin de la suppression du fichier
+                    $path = $this->container->getParameter('multimedias_directory')."/".$symlink;
+                    // On supprime
+                    $fs->remove($path);
+                }
+                // Suppression de l'oeuvre sélectionnée
+                $em->remove($oeuvre);
+                $em->flush();
 
                 $message = "Suppression effectuée avec succès !";
             }else{

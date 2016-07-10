@@ -35,7 +35,6 @@
                         <th>Artiste</th>
                         <th>Type</th>
                         <th>Nombre de visite</th>
-                        <th>Position</th>
                         <th>Actions</th>
                         <th>Imprimer</th>
                     </tr>
@@ -49,11 +48,6 @@
                             <td>{{ oeuvre.artiste.nomComplet }}</td>
                             <td>{{ oeuvre.typeoeuvre.discr }}</td>
                             <td>{{ oeuvre.nombreVisite }}</td>
-                            <td>
-                                {% for item in oeuvre.emplacements %}
-                                     {{ item.position }}
-                                {% endfor %}
-                            </td>
                             <td class="buttonTab">
                                 <a id="searchindex" title="Voir détail" class="glyphicon glyphicon-search" href="{{ path('oeuvre_show', { 'id': oeuvre.id }) }}"></a>
                                 <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('oeuvre_edit', { 'id': oeuvre.id }) }}"></a>
@@ -70,7 +64,7 @@
                     <div class="navigation">
                         {{ knp_pagination_render(pagination) }}
                     </div>
-                    <script type="text/javascript">
+                   <script type="text/javascript">
 
                         $('#list').append($('.navigation'));
 
@@ -161,13 +155,7 @@
 
             // Pour chaque élément trouvé dans le document JSON, on peuple la liste
             $.each(JSON.parse(msg['data']), function(i, item) {
-
-                // On prépare le script pour la suppression
-                var script = document.createElement("SCRIPT");
-                // var content = document.createTextNode("$('a#delindex').click(function(event){event.preventDefault();var test = confirm('Etes vous sur de vouloir supprimer cette oeuvre ?');if(test){var id = $(this).attr('name');$.ajax({url: '{{ path('oeuvre_delete') }}',method: 'post',data: {id: id}}).done(function(msg){$('a[name='"+id+"']').parent().parent().hide();});}});");
-                 
-                // script.appendChild(content);
-
+ 
                 // On créé une colonne pour chacun des champs
                 li = document.createElement('td');
                 li1 = document.createElement('td');
@@ -175,9 +163,8 @@
                 li3 = document.createElement('td');
                 li4 = document.createElement('td');
                 li5 = document.createElement('td');
+                li5.setAttribute('class', 'buttonTab');
                 li6 = document.createElement('td');
-                li6.setAttribute('class', 'buttonTab');
-                li7 = document.createElement('td');
                 
                 // On récupère les données
                 nom = document.createTextNode(item.nom);
@@ -194,7 +181,6 @@
                 type = document.createTextNode(item.type);
 
                 nbVisite = document.createTextNode(item.nombreVisite);
-                position = document.createTextNode(item.position);
 
                 // On créé les boutons
                 var show = document.createElement('a');
@@ -231,12 +217,11 @@
                 li2.appendChild(artiste);
                 li3.appendChild(type);
                 li4.appendChild(nbVisite);
-                li5.appendChild(position);
-                li6.appendChild(show);
-                li6.appendChild(edit);
-                li6.appendChild(del);
+                li5.appendChild(show);
+                li5.appendChild(edit);
+                li5.appendChild(del);
                 if(item.img != "")
-                    li7.appendChild(code);
+                    li6.appendChild(code);
 
                 //On insère dans la ligne les différentes colonnes
                 tr.appendChild(li);
@@ -245,18 +230,24 @@
                 tr.appendChild(li3);
                 tr.appendChild(li4);
                 tr.appendChild(li5);
-                tr.appendChild(li6);
                 if(item.img != "")
-                    tr.appendChild(li7);
-
-                tr.appendChild(script);
+                    tr.appendChild(li6);
 
                 list[0].appendChild(tr);
 
                 tr = document.createElement('tr');
             });
+
+            // On prépare le script pour la suppression
+            var script = document.createElement("SCRIPT");
+            var content = document.createTextNode("$('a#delindex').click(function(e){e.preventDefault();t=confirm('Etes vous sur de vouloir supprimer cette oeuvre ?');if(t){a=$(this).attr('name');$.ajax({url:"+"\"{{ path('oeuvre_delete') }}\""+",method:'post',data:{id:a}}).done(function(e){$(\"a[name=\'\"+a+\"\']\").parent().parent().hide()})}});");
+             
+            script.appendChild(content);
+
+            list[0].appendChild(script);
+
             scroll();             
-       }
+        }
     });
   </script>  
 {% endblock %}
