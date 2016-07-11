@@ -20,7 +20,6 @@ class ScanController extends Controller
     public function TestScanAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         // On charge la liste des expositions et oeuvres à alerter
         $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAllCurrent();
         // On charge la liste des mails des utilisateurs à avertir

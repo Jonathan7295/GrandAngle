@@ -699,6 +699,10 @@
                     $('#input-id').attr('data-preview-file-type', 'text');
                     $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
 
+                    $('#multimedia_type_stockage').attr('disabled', 'disabled');
+                    $('#multimedia_type_video').css('display', 'none');
+                    $('#input-id').css('display', 'none');
+
                     // On désactive la validation formulaire du navigateur 
                     $('form').attr('novalidate', '');
                     
