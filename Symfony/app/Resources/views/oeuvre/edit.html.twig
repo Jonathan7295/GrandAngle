@@ -689,7 +689,21 @@
                 </div>
                
                 {% endif %}
-
+                {% javascripts 'js/fileinput.min.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+                <script>
+                    $('#oeuvre_image').attr('id', 'input-id');
+                    $('#input-id').attr('data-preview-file-type', 'text');
+                    $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Supprimer'});
+                </script>
+                <div class="col-md-4 form-group">
+                    {# Génération de l'input #}
+                    {{ form_widget(edit_form.image, {'attr': {'class': 'file'}}) }}
+                </div>
+                {% javascripts 'js/fr.js' %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
                 <script>
                 $(document).ready(function(){
 
@@ -700,8 +714,8 @@
                     $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
 
                     $('#multimedia_type_stockage').attr('disabled', 'disabled');
-                    $('#multimedia_type_video').css('display', 'none');
-                    $('#input-id').css('display', 'none');
+                    // $('#multimedia_type_video').css('display', 'none');
+                    // $('#input-id').css('display', 'none');
 
                     // On désactive la validation formulaire du navigateur 
                     $('form').attr('novalidate', '');
