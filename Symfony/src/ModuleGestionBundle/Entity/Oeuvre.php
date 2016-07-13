@@ -82,6 +82,20 @@ class Oeuvre
      */
     private $typeoeuvre;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_image", type="string", length=255, nullable=true)
+     */
+    private $nom_image;
+
     private $tableau;
 
     private $multi;
@@ -411,5 +425,53 @@ class Oeuvre
     public function getTypeoeuvre()
     {
         return $this->typeoeuvre;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Oeuvre
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set nomImage
+     *
+     * @param string $nomImage
+     *
+     * @return Oeuvre
+     */
+    public function setNomImage($nomImage)
+    {
+        $this->nom_image = $nomImage;
+    
+        return $this;
+    }
+
+    /**
+     * Get nomImage
+     *
+     * @return string
+     */
+    public function getNomImage()
+    {
+        return $this->nom_image;
     }
 }

@@ -63,7 +63,7 @@
                         <div class="col-md-1 deplace"></div>
                     </div>        
                 </div>
-                <div class="col-md-8">
+                 <div class="col-md-11">
                     <div class="col-md-4 form-group">
                         {# Génération du label #}
                         <label for="typeoeuvre" class="control-label ajust">Choix du type d'oeuvre</label>
@@ -77,6 +77,21 @@
                             <option value="2">Multimédia</option>
                         </select>
                     </div>
+                    {% javascripts 'js/fileinput.min.js' %}
+                        <script src="{{ asset_url }}"></script>
+                    {% endjavascripts %}
+                    <script>
+                        $('#oeuvre_image').attr('id', 'input-id');
+                        $('#input-id').attr('data-preview-file-type', 'text');
+                        $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Supprimer'});
+                    </script>
+                    <div class="col-md-4 form-group">
+                        {# Génération de l'input #}
+                        {{ form_widget(form.image, {'attr': {'class': 'file'}}) }}
+                    </div>
+                    {% javascripts 'js/fr.js' %}
+                        <script src="{{ asset_url }}"></script>
+                    {% endjavascripts %}
                     {# Gestion des formulaires de Type d'oeuvre #}
                     {% javascripts 'js/jquery.datetimepicker.full.js' %}
                         <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -243,7 +258,7 @@
                                         $('#oeuvre_multi_1_fichier').attr('id', 'input-id');
                                         $('#input-id').attr('class', 'file');
                                         $('#input-id').attr('data-preview-file-type', 'text');
-                                        $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
+                                        $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Supprimer'});
 
                                         $('[for="oeuvre_multi_1_multi_titre"]').attr('class','label-control');
                                         $('#oeuvre_multi_1_multi_titre').attr('class', 'form-control');

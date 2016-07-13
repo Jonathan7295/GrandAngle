@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -74,6 +75,8 @@ class OeuvreType extends AbstractType
                 'label' => false,
                 'prototype' => true,
                 'by_reference' => false))
+            ->add('image', FileType::class, array('label' => 'Image',
+                                                    'data_class' => null))
         ;
     }
     
