@@ -27,6 +27,21 @@ select {
 	margin-right: 20px;
 }
 
+ul.dropdown-menu li  {
+	text-align: center;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	line-height: 0px;
+}
+
+ul.dropdown-menu li a {
+	padding: 15px;
+	margin: 0px;
+	border-radius: 5px;
+}
+
 #droit{
 	/*display: none;*/
 }
@@ -52,6 +67,41 @@ select {
 	color : white;
 }
 
+#statexpo {
+	background-color: #B07F39;
+	background-image: none;
+	color : #E3E3E3;
+}
+
+#statexpo:hover {
+	background-color: #B07F39;
+	background-image: none;
+	color : white;
+}
+
+#statoeuvre {
+	background-color: #D69B46;
+	background-image: none;
+	color : #E3E3E3;
+}
+
+#statoeuvre:hover{
+	background-color: #B07F39;
+	background-image: none;
+	color : white;
+}
+
+#statexoeu {
+	background-color: #F2AF4F;
+	background-image: none;
+	color : #E3E3E3;
+}
+
+#statexoeu:hover {
+	background-color: #B07F39;
+	background-image: none;
+	color : white;
+}
 
 #oeuv {
 	background-color: #5cb85c;

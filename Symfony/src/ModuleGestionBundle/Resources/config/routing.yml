@@ -6,6 +6,14 @@ module_gestion_index:
     path:     /accueil
     defaults: { _controller: ModuleGestionBundle:Security:login }
 
+statistique_expo:
+    path:     /statistique_expo
+    defaults: { _controller: ModuleGestionBundle:Statistique:chartexpo }
+
+statistique_oeuvre:
+    path:     /statistique_oeuvre
+    defaults: { _controller: ModuleGestionBundle:Statistique:chartoeuvre }
+
 module_gestion_exposition:
     resource: "@ModuleGestionBundle/Resources/config/routing/exposition.yml"
     prefix:   /exposition

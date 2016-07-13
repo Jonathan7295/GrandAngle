@@ -12,6 +12,7 @@ use ModuleGestionBundle\Form\ExpositionType;
 use ModuleGestionBundle\Entity\Emplacement;
 use ModuleGestionBundle\Entity\Oeuvre;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Filesystem\Filesystem;
 /**
  * Exposition controller.
  *
@@ -43,6 +44,12 @@ class ExpositionController extends Controller
      */
     public function newAction(Request $request)
     {
+        // On récupère l'id du thème qu'on vien de créer
+        $idTheme = $request->query->get('idT');
+        // On récupère l'id du collectif qu'on vien de créer
+        $idCollectif = $request->query->get('idC');
+        // On récupère l'id de l'auteur qu'on vien de créer
+        $idAuteur = $request->query->get('idA');
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
@@ -99,6 +106,9 @@ class ExpositionController extends Controller
             'form' => $form->createView(),
             'role' => $role,
             'oeuvres' => $oeuvres,
+            'idtheme' => $idTheme,
+            'idauteur' => $idAuteur,
+            'idcollectif' => $idCollectif,
         ));
     }
 
@@ -202,7 +212,23 @@ class ExpositionController extends Controller
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
 
-        $em = $this->getDoctrine()->getManager();
+        // On récupère l'id de l'oeuvre a supprimée
+        $id = $exposition->getId();
+        if($id != "")
+        {
+            $em = $this->getDoctrine()->getManager();
+            // On fait une requête pour récupérer les infos de l'oeuvre
+            $expo = $em->getRepository('ModuleGestionBundle:Exposition')->find($id);
+            // On instancie un objet fichier system
+            $fs = new Filesystem();
+            // On récupère le nom exact du fichier à supprimer
+            $symlink = $expo->getFichier();
+            // On définit le chemin de la suppression du fichier
+            $path = $this->container->getParameter('multimedias_directory')."/".$symlink;
+            // On supprime
+            $fs->remove($path);
+        }
+
         $em->remove($exposition);
         $em->flush();
 

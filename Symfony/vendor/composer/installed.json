@@ -1305,61 +1305,6 @@
         ]
     },
     {
-        "name": "swiftmailer/swiftmailer",
-        "version": "v5.4.2",
-        "version_normalized": "5.4.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "d8db871a54619458a805229a057ea2af33c753e8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-            "reference": "d8db871a54619458a805229a057ea2af33c753e8",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9.1,<0.9.4"
-        },
-        "time": "2016-05-01 08:45:47",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/swift_required.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Chris Corbyn"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Swiftmailer, free feature-rich PHP mailer",
-        "homepage": "http://swiftmailer.org",
-        "keywords": [
-            "email",
-            "mail",
-            "mailer"
-        ]
-    },
-    {
         "name": "symfony/polyfill-util",
         "version": "v1.2.0",
         "version_normalized": "1.2.0.0",
@@ -2591,6 +2536,174 @@
             "pager",
             "pagination",
             "paginator"
+        ]
+    },
+    {
+        "name": "swiftmailer/swiftmailer",
+        "version": "v5.4.3",
+        "version_normalized": "5.4.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/swiftmailer/swiftmailer.git",
+            "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+            "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9.1"
+        },
+        "time": "2016-07-08 11:51:25",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/swift_required.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris Corbyn"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Swiftmailer, free feature-rich PHP mailer",
+        "homepage": "http://swiftmailer.org",
+        "keywords": [
+            "email",
+            "mail",
+            "mailer"
+        ]
+    },
+    {
+        "name": "zendframework/zend-json",
+        "version": "2.6.1",
+        "version_normalized": "2.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-json.git",
+            "reference": "4c8705dbe4ad7d7e51b2876c5b9eea0ef916ba28"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/zend-json/zipball/4c8705dbe4ad7d7e51b2876c5b9eea0ef916ba28",
+            "reference": "4c8705dbe4ad7d7e51b2876c5b9eea0ef916ba28",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.5 || ^7.0"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "1.7.*",
+            "phpunit/phpunit": "~4.0",
+            "zendframework/zend-http": "^2.5.4",
+            "zendframework/zend-server": "^2.6.1",
+            "zendframework/zend-stdlib": "^2.5 || ^3.0",
+            "zendframework/zendxml": "^1.0.2"
+        },
+        "suggest": {
+            "zendframework/zend-http": "Zend\\Http component, required to use Zend\\Json\\Server",
+            "zendframework/zend-server": "Zend\\Server component, required to use Zend\\Json\\Server",
+            "zendframework/zend-stdlib": "Zend\\Stdlib component, for use with caching Zend\\Json\\Server responses",
+            "zendframework/zendxml": "To support Zend\\Json\\Json::fromXml() usage"
+        },
+        "time": "2016-02-04 21:20:26",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.6-dev",
+                "dev-develop": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Json\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
+        "homepage": "https://github.com/zendframework/zend-json",
+        "keywords": [
+            "json",
+            "zf2"
+        ]
+    },
+    {
+        "name": "ob/highcharts-bundle",
+        "version": "1.4",
+        "version_normalized": "1.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/marcaube/ObHighchartsBundle.git",
+            "reference": "0e28797c3bc1b1dcd3f4fe9e4465c42cec804e05"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/marcaube/ObHighchartsBundle/zipball/0e28797c3bc1b1dcd3f4fe9e4465c42cec804e05",
+            "reference": "0e28797c3bc1b1dcd3f4fe9e4465c42cec804e05",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3",
+            "symfony/symfony": "~2.3|~3.0",
+            "zendframework/zend-json": "~2.3"
+        },
+        "time": "2016-01-10 16:12:25",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Ob\\HighchartsBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Marc Aubé"
+            }
+        ],
+        "description": "Symfony2 Bundle that ease the use of highcharts to display rich graph and charts in your app",
+        "homepage": "https://github.com/marcaube/ObHighchartsBundle",
+        "keywords": [
+            "Symfony2",
+            "chart",
+            "charting",
+            "charts",
+            "graph",
+            "graphs",
+            "highcharts",
+            "marcaube",
+            "ob"
         ]
     }
 ]

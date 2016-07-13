@@ -33,7 +33,17 @@
                                 
                                 {# Affichage des erreurs pour ce champs précis #}
                                 {{ form_errors(form.themes) }}
-
+                                {% if idtheme is empty %}
+                                {% else %}
+                                    <script>
+                                        $(document).ready(function(){
+                                            if ({{ idtheme }} != "") {
+                                                var idtheme = "{{ idtheme }}";
+                                                $('#exposition_themes option[value='+idtheme+']').prop('selected', true);
+                                            } 
+                                        });
+                                    </script>
+                                {% endif %}
                                 <div class="col-md-3">
                                     {# Génération de l'input #}
                                     {{ form_widget(form.themes, {'attr': {'class': 'form-control ajust'}}) }}
@@ -107,7 +117,28 @@
                                 
                                 {# Affichage des erreurs pour ce champs précis #}
                                 {{ form_errors(form.organisateur) }}
-
+                                {% if idcollectif is empty %}
+                                {% else %}
+                                    <script>
+                                        $(document).ready(function(){
+                                            if ({{ idcollectif }} != "") {
+                                                var idcollectif = "{{ idcollectif }}";
+                                                $('#exposition_organisateur option[value='+idcollectif+']').prop('selected', true);
+                                            } 
+                                        });
+                                    </script>
+                                {% endif %}
+                                {% if idauteur is empty %}
+                                {% else %}
+                                    <script>
+                                        $(document).ready(function(){
+                                            if ({{ idauteur }} != "") {
+                                                var idauteur = "{{ idauteur }}";
+                                                $('#exposition_organisateur option[value='+idauteur+']').prop('selected', true);
+                                            } 
+                                        });
+                                    </script>
+                                {% endif %}
                                 <div class="col-md-3 control-label ajust">
                                     {# Génération de l'input #}
                                     {{ form_widget(form.organisateur, {'attr': {'class': 'form-control ajust'}}) }}

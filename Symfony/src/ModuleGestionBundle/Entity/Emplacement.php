@@ -30,6 +30,13 @@ class Emplacement
     private $position;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="nombreVisiteOeuvre", type="integer", nullable=true)
+     */
+    private $nombreVisiteOeuvre;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Exposition", inversedBy="emplacements")
      * @ORM\JoinColumn(nullable=FALSE)
      */
@@ -73,6 +80,30 @@ class Emplacement
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set nombreVisiteOeuvre
+     *
+     * @param integer $nombreVisiteOeuvre
+     *
+     * @return Emplacement
+     */
+    public function setNombreVisiteOeuvre($nombreVisiteOeuvre = null)
+    {
+        $this->nombreVisiteOeuvre = $nombreVisiteOeuvre;
+    
+        return $this;
+    }
+
+    /**
+     * Get nombreVisiteOeuvre
+     *
+     * @return integer
+     */
+    public function getNombreVisiteOeuvre()
+    {
+        return $this->nombreVisiteOeuvre;
     }
 
     /**

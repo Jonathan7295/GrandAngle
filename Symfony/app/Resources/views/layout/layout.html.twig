@@ -40,7 +40,13 @@
                                 <li id="droit" role="presentation"><a id="util" title="Utilisateur" href="{{ path("utilisateur_index") }}">Gestion Utilisateur</a></li>
                                 {% endif %}
                             {% endif %}
-                            <li role="presentation"><a id="stat" title="Statistiques" href="#">Gestion Statistique</a></li>
+                            <li role="presentation"><a id="stat" data-toggle="dropdown" class="dropdown-toggle" title="Statistiques">Gestion Statistique</a>
+                                <ul class="dropdown-menu">
+                                    <li role="presentation"><a id="statexpo" href="{{ path("statistique_expo") }}">Graph Exposition</a></li>
+                                    <li role="presentation"><a id="statoeuvre" href="{{ path("statistique_expo") }}">Graph Oeuvre</a></li>
+                                    <li role="presentation"><a id="statexoeu" href="#">Graph Expo/Oeuvre</a></li>
+                                </ul>
+                            </li>
                             <li role="presentation"><a id="deco" title="Deconnexion" href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
                             <li role="presentation">
                             {% image 'image/logo2.png' %}
@@ -50,6 +56,11 @@
                         </ul>
                     </nav>
                 </div>
+                <script>
+                    $('.dropdown').mouseover(function() {
+                        $(this).toggleClass("open");     
+                    });
+                </script>
             </div>
             <div>
                 {% block body %}{% endblock %}

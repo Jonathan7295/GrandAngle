@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Ob\HighchartsBundle\ObHighchartsBundle,
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

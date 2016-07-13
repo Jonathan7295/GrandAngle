@@ -51,7 +51,7 @@ class CollectifController extends Controller
             $em->persist($collectif);
             $em->flush();
 
-            return $this->redirectToRoute('exposition_new', array('id' => $collectif->getId()));
+            return $this->redirectToRoute('exposition_new', array('idC' => $collectif->getId()));
         }
 
         return $this->render('collectif/new.html.twig', array(

@@ -47,7 +47,7 @@ class AuteurController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($auteur);
             $em->flush();
-            return $this->redirectToRoute('exposition_new', array('id' => $auteur->getId()));
+            return $this->redirectToRoute('exposition_new', array('idA' => $auteur->getId()));
         }
 
         return $this->render('auteur/new.html.twig', array(
