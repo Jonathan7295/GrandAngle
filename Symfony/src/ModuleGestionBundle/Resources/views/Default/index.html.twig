@@ -1,20 +1,19 @@
 {% extends "::layout/layout.html.twig" %}
  {% block body %}
  	<style>
-		img.img{height:151px;width:202px;}
+		img.img{height:151px;width:202px;margin-top:10px;margin-bottom:10px;border:1px black solid;}
 		div.panel.pad{padding-left: 25px;padding-right: 25px; height: 52em;}
 		div.panel-heading.heig{height:51em;}
 		h4 span{line-height: 1px;}
+		button.btn{margin-bottom:10px;}
  	</style>
     <div class="panel panel-default pad">
         <div class="panel-heading heig">
         	<div class="row">
         		<div class="col-md-10 col-md-offset-1">
-        			<div class="container">
-					  <h3>Bonjour et Bienvenue sur la page d'accueil !</h3>
-					  <p>GrandAngle Module de Gestion nous sommes le {{ "now"|date("d/m/Y") }}.</p>
-					  <h4>Voici les quatres prochaines expositions</h4>
-					</div>
+        			<h3>Bonjour et Bienvenue sur la page d'accueil !</h3>
+					<p>GrandAngle Module de Gestion nous sommes le {{ "now"|date("d/m/Y") }}.</p>
+					<h4>Voici les quatres prochaines expositions</h4>
 					<br><br>
 				</div>
 			</div>
@@ -64,11 +63,6 @@
 				      <button class="btn 1">Voir détail</button>
 				    </div>
 				  </div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<button class="btn btn-primary btn-lg"><a title="Scan" href="{{ path("test_scan_oeuvre") }}">Test des Oeuvres</a></button> 
 				</div>
 			</div>
     	</div>

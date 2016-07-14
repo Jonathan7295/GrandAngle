@@ -78,7 +78,7 @@ class StatistiqueController extends Controller
             $Expo = $connection->fetchAll($query);
             $TotalExpo = array_merge($TotalExpo, $Expo);
         }
-        var_dump($TotalExpo);
+        
         $nbexpo = count($TotalExpo);
 
         $tableau = array();
@@ -138,7 +138,7 @@ class StatistiqueController extends Controller
             $memo = "";
             array_push($tableConstruit, $tab);
         }
-        var_dump($tableConstruit);
+        
         $ob = new Highchart();
         // ID de l'élement de HTML que utilisé comme conteneur
         $ob->chart->renderTo('linechart');

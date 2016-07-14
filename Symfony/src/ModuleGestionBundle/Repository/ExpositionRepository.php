@@ -15,19 +15,20 @@ class ExpositionRepository extends \Doctrine\ORM\EntityRepository
 
 	public function findAllCurrent(){
 
-		$date1 = new \Datetime();
-		$date2 = new \Datetime();
-
-		$dateDeb = date_sub($date1, date_interval_create_from_date_string('7 days')); // 2016-07-03 00:00:00
+		// Date de début 7 jours après la date du jour initialisée à 00:00:00
+		$dateDeb = new \Datetime();
+		$dateDeb = date_add($dateDeb, date_interval_create_from_date_string('7 days'));
 		$dateDeb = date_time_set($dateDeb, 00, 00, 00);
 
-		$dateFin = date_sub($date2, date_interval_create_from_date_string('7 days')); // 2016-07-03 23:59:59
+		// Date de fin 7 jours après la date du jour initialisée à 23:59:59
+		$dateFin = new \Datetime();
+		$dateFin = date_add($dateFin, date_interval_create_from_date_string('7 days'));
 		$dateFin = date_time_set($dateFin, 23, 59, 59);
 
 		$parameters = array(
 			'deliver' => 'Livré',
-			'dateSearchDeb' => $date1,
-			'dateSearchFin' => $date2
+			'dateSearchDeb' => $dateDeb,
+			'dateSearchFin' => $dateFin
 				);
 
 		$query = $this->_em->createQuery('
@@ -37,7 +38,7 @@ class ExpositionRepository extends \Doctrine\ORM\EntityRepository
 			INNER JOIN e.oeuvre o
 			WHERE o.etat != :deliver
 			AND ex.dateHeureDebutExposition
-			BETWEEN :dateSearchDeb AND :dateSearchFin'
+			BETWEEN :dateSearchDeb AND :dateSearchFin' 
 			)->setParameters($parameters);
 
 		return $query->getResult();
