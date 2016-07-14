@@ -8,7 +8,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nomexposition</th>
+                    <th>Nom</th>
                     <th>Date et heure début</th>
                     <th>Date et heure fin</th>
                     <th>Actions</th>
@@ -23,7 +23,7 @@
                     <td>
                         <a id="searchindex" class="glyphicon glyphicon-search" href="{{ path('exposition_show', { 'id': exposition.id }) }}"></a>
                         <a id="editindex" class="glyphicon glyphicon-pencil" href="{{ path('exposition_edit', { 'id': exposition.id }) }}"></a>
-                        <a id="delindex" name="{{ path('exposition_delete', { 'id': exposition.id }) }}" class="glyphicon glyphicon-trash" href="{{ path('exposition_delete', { 'id': exposition.id }) }}"></a>
+                        <a id="delindex" name="{{ exposition.id }}" class="glyphicon glyphicon-trash" href="{{ path('exposition_delete', { 'id': exposition.id }) }}"></a>
                     </td>
                 </tr>
             {% endfor %}
@@ -34,5 +34,34 @@
                 <a id="expo" href="{{ path('exposition_new') }}">Nouveau</a>
             </li>
         </ul>
+        <div class="navigation">
+            {{ knp_pagination_render(expositions) }}
+        </div>
+        <script type="text/javascript">
+            $('a#delindex').click(function(event) {
+                
+                // On bloque le comportement du bouton
+                event.preventDefault();
+
+                // Message de confirmation
+                var test = confirm("Etes vous sur de vouloir supprimer cette exposition ?");
+
+                if(test){
+                    // On récupère l'id de l'oeuvre
+                    var id = $ (this).attr('name');
+                  
+                    $.ajax({
+                        url: "{{ path('exposition_delete') }}",  // On renseigne l'url TWIG
+                        method: "post",
+                        data: {id: id} // On passe l'id dans la requête
+                    }).done(function(msg){
+                        alert(msg.msg);
+                        // Suppression de la ligne en cause
+                        $('a[name="'+id+'"]').parent().parent().hide();
+                    }); 
+                }
+               
+            });
+        </script>
     </div>
 {% endblock %}

@@ -34,6 +34,8 @@ ul.dropdown-menu li  {
 	margin-top: 0px;
 	margin-bottom: 0px;
 	line-height: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 ul.dropdown-menu li a {
@@ -68,37 +70,25 @@ ul.dropdown-menu li a {
 }
 
 #statexpo {
-	background-color: #B07F39;
+	background-color: #fff;
 	background-image: none;
-	color : #E3E3E3;
+	color : #000;
 }
 
 #statexpo:hover {
-	background-color: #B07F39;
+	background-color: #f0ad4e;
 	background-image: none;
 	color : white;
 }
 
 #statoeuvre {
-	background-color: #D69B46;
+	background-color: #fff;
 	background-image: none;
-	color : #E3E3E3;
+	color : #000;
 }
 
 #statoeuvre:hover{
-	background-color: #B07F39;
-	background-image: none;
-	color : white;
-}
-
-#statexoeu {
-	background-color: #F2AF4F;
-	background-image: none;
-	color : #E3E3E3;
-}
-
-#statexoeu:hover {
-	background-color: #B07F39;
+	background-color: #f0ad4e;
 	background-image: none;
 	color : white;
 }

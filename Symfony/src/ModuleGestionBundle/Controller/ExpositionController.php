@@ -4,6 +4,7 @@ namespace ModuleGestionBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 use ModuleGestionBundle\Entity\Exposition;
@@ -23,7 +24,7 @@ class ExpositionController extends Controller
      * Lists all Exposition entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
@@ -31,9 +32,17 @@ class ExpositionController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
+        $paginator  = $this->get('knp_paginator');
+
+        $paginator  = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $expositions,
+                $request->query->get('page', 1)/*page number*/,
+                10/*limit per page*/
+            );
 
         return $this->render('exposition/index.html.twig', array(
-            'expositions' => $expositions,
+            'expositions' => $pagination,
             'role'        => $role,
         ));
     }
@@ -207,32 +216,41 @@ class ExpositionController extends Controller
      * Deletes a Exposition entity.
      *
      */
-    public function deleteAction(Request $request, Exposition $exposition)
+    public function deleteAction(Request $request)
     {
         // On récupère le role de la personne connectée
-        $role = $this->getUser()->getRole();
-
-        // On récupère l'id de l'oeuvre a supprimée
-        $id = $exposition->getId();
-        if($id != "")
+        //$role = $this->getUser()->getRole();
+        // Si on reçoit une requête Ajax
+        if($request->isXMLHttpRequest())
         {
-            $em = $this->getDoctrine()->getManager();
-            // On fait une requête pour récupérer les infos de l'oeuvre
-            $expo = $em->getRepository('ModuleGestionBundle:Exposition')->find($id);
-            // On instancie un objet fichier system
-            $fs = new Filesystem();
-            // On récupère le nom exact du fichier à supprimer
-            $symlink = $expo->getFichier();
-            // On définit le chemin de la suppression du fichier
-            $path = $this->container->getParameter('multimedias_directory')."/".$symlink;
-            // On supprime
-            $fs->remove($path);
+            // On récupère l'id de l'oeuvre a supprimée
+            $id = $request->get('id');
+            if($id != "")
+            {
+                $em = $this->getDoctrine()->getManager();
+                // On fait une requête pour récupérer les infos de l'oeuvre
+                $expo = $em->getRepository('ModuleGestionBundle:Exposition')->find($id);
+                // On instancie un objet fichier system
+                $fs = new Filesystem();
+                // On récupère le nom exact du fichier à supprimer
+                $symlink = $expo->getFichier();
+                // On définit le chemin de la suppression du fichier
+                $path = $this->container->getParameter('multimedias_directory')."/".$symlink;
+                // On supprime
+                $fs->remove($path);
+            }
+
+            $em->remove($expo);
+            $em->flush();
+
+        //return $this->redirectToRoute('exposition_index');
+            $message = "Suppression effectuée avec succès !";
+        }else{
+            $message = "Erreur de suppression !";
         }
 
-        $em->remove($exposition);
-        $em->flush();
-
-        return $this->redirectToRoute('exposition_index');
+        // Puis on le renvoie dans un tableau en Json
+        return new JsonResponse(array('msg' => json_encode($message, JSON_UNESCAPED_UNICODE)));
     }
 
     /**
@@ -303,6 +321,7 @@ class ExpositionController extends Controller
                   FROM Exposition as e
                   WHERE id <> ".$idExpo;
         $ExpoTrouve = $connection->fetchAll($query);
+        var_dump($ExpoTrouve);
         $verif = true;
         foreach ($ExpoTrouve as $Expo)
         {
@@ -310,23 +329,37 @@ class ExpositionController extends Controller
             {
                 $dateFinReq = date("Y-m-d H:i", strtotime($Expo['datefin']." +4 days"));
                 $date = new \DateTime($dateFinReq);
+                var_dump($date);
 
                 $dateDebutTrouve = $request->request->get('exposition')['dateHeureDebutExposition'];
                 $dateDebutTrouve = str_replace("/", "-", $dateDebutTrouve);
                 $dateDebut = new \DateTime($dateDebutTrouve);
-                if($date > $dateDebut)
-                {
-                    $verif = false;
-                }
+                var_dump($dateDebut);
+
                 $dateDebReq = $Expo['datedeb'];
                 $date = new \DateTime($dateDebReq);
 
                 $dateFinTrouve = $request->request->get('exposition')['dateHeureFinExposition'];
-                $dateFinTrouve = str_replace("/", "-", $dateDebutTrouve);
-                $dateFin = new \DateTime($dateDebutTrouve);
-                if($date > $dateFin)
+                $dateFinTrouve = str_replace("/", "-", $dateFinTrouve);
+                $dateFin = new \DateTime($dateFinTrouve);
+
+                if($date > $dateDebut)
                 {
-                    $verif = false;
+                    if($date > $dateFin)
+                    {
+                        $verif = true;
+                    } else {
+                        $verif = false;
+                    }
+                }
+                if($date < $dateFin)
+                {
+                    if($date < $dateDebut)
+                    {
+                        $verif = true;
+                    } else {
+                        $verif = false;
+                    }
                 }
             }
             if($verif == false)

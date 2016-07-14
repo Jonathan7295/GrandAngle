@@ -144,7 +144,7 @@ class StatistiqueController extends Controller
         // ID de l'élement de HTML que utilisé comme conteneur
         $ob->chart->renderTo('linechart');
         // Tittre du graphique
-        $ob->title->text('Nombre de vues par exposition');
+        $ob->title->text('Nombre de vues par oeuvre par exposition');
         // Type du graphique
         $ob->chart->type('column');
         // Axe des ordonnées
