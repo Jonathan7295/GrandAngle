@@ -695,7 +695,7 @@
                 <script>
                     $('#oeuvre_image').attr('id', 'input-id');
                     $('#input-id').attr('data-preview-file-type', 'text');
-                    $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Supprimer'});
+                    $('#input-id').fileinput();
                 </script>
                 <div class="col-md-4 form-group">
                     {# Génération de l'input #}
@@ -707,15 +707,19 @@
                 <script>
                 $(document).ready(function(){
 
-                    // On met en forme le sélecteur de fichier
+                    // On met en forme le sélecteur de fichier de l'oeuvre
                     $('#multimedia_type_fichier').attr('id', 'input-id');
                     $('#input-id').attr('class', 'file');
                     $('#input-id').attr('data-preview-file-type', 'text');
-                    $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
+                    $('#input-id').fileinput();
+                    $('input[name="oeuvre[image]"]').parent().find('.hidden-xs').html('Select...');
+                    // On met en forme le sélecteur de fichier du contenu additionnel de l'oeuvre
+                    $('input[name="multimedia_type[fichier]"]').parent().find('.hidden-xs').html('Select...');
+                    $('#oeuvre_image').css('display', 'none');
 
                     $('#multimedia_type_stockage').attr('disabled', 'disabled');
-                    // $('#multimedia_type_video').css('display', 'none');
-                    // $('#input-id').css('display', 'none');
+                    $('#multimedia_type_video').css('display', 'none');
+                    $('#input-id').css('display', 'none');
 
                     // On désactive la validation formulaire du navigateur 
                     $('form').attr('novalidate', '');

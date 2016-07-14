@@ -43,7 +43,7 @@ class Utilisateur extends BaseUser
     private $role;
 
     /**
-     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Telephone", mappedBy="utilisateur", cascade={"persist","remove"})
      */
     private $telephones;
 

@@ -32,8 +32,7 @@ class OeuvreController extends Controller
             //Connection à la base de données
             $connection = $this->get('database_connection');
             // récupérer la liste complète des oeuvres
-            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
-                            left join emplacement as e on e.oeuvre_id = o.id
+            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             inner join artiste as a on o.artiste_id = a.id
                             left join typeoeuvre as t on o.typeoeuvre_id = t.id";
             // On stocke le résultat
@@ -73,7 +72,7 @@ class OeuvreController extends Controller
             $id = $req->get('id');
             $connection = $this->get('database_connection');
             // récupérer la liste des oeuvres
-            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.nombreVisite,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
+            $query = "select o.nom,o.etat,a.nom as nomArt,a.prenom as preNomArt,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             left join emplacement as e on e.oeuvre_id = o.id
                             inner join artiste as a on o.artiste_id = a.id
                             inner join typeoeuvre as t on o.typeoeuvre_id = t.id  

@@ -83,7 +83,7 @@
                     <script>
                         $('#oeuvre_image').attr('id', 'input-id');
                         $('#input-id').attr('data-preview-file-type', 'text');
-                        $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Supprimer'});
+                        $('#input-id').fileinput();
                     </script>
                     <div class="col-md-4 form-group">
                         {# Génération de l'input #}
@@ -98,6 +98,10 @@
                     {% endjavascripts %}
                     <script>
                         $(document).ready(function(){
+
+                            // On modifie le nom des boutons d'upload
+                            $('[name="oeuvre[image]"]').parent().find('.hidden-xs').html('Select...');
+                            $('.glyphicon-trash').parent().find('.hidden-xs').html('Supprimer');
 
                             $('#oeuvre_typeoeuvre').change(function(){
                                 if($(this).val() == 0){
@@ -258,7 +262,10 @@
                                         $('#oeuvre_multi_1_fichier').attr('id', 'input-id');
                                         $('#input-id').attr('class', 'file');
                                         $('#input-id').attr('data-preview-file-type', 'text');
-                                        $('#input-id').fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Supprimer'});
+                                        $('#input-id').fileinput();
+                                        // On modifie le nom des boutons de l'upload
+                                        $('[name="oeuvre[multi][1][fichier]"]').parent().find('.hidden-xs').html('Select...');
+                                        $('.glyphicon-trash').parent().find('.hidden-xs').html('Supprimer');
 
                                         $('[for="oeuvre_multi_1_multi_titre"]').attr('class','label-control');
                                         $('#oeuvre_multi_1_multi_titre').attr('class', 'form-control');

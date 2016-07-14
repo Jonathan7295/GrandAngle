@@ -15,9 +15,8 @@ class OeuvreRepository extends \Doctrine\ORM\EntityRepository
 	public function getFindAllOeuv(){
 
 		$query = $this->_em->createQuery('
-			SELECT o, e, a, t
+			SELECT o, a, t
 			FROM ModuleGestionBundle:Oeuvre o
-			LEFT JOIN o.emplacements e
 			INNER JOIN o.artiste a
 			LEFT JOIN o.typeoeuvre t');
 
