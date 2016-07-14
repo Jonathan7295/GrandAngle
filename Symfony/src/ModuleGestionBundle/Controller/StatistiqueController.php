@@ -78,7 +78,6 @@ class StatistiqueController extends Controller
             $Expo = $connection->fetchAll($query);
             $TotalExpo = array_merge($TotalExpo, $Expo);
         }
-        var_dump($TotalExpo);
         $nbexpo = count($TotalExpo);
 
         $tableau = array();
@@ -105,7 +104,7 @@ class StatistiqueController extends Controller
         {
             $tab = array();
             $tab['name'] = $value;
-            $precedent = $value;
+            //$precedent = $value;
             $tab['data'] = array();
             //il faut chercher dans chaque $TotalExpo les expo qui on l'oeuvre $value
             $memo = "";
@@ -129,16 +128,18 @@ class StatistiqueController extends Controller
                         }
                         if($trouve == false)
                         {
-                           array_push($tab['data'],0); 
+                            array_push($tab['data'],0); 
+                            $memo = $value2['nomexpo'];
                         }
+                        $trouve = false;
                     }
                 }
-                $trouve = false;
+                //$trouve = false;
             }
+            $trouve = false;
             $memo = "";
             array_push($tableConstruit, $tab);
         }
-        var_dump($tableConstruit);
         $ob = new Highchart();
         // ID de l'élement de HTML que utilisé comme conteneur
         $ob->chart->renderTo('linechart');
