@@ -496,4 +496,35 @@ class OeuvreController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Tests sur les oeuvres
+     *
+     */
+    public function testUniteAction(Request $req)
+    {
+        // Si on reçoit une requête Ajax
+        if($req->isXMLHttpRequest()) {
+
+            // On récupère le nom de l'oeuvre
+            $nomOeuv = $req->get('nomOeuv');
+
+            // Connection à la base
+            $connection = $this->get('database_connection');
+
+            // On vérifie si l'oeuvre existe
+            $query = "select * from oeuvre o where o.nom='".$nomOeuv."'";
+            // On récupère la réponse
+            $rows = $connection->fetchAll($query);
+            // Si la requête renvoie rien
+            if(empty($rows))
+                $message = false;
+            else
+                $message = true;
+
+            // On la retourne
+            return new JsonResponse(array('data' => json_encode($message)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
+    }
 }

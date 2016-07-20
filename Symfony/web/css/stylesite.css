@@ -606,9 +606,6 @@ textarea {
 }
 
 /*****Show exposition*****/
-#showexpo{
-
-}
 
 #showexporet{
 	background-color: #777;
@@ -659,8 +656,33 @@ textarea {
 	padding-right: 0px;
 }
 
+.labeloeuvre2 label, .labelpos2 label {
+	line-height: 33px;
+	margin-bottom: 15px;
+}
+
+
 #labeldescrip{
 	padding-left: 0px;
+}
+
+.red3 {
+	background-color: #BD3329;
+	color : #E3E3E3;
+	border-radius:4px;
+	padding: 9px 9px;
+	margin-bottom: 0.859em;
+}
+
+.red3:hover{
+	background-color: #BE524A;
+	color : white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#oeuvreexpo {
+	margin-left: -30px;
 }
 
 /***************Style Gestion oeuvre*******************/

@@ -150,7 +150,7 @@
                         var index = 0;
                         while ($('#exposition_emplacements_'+index).length > 0) {
                             // On récupère le lien de suppression
-                            var dellink = '<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red red2"></a>'
+                            var dellink = '<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red red3"></a>'
 
                             // On désactive le label de l'indice de collection
                             $('label.required:contains('+index+')').css('display','none');
@@ -163,19 +163,19 @@
                              console.log(descendant);
 
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-                            $('.labelpos').append(descendant[0]);
+                            $('.labelpos2').append(descendant[0]);
                             $('.champspos').append(descendant[1]);
-                            $('.labeloeuvre').append(descendant[32]);
+                            $('.labeloeuvre2').append(descendant[32]);
                             $('.champsoeuvre').append(descendant[33]);
                             $('.deplace2 ').append(dellink);
                             // On incremente après chaque disposition de champs
                             index++;
                         }
                         // Puis on intègre tout ça dans le formulaire
-                        $('#lienrow').append($('#oeuvre'));
+                        $('#lienrow').append($('#oeuvreexpo'));
 
                          // Quand on clique pour supprimer un numéro
-                        $('a.red2').click(function(e){
+                        $('a.red3').click(function(e){
 
                             // On récupère l'index du champs à supprimer
                             var num = $(this).attr('name');
@@ -226,16 +226,16 @@
                             console.log(descendant);
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
 
-                            $('.labelpos').append(descendant[3]);
+                            $('.labelpos2').append(descendant[3]);
                             $('.champspos').append(descendant[4]);
-                            $('.labeloeuvre').append(descendant[36]);
+                            $('.labeloeuvre2').append(descendant[36]);
                             $('.champsoeuvre').append(descendant[37]);
 
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                             addDeleteLinkOeuvre2($('.deplace2'));
 
                             //on ajoute le prototype modifié à la fin de la balise <div>
-                            $('#oeuvre').append($('#add_oeuvre'));
+                            $('#oeuvreexpo').append($('#add_oeuvre'));
 
                             //enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
                             index++;
@@ -243,7 +243,7 @@
                         //la fonction qui ajoute un lien de suppression d'un text
                         function addDeleteLinkOeuvre2($prototype) {
                             //création du lien 
-                            $deleteLink = $('<a type="button" name="'+index+'2'+'" class="glyphicon glyphicon-remove-circle red red2"></a>');
+                            $deleteLink = $('<a type="button" name="'+index+'2'+'" class="glyphicon glyphicon-remove-circle red red3"></a>');
 
                             //Ajout du lien
                             $prototype.append($deleteLink);
@@ -273,14 +273,14 @@
                 </script>
                 <div class="row">
                     <div class="row">
-                        <div id="oeuvre" class="col-md-10 col-sm-10 col-xs-10">
+                        <div id="oeuvreexpo" class="col-md-10 col-sm-10 col-xs-10">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos control-label ajust"></div>
-                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label ajustSel"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust"></div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label ajustSel"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label ajust "></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos2 control-label"></div>
+                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
                                 </div>
                             </div>
                         </div>
@@ -295,7 +295,7 @@
                         //On ajoute un lien pour ajouter un nouveau textexposition
                         var $addLink =$('<a type="button" id="add_oeuvre" class="glyphicon glyphicon-ok-circle vert"></a>');
 
-                        $('#oeuvre').append($addLink);
+                        $('#oeuvreexpo').append($addLink);
 
                         //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
                         $addLink.click(function(e) {
@@ -331,9 +331,9 @@
                             var descendant = $newprototype.find('*');
                            
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-                            $('.labelpos').append(descendant[3]);
+                            $('.labelpos2').append(descendant[3]);
                             $('.champspos').append(descendant[4]);
-                            $('.labeloeuvre').append(descendant[36]);
+                            $('.labeloeuvre2').append(descendant[36]);
                             $('.champsoeuvre').append(descendant[37]);
 
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
@@ -348,7 +348,7 @@
                         //la fonction qui ajoute un lien de suppression d'un text
                         function addDeleteLinkOeuvre($prototype) {
                             //création du lien 
-                            $deleteLink = $('<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red red2"></a>');
+                            $deleteLink = $('<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red red3"></a>');
 
                             //Ajout du lien
                             $prototype.append($deleteLink);
@@ -378,14 +378,14 @@
                 </script>
                 <div class="row">
                     <div class="row">
-                        <div id="oeuvre2" class="col-md-10 col-sm-10 col-xs-10">
+                        <div id="oeuvreexpo" class="col-md-10 col-sm-10 col-xs-10">
                             <div class="form-group">
                                 <div class="form-group">
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos control-label ajust"></div>
-                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label ajustSel"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust"></div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label ajustSel"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label ajust "></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos2 control-label"></div>
+                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
                                 </div>
                             </div>
                         </div>

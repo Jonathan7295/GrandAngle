@@ -31,6 +31,11 @@ list_oeuvre:
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:listOeuvre" }
     methods: [POST]
 
+test_unit_oeuvre:
+    path:    /test_unit/oeuvre
+    defaults: { _controller: "ModuleGestionBundle:Oeuvre:testUnite" }
+    methods: [POST]
+
 test_scan_oeuvre:
     path:   /scan
     defaults: { _controller: "ModuleGestionBundle:Scan:TestScan" }

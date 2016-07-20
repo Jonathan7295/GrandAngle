@@ -321,7 +321,6 @@ class ExpositionController extends Controller
                   FROM Exposition as e
                   WHERE id <> ".$idExpo;
         $ExpoTrouve = $connection->fetchAll($query);
-        var_dump($ExpoTrouve);
         $verif = true;
         foreach ($ExpoTrouve as $Expo)
         {
@@ -329,12 +328,10 @@ class ExpositionController extends Controller
             {
                 $dateFinReq = date("Y-m-d H:i", strtotime($Expo['datefin']." +4 days"));
                 $date = new \DateTime($dateFinReq);
-                var_dump($date);
 
                 $dateDebutTrouve = $request->request->get('exposition')['dateHeureDebutExposition'];
                 $dateDebutTrouve = str_replace("/", "-", $dateDebutTrouve);
                 $dateDebut = new \DateTime($dateDebutTrouve);
-                var_dump($dateDebut);
 
                 $dateDebReq = $Expo['datedeb'];
                 $date = new \DateTime($dateDebReq);
