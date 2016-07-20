@@ -99,6 +99,93 @@
                     <script>
                         $(document).ready(function(){
 
+                            // Test du nom de l'oeuvre
+                            $('#oeuvre_nom').change(function(event){
+
+                                var nomOeuv = $(this).val();
+
+                                if (nomOeuv != '') {
+
+                                    $.ajax({
+                                        url: "{{ path('test_unit_oeuvre') }}", // On renseigne l'url TWIG
+                                        method: "post",
+                                        data: {nomOeuv: nomOeuv} // On passe l'id dans la requête
+                                    }).done(function(msg){
+                                        // Si l'oeuvre existe déjà
+                                        if(msg.data == "true"){
+                                            alert("Cette oeuvre existe déjà !");
+                                            $('#newartval').hide('slow/400/fast');
+                                        }else{
+                                            $('#newartval').show('slow/400/fast');
+                                        }
+                                    });
+                                }
+
+                            });
+
+                            // Test avant validation
+                            $('#newartval').click(function(event) {
+
+                                // On vérifie la diversité des langues
+                                // On récupère le nombre de langue afficher
+                                var nbLangue = $('.champslang').children('*').length;
+
+                                if(nbLangue > 1){
+
+                                    tableLang = new Array();
+                                    // Puis on boucle dessus
+                                    for(var a = 0; a < nbLangue; a++){
+                                        tableLang[a] = $('#oeuvre_texteoeuvres_'+a+'_langue option:selected').text();
+                                    }
+                                    // On trie par ordre alphabétique
+                                    tableLang.sort();
+                                    // Puis on reboucle en comparant chaque paires ordonnées
+                                    var ordo = false;
+                                    var nextTable = "";
+
+                                    for(var b = 0; b < nbLangue; b++){
+                                        // On vérifie si l'élément en cours est strictement égal au précédent
+                                        if(tableLang[b] == nextTable){
+                                            ordo = true;
+                                        }
+                                        // On définit le précédent suivant
+                                        nextTable = tableLang[b];
+                                    }
+                                    
+                                    if(ordo){
+                                        // On stoppe le comportement par défaut
+                                        event.preventDefault();
+                                        alert("Vous ne pouvez pas enregistrer plusieurs traductions avec la même langue !");
+                                        return;
+                                    }else{
+                                       // Suppression de l'objet event
+                                        delete event;
+                                    }
+                                }
+
+                                // On vérifie le choix du type d'oeuvre
+                                if($('#oeuvre_typeoeuvre option:selected').text() == "Sélectionnez"){
+                                    // On stoppe le comportement par défaut
+                                    event.preventDefault();
+                                    alert("Vous devez choisir un type d'oeuvre !");
+                                }else{
+                                    // Suppression de l'objet event
+                                    delete event;
+                                }
+
+                                // On vérifie le choix de l'artiste
+                                if($('#oeuvre_artiste option:selected').text() == "Nouvel artiste"){
+                                    // On stoppe le comportement par défaut
+                                    event.preventDefault();
+                                    alert("Vous devez choisir un artiste !");
+                                }else{
+                                    // Suppression de l'objet event
+                                    delete event;
+                                }
+
+
+                            });
+
                             // On modifie le nom des boutons d'upload
                             $('[name="oeuvre[image]"]').parent().find('.hidden-xs').html('Select...');
                             $('.glyphicon-trash').parent().find('.hidden-xs').html('Supprimer');
@@ -380,6 +467,7 @@
 
         //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
         $addLink.click(function(e) {
+            if(index < 5)
             addTexteOeuvre($container);
             e.preventDefault(); // évite qu'un # apparaisse dans l'url
             return false;
@@ -572,5 +660,6 @@
         $('#previsu').append($img); 
         
     }
+
     </script>
 {% endblock %}

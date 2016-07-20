@@ -321,7 +321,6 @@ class ExpositionController extends Controller
                   FROM Exposition as e
                   WHERE id <> ".$idExpo;
         $ExpoTrouve = $connection->fetchAll($query);
-        var_dump($ExpoTrouve);
         $verif = true;
         foreach ($ExpoTrouve as $Expo)
         {

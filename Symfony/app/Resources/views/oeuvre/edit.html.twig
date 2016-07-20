@@ -359,6 +359,7 @@
 
                             //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
                             $addLink.click(function(e) {
+                                if(index < 5)
                                 addTexteOeuvre($container);
                                 e.preventDefault(); // évite qu'un # apparaisse dans l'url
                                 return false;

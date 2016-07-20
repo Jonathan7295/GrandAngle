@@ -20,7 +20,7 @@ class ArtisteType extends AbstractType
             ->add('prenom')
             ->add('nationalite')
             ->add('dateNaissance', TextType::class)
-            ->add('dateMort', TextType::class)
+            ->add('dateMort', TextType::class, array("required" => false))
         ;
     }
     

@@ -53,7 +53,7 @@ class Artiste
     /**
      * @var String
      *
-     * @ORM\Column(name="date_mort", type="string")
+     * @ORM\Column(name="date_mort", type="string", nullable=true)
      */
     private $dateMort;
 
