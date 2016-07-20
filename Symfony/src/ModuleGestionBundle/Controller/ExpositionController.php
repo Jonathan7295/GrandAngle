@@ -326,7 +326,7 @@ class ExpositionController extends Controller
         {
             if($Expo['datefin'] != "" && $Expo['datedeb'] != "")
             {
-                $dateFinReq = date("Y-m-d H:i", strtotime($Expo['datefin']." +4 days"));
+                $dateFinReq = date("Y-m-d H:i", strtotime($Expo['datefin']." +2 days"));
                 $date = new \DateTime($dateFinReq);
 
                 $dateDebutTrouve = $request->request->get('exposition')['dateHeureDebutExposition'];
@@ -366,7 +366,7 @@ class ExpositionController extends Controller
         }
         if ($verif == false)
         {
-            throw $this->createNotFoundException('Vous ne pouvais pas créer une exposition avec moins de 3 jours de séparation avec la dernière');
+            throw $this->createNotFoundException('Vous ne pouvez pas créer une exposition avec moins de 3 jours de séparation avec la dernière');
         }
         //Test Le nom de l'exposition existe déjà
         $nomExpo = $request->request->get('exposition')['nomExposition'];
@@ -377,7 +377,7 @@ class ExpositionController extends Controller
         $nomExpoTrouve = $connection->fetchAll($query);
         if(!empty($nomExpoTrouve))
         {
-            throw $this->createNotFoundException('Vous ne pouvais pas créer une exposition dont le nom existe déjà.');
+            throw $this->createNotFoundException('Vous ne pouvez pas créer une exposition dont le nom existe déjà.');
         }
         //Test si la langue est présente en plusieurs fois
         $textexpositions = $request->request->get('exposition')['textexpositions'];
@@ -389,7 +389,7 @@ class ExpositionController extends Controller
                 {
                     array_push($pos, $value['langue']);
                 } else {
-                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer posséde plusieurs fois la langue.');
+                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer posséde plusieurs fois la même langue.');
                     break;
                 }
             }
