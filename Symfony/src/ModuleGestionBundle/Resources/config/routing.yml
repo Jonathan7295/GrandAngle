@@ -26,6 +26,11 @@ module_gestion_artiste:
     resource: "@ModuleGestionBundle/Resources/config/routing/artiste.yml"
     prefix:    /artiste
 
+test_unit_artiste:
+    path:    /test_unit/artiste
+    defaults: { _controller: "ModuleGestionBundle:Artiste:testUnite" }
+    methods: [POST]
+
 list_oeuvre:
     path:    /list/oeuvre
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:listOeuvre" }

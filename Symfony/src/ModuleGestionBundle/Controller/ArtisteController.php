@@ -5,7 +5,7 @@ namespace ModuleGestionBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 use ModuleGestionBundle\Entity\Artiste;
 use ModuleGestionBundle\Form\ArtisteType;
 
@@ -164,5 +164,39 @@ class ArtisteController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+     /**
+     * Tests sur les artistes
+     *
+     */
+    public function testUniteAction(Request $req)
+    {
+        // Si on reçoit une requête Ajax
+        if($req->isXMLHttpRequest()) {
+
+            // On récupère le nom de l'artiste et le prénom
+            $nomArtist = $req->get('nomArtist');
+            $prenArtist = $req->get('prenArtist');
+
+            // Connection à la base
+            $connection = $this->get('database_connection');
+
+            // On vérifie si l'artiste existe
+            $query = "select * from artiste a where a.nom='".$nomArtist."'and prenom='".$prenArtist."'";
+
+            // On récupère la réponse
+            $rows = $connection->fetchAll($query);
+
+            // Si la requête renvoie rien
+            if(empty($rows))
+                $message = false;
+            else
+                $message = true;
+
+            // On la retourne
+            return new JsonResponse(array('data' => json_encode($message)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
 }

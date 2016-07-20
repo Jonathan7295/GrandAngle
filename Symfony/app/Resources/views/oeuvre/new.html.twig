@@ -109,7 +109,7 @@
                                     $.ajax({
                                         url: "{{ path('test_unit_oeuvre') }}", // On renseigne l'url TWIG
                                         method: "post",
-                                        data: {nomOeuv: nomOeuv} // On passe l'id dans la requête
+                                        data: {nomOeuv: nomOeuv} // On passe le nom de l'oeuvre dans la requête
                                     }).done(function(msg){
                                         // Si l'oeuvre existe déjà
                                         if(msg.data == "true"){

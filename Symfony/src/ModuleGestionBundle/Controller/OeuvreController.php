@@ -512,15 +512,47 @@ class OeuvreController extends Controller
             // Connection à la base
             $connection = $this->get('database_connection');
 
-            // On vérifie si l'oeuvre existe
-            $query = "select * from oeuvre o where o.nom='".$nomOeuv."'";
-            // On récupère la réponse
-            $rows = $connection->fetchAll($query);
-            // Si la requête renvoie rien
-            if(empty($rows))
-                $message = false;
-            else
-                $message = true;
+            // Si on est en mode edition
+            if(null !== $req->get('editMode')){
+
+                // On récupère l'id
+                $id = $req->get('idOeuv');
+
+                // On vérifie si le nom de l'oeuvre correspond à l'oeuvre en cours
+                $query = "select * from oeuvre o where o.nom='".$nomOeuv."' and o.id='".$id."'";
+                // On récupère la réponse
+                $rows = $connection->fetchAll($query);
+
+                // Si l'oeuvre en cours a un nom différent
+                if(empty($rows)){
+                    // On vérifie si le nouveau nom d'oeuvre existe
+                    $query = "select * from oeuvre o where o.nom='".$nomOeuv."'";
+                    // On récupère la réponse
+                    $rows = $connection->fetchAll($query);
+
+                        // Si la requête renvoie rien
+                        if(empty($rows))
+                            $message = false;
+                        else
+                            $message = true;
+                }else{
+
+                    $message = false;
+                }
+
+            }else{
+                // On vérifie si l'oeuvre existe
+                $query = "select * from oeuvre o where o.nom='".$nomOeuv."'";
+                // On récupère la réponse
+                $rows = $connection->fetchAll($query);
+                // Si la requête renvoie rien
+                if(empty($rows))
+                    $message = false;
+                else
+                    $message = true;
+            }
+
+            
 
             // On la retourne
             return new JsonResponse(array('data' => json_encode($message)));

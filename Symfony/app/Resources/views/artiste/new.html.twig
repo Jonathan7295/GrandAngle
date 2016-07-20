@@ -86,12 +86,47 @@
     {% endjavascripts %}
     <script type="text/javascript">
         $(document).ready(function() {
+            // Affichage date picker
             $.datetimepicker.setLocale('fr');
             $('.calendar').datetimepicker({
                 dayOfWeekStart : 1,
                 lang:'fr',
                 format:'d/m/Y H:i',
             });
+
+            // Test du nom et prenom de l'artiste
+            $('#artiste_prenom').change(function(event){
+               controleArtiste();
+            });
+
+            $('#artiste_nom').change(function(event){
+               controleArtiste();
+            });
+
+            function controleArtiste(){
+
+                var nomArtist = $('#artiste_nom').val();
+                var prenArtist = $('#artiste_prenom').val();
+
+                if (nomArtist != '' && prenArtist != '') {
+
+                    $.ajax({
+                        url: "{{ path('test_unit_artiste') }}", // On renseigne l'url TWIG
+                        method: "post",
+                        data: {nomArtist: nomArtist,
+                               prenArtist: prenArtist} // On passe le nom de l'artiste et le prenom dans la requête
+                    }).done(function(msg){
+                        // Si l'artiste existe déjà
+                        if(msg.data == "true"){
+                            alert("Cet artiste existe déjà !");
+                            $('#newartval').hide();
+                        }else{
+                           $('#newartval').show();
+                        }
+                    });
+                }
+            }
+
         });
     </script>
 {% endblock %}

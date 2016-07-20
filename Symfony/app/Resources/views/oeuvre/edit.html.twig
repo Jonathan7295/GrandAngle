@@ -755,6 +755,7 @@
                             {{ form_widget(edit_form.genFlashcode, {'attr': {'id': 'input-1'}}) }}
                             <script>
                                 $(document).ready(function(){
+
                                     // On met en forme le bouton Video
                                     $(':checkbox').checkboxpicker();
                                     // On met en forme le bouton Flashcode
@@ -766,6 +767,77 @@
                                 });
                             </script>
                         {% endif %}
+                            <script>
+                                $(document).ready(function(){
+
+                                    // Test du nom de l'oeuvre
+                                    $('#oeuvre_nom').change(function(event){
+
+                                        var nomOeuv = $(this).val();
+
+                                        if (nomOeuv != '') {
+
+                                            $.ajax({
+                                                url: "{{ path('test_unit_oeuvre') }}", // On renseigne l'url TWIG
+                                                method: "post",
+                                                data: {nomOeuv: nomOeuv,
+                                                       editMode: true,
+                                                       idOeuv: {{ oeuvre.id }} } // On passe le nom de l'oeuvre et le mode dans la requête
+                                            }).done(function(msg){
+                                                // Si l'oeuvre existe déjà
+                                                if(msg.data == "true"){
+                                                    alert("Cette oeuvre existe déjà !");
+                                                    $('#newartval').hide('slow/400/fast');
+                                                }else{
+                                                    $('#newartval').show('slow/400/fast');
+                                                }
+                                            });
+                                        }
+
+                                    });
+
+                                    // Test avant validation
+                                    $('#newartval').click(function(event) {
+
+                                        // On vérifie la diversité des langues
+                                        // On récupère le nombre de langue afficher
+                                        var nbLangue = $('.champslang').children('*').length;
+
+                                        if(nbLangue > 1){
+
+                                            tableLang = new Array();
+                                            // Puis on boucle dessus
+                                            for(var a = 0; a < nbLangue; a++){
+                                                tableLang[a] = $('#oeuvre_texteoeuvres_'+a+'_langue option:selected').text();
+                                            }
+                                            // On trie par ordre alphabétique
+                                            tableLang.sort();
+                                            // Puis on reboucle en comparant chaque paires ordonnées
+                                            var ordo = false;
+                                            var nextTable = "";
+
+                                            for(var b = 0; b < nbLangue; b++){
+                                                // On vérifie si l'élément en cours est strictement égal au précédent
+                                                if(tableLang[b] == nextTable){
+                                                    ordo = true;
+                                                }
+                                                // On définit le précédent suivant
+                                                nextTable = tableLang[b];
+                                            }
+                                            
+                                            if(ordo){
+                                                // On stoppe le comportement par défaut
+                                                event.preventDefault();
+                                                alert("Vous ne pouvez pas enregistrer plusieurs traductions avec la même langue !");
+                                                return;
+                                            }else{
+                                               // Suppression de l'objet event
+                                                delete event;
+                                            }
+                                        }
+                                    });
+                                });
+                            </script>
                     </div>
                     <div class="col-md-4">
                         <input id="newartval" type="submit" value="Enregistrer" />
