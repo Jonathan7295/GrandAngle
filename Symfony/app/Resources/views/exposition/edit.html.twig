@@ -199,7 +199,11 @@
 
                         //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
                         $('#add_oeuvre').click(function(e) {
-                            addOeuvre2($container);
+                            var nbOeuvre= $('#oeuvre .form-group .form-group .deplace2').find('a').length;
+                            if(nbOeuvre < 30)
+                            {
+                                addOeuvre2($container);
+                            }
                             e.preventDefault(); // évite qu'un # apparaisse dans l'url
                             return false;
                         });
@@ -458,7 +462,11 @@
 
                         //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
                         $('#add_textexposition').click(function(e) {
-                            addTextExposition2($container);
+                            var nbTexte = $(document).find('textarea').length;
+                            if(nbTexte < 5)
+                            {
+                                addTextExposition2($container);
+                            }
                             e.preventDefault(); // évite qu'un # apparaisse dans l'url
                             return false;
                         });
