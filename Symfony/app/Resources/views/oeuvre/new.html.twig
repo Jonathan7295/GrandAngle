@@ -168,6 +168,7 @@
                                     // On stoppe le comportement par défaut
                                     event.preventDefault();
                                     alert("Vous devez choisir un type d'oeuvre !");
+                                    return;
                                 }else{
                                     // Suppression de l'objet event
                                     delete event;
@@ -178,12 +179,11 @@
                                     // On stoppe le comportement par défaut
                                     event.preventDefault();
                                     alert("Vous devez choisir un artiste !");
+                                    return;
                                 }else{
                                     // Suppression de l'objet event
                                     delete event;
                                 }
-
-
                             });
 
                             // On modifie le nom des boutons d'upload
