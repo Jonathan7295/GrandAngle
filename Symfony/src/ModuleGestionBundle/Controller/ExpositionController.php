@@ -69,7 +69,7 @@ class ExpositionController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $id = 0;
-            $this->TestDebugExpoAction($request, $id);
+            //$this->TestDebugExpoAction($request, $id);
 
             $file = $request->files->get("exposition")["fichier"];
             // On génère un nom unique pour ce fichier 
@@ -195,8 +195,6 @@ class ExpositionController extends Controller
                 }    
             }
 
-            $this->TestDebugExpoAction($request, $id);
-
             $em->persist($exposition);
             $em->flush();
 
@@ -269,130 +267,139 @@ class ExpositionController extends Controller
         ;
     }
 
-    private function TestDebugExpoAction(Request $request, $idExpo)
+    public function testNomAction(Request $request)
     {
-        $emplacements = $request->request->get('exposition')['emplacements'];
-        //Test si plusieurs fois la même position
-        if (is_array($emplacements))
-        {
-            $pos = array();
-            foreach ($emplacements as $emp => $value) {
-                if(!in_array($value['position'], $pos))
-                {
-                    array_push($pos, $value['position']);
-                } else {
-                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a des oeuvres qui possédent la même position.');
-                    break;
-                }
-            }
-        }
-        //Test si plusieurs fois la même oeuvre
-        if (is_array($emplacements))
-        {
-            $pos = array();
-            foreach ($emplacements as $emp => $value) {
-                if(!in_array($value['oeuvre'], $pos))
-                {
-                    array_push($pos, $value['oeuvre']);
-                } else {
-                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a des oeuvres qui possédent le même nom.');
-                    break;
-                }
-            }
-        }
-        $dateDebut = $request->request->get('exposition')['dateHeureDebutExposition'];
-        $dateDebut = str_replace("/", "-", $dateDebut);
-        $dateDebut = date("Y-m-d H:i", strtotime($dateDebut));
-        $dateD = new \DateTime($dateDebut);
-        $dateFin = $request->request->get('exposition')['dateHeureFinExposition'];
-        $dateFin = str_replace("/", "-", $dateFin);
-        $dateFin = date("Y-m-d H:i", strtotime($dateFin));
-        $dateF = new \DateTime($dateFin);
-        //Test si date de début inférieur à la date de fin 
-        if ($dateD > $dateF)
-        {
-            throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer a la date de fin inférieur à la date de début.');
-        }
-
-        //Test si date de début est bien supérieur de 3 jour par rapport à la dernière date
-        //de fin des expositions enregistrer
-        $connection = $this->get('database_connection');
-        $query = "SELECT e.dateHeureFinExposition as datefin, e.dateHeureDebutExposition as datedeb
-                  FROM Exposition as e
-                  WHERE id <> ".$idExpo;
-        $ExpoTrouve = $connection->fetchAll($query);
-        $verif = true;
-        foreach ($ExpoTrouve as $Expo)
-        {
-            if($Expo['datefin'] != "" && $Expo['datedeb'] != "")
+        if($request->isXMLHttpRequest()) {
+            $idExpo = $request->get('idExpo');
+            $nomExpo = $request->get('nomExpo');
+            $connection = $this->get('database_connection');
+            $query = "SELECT e.nomExposition as nom
+                      FROM Exposition as e
+                      WHERE e.id <> ".$idExpo."
+                      AND e.nomExposition ='".$nomExpo."'";
+            $nomExpoTrouve = $connection->fetchAll($query);
+            var_dump($query);
+            var_dump($nomExpoTrouve);
+            die;
+            if(empty($nomExpoTrouve))
             {
-                $dateFinReq = date("Y-m-d H:i", strtotime($Expo['datefin']." +2 days"));
-                $date = new \DateTime($dateFinReq);
+                $message = false;
+            }
+            else
+            {
+                $message = true;
+            }
 
-                $dateDebutTrouve = $request->request->get('exposition')['dateHeureDebutExposition'];
-                $dateDebutTrouve = str_replace("/", "-", $dateDebutTrouve);
-                $dateDebut = new \DateTime($dateDebutTrouve);
+            return new JsonResponse(array('data' => json_encode($message)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
+    }
 
-                $dateDebReq = $Expo['datedeb'];
-                $date = new \DateTime($dateDebReq);
-
-                $dateFinTrouve = $request->request->get('exposition')['dateHeureFinExposition'];
-                $dateFinTrouve = str_replace("/", "-", $dateFinTrouve);
-                $dateFin = new \DateTime($dateFinTrouve);
-
-                if($date > $dateDebut)
+    public function testDateDiffAction(Request $request)
+    {
+        if($request->isXMLHttpRequest()) {
+            $dateDebut = $request->get('dateDebut');
+            $dateDebut = str_replace("/", "-", $dateDebut);
+            $dateDebut = date("Y-m-d H:i", strtotime($dateDebut));
+            $dateD = new \DateTime($dateDebut);
+            $dateFin = $request->get('dateFin');
+            $dateFin = str_replace("/", "-", $dateFin);
+            $dateFin = date("Y-m-d H:i", strtotime($dateFin));
+            $dateF = new \DateTime($dateFin);
+            //Test si date de début inférieur à la date de fin 
+            if ($dateD > $dateF)
+            {
+                $message = true;
+            }
+            else
+            {
+                $dd = date("Y-m-d H:i", strtotime($dateDebut." +7 days"));
+                $dateD = new \DateTime($dd);
+                if($dateD > $dateF)
                 {
-                    if($date > $dateFin)
-                    {
-                        $verif = true;
-                    } else {
-                        $verif = false;
-                    }
+                    $message = true;
                 }
-                if($date < $dateFin)
+                else
                 {
-                    if($date < $dateDebut)
+                    $dd = date("Y-m-d H:i", strtotime($dateDebut." +28 days"));
+                    $dateD = new \DateTime($dd);
+                    if($dateD < $dateF)
                     {
-                        $verif = true;
-                    } else {
-                        $verif = false;
+                        $message = true;
+                    }
+                    else
+                    {
+                        $message = false;
                     }
                 }
             }
-            if($verif == false)
+            return new JsonResponse(array('data' => json_encode($message)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
+    }
+
+    public function testDateExpoAction(Request $request)
+    {
+        if($request->isXMLHttpRequest()) {
+            $idExpo = $request->get('idExpo');
+            $connection = $this->get('database_connection');
+            $query = "SELECT e.dateHeureFinExposition as datefin, e.dateHeureDebutExposition as datedeb
+                      FROM Exposition as e
+                      WHERE e.id <> ".$idExpo;
+            $ExpoTrouve = $connection->fetchAll($query);
+            $verif = true;
+            foreach ($ExpoTrouve as $Expo)
             {
-                break;
-            }
-        }
-        if ($verif == false)
-        {
-            throw $this->createNotFoundException('Vous ne pouvez pas créer une exposition avec moins de 3 jours de séparation avec la dernière');
-        }
-        //Test Le nom de l'exposition existe déjà
-        $nomExpo = $request->request->get('exposition')['nomExposition'];
-        $query = "SELECT e.nomExposition as nom
-                  FROM Exposition as e
-                  WHERE e.id <> ".$idExpo."
-                  AND e.nomExposition ='".$nomExpo."'";
-        $nomExpoTrouve = $connection->fetchAll($query);
-        if(!empty($nomExpoTrouve))
-        {
-            throw $this->createNotFoundException('Vous ne pouvez pas créer une exposition dont le nom existe déjà.');
-        }
-        //Test si la langue est présente en plusieurs fois
-        $textexpositions = $request->request->get('exposition')['textexpositions'];
-        if (is_array($textexpositions))
-        {
-            $pos = array();
-            foreach ($textexpositions as $text => $value) {
-                if(!in_array($value['langue'], $pos))
+                if($Expo['datefin'] != "" && $Expo['datedeb'] != "")
                 {
-                    array_push($pos, $value['langue']);
-                } else {
-                    throw $this->createNotFoundException('L\'exposition que vous êtes en train de créer posséde plusieurs fois la même langue.');
+                    $dateFinReq = date("Y-m-d H:i", strtotime($Expo['datefin']." +2 days"));
+                    $date = new \DateTime($dateFinReq);
+
+                    $dateDebutTrouve = $request->get('dateDebut');
+                    $dateDebutTrouve = str_replace("/", "-", $dateDebutTrouve);
+                    $dateDebut = new \DateTime($dateDebutTrouve);
+
+                    $dateDebReq = $Expo['datedeb'];
+                    $date = new \DateTime($dateDebReq);
+
+                    $dateFinTrouve = $request->get('dateFin');
+                    $dateFinTrouve = str_replace("/", "-", $dateFinTrouve);
+                    $dateFin = new \DateTime($dateFinTrouve);
+
+                    if($date > $dateDebut)
+                    {
+                        if($date > $dateFin)
+                        {
+                            $verif = true;
+                        } else {
+                            $verif = false;
+                        }
+                    }
+                    if($date < $dateFin)
+                    {
+                        if($date < $dateDebut)
+                        {
+                            $verif = true;
+                        } else {
+                            $verif = false;
+                        }
+                    }
+                }
+                if($verif == false)
+                {
                     break;
                 }
             }
+            if ($verif == false)
+            {
+                $message = true;
+            }
+            else
+            {
+                $message = false;
+            }
+            return new JsonResponse(array('data' => json_encode($message)));
         }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
 }
