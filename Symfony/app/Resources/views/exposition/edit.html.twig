@@ -160,7 +160,6 @@
 
                             // On en extrait les balises descendantes
                             var descendant = enfant.find("*");
-                             console.log(descendant);
 
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
                             $('.labelpos2').append(descendant[0]);
@@ -227,7 +226,6 @@
                             $newprototype = $($prototype);
 
                             var descendant = $newprototype.find('*');
-                            console.log(descendant);
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
 
                             $('.labelpos2').append(descendant[3]);
@@ -423,7 +421,6 @@
 
                             // On en extrait les balises descendantes
                             var descendant = enfant.find("*");
-                             console.log(descendant);
 
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
                             $('.labeldes').append(descendant[0]);
@@ -653,6 +650,147 @@
                 </div>
             {% endif %}
         </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                //Test Nom de l'exposition
+                $('#exposition_nomExposition').change(function(event){
+                    var idExpo = {{ exposition.id }};
+                    var nomExpo = $(this).val();
+                    if(nomExpo != '')
+                    {
+                        $.ajax({
+                            url: "{{ path('test_nom_exposition') }}", 
+                            method: "post",
+                            data: {nomExpo: nomExpo, idExpo: idExpo}
+                        }).done(function(msg){
+                            if(msg.data == "true"){
+                                alert("Cette exposition existe déjà !");
+                                $('#newsub').hide('slow/400/fast');
+                            }else{
+                                $('#newsub').show('slow/400/fast');
+                            }
+                        });
+                    }
+                });
+
+                //Test Langue
+                $('#newsub').click(function(event) {
+                    // On vérifie la diversité des langues
+                    // On récupère le nombre de langue afficher
+                    var nbLangue = $('.champslang').children('*').length;
+
+                    if(nbLangue > 1){
+                        tableLang = new Array();
+                        // Puis on boucle dessus
+                        for(var a = 0; a < nbLangue; a++){
+                            tableLang[a] = $('#exposition_textexpositions_'+a+'_langue option:selected').text();
+                        }
+                        // On trie par ordre alphabétique
+                        tableLang.sort();
+                        // Puis on reboucle en comparant chaque paires ordonnées
+                        var ordo = false;
+                        var nextTable = "";
+
+                        for(var b = 0; b < nbLangue; b++){
+                            // On vérifie si l'élément en cours est strictement égal au précédent
+                            if(tableLang[b] == nextTable){
+                                ordo = true;
+                            }
+                            // On définit le précédent suivant
+                            nextTable = tableLang[b];
+                        }
+                        
+                        if(ordo){
+                            // On stoppe le comportement par défaut
+                            event.preventDefault();
+                            alert("Vous ne pouvez pas enregistrer plusieurs traductions avec la même langue !");
+                            return;
+                        }else{
+                           // Suppression de l'objet event
+                            delete event;
+                        }
+                    }
+
+                    //On regarde la diversité des oeuvres
+                    var nbOeuvre = $('.champsoeuvre').children('*').length;
+                    if(nbOeuvre > 1){
+                        tableOeuv = new Array();
+                        // Puis on boucle dessus
+                        for(var a = 0; a < nbOeuvre; a++){
+                            tableOeuv[a] = $('#exposition_emplacements_'+a+'_oeuvre option:selected').text();
+                        }
+                        // On trie par ordre alphabétique
+                        tableOeuv.sort();
+                        // Puis on reboucle en comparant chaque paires ordonnées
+                        var ordo = false;
+                        var nextTable = "";
+
+                        for(var b = 0; b < nbOeuvre; b++){
+                            // On vérifie si l'élément en cours est strictement égal au précédent
+                            if(tableOeuv[b] == nextTable){
+                                ordo = true;
+                            }
+                            // On définit le précédent suivant
+                            nextTable = tableOeuv[b];
+                        }
+                        
+                        if(ordo){
+                            // On stoppe le comportement par défaut
+                            event.preventDefault();
+                            alert("Vous ne pouvez pas enregistrer plusieurs oeuvre avec le même nom !");
+                            return;
+                        }else{
+                           // Suppression de l'objet event
+                            delete event;
+                        }
+                    }
+
+                    //On regarde la diversité des positions
+                    var nbPosition = $('.champspos').children('*').length;
+                    if(nbPosition > 1){
+                        tablePos = new Array();
+                        // Puis on boucle dessus
+                        for(var a = 0; a < nbPosition; a++){
+                            tablePos[a] = $('#exposition_emplacements_'+a+'_position option:selected').text();
+                        }
+                        // On trie par ordre alphabétique
+                        tablePos.sort();
+                        // Puis on reboucle en comparant chaque paires ordonnées
+                        var ordo = false;
+                        var nextTable = "";
+
+                        for(var b = 0; b < nbPosition; b++){
+                            // On vérifie si l'élément en cours est strictement égal au précédent
+                            if(tablePos[b] == nextTable){
+                                ordo = true;
+                            }
+                            // On définit le précédent suivant
+                            nextTable = tablePos[b];
+                        }
+                        
+                        if(ordo){
+                            // On stoppe le comportement par défaut
+                            event.preventDefault();
+                            alert("Vous ne pouvez pas enregistrer plusieurs oeuvre avec la même position !");
+                            return;
+                        }else{
+                           // Suppression de l'objet event
+                            delete event;
+                        }
+                    }
+                });
+
+                $('#exposition_dateHeureDebutExposition').change(function(event){
+                    controleDate();
+                    controleDate2();
+                });
+
+                $('#exposition_dateHeureFinExposition').change(function(event){
+                    controleDate();
+                    controleDate2();
+                });
+            });
+        </script>
         <div class="row">
             <div id="exposition" class="form-group col-md-12"></div>
         </div>
@@ -689,5 +827,51 @@
                 format:'d/m/Y H:i',
             });
         });
+
+         //Fonction pour controler les dates
+        function controleDate(){
+
+            var idExpo = {{ exposition.id }};
+            var dateDebut = $('#exposition_dateHeureDebutExposition').val();
+            var dateFin = $('#exposition_dateHeureFinExposition').val();
+
+            if(dateDebut != '' && dateFin != '')
+            {
+                $.ajax({
+                    url: "{{ path('test_datediff_exposition') }}", 
+                    method: "post",
+                    data: {dateDebut: dateDebut,dateFin: dateFin}
+                }).done(function(msg){
+                    if(msg.data == "true"){
+                        alert("Cette exposition posséde une date de fin inférieur a la date de début et ou la date de fin est inférieur à 1 semaine par rapport à la date début, ou encore la date de fin est supérieur à 4 semaines par rapport à la date de début !");
+                        $('#newsub').hide();
+                    }else{
+                        $('#newsub').show();
+                    }
+                });
+            }
+        }
+
+        function controleDate2(){
+            var idExpo = {{ exposition.id }};
+            var dateDebut = $('#exposition_dateHeureDebutExposition').val();
+            var dateFin = $('#exposition_dateHeureFinExposition').val();
+
+            if(dateDebut != '' && dateFin != '')
+            {
+                $.ajax({
+                    url: "{{ path('test_dateexpo_exposition') }}", 
+                    method: "post",
+                    data: {dateDebut: dateDebut,dateFin: dateFin, idExpo: idExpo}
+                }).done(function(msg){
+                    if(msg.data == "true"){
+                        alert("Cette exposition est à cheval sur une autre exposition ou alors la durée de séparation de 2 expositions y compris celle là est inférieur à 3 jours. Veuillez saisir de nouvelles date !");
+                        $('#newsub').hide();
+                    }else{
+                        $('#newsub').show();
+                    }
+                });
+            }
+        }
     </script>
 {% endblock %}

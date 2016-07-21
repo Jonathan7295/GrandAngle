@@ -18,6 +18,22 @@ module_gestion_exposition:
     resource: "@ModuleGestionBundle/Resources/config/routing/exposition.yml"
     prefix:   /exposition
 
+test_nom_exposition:
+    path:    /test_nom/exposition
+    defaults: { _controller: "ModuleGestionBundle:Exposition:testNom" }
+    methods: [POST]
+
+test_datediff_exposition:
+    path:    /test_datediff/exposition
+    defaults: { _controller: "ModuleGestionBundle:Exposition:testDateDiff" }
+    methods: [POST]
+
+test_dateexpo_exposition:
+    path:    /test_dateexpo/exposition
+    defaults: { _controller: "ModuleGestionBundle:Exposition:testDateExpo" }
+    methods: [POST]
+
+
 module_gestion_oeuvre:
     resource: "@ModuleGestionBundle/Resources/config/routing/oeuvre.yml"
     prefix:   /oeuvre
