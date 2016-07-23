@@ -1,0 +1,3 @@
+module_diffusion_homepage:
+    path:     /
+    defaults: { _controller: ModuleDiffusionBundle:Accueil:index }
