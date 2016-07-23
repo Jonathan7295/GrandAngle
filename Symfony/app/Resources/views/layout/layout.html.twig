@@ -4,26 +4,37 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Bienvenue!{% endblock %}</title>
-        {# Css Bootstrap #}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        {# Css theme Bootstrap #}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-        {# Css jquery-ui + datepicker + style perso #}
         {% block stylesheets %}
+            {# Css Bootstrap #}
+            {% stylesheets 'css/bootstrap/bootstrap.min.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+            {# Css theme Bootstrap #}
+            {% stylesheets 'css/bootstrap/bootstrap-theme.min.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+            {# Css Css jquery-ui #}
             {% stylesheets 'css/ui-lightness/jquery-ui-1.7.2.custom.css' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
+            {# Css Datepicker #}
             {% stylesheets 'css/jquery.datetimepicker.css' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
+            {# Css Style perso #}
             {% stylesheets 'css/stylesite.css' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
+
         {# Script Jquery #}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        {% javascripts 'js/jquery/jquery.min.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         {# Script Bootstrap #}
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        {% javascripts 'js/bootstrap/bootstrap.min.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     </head>
     <body>
         <div id="back"></div>

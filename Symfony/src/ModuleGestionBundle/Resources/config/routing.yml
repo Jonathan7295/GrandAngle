@@ -4,7 +4,7 @@ module_gestion_homepage:
 
 module_gestion_index:
     path:     /accueil
-    defaults: { _controller: ModuleGestionBundle:Security:login }
+    defaults: { _controller: ModuleGestionBundle:Exposition:Accueil }
 
 statistique_expo:
     path:     /statistique_expo

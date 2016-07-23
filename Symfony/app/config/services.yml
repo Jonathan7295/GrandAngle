@@ -10,3 +10,7 @@ services:
             - { name: form.type, alias: app_user_registration }
     app.scan_oeuvre:
         class: ModuleGestionBundle\Controller\ScanController
+    twig.extension.intl:
+       class: Twig_Extensions_Extension_Intl
+       tags:
+           - { name: twig.extension }

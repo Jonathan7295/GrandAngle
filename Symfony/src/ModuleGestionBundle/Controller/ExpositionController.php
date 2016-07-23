@@ -402,4 +402,42 @@ class ExpositionController extends Controller
         }
         return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
+
+    public function AccueilAction()
+    {
+        $connection = $this->get('database_connection');
+        $query = "SELECT e.nomExposition as Nom, e.dateHeureDebutExposition as DateHeure, e.evenement as Evenement,
+                    e.fichier as Fichier, e.id as Id
+                  FROM Exposition e
+                  ORDER BY e.dateHeureDebutExposition
+                  LIMIT 4";
+        $exposition = $connection->fetchAll($query);
+        $i = 0;
+        foreach ($exposition as $key) {
+            $Date = date("Y-m-d", strtotime($key['DateHeure']));
+            $exposition[$i]['DateHeure'] = $this->DateFrancais($Date);
+            $i++;
+        }
+        return $this->render('accueil/index.html.twig', array(
+            'expositions' => $exposition
+        ));
+    }
+
+    public function DateFrancais($datefr)
+    {
+        $Jour = array("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi","Samedi","Dimanche");
+        $Mois = array("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre");
+        $tabDate = explode("-", $datefr);
+        $timestamp = mktime(0, 0, 0, $tabDate[1], $tabDate[2], $tabDate[0]);
+        $jour = date('w', $timestamp);
+        $mois = date('n', $timestamp); 
+        if($jour != 0){
+        $jour = $Jour[$jour-1];
+        } else {
+            $jour = $Jour[6];
+        }
+        $mois = $Mois[$mois-1];
+        $datefr = $jour." ".$tabDate[2]." ".$mois." ".$tabDate[0];
+        return $datefr;
+    }
 }

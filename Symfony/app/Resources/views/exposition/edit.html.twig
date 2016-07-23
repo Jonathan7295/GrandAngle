@@ -651,10 +651,10 @@
             {% endif %}
         </div>
         <script type="text/javascript">
-            $(document).ready(function(){
+            // $(document).ready(function(){
                 //Test Nom de l'exposition
                 $('#exposition_nomExposition').change(function(event){
-                    var idExpo = {{ exposition.id }};
+                    var idExpo = "{{ exposition.id }}";
                     var nomExpo = $(this).val();
                     if(nomExpo != '')
                     {
@@ -782,14 +782,14 @@
 
                 $('#exposition_dateHeureDebutExposition').change(function(event){
                     controleDate();
-                    controleDate2();
+                    //controleDate2();
                 });
 
                 $('#exposition_dateHeureFinExposition').change(function(event){
-                    controleDate();
-                    controleDate2();
+                    //controleDate();
+                    //controleDate2();
                 });
-            });
+            // });
         </script>
         <div class="row">
             <div id="exposition" class="form-group col-md-12"></div>
