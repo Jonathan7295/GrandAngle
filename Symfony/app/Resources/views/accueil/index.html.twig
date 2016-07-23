@@ -25,7 +25,7 @@
 							<img class="img" src="{{ app.request.basepath }}/upload/{{ exposition.Fichier}}" alt="Image Exposition" />
 					       	<p><strong>{{ exposition.Nom }}</strong></p>
 					       	<p>{{ exposition.DateHeure }}</p>
-					       	<button class="btn 1">Voir détail</button>
+					       	<a class="btn btn-primary" href="{{ path('exposition_show', { 'id': exposition.Id }) }}">Voir détail</a>
 					    </div>
 					</div>
 					{% endfor %}
@@ -33,12 +33,4 @@
 			</div>
     	</div>
     </div>
-    <script>
-	    $(document).ready(function(){
-	    	$('.btn.1').click(function() {
-	    		alert('Option non disponible dans cette version veuillez nous contacter pour plus d\'informations concernant nos tarifs !')
-	    	});
-	    	$('.btn-lg a').css('color', 'white');
-	    });
-    </script>
 {% endblock %}
