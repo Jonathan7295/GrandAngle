@@ -17,11 +17,11 @@ security:
                 always_use_default_target_path: true
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-                default_target_path: /accueil
+                default_target_path: /gestion/accueil
                 # submit the login form here
                 check_path: /login_check
                 # the user is redirected here when they need to log in
-                login_path: /
+                login_path: /gestion
             logout:
                 path: /logout
                 target: /login

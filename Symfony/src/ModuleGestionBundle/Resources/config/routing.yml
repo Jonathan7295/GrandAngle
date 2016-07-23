@@ -1,88 +1,88 @@
 module_gestion_homepage:
-    path:     /
+    path:     /gestion
     defaults: { _controller: FOSUserBundle:Security:login }
 
 module_gestion_index:
-    path:     /accueil
-    defaults: { _controller: ModuleGestionBundle:Security:login }
+    path:     /gestion/accueil
+    defaults: { _controller: ModuleGestionBundle:Exposition:Accueil }
 
 statistique_expo:
-    path:     /statistique_expo
+    path:     /gestion/statistique_expo
     defaults: { _controller: ModuleGestionBundle:Statistique:chartexpo }
 
 statistique_oeuvre:
-    path:     /statistique_oeuvre
+    path:     /gestion/statistique_oeuvre
     defaults: { _controller: ModuleGestionBundle:Statistique:chartoeuvre }
 
 module_gestion_exposition:
     resource: "@ModuleGestionBundle/Resources/config/routing/exposition.yml"
-    prefix:   /exposition
+    prefix:   /gestion/exposition
 
 test_nom_exposition:
-    path:    /test_nom/exposition
+    path:    /gestion/test_nom/exposition
     defaults: { _controller: "ModuleGestionBundle:Exposition:testNom" }
     methods: [POST]
 
 test_datediff_exposition:
-    path:    /test_datediff/exposition
+    path:    /gestion/test_datediff/exposition
     defaults: { _controller: "ModuleGestionBundle:Exposition:testDateDiff" }
     methods: [POST]
 
 test_dateexpo_exposition:
-    path:    /test_dateexpo/exposition
+    path:    /gestion/test_dateexpo/exposition
     defaults: { _controller: "ModuleGestionBundle:Exposition:testDateExpo" }
     methods: [POST]
 
 
 module_gestion_oeuvre:
     resource: "@ModuleGestionBundle/Resources/config/routing/oeuvre.yml"
-    prefix:   /oeuvre
+    prefix:   /gestion/oeuvre
 
 module_gestion_artiste:
     resource: "@ModuleGestionBundle/Resources/config/routing/artiste.yml"
-    prefix:    /artiste
+    prefix:    /gestion/artiste
 
 list_oeuvre:
-    path:    /list/oeuvre
+    path:    /gestion/list/oeuvre
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:listOeuvre" }
     methods: [POST]
 
 test_unit_oeuvre:
-    path:    /test_unit/oeuvre
+    path:    /gestion/test_unit/oeuvre
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:testUnite" }
     methods: [POST]
 
 test_scan_oeuvre:
-    path:   /scan
+    path:   /gestion/scan
     defaults: { _controller: "ModuleGestionBundle:Scan:TestScan" }
     methods: [GET]
 
 test_oeuvre:
-    path:    /testoeuvre/{id}/show
+    path:    /gestion/testoeuvre/{id}/show
     defaults: { _controller: "ModuleGestionBundle:Oeuvre:testOeuvre" }
     methods: [GET]
 
 module_gestion_utilisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/utilisateur.yml"
-    prefix:    /utilisateur
+    prefix:    /gestion/utilisateur
 
 module_gestion_organisateur:
     resource: "@ModuleGestionBundle/Resources/config/routing/organisateur.yml"
-    prefix:    /organisateur
+    prefix:    /gestion/organisateur
 
 module_gestion_auteur:
     resource: "@ModuleGestionBundle/Resources/config/routing/auteur.yml"
-    prefix:   /auteur
+    prefix:   /gestion/auteur
 
 module_gestion_collectif:
     resource: "@ModuleGestionBundle/Resources/config/routing/collectif.yml"
-    prefix:   /collectif
+    prefix:   /gestion/collectif
 
 EndroidQrCodeBundle:
     resource:   "@EndroidQrCodeBundle/Controller/"
     type:       annotation
-    prefix:     /qrcode
+    prefix:     /gestion/qrcode
 
 module_gestion_theme:
     resource: "@ModuleGestionBundle/Resources/config/routing/theme.yml"
-    prefix:   /theme
+    prefix:   /gestion/theme

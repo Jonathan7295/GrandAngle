@@ -84,21 +84,6 @@
                             <div class="form-group">
 
                                 {# Génération du label #}
-                                {{ form_label(form.nombreVisiteExposition, "Nombres visites", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
-                                
-                                {# Affichage des erreurs pour ce champs précis #}
-                                {{ form_errors(form.nombreVisiteExposition) }}
-
-                                <div class="col-md-3">
-                                    {# Génération de l'input #}
-                                    {{ form_widget(form.nombreVisiteExposition, {'attr': {'class': 'form-control ajust'}}) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-
-                                {# Génération du label #}
                                 {{ form_label(form.evenement, "Evenement", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
                                 
                                 {# Affichage des erreurs pour ce champs précis #}
@@ -196,14 +181,11 @@
 
                     //Test Langue
                     $('#newsub').click(function(event) {
-                    //$('#newsub').bind("click.myclick", function(event) {
-                        event.preventDefault();
                         // On vérifie la diversité des langues
                         // On récupère le nombre de langue afficher
                         var nbLangue = $('.champslang').children('*').length;
 
                         if(nbLangue > 1){
-
                             tableLang = new Array();
                             // Puis on boucle dessus
                             for(var a = 0; a < nbLangue; a++){
@@ -226,6 +208,7 @@
                             
                             if(ordo){
                                 // On stoppe le comportement par défaut
+                                event.preventDefault();
                                 alert("Vous ne pouvez pas enregistrer plusieurs traductions avec la même langue !");
                                 return;
                             }else{
@@ -234,40 +217,9 @@
                             }
                         }
 
-                        var idExpo = 0;
-                        var dateDebut = $('#exposition_dateHeureDebutExposition').val();
-                        var dateFin = $('#exposition_dateHeureFinExposition').val();
-                        if(dateDebut != '' && dateFin != '')
-                        {
-                            $.ajax({
-                                url: "{{ path('test_datediff_exposition') }}", 
-                                method: "post",
-                                data: {dateDebut: dateDebut,dateFin: dateFin}
-                            }).done(function(msg){
-                                if(msg.data == "true"){
-                                    alert("Cette exposition posséde une date de fin inférieur a la date de début et ou la date de fin est inférieur à 1 semaine par rapport à la date début, ou encore la date de fin est supérieur à 4 semaines par rapport à la date de début !");
-                                }else{
-                                    delete event; 
-                                }
-                            });
-
-                            $.ajax({
-                                url: "{{ path('test_dateexpo_exposition') }}", 
-                                method: "post",
-                                data: {dateDebut: dateDebut,dateFin: dateFin, idExpo: idExp}
-                            }).done(function(msg){
-                                if(msg.data == "true"){
-                                    alert("Cette exposition est à cheval sur une autre exposition ou alors la durée de séparation de 2 expositions y compris celle là est inférieur à 3 jours. Veuillez saisir de nouvelles date !");
-                                }else{
-                                    delete event; 
-                                }
-                            });
-                        }
-
                         //On regarde la diversité des oeuvres
                         var nbOeuvre = $('.champsoeuvre').children('*').length;
                         if(nbOeuvre > 1){
-
                             tableOeuv = new Array();
                             // Puis on boucle dessus
                             for(var a = 0; a < nbOeuvre; a++){
@@ -290,6 +242,7 @@
                             
                             if(ordo){
                                 // On stoppe le comportement par défaut
+                                event.preventDefault();
                                 alert("Vous ne pouvez pas enregistrer plusieurs oeuvre avec le même nom !");
                                 return;
                             }else{
@@ -301,7 +254,6 @@
                         //On regarde la diversité des positions
                         var nbPosition = $('.champspos').children('*').length;
                         if(nbPosition > 1){
-
                             tablePos = new Array();
                             // Puis on boucle dessus
                             for(var a = 0; a < nbPosition; a++){
@@ -324,6 +276,7 @@
                             
                             if(ordo){
                                 // On stoppe le comportement par défaut
+                                event.preventDefault();
                                 alert("Vous ne pouvez pas enregistrer plusieurs oeuvre avec la même position !");
                                 return;
                             }else{
@@ -331,6 +284,16 @@
                                 delete event;
                             }
                         }
+                    });
+
+                    $('#exposition_dateHeureDebutExposition').blur(function(event){
+                        controleDate();
+                        controleDate2();
+                    });
+
+                    $('#exposition_dateHeureFinExposition').blur(function(event){
+                        controleDate();
+                        controleDate2();
                     });
 
                     // On vérifie le choix de l'collectif
@@ -419,6 +382,53 @@
         $(document).ready(function(){
             $("#input-id").fileinput('refresh', {browseLabel: 'Select...', removeLabel: 'Delete'});
         });
+    </script>
+    <script type="text/javascript">7
+        //Fonction pour controler les dates
+        function controleDate(){
+
+            var idExpo = 0;
+            var dateDebut = $('#exposition_dateHeureDebutExposition').val();
+            var dateFin = $('#exposition_dateHeureFinExposition').val();
+
+            if(dateDebut != '' && dateFin != '')
+            {
+                $.ajax({
+                    url: "{{ path('test_datediff_exposition') }}", 
+                    method: "post",
+                    data: {dateDebut: dateDebut,dateFin: dateFin}
+                }).done(function(msg){
+                    if(msg.data == "true"){
+                        alert("Cette exposition posséde une date de fin inférieur a la date de début et ou la date de fin est inférieur à 1 semaine par rapport à la date début, ou encore la date de fin est supérieur à 4 semaines par rapport à la date de début !");
+                        $('#newsub').hide();
+                    }else{
+                        $('#newsub').show();
+                    }
+                });
+            }
+        }
+
+        function controleDate2(){
+            var idExpo = 0;
+            var dateDebut = $('#exposition_dateHeureDebutExposition').val();
+            var dateFin = $('#exposition_dateHeureFinExposition').val();
+
+            if(dateDebut != '' && dateFin != '')
+            {
+                $.ajax({
+                    url: "{{ path('test_dateexpo_exposition') }}", 
+                    method: "post",
+                    data: {dateDebut: dateDebut,dateFin: dateFin, idExpo: idExpo}
+                }).done(function(msg){
+                    if(msg.data == "true"){
+                        alert("Cette exposition est à cheval sur une autre exposition ou alors la durée de séparation de 2 expositions y compris celle là est inférieur à 3 jours. Veuillez saisir de nouvelles date !");
+                        $('#newsub').hide();
+                    }else{
+                        $('#newsub').show();
+                    }
+                });
+            }
+        }
     </script>
     <script type="text/javascript">
         $(document).ready(function() {

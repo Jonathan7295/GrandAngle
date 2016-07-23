@@ -74,21 +74,6 @@
                             <div class="form-group">
 
                                 {# Génération du label #}
-                                {{ form_label(edit_form.nombreVisiteExposition, "Nombres visites", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
-                                
-                                {# Affichage des erreurs pour ce champs précis #}
-                                {{ form_errors(edit_form.nombreVisiteExposition) }}
-
-                                <div class="col-md-3">
-                                    {# Génération de l'input #}
-                                    {{ form_widget(edit_form.nombreVisiteExposition, {'attr': {'class': 'form-control ajust'}}) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-
-                                {# Génération du label #}
                                 {{ form_label(edit_form.evenement, "Evenement", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}}
                                 
                                 {# Affichage des erreurs pour ce champs précis #}
@@ -780,12 +765,12 @@
                     }
                 });
 
-                $('#exposition_dateHeureDebutExposition').change(function(event){
+                $('#exposition_dateHeureDebutExposition').blur(function(event){
                     controleDate();
                     controleDate2();
                 });
 
-                $('#exposition_dateHeureFinExposition').change(function(event){
+                $('#exposition_dateHeureFinExposition').blur(function(event){
                     controleDate();
                     controleDate2();
                 });
