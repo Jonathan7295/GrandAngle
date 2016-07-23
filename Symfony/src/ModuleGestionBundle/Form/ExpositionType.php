@@ -34,7 +34,6 @@ class ExpositionType extends AbstractType
                                                 'format' => 'dd-MM-yyyy HH:mm',
                                                 'attr' => array('class' => 'calendar'),
                                                 ))
-            ->add('nombreVisiteExposition')
             ->add('fichier', FileType::class, array('label' => 'Image',
                                                     'data_class' => null,
                                                     'attr' => array('data-preview-file-type' => 'text',

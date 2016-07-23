@@ -53,7 +53,7 @@ class Exposition
     /**
      * @var int
      *
-     * @ORM\Column(name="nombreVisiteExposition", type="integer")
+     * @ORM\Column(name="nombreVisiteExposition", type="integer", nullable=true)
      */
     private $nombreVisiteExposition;
 
@@ -216,7 +216,7 @@ class Exposition
      *
      * @return Exposition
      */
-    public function setNombreVisiteExposition($nombreVisiteExposition)
+    public function setNombreVisiteExposition(\ModuleGestionBundle\Entity\Exposition $nombreVisiteExposition)
     {
         $this->nombreVisiteExposition = $nombreVisiteExposition;
     

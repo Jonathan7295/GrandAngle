@@ -28,7 +28,6 @@ class LoadExpositionData extends AbstractFixture implements OrderedFixtureInterf
         $exposition->setEvenement('teaser');
         $exposition->setDateHeureDebutExposition(\DateTime::createFromFormat('d/m/Y', '07/10/2015'));
         $exposition->setDateHeureFinExposition(\DateTime::createFromFormat('d/m/Y', '24/01/2016'));
-        $exposition->setNombreVisiteExposition('0');
         $exposition->setStockage('');
         $exposition->setFichier('');
 
@@ -36,7 +35,6 @@ class LoadExpositionData extends AbstractFixture implements OrderedFixtureInterf
         $exposition1->setEvenement('deploie');
         $exposition1->setDateHeureDebutExposition(\DateTime::createFromFormat('d/m/Y', '25/10/2015'));
         $exposition1->setDateHeureFinExposition(\DateTime::createFromFormat('d/m/Y', '25/01/2016'));
-        $exposition1->setNombreVisiteExposition('0');
         $exposition1->setStockage('');
         $exposition1->setFichier('');
 
@@ -44,7 +42,6 @@ class LoadExpositionData extends AbstractFixture implements OrderedFixtureInterf
         $exposition2->setEvenement('inaugurer');
         $exposition2->setDateHeureDebutExposition(\DateTime::createFromFormat('d/m/Y', '11/07/2015'));
         $exposition2->setDateHeureFinExposition(\DateTime::createFromFormat('d/m/Y', '10/01/2016'));
-        $exposition2->setNombreVisiteExposition('0');
         $exposition2->setStockage('');
         $exposition2->setFichier('');
 
@@ -52,7 +49,6 @@ class LoadExpositionData extends AbstractFixture implements OrderedFixtureInterf
         $exposition3->setEvenement('teaser');
         $exposition3->setDateHeureDebutExposition(\DateTime::createFromFormat('d/m/Y', '10/09/2015'));
         $exposition3->setDateHeureFinExposition(\DateTime::createFromFormat('d/m/Y', '07/02/2016'));
-        $exposition3->setNombreVisiteExposition('0');
         $exposition3->setStockage('');
         $exposition3->setFichier('');
 

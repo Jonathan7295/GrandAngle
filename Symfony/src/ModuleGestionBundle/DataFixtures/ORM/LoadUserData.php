@@ -56,6 +56,19 @@ class LoadUserData implements FixtureInterface
         $Utilisateur1->addTelephone($telephone1User2);
         $Utilisateur1->addTelephone($telephone2User2);
 
+        //Je créé mes utilisateurs
+        $Utilisateur2 = new Utilisateur();
+        $Utilisateur2->setFirstname('admin');
+        $Utilisateur2->setLastname('admin');
+        $Utilisateur2->setRole('ADMIN');
+        $Utilisateur2->setUsername('admin');
+        $Utilisateur2->setEmail('tata@tata.fr');
+        $Utilisateur2->setEnabled('1');
+        $Utilisateur2->setPassword('$2y$13$FwffagLdrI52mA1K5VXvSeejGYuoMmjnDY6yLWa6xkgkO4EaS7V.O');
+        // J'ajoute autant de téléphone qu'il faut
+        $Utilisateur2->addTelephone($telephone1User1);
+        $Utilisateur2->addTelephone($telephone2User1);
+
         // Je persiste tout ça 
         $manager->persist($telephone1User1);
         $manager->persist($telephone2User1);
@@ -63,6 +76,7 @@ class LoadUserData implements FixtureInterface
         $manager->persist($telephone2User2);
         $manager->persist($Utilisateur);
         $manager->persist($Utilisateur1);
+        $manager->persist($Utilisateur2);
 
         // Et j'enregistre en base de données
         $manager->flush();

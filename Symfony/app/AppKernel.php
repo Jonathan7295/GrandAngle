@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle,
+            new ModuleDiffusionBundle\ModuleDiffusionBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -13,6 +13,7 @@ use ModuleGestionBundle\Form\ExpositionType;
 use ModuleGestionBundle\Entity\Emplacement;
 use ModuleGestionBundle\Entity\Oeuvre;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Date as Assert;
 use Symfony\Component\Filesystem\Filesystem;
 /**
  * Exposition controller.
@@ -405,6 +406,8 @@ class ExpositionController extends Controller
 
     public function AccueilAction()
     {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
         $connection = $this->get('database_connection');
         $query = "SELECT e.nomExposition as Nom, e.dateHeureDebutExposition as DateHeure, e.evenement as Evenement,
                     e.fichier as Fichier, e.id as Id
@@ -419,12 +422,14 @@ class ExpositionController extends Controller
             $i++;
         }
         return $this->render('accueil/index.html.twig', array(
-            'expositions' => $exposition
+            'expositions' => $exposition,
+            'role' => $role
         ));
     }
 
     public function DateFrancais($datefr)
     {
+
         $Jour = array("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi","Samedi","Dimanche");
         $Mois = array("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre");
         $tabDate = explode("-", $datefr);

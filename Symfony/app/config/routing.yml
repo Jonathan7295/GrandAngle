@@ -1,3 +1,7 @@
+module_diffusion:
+    resource: "@ModuleDiffusionBundle/Resources/config/routing.yml"
+    prefix:   /
+
 module_gestion:
     resource: "@ModuleGestionBundle/Resources/config/routing.yml"
     prefix:   /
