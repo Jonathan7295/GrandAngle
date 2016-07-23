@@ -19,50 +19,16 @@
 			</div>
 			<div class="row">
 				<div class="row text-center">
-				  <div class="col-md-3">
-				    <div class="thumbnail">
-				      	{% image '@ModuleGestionBundle/Resources/public/images/example.jpg'
-						    filter='jpegoptim' output='/image/example.jpg' %}
-						    <img class="img" src="{{ asset_url }}" alt="Example" />
-						{% endimage %}
-				      <p><strong>Chevaliers et bombardes</strong></p>
-				      <p>Vendredi 27 juin 2016</p>
-				      <button class="btn 1">Voir détail</button>
-				    </div>
-				  </div>
-				  <div class="col-md-3">
-				    <div class="thumbnail">
-				      	{% image '@ModuleGestionBundle/Resources/public/images/example2.jpg'
-						    filter='jpegoptim' output='/image/example2.jpg' %}
-						    <img class="img" src="{{ asset_url }}" alt="Example" />
-						{% endimage %}
-				      <p><strong>Beaute congo</strong></p>
-				      <p>Lundi 14 Juillet 2016</p>
-				      <button class="btn 1">Voir détail</button>
-				    </div>
-				  </div>
-				  <div class="col-md-3">
-				    <div class="thumbnail">
-				      	{% image '@ModuleGestionBundle/Resources/public/images/example3.jpg'
-						    filter='jpegoptim' output='/image/example3.jpg' %}
-						    <img class="img" src="{{ asset_url }}" alt="Example" />
-						{% endimage %}
-				      <p><strong>Philippe halsman</strong></p>
-				      <p>Mercredi 29 Juillet 2016</p>
-				      <button class="btn 1">Voir détail</button>
-				    </div>
-				  </div>
-				   <div class="col-md-3">
-				    <div class="thumbnail">
-				      	{% image '@ModuleGestionBundle/Resources/public/images/example4.jpg'
-						    filter='jpegoptim' output='/image/example4.jpg' %}
-						    <img class="img" src="{{ asset_url }}" alt="Example" />
-						{% endimage %}
-				      <p><strong>Splendeurs et miseres</strong></p>
-				      <p>Lundi 13 Aout 2016</p>
-				      <button class="btn 1">Voir détail</button>
-				    </div>
-				  </div>
+					{% for exposition in expositions %}
+					<div class="col-md-3">
+					    <div class="thumbnail">
+							<img class="img" src="{{ app.request.basepath }}/upload/{{ exposition.Fichier}}" alt="Image Exposition" />
+					       	<p><strong>{{ exposition.Nom }}</strong></p>
+					       	<p>{{ exposition.DateHeure }}</p>
+					       	<button class="btn 1">Voir détail</button>
+					    </div>
+					</div>
+					{% endfor %}
 				</div>
 			</div>
     	</div>

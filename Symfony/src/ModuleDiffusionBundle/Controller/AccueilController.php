@@ -1,6 +1,8 @@
 <?php
 
-namespace ModuleGestionBundle\Controller;
+namespace ModuleDiffusionBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Accueil controller.
