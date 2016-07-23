@@ -33,6 +33,10 @@ test_dateexpo_exposition:
     defaults: { _controller: "ModuleGestionBundle:Exposition:testDateExpo" }
     methods: [POST]
 
+test_unit_artiste:
+    path:   /gestion/test_unit_artiste
+    defaults: { _controller: "ModuleGestionBundle:Artiste:testUnite"}
+    methods: [POST]
 
 module_gestion_oeuvre:
     resource: "@ModuleGestionBundle/Resources/config/routing/oeuvre.yml"

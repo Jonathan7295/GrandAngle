@@ -15,11 +15,6 @@ assetic:
     filters:
         jpegoptim:
             bin: path/to/jpegoptim
-        yui_css:
-            jar: '%kernel.root_dir%/Resources/java/yuicompressor.jar'
-        yui_js:
-            jar: '%kernel.root_dir%/Resources/java/yuicompressor.jar'
-               
     twig:
         functions:
             jpegoptim: ~

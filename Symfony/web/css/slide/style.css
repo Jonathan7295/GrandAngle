@@ -19,7 +19,7 @@
     margin:-25px 0 0 -25px;
     width:50px;
     height:50px;
-    background:#000 url(../images/ajax-loader.gif) no-repeat center center;
+    background:#000 url(../../images/ajax-loader.gif) no-repeat center center;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
     border-radius: 25px;
@@ -37,7 +37,7 @@
     display: none;
 }
 .cn-bar{
-    background: transparent url(../images/bar.png) repeat top left;
+    background: transparent url(../../images/bar.png) repeat top left;
     height: 74px;
     position: absolute;
     bottom: 0px;
@@ -136,10 +136,10 @@ a.cn-nav-next{
 	transition: all 0.4s ease;
 }
 .cn-nav a.cn-nav-prev span{
-    background: #666 url(../images/prev.png) no-repeat center center;
+    background: #666 url(../../images/prev.png) no-repeat center center;
 }
 .cn-nav a.cn-nav-next span{
-    background: #666 url(../images/next.png) no-repeat center center;
+    background: #666 url(../../images/next.png) no-repeat center center;
 }
 .cn-nav a div{
     width: 0px;
