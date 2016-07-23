@@ -4,45 +4,76 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Bienvenue!{% endblock %}</title>
-        {# Css Bootstrap #}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        {# Css theme Bootstrap #}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-        {# Css jquery-ui + datepicker + style perso #}
         {% block stylesheets %}
+            {# Css Bootstrap #}
+            {% stylesheets 'css/bootstrap/bootstrap.min.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+            {# Css theme Bootstrap #}
+            {% stylesheets 'css/bootstrap/bootstrap-theme.min.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+            {# Css Css jquery-ui #}
             {% stylesheets 'css/ui-lightness/jquery-ui-1.7.2.custom.css' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
+            {# Css Datepicker #}
             {% stylesheets 'css/jquery.datetimepicker.css' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
-            {% stylesheets 'css/stylesite.css' %}
+            {# Css Style perso #}
+            {% stylesheets 'css/diffusion/stylesitediffusion.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+            {# Css menu #}
+            {% stylesheets 'css/diffusion/style.css' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
         {# Script Jquery #}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        {% javascripts 'js/jquery/jquery.min.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         {# Script Bootstrap #}
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        {% javascripts 'js/bootstrap/bootstrap.min.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {# Script site #}
+        {% javascripts 'js/diffusion/site.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     </head>
     <body>
         <div id="back"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-default">
-                        <ul class="nav nav-pills">
-                            <li role="presentation"><a id="acce" title="Accueil" href="#">Accueil</a></li>
-                            <li role="presentation"><a id="expo" title="Exposition" href="#">Agenda</a></li>
-                            <li role="presentation"><a id="oeuv" title="Oeuvre" href="#">Oeuvre</a></li>
-                            <li role="presentation"><a id="deco" title="Deconnexion" href="#">Info Expo</a></li>
-                            <li role="presentation"><a id="deco" title="Deconnexion" href="#">Position Salle</a></li>
-                        </ul>
-                    </nav>
-                </div>
+            <div class="container">
+            <a href="#" class="menu_btn">
+                <span class="icon">
+                       <i aria-hidden="true" class="glyphicon glyphicon-th"></i>
+                </span>
+            </a>
+             <div id="menu">
+                <a href="#" class="close">
+                    <span class="icon">
+                        <i aria-hidden="true" class="glyphicon glyphicon-remove"></i>
+                    </span>
+                </a>
+                <ul>
+                    <li class="active"><a href="#">Accueil</a></li>
+                    <li><a href="#">Articles</a></li>
+                    <li><a href="#">Votes</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
             </div>
-            <div>
-                {% block body %}{% endblock %}
+        </div>
+            <div id="page">
+                <div class="container">
+                    {% block body %}{% endblock %}
+                </div>
             </div>
         </div>
         {% block javascripts %}{% endblock %}
