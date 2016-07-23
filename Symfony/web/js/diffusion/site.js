@@ -12,7 +12,8 @@ $(document).ready(function()
                 left : '0'
             })
             $("#page").clearQueue().animate({
-                "margin-right" : '-290px'
+                "margin-right" : '-290px',
+                "margin-left" : '290px'
             })
              
             $(this).fadeOut(200);
@@ -27,10 +28,11 @@ $(document).ready(function()
         if (isMenuOpen == true)
         {
             $("#menu").clearQueue().animate({
-                left : '-240px'
+                left : '-245px'
             })
             $("#page").clearQueue().animate({
-                "margin-right" : '0px'
+                "margin-right" : '0px',
+                "margin-left" : '0px'
             })
              
             $(this).fadeOut(200);
@@ -39,4 +41,11 @@ $(document).ready(function()
             isMenuOpen = false;
         }
     });
+
+    $('.lien').click(function()
+    {
+        $('.barre').remove();
+        $(this).parent().prepend('<div class="barre"></div>');
+    });
+
 });

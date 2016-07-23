@@ -3,7 +3,6 @@ body {
     overflow-y: auto;
     font-family: 'Open Sans', sans-serif;
     font-weight:300;
-    background:#292929;
     margin:0;
 }
  
@@ -20,7 +19,7 @@ img {
 }
  
 .menu_btn {
-    background: #f2b33d;
+    background: #6D6C68;
     display:block;
     height:42px;
     width:42px;
@@ -32,12 +31,12 @@ img {
 #menu {
     height:100%;
     position:fixed;
-    background:#f2b33d;
+    background:#6D6C68;
     top:0;
     bottom:0;
     height:100%;
-    width:240px;
-    right:-240px;
+    width:245px;
+    left:-245px;
     z-index:9999;
 }
  
@@ -50,9 +49,9 @@ img {
  
 #menu ul li {
     height:47px;
-    padding-left:30px;
+    /*padding-left:30px;*/
     line-height:47px;
-    border-bottom:1px solid #d39b33;
+    border-bottom:1px solid #6D6C68;
 }
  
 #menu ul li.active {
@@ -60,11 +59,13 @@ img {
 }
  
 #menu ul li:hover {
-    background:#fbce52;     
+    background:#000;    
+    color:#fff; 
 }
  
 #menu ul li a {
     color:white;
+    width: 240px;
     text-decoration:none;
     font-family: 'Open Sans', sans-serif;
     font-size:16px;
@@ -73,7 +74,7 @@ img {
  
 .close {
     display:block;
-    background:red;
+    background:505372;
     height:47px;
     width:47px;
     position:absolute;
@@ -81,11 +82,6 @@ img {
     right:-47px; 
 }
  
-#logo {
-    padding-left:20px;
-    max-width:309px;
-    display:block;
-}
 /* Disable iOS/WinMobile font size changes */
 @media screen and (max-width: 600px),
 screen and (max-device-width: 480px) {
@@ -102,12 +98,7 @@ screen and (max-device-width: 480px) {
      
     #page {
         width:1280px;
-    }
-     
-    .article {
-        width:400px;
-    }
-     
+    } 
 }
  
 /* Default Screen */
@@ -125,10 +116,6 @@ screen and (max-device-width: 480px) {
     #page {
         width:720px;
     }
-     
-    .article {
-        width:330px;
-    }
  
 }
  
@@ -137,10 +124,6 @@ screen and (max-device-width: 480px) {
      
     #page {
         width:640px;
-    }
-     
-    .article {
-        width:600px;
     }
      
 }
@@ -155,14 +138,6 @@ screen and (max-device-width: 480px) {
      
     .menu_btn {
         right:10px; 
-    }
-     
-    #logo {
-        width: 70%; 
-    }
-     
-    .article {
-        width:auto;
     }
  
 }

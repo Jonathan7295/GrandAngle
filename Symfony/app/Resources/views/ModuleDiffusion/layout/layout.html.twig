@@ -51,27 +51,64 @@
     <body>
         <div id="back"></div>
             <div class="container">
-            <a href="#" class="menu_btn">
-                <span class="icon">
-                       <i aria-hidden="true" class="glyphicon glyphicon-th"></i>
-                </span>
-            </a>
-             <div id="menu">
-                <a href="#" class="close">
-                    <span class="icon">
-                        <i aria-hidden="true" class="glyphicon glyphicon-remove"></i>
-                    </span>
-                </a>
-                <ul>
-                    <li class="active"><a href="#">Accueil</a></li>
-                    <li><a href="#">Articles</a></li>
-                    <li><a href="#">Votes</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
+                 <div id="menu">
+                    <button class="close">
+                        <span class="icon">
+                            <i aria-hidden="true" class="glyphicon glyphicon-remove"></i>
+                        </span>
+                    </button>
+                    <ul>
+                        <li>
+                            <div class="barre"></div>
+                            <a href="#" class="lien">
+                                <span class="icon menuimg">
+                                    <i aria-hidden="true" class="glyphicon glyphicon-home"></i>
+                                </span>
+                                Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lien">
+                                <span class="icon menuimg">
+                                    <i aria-hidden="true" class="glyphicon glyphicon-list-alt"></i>
+                                </span>
+                                Agenda
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lien">
+                                <span class="icon menuimg">
+                                    <i aria-hidden="true" class="glyphicon glyphicon-film"></i>
+                                </span>
+                                Oeuvre
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lien">
+                                <span class="icon menuimg">
+                                    <i aria-hidden="true" class="glyphicon glyphicon-info-sign"></i>
+                                </span>
+                                  Information Exposition
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="lien">
+                                <span class="icon menuimg">
+                                    <i aria-hidden="true" class="glyphicon glyphicon-map-marker"></i>
+                                </span>
+                                Position Salle
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
             <div id="page">
                 <div class="container">
+                    <button class="menu_btn">
+                        <span class="icon">
+                               <i aria-hidden="true" class="glyphicon glyphicon-th"></i>
+                        </span>
+                    </button>
                     {% block body %}{% endblock %}
                 </div>
             </div>
