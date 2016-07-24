@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="col-md-4 col-xs-4">
+    <div class="col-md-10 col-md-offset-2 col-xs-12">
         <script id="barTmpl" type="text/x-jquery-tmpl">
             <div class="cn-bar">
                 <div class="cn-nav">
@@ -50,19 +50,17 @@
                 </div><!-- cn-nav-content -->
             </div><!-- cn-bar -->
         </script>
-        <div class="container">
-            <h1>Grand Angle Exposition<span></span></h1>
-            <div class="wrapper">
-                <div id="cn-slideshow" class="cn-slideshow">
-                    <div class="cn-images">
-                        <img src="{{ app.request.basepath }}/upload/1.jpg" alt="image01" title="Beautiful Scenery 1" data-thumb="{{ app.request.basepath }}/upload/1.jpg" style="display:block;"/>
-                        <img src="{{ app.request.basepath }}/upload/2.jpg" alt="image02" title="Beautiful Scenery 2" data-thumb="{{ app.request.basepath }}/upload/2.jpg" style="display:block;"/>
-                        <img src="{{ app.request.basepath }}/upload/3.jpg" alt="image03" title="Beautiful Scenery 3" data-thumb="{{ app.request.basepath }}/upload/3.jpg" />
-                         <img src="{{ app.request.basepath }}/upload/4.jpg" alt="image04" title="Beautiful Scenery 4" data-thumb="{{ app.request.basepath }}/upload/4.jpg" />
-                    </div><!-- cn-images -->
-                </div><!-- cn-slideshow -->
-            </div>
+        <h1>{{ rows.0.nomEx }}<span></span></h1>
+        <div class="wrapper">
+            <div id="cn-slideshow" class="cn-slideshow">
+                <div class="cn-images">
+                    {% for row in rows %}
+                        <img src="{{ app.request.basepath }}/upload/{{ row.img }}" alt="image01" title="{{ row.nomOe }}" data-thumb="{{ app.request.basepath }}/upload/{{ row.img }}" style="display:block;"/>
+                    {% endfor %}
+                </div><!-- cn-images -->
+            </div><!-- cn-slideshow -->
         </div>
+        <p id="desc">{{ rows.0.des }}</p>
     </div>
 {% endblock body %}
 

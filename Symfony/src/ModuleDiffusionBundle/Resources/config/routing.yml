@@ -1,3 +1,6 @@
 module_diffusion_homepage:
     path:     /
     defaults: { _controller: ModuleDiffusionBundle:Accueil:index }
+module_diffusion_agenda:
+    path:     /agenda
+    defaults: { _controller: ModuleDiffusionBundle:Accueil:agenda }

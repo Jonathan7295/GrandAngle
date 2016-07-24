@@ -49,7 +49,6 @@ img {
  
 #menu ul li {
     height:47px;
-    /*padding-left:30px;*/
     line-height:47px;
     border-bottom:1px solid #6D6C68;
 }
@@ -133,7 +132,7 @@ screen and (max-device-width: 480px) {
     }
 
     #menu ul li a {
-        font-size:50px;
+        background-color: red;
     }
     .menu_btn {
         height:60px;
@@ -149,24 +148,42 @@ screen and (max-device-width: 480px) {
  
 /* Mobile Screen Wide */
 @media (max-width : 640px) {
+
+    #desc {
+        position:relative;
+        top:50px;
+    }
      
     #page {
         width:100%;
         padding:0;
     }
+
+    div.cn-bar {
+       left:0px;
+       right:0px; 
+    }
+
+    a.cn-nav-prev {
+        margin-left: 0px;
+    }
+
+    a.cn-nav-next {
+        margin-left: 0px;
+    }
      
-    .menu_btn {
-        margin: 0; 
-        padding: 0;
-    }
-
     #menu ul li a {
-        font-size:50px;
+        
+    }
+
+    #cn-slideshow {
+        height:255px;
     }
 
     .menu_btn {
-        height:60px;
-        width:60px;
+        position: relative;
+        height: 50px;
+        width: 50px;
     }
 
     .close{
