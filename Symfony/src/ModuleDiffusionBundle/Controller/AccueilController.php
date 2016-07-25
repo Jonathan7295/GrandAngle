@@ -26,7 +26,7 @@ class AccueilController extends Controller
         $query = "select e.nomExposition as nomEx, oe.nom as nomOe, oe.image as img, oe.nom_image as nomImg, texe.description as des from Exposition as e
         		  inner join Emplacement as em on e.id=em.exposition_id
         		  inner join Oeuvre as oe on oe.id=em.oeuvre_id
-                          inner join Text_exposition as texe on e.id=texe.id
+                  inner join Text_exposition as texe on e.id=texe.exposition_id
         		  where e.dateHeureDebutExposition <= '".$date."'and e.dateHeureFinExposition >= '".$date."' and texe.langue='".$langue."'";
 
                 // On stocke le résultat
