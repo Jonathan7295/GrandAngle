@@ -14,21 +14,32 @@ use ModuleGestionBundle\Entity\Emplacement;
 class AccueilController extends Controller
 {
 	public function indexAction()
-	{
-		//Connection à la base de données
-                $connection = $this->get('database_connection');
+    {
+        $dateJour = new \Datetime();
+        $date = $dateJour->format('Y-m-d H:i:s');
+        $langue = "fr";
+        
+	//Connection à la base de données
+        $connection = $this->get('database_connection');
 
-                // récupérer la liste complète des oeuvres
-                $query = "select e.nomExposition as nomEx, oe.nom as nomOe from Exposition as e
-                		  inner join Emplacement as em on e.id=em.exposition_id
-                		  inner join Oeuvre as oe on oe.id=em.oeuvre_id
-                		  where e.id=21";
+        // récupérer la liste complète des oeuvres
+        $query = "select e.nomExposition as nomEx, oe.nom as nomOe, oe.image as img, oe.nom_image as nomImg, texe.description as des from Exposition as e
+        		  inner join Emplacement as em on e.id=em.exposition_id
+        		  inner join Oeuvre as oe on oe.id=em.oeuvre_id
+                          inner join Text_exposition as texe on e.id=texe.id
+        		  where e.dateHeureDebutExposition <= '".$date."'and e.dateHeureFinExposition >= '".$date."' and texe.langue='".$langue."'";
 
                 // On stocke le résultat
                 $rows = $connection->fetchAll($query);
 
-        	return $this->render('ModuleDiffusion/accueil/index.html.twig', array(
-        		'rows' => $rows));
+        return $this->render('ModuleDiffusion/accueil/index.html.twig', array(
+        	'rows' => $rows));
 	}
+
+    public function agendaAction()
+    {
+            return $this->render('ModuleDiffusion/accueil/agenda.html.twig');
+
+    }
 
 }

@@ -11,10 +11,6 @@ $(document).ready(function()
             $("#menu").clearQueue().animate({
                 left : '0'
             })
-            $("#page").clearQueue().animate({
-                "margin-right" : '-290px',
-                "margin-left" : '290px'
-            })
              
             $(this).fadeOut(200);
             $(".close").fadeIn(300);

@@ -1,7 +1,8 @@
 body{
-	background:#292929;
+	background-color:#edeae2;
 }
 
+/*Menu horizontal*/
 span.menuimg{
 	padding-left: 25px;
 	margin-right: 15px;
@@ -13,11 +14,31 @@ span.menuimg{
 	padding-left: 0px;
 	width: 5px;
 	height: 47px;
-	background-color: #28A3FA;
+	background-color:white;
 }
 
 .calendar{
 	width:220px;
 	margin-left: 10px;
 	margin-top: 50px;
+}
+/*Champs text de l'exposition*/
+p#desc{
+	font-size: 1.5em;
+    background-color: burlywood;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/*Bandeau vertical*/
+div#bandeau-vertical{
+    height: 85px;
+    background-color: aliceblue;
+    border-right: 100em solid;
+    opacity: 0.1;
+}
+
+/*Calendar*/
+div#calendar-holder {
+    margin-top: 60px;
 }
