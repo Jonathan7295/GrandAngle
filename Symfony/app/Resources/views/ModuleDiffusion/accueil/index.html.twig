@@ -50,7 +50,13 @@
                 </div><!-- cn-nav-content -->
             </div><!-- cn-bar -->
         </script>
-        <h1>{{ rows.0.nomEx }}<span></span></h1>
+        <h1>{% if rows is empty %} 
+                
+            {% else %}
+                {{rows.0.nomEx}}
+            {% endif %}  
+            <span></span>
+        </h1>
         <div class="wrapper">
             <div id="cn-slideshow" class="cn-slideshow">
                 <div class="cn-images">
@@ -60,7 +66,11 @@
                 </div><!-- cn-images -->
             </div><!-- cn-slideshow -->
         </div>
-        <p id="desc">{{ rows.0.des }}</p>
+        <p id="desc">{% if rows is empty %} 
+                
+            {% else %}
+                {{rows.0.nomEx}}
+            {% endif %}  </p>
     </div>
 {% endblock body %}
 
