@@ -34,23 +34,23 @@
     </head>
     <body>
         <div id="back"></div>
-        <div class="container">
+        <div id="contentlay" class="container">
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-default">
                         <ul class="nav nav-pills">
                             <li role="presentation"><a id="acce" title="Accueil" href="{{ path("module_gestion_index") }}">Accueil</a></li>
-                            <li role="presentation"><a id="expo" title="Exposition" href="{{ path("exposition_index") }}">Gestion Exposition</a></li>
-                            <li role="presentation"><a id="oeuv" title="Oeuvre" href="{{ path("oeuvre_index") }}">Gestion Oeuvre</a></li>
+                            <li role="presentation"><a id="expo" title="Exposition" href="{{ path("exposition_index") }}">Gestion des Expositions</a></li>
+                            <li role="presentation"><a id="oeuv" title="Oeuvre" href="{{ path("oeuvre_index") }}">Gestion des Oeuvres</a></li>
                             {% if role is defined %}
                                 {% if role == "ADMIN" %}
-                                <li id="droit" role="presentation"><a id="util" title="Utilisateur" href="{{ path("utilisateur_index") }}">Gestion Utilisateur</a></li>
+                                <li id="droit" role="presentation"><a id="util" title="Utilisateur" href="{{ path("utilisateur_index") }}">Gestion des Utilisateurs</a></li>
                                 {% endif %}
                             {% endif %}
-                            <li role="presentation"><a id="stat" data-toggle="dropdown" class="dropdown-toggle" title="Statistiques">Gestion Statistique</a>
+                            <li role="presentation"><a id="stat" data-toggle="dropdown" class="dropdown-toggle" title="Statistiques">Gestion des Statistiques</a>
                                 <ul class="dropdown-menu">
-                                    <li role="presentation"><a id="statexpo" href="{{ path("statistique_expo") }}">Graph Exposition</a></li>
-                                    <li role="presentation"><a id="statoeuvre" href="{{ path("statistique_oeuvre") }}">Graph Oeuvre</a></li>
+                                    <li role="presentation"><a id="statexpo" href="{{ path("statistique_expo") }}">Graphique Exposition</a></li>
+                                    <li role="presentation"><a id="statoeuvre" href="{{ path("statistique_oeuvre") }}">Graphique Oeuvre</a></li>
                                 </ul>
                             </li>
                             <li role="presentation"><a id="deco" title="Deconnexion" href="{{ path('fos_user_security_logout') }}">Deconnexion</a></li>
