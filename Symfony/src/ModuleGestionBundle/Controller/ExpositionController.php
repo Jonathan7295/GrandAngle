@@ -279,9 +279,6 @@ class ExpositionController extends Controller
                       WHERE e.id <> ".$idExpo."
                       AND e.nomExposition ='".$nomExpo."'";
             $nomExpoTrouve = $connection->fetchAll($query);
-            var_dump($query);
-            var_dump($nomExpoTrouve);
-            die;
             if(empty($nomExpoTrouve))
             {
                 $message = false;

@@ -15,3 +15,9 @@ span.menuimg{
 	height: 47px;
 	background-color: #28A3FA;
 }
+
+.calendar{
+	width:220px;
+	margin-left: 10px;
+	margin-top: 50px;
+}

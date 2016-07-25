@@ -133,7 +133,7 @@ screen and (max-device-width: 480px) {
     }
 
     #menu ul li a {
-        font-size:50px;
+        font-size:25px;
     }
     .menu_btn {
         height:60px;
@@ -161,7 +161,7 @@ screen and (max-device-width: 480px) {
     }
 
     #menu ul li a {
-        font-size:50px;
+        font-size:25px;
     }
 
     .menu_btn {
