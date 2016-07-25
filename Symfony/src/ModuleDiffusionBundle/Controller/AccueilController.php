@@ -19,7 +19,7 @@ class AccueilController extends Controller
         $date = $dateJour->format('Y-m-d H:i:s');
         $langue = "fr";
         
-	//Connection à la base de données
+	   //Connection à la base de données
         $connection = $this->get('database_connection');
 
         // récupérer la liste complète des oeuvres
@@ -41,5 +41,4 @@ class AccueilController extends Controller
             return $this->render('ModuleDiffusion/accueil/agenda.html.twig');
 
     }
-
 }

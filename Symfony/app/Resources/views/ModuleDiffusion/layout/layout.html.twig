@@ -24,7 +24,7 @@
         {% stylesheets 'css/diffusion/stylesitediffusion.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-        
+
         {# Script Jquery #}
         {% javascripts 'js/jquery/jquery.min.js' %}
             <script src="{{ asset_url }}"></script>
@@ -105,11 +105,6 @@
                     }).done(function(msg){
                         console.log(msg.data);
                         affiche_calendar(msg.data);
-                        // $("#my-calendar").zabuto_calendar({
-                        //     language: "fr",
-                        //     //data: tab
-                        //     data: msg.data
-                        // });
                     });
                     function affiche_calendar(tab)
                     {

@@ -28,22 +28,26 @@ class DefaultController extends Controller
     				  WHERE e.dateHeureDebutExposition <= '".$date."'
     				  AND e.dateHeureFinExposition >= '".$date."'";
     		$expo = $connection->fetchAll($query);
-
-    		$dateD = $expo[0]['dateD'];
-    		$dateF = $expo[0]['dateF'];
-    		$dateD = new \DateTime($dateD);
-    		$dateF = new \DateTime($dateF);
-    		$diff = date_diff($dateD, $dateF);
-    		$diff = $diff->format('%a');
-    		$diff = intval($diff);
-    		$tab = array();
-    		for($i = 0; $i < $diff; $i++)
-    		{
-                $date = date("Y-m-d", strtotime($dateD->format('Y-m-d')." +".$i." days"));
-    			$tab[$i]['date'] = $date;
-                $tab[$i]['badge'] = true;
-                $tab[$i]['title'] = "exemple".$i;
-    		}
+            if(!empty($expo))
+            {
+        		$dateD = $expo[0]['dateD'];
+        		$dateF = $expo[0]['dateF'];
+        		$dateD = new \DateTime($dateD);
+        		$dateF = new \DateTime($dateF);
+        		$diff = date_diff($dateD, $dateF);
+        		$diff = $diff->format('%a');
+        		$diff = intval($diff);
+        		$tab = array();
+        		for($i = 0; $i < $diff; $i++)
+        		{
+                    $date = date("Y-m-d", strtotime($dateD->format('Y-m-d')." +".$i." days"));
+        			$tab[$i]['date'] = $date;
+                    $tab[$i]['badge'] = true;
+                    $tab[$i]['title'] = "exemple".$i;
+        		}
+            }else{
+                $tab = "";
+            }
     		return new JsonResponse(array('data' => $tab));
     	}
     	return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
