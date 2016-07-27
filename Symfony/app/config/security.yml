@@ -28,18 +28,20 @@ security:
             anonymous:   true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/accueil, role: ROLE_USER }
-        - { path: ^/exposition, role: ROLE_USER }
-        - { path: ^/utilisateur, role: ROLE_USER }
-        - { path: ^/oeuvre, role: ROLE_USER }
-        - { path: ^/auteur, role: ROLE_USER }
-        - { path: ^/collectif, role: ROLE_USER }
-        - { path: ^/organisateur, role: ROLE_USER }
-        - { path: ^/artiste, role: ROLE_USER }
-        - { path: ^/emplacement, role: ROLE_USER }
+        - { path: ^/gestion/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/gestion/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/gestion/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/gestion/admin/, role: ROLE_ADMIN }
+        - { path: ^/gestion/accueil, role: ROLE_USER }
+        - { path: ^/gestion/exposition, role: ROLE_USER }
+        - { path: ^/gestion/utilisateur, role: ROLE_USER }
+        - { path: ^/gestion/oeuvre, role: ROLE_USER }
+        - { path: ^/gestion/auteur, role: ROLE_USER }
+        - { path: ^/gestion/collectif, role: ROLE_USER }
+        - { path: ^/gestion/organisateur, role: ROLE_USER }
+        - { path: ^/gestion/artiste, role: ROLE_USER }
+        - { path: ^/gestion/emplacement, role: ROLE_USER }
+        - { path: ^/gestion/accueil, role: ROLE_USER }
+        - { path: ^/gestion/statistique, role: ROLE_USER }
         # - { allow_if: "'127.0.0.1' == request.getClientIp()" }
 

@@ -62,7 +62,7 @@ class LoadUserData implements FixtureInterface
         $Utilisateur2->setLastname('admin');
         $Utilisateur2->setRole('ADMIN');
         $Utilisateur2->setUsername('admin');
-        $Utilisateur2->setEmail('tata@tata.fr');
+        $Utilisateur2->setEmail('jonathan.pouvreau@hotmail.fr');
         $Utilisateur2->setEnabled('1');
         $Utilisateur2->setPassword('$2y$13$FwffagLdrI52mA1K5VXvSeejGYuoMmjnDY6yLWa6xkgkO4EaS7V.O');
         // J'ajoute autant de téléphone qu'il faut
