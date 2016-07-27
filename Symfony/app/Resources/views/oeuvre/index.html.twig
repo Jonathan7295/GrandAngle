@@ -98,6 +98,7 @@
             </table>
         </div>
         <div class="row"></div>
+        <input id="url_path" type="hidden" name="path" value="{{ app.request.requestUri }}">
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -180,22 +181,25 @@
                     item.type = "Statut";
                 type = document.createTextNode(item.type);
 
+                // On récupère le path pour les boutons
+                var path = $('#url_path').val();
+
                 // On créé les boutons
                 var show = document.createElement('a');
                 show.id = 'searchindex';
-                show.href = '/oeuvre/'+item.id+'/show';
+                show.href = path+item.id+'/show';
                 show.title = 'Voir détail';
                 show.setAttribute('class','glyphicon glyphicon-search');
 
                 var edit = document.createElement('a');
                 edit.id = 'editindex';
-                edit.href = '/oeuvre/'+item.id+'/edit';
+                edit.href = path+item.id+'/edit';
                 edit.title = 'Modifier';
                 edit.setAttribute('class','glyphicon glyphicon-pencil');
 
                 var del  = document.createElement('a');
                 del.id = 'delindex';
-                del.href = '/oeuvre/'+item.id+'/delete';
+                del.href = path+'delete?id='+item.id;
                 del.title = 'Supprimer';
                 del.setAttribute('name', item.id);
                 del.setAttribute('class','glyphicon glyphicon-trash del');

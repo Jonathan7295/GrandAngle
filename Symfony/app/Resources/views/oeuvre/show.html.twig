@@ -48,16 +48,6 @@
                                 <td>{{ oeuvre.etat }}</td>
                             </tr>
                             <tr>
-                                <th>Nombre de visite</th>
-                                <td>
-                                    {% if oeuvre.nombreVisite is empty %}
-                                        Non Défini
-                                    {% else %}
-                                        {{ oeuvre.nombreVisite }}
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>Artiste</th>
                                 <td>
                                     {{ oeuvre.artiste.nomComplet }}
