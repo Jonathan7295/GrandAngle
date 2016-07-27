@@ -176,6 +176,17 @@ ul.dropdown-menu li a {
 	padding: 8px 8px;
 }
 
+#printindex {
+	background-color: #FE9A2E;
+	border-radius:4px;
+	padding: 8px 8px;
+}
+
+#printindex:hover {
+	text-decoration: none;
+	color: black;
+}
+
 #formdel {
 	position: relative;
 	bottom: 29px;

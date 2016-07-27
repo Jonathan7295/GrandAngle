@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new Ob\HighchartsBundle\ObHighchartsBundle,
             new ModuleDiffusionBundle\ModuleDiffusionBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new ADesigns\CalendarBundle\ADesignsCalendarBundle()
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

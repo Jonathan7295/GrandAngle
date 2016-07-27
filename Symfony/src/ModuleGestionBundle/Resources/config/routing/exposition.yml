@@ -22,3 +22,8 @@ exposition_delete:
     path:     /delete
     defaults: { _controller: "ModuleGestionBundle:Exposition:delete" }
     methods:  [GET, POST]
+
+exposition_print:
+    path:     /{id}/print
+    defaults: { _controller: "ModuleGestionBundle:Exposition:print" }
+    methods:  [GET, POST]
