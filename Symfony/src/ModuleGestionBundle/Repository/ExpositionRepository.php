@@ -15,7 +15,7 @@ class ExpositionRepository extends \Doctrine\ORM\EntityRepository
 
 	public function findAllCurrent(){
 
-		$dateJour = new \Datetime();
+		$dateJour = date_format(new \Datetime(),'Y-m-d');
 
 		$parameters1 = array(
 			'dateJour' => $dateJour
@@ -33,7 +33,7 @@ class ExpositionRepository extends \Doctrine\ORM\EntityRepository
 		// Date de début de la prochaine exposition
 		$dateDebExpo = $query->getResult()[0]->getDateHeureDebutExposition();
 		// Date 7 jours avant la prochaine exposition
-		$dateDebExpoSub = date_sub($dateDebExpo, date_interval_create_from_date_string('7 days'));
+		$dateDebExpoSub = date_format(date_sub($dateDebExpo, date_interval_create_from_date_string('7 days')),'Y-m-d');
 		// On récupère l'id de l'exposition
 		$id = $query->getResult()[0]->getId();
 

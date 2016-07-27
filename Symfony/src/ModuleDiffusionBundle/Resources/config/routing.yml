@@ -1,6 +1,6 @@
 module_diffusion_homepage:
     path:     /
-    defaults: { _controller: ModuleDiffusionBundle:Accueil:index }
+    defaults: { _controller: "ModuleDiffusionBundle:Accueil:index" }
 
 affiche_calendar:
     path:    /calendrier
@@ -9,5 +9,5 @@ affiche_calendar:
 
 module_diffusion_agenda:
     path:     /agenda
-    defaults: { _controller: ModuleDiffusionBundle:Accueil:agenda }
+    defaults: { _controller: "ModuleDiffusionBundle:Accueil:agenda" }
 
