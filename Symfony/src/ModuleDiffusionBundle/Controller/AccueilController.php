@@ -41,4 +41,10 @@ class AccueilController extends Controller
             return $this->render('ModuleDiffusion/accueil/agenda.html.twig');
 
     }
+
+    public function oeuvreAction()
+    {
+
+        return $this->render('ModuleDiffusion/accueil/oeuvre.html.twig');
+    }
 }
