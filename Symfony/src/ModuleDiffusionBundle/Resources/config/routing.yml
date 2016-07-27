@@ -11,3 +11,7 @@ module_diffusion_agenda:
     path:     /agenda
     defaults: { _controller: "ModuleDiffusionBundle:Accueil:agenda" }
 
+module_diffusion_oeuvre:
+    path:     /oeuvre
+    defaults: { _controller: "ModuleDiffusionBundle:Accueil:oeuvre" }
+
