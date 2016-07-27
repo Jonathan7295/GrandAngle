@@ -52,7 +52,7 @@ class ExpositionRepository extends \Doctrine\ORM\EntityRepository
 					FROM ModuleGestionBundle:Exposition ex
 					INNER JOIN ex.emplacements e
 					INNER JOIN e.oeuvre o
-					WHERE o.etat != :deliver
+					WHERE e.etat != :deliver
 					AND ex.id = :id
 				')->setParameters($parameters2);
 
