@@ -33,6 +33,7 @@ class ExpositionController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAll();
+
         $paginator  = $this->get('knp_paginator');
 
         $paginator  = $this->get('knp_paginator');
@@ -418,9 +419,16 @@ class ExpositionController extends Controller
             $exposition[$i]['DateHeure'] = $this->DateFrancais($Date);
             $i++;
         }
+
+         // On appelle l'entity manager
+        $em = $this->getDoctrine()->getManager();
+        // Alerte Oeuvre non livrée
+        $oeuvresNonLivre = $em->getRepository('ModuleGestionBundle:Exposition')->findAllCurrent();
+
         return $this->render('accueil/index.html.twig', array(
             'expositions' => $exposition,
-            'role' => $role
+            'role' => $role,
+            'oeuvNonLivre' => $oeuvresNonLivre
         ));
     }
 
@@ -442,4 +450,13 @@ class ExpositionController extends Controller
         $datefr = $jour." ".$tabDate[2]." ".$mois." ".$tabDate[0];
         return $datefr;
     }
+
+    // public function testMailExpoAction(){
+
+    //     $em = $this->getDoctrine()->getManager();
+    //     // On charge la liste des expositions et oeuvres à alerter
+    //     $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAllCurrent();
+
+    //     return new Response("Hello world !");
+    // }
 }

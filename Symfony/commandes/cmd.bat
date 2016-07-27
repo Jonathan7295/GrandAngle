@@ -1,2 +1,3 @@
-at \\Franck-PC 14:15 /Every:l,ma,me,j,v,s,d "C:\wamp\www\GrandAngle\Symfony\commandes\exec.bat"
+@echo off
+SCHTASKS /Create /SC DAILY /TN Oeuvre /TR C:\wamp\www\GrandAngle\Symfony\commandes\exec.bat /ST 01:10:00
 

@@ -16,7 +16,7 @@ class AccueilController extends Controller
 	public function indexAction()
     {
         $dateJour = new \Datetime();
-        $date = $dateJour->format('Y-m-d H:i:s');
+        $date = $dateJour->format('Y-m-d');
         $langue = "fr";
         
 	   //Connection à la base de données
@@ -27,7 +27,7 @@ class AccueilController extends Controller
         		  inner join Emplacement as em on e.id=em.exposition_id
         		  inner join Oeuvre as oe on oe.id=em.oeuvre_id
                   inner join Text_exposition as texe on e.id=texe.exposition_id
-        		  where e.dateHeureDebutExposition <= '".$date."'and e.dateHeureFinExposition >= '".$date."' and texe.langue='".$langue."'";
+        		  where FORMAT(e.dateHeureDebutExposition,'Y-m-d') <= '".$date."'and FORMAT(e.dateHeureFinExposition,'Y-m-d') >= '".$date."' and texe.langue='".$langue."'";
 
                 // On stocke le résultat
                 $rows = $connection->fetchAll($query);

@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
     {{ form_start(form, {'attr': {'id': 'formExpo'}}) }}
+{% spaceless %}
     <div class="panel panel-default">
         <div class="panel-heading">
             Ajout d'une nouvelle exposition
@@ -146,11 +147,10 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                {% image 'image/position.png'
+                                {% image 'image/position.png'  
                                     filter='jpegoptim' output='/image/position.png' %}
                                     <img class="img" src="{{ asset_url }}" alt="Example" width="500" heugth="250"/>
                                 {% endimage %}
-                               {#  <img src="{{ asset('image/position.png') }}" alt="position_salle" heigth="250" width="500" /> #}
                             </div>
                         </div>
                     </div>
@@ -367,9 +367,10 @@
             </div>
         </div>
     </div>
+{% endspaceless %}
     {{ form_rest(form) }}
     {{ form_end(form) }}
-{% endblock %}
+{% endblock body %}
 {% block javascripts %}
     {# Gestion des formulaires de Type d'oeuvre #}
     {% javascripts 'js/jquery.datetimepicker.full.js' %}
@@ -657,4 +658,4 @@
             }
         }
     </script>
-{% endblock %}
+{% endblock javascripts %}

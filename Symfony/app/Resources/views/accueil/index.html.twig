@@ -30,7 +30,25 @@
 					</div>
 					{% endfor %}
 				</div>
+			{% if oeuvNonLivre is not null %}
 			</div>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h3 style="color:red;"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;Attention il y a des Oeuvres non livrées !</h3>
+					{% for oeuvreExpo in oeuvNonLivre %}
+					    <tr>
+					    	<td>
+					    		<ul class="list-group">
+					    			{% for oeuvre in oeuvreExpo.emplacements %}
+					    			    <li class="list-group-item" style:"color=red;">{{ oeuvre.oeuvre.nom }} => {{ oeuvre.oeuvre.etat }} ( {{ oeuvreExpo.nomExposition }} )</li>
+					    			{% endfor %}
+					    		</ul>
+					    	</td>
+					    </tr>
+					{% endfor %}
+				</div>
+			</div>
+			{% endif %}
     	</div>
     </div>
 {% endblock %}
