@@ -12,6 +12,7 @@
                     <th>Date et heure début</th>
                     <th>Date et heure fin</th>
                     <th>Actions</th>
+                    <th>Imprimer</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,9 @@
                         <a id="searchindex" class="glyphicon glyphicon-search" href="{{ path('exposition_show', { 'id': exposition.id }) }}"></a>
                         <a id="editindex" class="glyphicon glyphicon-pencil" href="{{ path('exposition_edit', { 'id': exposition.id }) }}"></a>
                         <a id="delindex" name="{{ exposition.id }}" class="glyphicon glyphicon-trash" href="{{ path('exposition_delete', { 'id': exposition.id }) }}"></a>
+                    </td>
+                    <td>
+                        <a id="printindex" class="glyphicon glyphicon-print" href="{{ path('exposition_print', { 'id': exposition.id }) }}"></a>
                     </td>
                 </tr>
             {% endfor %}

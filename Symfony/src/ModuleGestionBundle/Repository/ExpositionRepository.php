@@ -30,33 +30,36 @@ class ExpositionRepository extends \Doctrine\ORM\EntityRepository
 		')->setParameters($parameters1)
 		->setMaxResults(1);
 
-		// Date de début de la prochaine exposition
-		$dateDebExpo = $query->getResult()[0]->getDateHeureDebutExposition();
-		// Date 7 jours avant la prochaine exposition
-		$dateDebExpoSub = date_format(date_sub($dateDebExpo, date_interval_create_from_date_string('7 days')),'Y-m-d');
-		// On récupère l'id de l'exposition
-		$id = $query->getResult()[0]->getId();
+		if(!empty($query->getResult()))
+		{
+			// Date de début de la prochaine exposition
+			$dateDebExpo = $query->getResult()[0]->getDateHeureDebutExposition();
+			// Date 7 jours avant la prochaine exposition
+			$dateDebExpoSub = date_format(date_sub($dateDebExpo, date_interval_create_from_date_string('7 days')),'Y-m-d');
+			// On récupère l'id de l'exposition
+			$id = $query->getResult()[0]->getId();
 
-		// Puis on compare sa date de début retrancher de 7 jours avec la date du jour
-		if($dateDebExpoSub <= $dateJour){
+			// Puis on compare sa date de début retrancher de 7 jours avec la date du jour
+			if($dateDebExpoSub <= $dateJour){
 
-			$parameters2 = array(
-			'deliver' => 'Livré',
-			'id'      => $id
-			);
+				$parameters2 = array(
+				'deliver' => 'Livré',
+				'id'      => $id
+				);
 
-			$query = $this->_em->createQuery('
-				SELECT ex, o, e
-				FROM ModuleGestionBundle:Exposition ex
-				INNER JOIN ex.emplacements e
-				INNER JOIN e.oeuvre o
-				WHERE o.etat != :deliver
-				AND ex.id = :id
-			')->setParameters($parameters2);
+				$query = $this->_em->createQuery('
+					SELECT ex, o, e
+					FROM ModuleGestionBundle:Exposition ex
+					INNER JOIN ex.emplacements e
+					INNER JOIN e.oeuvre o
+					WHERE o.etat != :deliver
+					AND ex.id = :id
+				')->setParameters($parameters2);
 
-			return $query->getResult();
+				return $query->getResult();
+			}
+			return;
 		}
-
 		return;
 	}
 

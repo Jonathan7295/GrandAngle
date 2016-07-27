@@ -451,12 +451,33 @@ class ExpositionController extends Controller
         return $datefr;
     }
 
-    // public function testMailExpoAction(){
+    /* test unitaire d'impression */
+    public function testMailExpoAction(){
 
-    //     $em = $this->getDoctrine()->getManager();
-    //     // On charge la liste des expositions et oeuvres à alerter
-    //     $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAllCurrent();
+        $em = $this->getDoctrine()->getManager();
+        // On charge la liste des expositions et oeuvres à alerter
+        $expositions = $em->getRepository('ModuleGestionBundle:Exposition')->findAllCurrent();
 
-    //     return new Response("Hello world !");
-    // }
+        return new Response("Hello world !");
+    }
+
+    public function printAction(Exposition $exposition)
+    {
+        // On récupère le role de la personne connectée
+        $role = $this->getUser()->getRole();
+        $id = $exposition->getId();
+        $connection = $this->get('database_connection');
+        $query = "SELECT e.nomExposition as nomE, o.nom as nomO, emp.position as pos, emp.nombreVisiteOeuvre as nb
+                  FROM Exposition e
+                  INNER JOIN Emplacement emp
+                  ON emp.exposition_id = e.id
+                  INNER JOIN Oeuvre o
+                  ON emp.oeuvre_id = o.id
+                  WHERE e.id = ".$id;
+        $exposition = $connection->fetchAll($query);
+        return $this->render('exposition/print.html.twig', array(
+            'expositions' => $exposition,
+            'role' => $role
+        ));
+    }
 }
