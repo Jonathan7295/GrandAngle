@@ -12,6 +12,8 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Knp\\Component' => array($vendorDir . '/knplabs/knp-components/src'),
     'JsonpCallbackValidator' => array($vendorDir . '/willdurand/jsonp-callback-validator/src'),
+    'HTML2PDF' => array($vendorDir . '/ensepar/html2pdf'),
+    'Ensepar\\Html2pdfBundle' => array($vendorDir . '/ensepar/html2pdf-bundle'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
