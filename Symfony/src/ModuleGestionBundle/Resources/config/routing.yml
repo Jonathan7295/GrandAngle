@@ -33,6 +33,11 @@ test_dateexpo_exposition:
     defaults: { _controller: "ModuleGestionBundle:Exposition:testDateExpo" }
     methods: [POST]
 
+test_expo_oeuvre:
+    path:    /gestion/test_expo_oeuvre
+    defaults: { _controller: "ModuleGestionBundle:Exposition:testExpoOeuv" }
+    methods: [POST]
+
 # testMailExpo:
 #     path:    /gestion/testMailExpo/index
 #     defaults: { _controller: "ModuleGestionBundle:Exposition:testMailExpo" }

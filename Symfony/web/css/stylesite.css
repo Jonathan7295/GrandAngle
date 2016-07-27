@@ -925,6 +925,12 @@ td.buttonTab a {
 	background-color: rgb(210, 226, 213);
 }
 
+#imgShowOeuv {
+	height: 207px;
+    width: 30em;
+}
+
+
 /*****Edit Oeuvre*****/
 
 
@@ -969,9 +975,7 @@ td.buttonTab a {
 /*iPads (landscape)*/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
 /* Styles pour cette Media Queries */
-	body{
-		background-color: red; 
-	}
+	
 	div#contentlay {
 		font-size: 0.9em;
     	width: 100%;

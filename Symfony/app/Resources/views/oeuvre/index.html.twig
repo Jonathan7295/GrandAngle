@@ -43,7 +43,7 @@
                     {% for oeuvre in pagination %}
                         <tr>
                             <td>{{ oeuvre.nom }}</td>
-                            <td>{{ oeuvre.etat }}</td>
+                            <td>{{ oeuvre.emplacements.0.etat }}</td>
                             <td>{{ oeuvre.artiste.nomComplet }}</td>
                             <td>{{ oeuvre.typeoeuvre.discr }}</td>
                             <td class="buttonTab">
