@@ -2,8 +2,8 @@ body {
 	background-color: #333;
 }
 
-.container {
-	
+#contentlay {
+	width:89em;
 }
 
 select {
@@ -633,11 +633,11 @@ textarea {
 }
 
 .showexpo tr:nth-child(odd) {
-	background-color: #337AB7;
+	background-color: rgba(91, 150, 201, 0.88);
 }
 
 .showexpo tr:nth-child(even) {
-	background-color: #538FB7;
+	background-color: rgba(51, 122, 183, 0.46);
 }
 
 /*****Edit exposition*****/
@@ -891,11 +891,11 @@ td.buttonTab a {
 }
 
 .shooeuv tr:nth-child(odd) {
-	background-color: #5CB85C;
+	background-color: rgba(92, 184, 92, 0.8);
 }
 
 .shooeuv tr:nth-child(even) {
-	background-color: #D2E1E2;
+	background-color: rgb(210, 226, 213);
 }
 
 /*****Edit Oeuvre*****/

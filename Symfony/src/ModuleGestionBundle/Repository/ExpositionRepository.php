@@ -15,33 +15,49 @@ class ExpositionRepository extends \Doctrine\ORM\EntityRepository
 
 	public function findAllCurrent(){
 
-		// Date de début 7 jours après la date du jour initialisée à 00:00:00
-		$dateDeb = new \Datetime();
-		$dateDeb = date_add($dateDeb, date_interval_create_from_date_string('7 days'));
-		$dateDeb = date_time_set($dateDeb, 00, 00, 00);
+		$dateJour = new \Datetime();
 
-		// Date de fin 7 jours après la date du jour initialisée à 23:59:59
-		$dateFin = new \Datetime();
-		$dateFin = date_add($dateFin, date_interval_create_from_date_string('7 days'));
-		$dateFin = date_time_set($dateFin, 23, 59, 59);
-
-		$parameters = array(
-			'deliver' => 'Livré',
-			'dateSearchDeb' => $dateDeb,
-			'dateSearchFin' => $dateFin
+		$parameters1 = array(
+			'dateJour' => $dateJour
 				);
 
+		// On récupère la prochaine exposition
 		$query = $this->_em->createQuery('
-			SELECT ex, o, e
+			SELECT ex 
 			FROM ModuleGestionBundle:Exposition ex
-			INNER JOIN ex.emplacements e
-			INNER JOIN e.oeuvre o
-			WHERE o.etat != :deliver
-			AND ex.dateHeureDebutExposition
-			BETWEEN :dateSearchDeb AND :dateSearchFin' 
-			)->setParameters($parameters);
+			WHERE ex.dateHeureDebutExposition > :dateJour
+			ORDER BY ex.dateHeureDebutExposition ASC
+		')->setParameters($parameters1)
+		->setMaxResults(1);
 
-		return $query->getResult();
+		// Date de début de la prochaine exposition
+		$dateDebExpo = $query->getResult()[0]->getDateHeureDebutExposition();
+		// Date 7 jours avant la prochaine exposition
+		$dateDebExpoSub = date_sub($dateDebExpo, date_interval_create_from_date_string('7 days'));
+		// On récupère l'id de l'exposition
+		$id = $query->getResult()[0]->getId();
+
+		// Puis on compare sa date de début retrancher de 7 jours avec la date du jour
+		if($dateDebExpoSub <= $dateJour){
+
+			$parameters2 = array(
+			'deliver' => 'Livré',
+			'id'      => $id
+			);
+
+			$query = $this->_em->createQuery('
+				SELECT ex, o, e
+				FROM ModuleGestionBundle:Exposition ex
+				INNER JOIN ex.emplacements e
+				INNER JOIN e.oeuvre o
+				WHERE o.etat != :deliver
+				AND ex.id = :id
+			')->setParameters($parameters2);
+
+			return $query->getResult();
+		}
+
+		return;
 	}
 
 }

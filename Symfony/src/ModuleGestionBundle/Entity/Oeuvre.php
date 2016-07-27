@@ -49,13 +49,6 @@ class Oeuvre
     private $etat;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="nombreVisite", type="integer", nullable=true)
-     */
-    private $nombreVisite;
-
-     /**
      * @ORM\OneToMany(targetEntity="TexteOeuvre", mappedBy="oeuvre", cascade={"persist", "remove"})
      */
     private $texteoeuvres;
@@ -111,7 +104,6 @@ class Oeuvre
         $this->multi = new ArrayCollection();
         $this->statut = new ArrayCollection();
         $this->genFlashcode = false;
-        $this->nombreVisite = 0;
     }
     
     /**
@@ -218,30 +210,6 @@ class Oeuvre
     public function getEtat()
     {
         return $this->etat;
-    }
-
-    /**
-     * Set nombreVisite
-     *
-     * @param integer $nombreVisite
-     *
-     * @return Oeuvre
-     */
-    public function setNombreVisite($nombreVisite)
-    {
-        $this->nombreVisite = $nombreVisite;
-    
-        return $this;
-    }
-
-    /**
-     * Get nombreVisite
-     *
-     * @return integer
-     */
-    public function getNombreVisite()
-    {
-        return $this->nombreVisite;
     }
 
     /**
