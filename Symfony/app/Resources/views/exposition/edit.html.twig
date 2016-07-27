@@ -99,20 +99,6 @@
                                 </div>
                             </div>
                         </div>
-                       {#  <div class="row">
-                            <div class="form-group"> #}
-                                {# Génération du label #}
-                                {# {{ form_label(edit_form.fichier, "Image", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}} #}
-
-                                {# Affichage des erreurs pour ce champs précis #}
-                                {# {{ form_errors(edit_form.fichier) }}
-
-                                <div class="col-md-3 control-label ajust file">
-                                    {# Génération de l'input #}
-                                    {# {{ form_widget(edit_form.fichier, {'id': 'input-id', 'attr': {'class': 'file'}}) }}
-                                </div>
-                            </div>
-                        </div> #}
                         <div class="row">
                             <div class="form-group">
                                 {% image 'image/position.png'
@@ -144,12 +130,14 @@
 
                             // On en extrait les balises descendantes
                             var descendant = enfant.find("*");
-
+                            
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
                             $('.labelpos2').append(descendant[0]);
                             $('.champspos').append(descendant[1]);
                             $('.labeloeuvre2').append(descendant[32]);
                             $('.champsoeuvre').append(descendant[33]);
+                            $('.labeletat').append(descendant[38]);
+                            $('.champsetat').append(descendant[39]);
                             $('.deplace2 ').append(dellink);
                             // On incremente après chaque disposition de champs
                             index++;
@@ -172,6 +160,10 @@
                             $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
                             // Champs oeuvre
                             $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                            // Label etat
+                            $('[for="exposition_emplacements_'+num+'_etat"]').remove();
+                            // Champs etat
+                            $('[id="exposition_emplacements_'+num+'_etat"]').remove();
                             $(this).remove();
 
                             e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
@@ -211,11 +203,12 @@
 
                             var descendant = $newprototype.find('*');
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-
                             $('.labelpos2').append(descendant[3]);
                             $('.champspos').append(descendant[4]);
                             $('.labeloeuvre2').append(descendant[36]);
                             $('.champsoeuvre').append(descendant[37]);
+                            $('.labeletat').append(descendant[43]);
+                            $('.champsetat').append(descendant[44]);
 
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                             addDeleteLinkOeuvre2($('.deplace2'));
@@ -248,6 +241,10 @@
                                 $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
                                 // Champs oeuvre
                                 $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                                // Label etat
+                                $('[for="exposition_emplacements_'+num+'_etat"]').remove();
+                                // Champs etat
+                                $('[id="exposition_emplacements_'+num+'_etat"]').remove();
                                 $(this).remove();
                                 
                                 e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
@@ -259,13 +256,15 @@
                 </script>
                 <div class="row">
                     <div class="row">
-                        <div id="oeuvreexpo" class="col-md-10 col-sm-10 col-xs-10">
+                        <div id="oeuvreexpo" class="col-md-12 col-sm-10 col-xs-10">
                             <div class="form-group">
                                 <div class="form-group">
                                     <div class="col-md-1 col-sm-1 col-xs-1 labelpos2 control-label"></div>
-                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 champspos control-label"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                                    <div class="col-md-4 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajust"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
                                 </div>
                             </div>

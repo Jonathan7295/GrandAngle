@@ -8,9 +8,10 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <a id="showexporet" href="{{ path('exposition_index') }}">Retour</a>
                     <a id="showexpoedit" href="{{ path('exposition_edit', { 'id': exposition.id }) }}">Modifier</a>
+                    <img id="imgExpo" class="img-responsive" src="{{ app.request.basepath }}/upload/{{ exposition.Fichier}}" alt="Image Exposition" />
                 </div>
                 <div class="col-md-5">
                     <table class="table showexpo">
@@ -78,11 +79,13 @@
                             <tr>
                                 <th>Oeuvre</th>
                                 <th>Position</th>
+                                <th>Emplacement</th>
                             </tr>
                         {% for emplacement in exposition.emplacements %}
                             <tr>
                                 <td>{{ emplacement.oeuvre.nom }}</td>
                                 <td>{{ emplacement.position }}</td>
+                                <td>{{ emplacement.etat }}</td>
                             </tr>
                         {% endfor %}
                         </table>

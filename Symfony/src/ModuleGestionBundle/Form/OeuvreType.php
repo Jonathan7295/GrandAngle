@@ -24,14 +24,6 @@ class OeuvreType extends AbstractType
         $builder
             ->add('nom')
             ->add('genFlashcode')
-            ->add('etat', ChoiceType::class, array(
-                'choices' => array(
-                    'Pas livré' => 'Pas livré',
-                    'Livré'     => 'Livré',
-                    'En cours'  => 'En cours',
-                ),
-                'multiple' => false,
-                'expanded' => true))
             ->add('artiste', EntityType::class, array(
                 'class' => 'ModuleGestionBundle:Artiste',
                 'label' => false,

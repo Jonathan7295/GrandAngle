@@ -59,7 +59,15 @@ class EmplacementType extends AbstractType
                                                 'expanded' => false,
                                                 'required'    => true,
                                                 'multiple' => false
-                                                ));
+                                                ))
+            ->add('etat', ChoiceType::class, array(
+                'label' => 'Etat',
+                'choices'  => array(
+                            'Pas livré' => 'Pas livré',
+                            'Livré' => 'Livré',
+                            'En cours' => 'En cours'
+                            )
+                ))
         ;
     }
     
