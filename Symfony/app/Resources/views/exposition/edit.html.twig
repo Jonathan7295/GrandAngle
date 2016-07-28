@@ -128,13 +128,12 @@
                             var descendant = enfant.find("*");
                             
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-                            console.log(descendant);
-                            $('.labelpos2').append(descendant[0]);
-                            $('.champspos').append(descendant[1]);
-                            $('.labeloeuvre2').append(descendant[32]);
-                            $('.champsoeuvre').append(descendant[33]);
-                            $('.labeletat').append(descendant[38]);
-                            $('.champsetat').append(descendant[39]);
+                            $('.labeletat').append(descendant[0]);
+                            $('.champsetat').append(descendant[1]);
+                            $('.labelpos2').append(descendant[5]);
+                            $('.champspos').append(descendant[6]);
+                            $('.labeloeuvre2').append(descendant[37]);
+                            $('.champsoeuvre').append(descendant[38]);
                             $('.deplace2 ').append(dellink);
                             // On incremente après chaque disposition de champs
                             index++;
@@ -188,13 +187,14 @@
                             var $prototype = $($container.attr('data-prototype').replace(/__name__label_/g, 'Texte n°' + (index+2)).replace(/__name__/g, index+'2'));
                             $newprototype = $($prototype);
                             var descendant = $newprototype.find('*');
+
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-                            $('.labelpos2').append(descendant[3]);
-                            $('.champspos').append(descendant[4]);
-                            $('.labeloeuvre2').append(descendant[36]);
-                            $('.champsoeuvre').append(descendant[37]);
-                            $('.labeletat').append(descendant[43]);
-                            $('.champsetat').append(descendant[44]);
+                            $('.labeletat').append(descendant[3]);
+                            $('.champsetat').append(descendant[4]);
+                            $('.labelpos2').append(descendant[9]);
+                            $('.champspos').append(descendant[10]);
+                            $('.labeloeuvre2').append(descendant[42]);
+                            $('.champsoeuvre').append(descendant[43]);
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                             addDeleteLinkOeuvre2($('.deplace2'));
                             //on ajoute le prototype modifié à la fin de la balise <div>
@@ -243,8 +243,8 @@
                                     <div class="col-md-1 col-sm-1 col-xs-1 champspos control-label"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
                                     <div class="col-md-4 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajust"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
                                 </div>
                             </div>
@@ -284,17 +284,18 @@
                             var $prototype = $($container.attr('data-prototype').replace(/__name__label_/g, 'Texte n°' + (index+2)).replace(/__name__/g, index));
                             $newprototype = $($prototype);
                             var descendant = $newprototype.find('*');
+                            
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-                            $('.labelpos2').append(descendant[3]);
-                            $('.champspos').append(descendant[4]);
-                            $('.labeloeuvre2').append(descendant[36]);
-                            $('.champsoeuvre').append(descendant[37]);
-                            $('.labeletat').append(descendant[43]);
-                            $('.champsetat').append(descendant[44]);
+                            $('.labeletat').append(descendant[3]);
+                            $('.champsetat').append(descendant[4]);
+                            $('.labelpos2').append(descendant[9]);
+                            $('.champspos').append(descendant[10]);
+                            $('.labeloeuvre2').append(descendant[42]);
+                            $('.champsoeuvre').append(descendant[43]);
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                             addDeleteLinkOeuvre($('.deplace2'));
                             //on ajoute le prototype modifié à la fin de la balise <div>
-                            $('#lienrow').append($('#add_oeuvre'));
+                            $('#oeuvreexpo').append($('#add_oeuvre'));
                             //enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
                             index++;
                         }
@@ -329,22 +330,14 @@
                         }
                     });
                 </script>
-                <div class="row">
-                    <div class="row">
-                        <div id="oeuvreexpo" class="col-md-10 col-sm-10 col-xs-10">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos2 control-label"></div>
-                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajust"></div>
-                                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="oeuvreexpo" class="col-md-12 col-sm-10 col-xs-10">
+                    <div class="col-md-1 col-sm-1 col-xs-1 labelpos2 control-label"></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1 champspos control-label"></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
+                    <div class="col-md-4 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label"></div>
+                    <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label"></div>
+                    <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
                 </div>
             {% endif %}
             {% if edit_form.textexpositions.0 is defined %}
@@ -472,8 +465,6 @@
                         <div class="col-md-4 col-sm-3 col-xs-10 champsdes"></div>
                         <div class="col-md-1 col-sm-2 col-xs-2 labellang control-label ajust ajust2"></div>
                         <div class="col-md-3 col-sm-3 col-xs-10 champslang control-label ajust ajust2"></div>
-                        <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
-                        <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajust"></div>
                         <div class="col-md-1 col-sm-1 col-xs-1 deplace control-label ajust ajust2"></div>
                     </div>
                 </div>
@@ -484,10 +475,14 @@
                         var $container = $('div#exposition_textexpositions');
                         //On ajoute un lien pour ajouter un nouveau textexposition
                         var $addLink =$('<a type="button" id="add_textexposition" class="glyphicon glyphicon-plus vert"></a>');
-                        $('#oeuvreexpo').append($addLink);
+                        $('#formedit2').append($addLink);
                         //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
                         $addLink.click(function(e) {
-                            addTextExposition($container);
+                             var nbTexte = $(document).find('textarea').length;
+                            if(nbTexte < 5)
+                            {
+                                addTextExposition($container);
+                            }
                             e.preventDefault(); // évite qu'un # apparaisse dans l'url
                             return false;
                         });
@@ -519,7 +514,7 @@
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                             addDeleteLink($('.deplace'));
                             //on ajoute le prototype modifié à la fin de la balise <div>
-                            $('#lienrow').append($('#add_textexposition'));
+                            $('#formedit2').append($('#add_textexposition'));
                             //enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
                             index++;
                         }
