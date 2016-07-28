@@ -24,13 +24,12 @@
 			{% endfor %}
 		</div>
 	</div>
-</div>
+</divW>
 {% endblock body %}
 
 {% block javascripts %}
 <script type="text/javascript">
 	$(document).ready(function(){
-		
 		if({{oeuvres.0.idEx}} != undefined)
 		{
 			var idex = {{oeuvres.0.idEx}};
@@ -39,6 +38,7 @@
 				$('#selecexpo option[value='+idex+']').prop('selected', true);
 				$('#input').attr('value',idex);
 			}
+
 			$('#selecexpo').change(function(){
 				var id = $(this).val();
 				$('#input').attr('value',id);
@@ -86,18 +86,22 @@
 			strong = document.createElement('strong');
 			a = document.createElement('a');
 			a.setAttribute('class', 'btn btn-primary');
+
 			p.appendChild(strong);
 			div2.appendChild(img);
 			div2.appendChild(p);
 			div2.appendChild(a);
 			div1.appendChild(div2);
+
 			fichier = expo.fichier;
 			nom = document.createTextNode(expo.nomO);
 			texte = document.createTextNode('Voir le détail');
 			id = document.createTextNode(expo.idO);
 			img.src = '{{ app.request.basepath }}/upload/'+fichier;
 			a.appendChild(texte);
+
 			strong.appendChild(nom);
+
 			contenu.appendChild(div1);
 			div[0].appendChild(contenu);
 			contenu = document.createElement('div');
@@ -118,18 +122,22 @@
 			strong = document.createElement('strong');
 			a = document.createElement('a');
 			a.setAttribute('class', 'btn btn-primary');
+
 			p.appendChild(strong);
 			div2.appendChild(img);
 			div2.appendChild(p);
 			div2.appendChild(a);
 			div1.appendChild(div2);
+
 			fichier = expo.fichier;
 			nom = document.createTextNode(expo.nom);
 			texte = document.createTextNode('Voir le détail');
 			id = document.createTextNode(expo.id);
 			img.src = '{{ app.request.basepath }}/upload/'+fichier;
 			a.appendChild(texte);
+
 			strong.appendChild(nom);
+
 			contenu.appendChild(div1);
 			div[0].appendChild(contenu);
 			contenu = document.createElement('div');

@@ -110,6 +110,7 @@ class AccueilController extends Controller
         }
         return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
+
     public function detailAction(Oeuvre $oeuvre, $idE)
     {
         $connection = $this->get('database_connection');
@@ -132,6 +133,7 @@ class AccueilController extends Controller
             'idE' => $idE
         ));
     }
+
     public function majvuoAction(Request $request)
     {
         if($request->isXMLHttpRequest()) 

@@ -10,4 +10,18 @@ namespace ModuleGestionBundle\Repository;
  */
 class EmplacementRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function updateVisite($idO, $idE,$em)
+	{
+		$qb = $em->createQueryBuilder();
+		$q = $qb->update('ModuleGestionBundle\Entity\Emplacement', 'e')
+		    ->set('e.nombreVisiteOeuvre', 'e.nombreVisiteOeuvre + 1')
+		    ->where('e.oeuvre = ?1')
+		    ->andWhere('e.exposition = ?2')
+		    ->setParameters(array(
+		    	1 => $idO,
+		    	2 => $idE,
+		    ))
+		    ->getQuery();
+		$p = $q->execute();
+	}
 }

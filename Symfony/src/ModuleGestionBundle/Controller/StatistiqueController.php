@@ -59,12 +59,18 @@ class StatistiqueController extends Controller
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
+        // On se connecte à la base de données
         $connection = $this->get('database_connection');
-        $query = "SELECT e.id as idexpo, e.nomExposition as nomexpo
-                  FROM Exposition as e";
+        $query = "SELECT distinct e.id as idexpo, e.nomExposition as nomexpo
+                  FROM Exposition as e
+                  INNER JOIN Emplacement em
+                  ON em.exposition_id = e.id
+                  WHERE em.exposition_id is not null";
+        // On récupère le résultat de la requéte
         $id = $connection->fetchAll($query);
         $exposition[] = "";
         $TotalExpo = array();
+        // Ici on boucle afin de trouver toutes les oeuvres de toutes les expositions
         foreach ($id as $key => $value) {
             $exposition[$key] = $value['nomexpo'];
             $connection = $this->get('database_connection');
@@ -82,6 +88,7 @@ class StatistiqueController extends Controller
 
         $tableau = array();
         $y = 0;
+        //Ici on cherche les oeuvre unique sans doublon
         while($y != count($TotalExpo))
         {
             if(!empty($tableau))
@@ -100,9 +107,11 @@ class StatistiqueController extends Controller
         $tableConstruit = array();
         $trouve = false;
         $precedent = "";
+        // On reconstruit le tableau pour l'adapter au type de données lu par le graphique
         foreach ($tableau as $key => $value) 
         {
             $tab = array();
+            // nom de l'oeuvre
             $tab['name'] = $value;
             //$precedent = $value;
             $tab['data'] = array();
