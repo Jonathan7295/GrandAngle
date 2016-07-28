@@ -18,6 +18,14 @@ class EmplacementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('etat', ChoiceType::class, array(
+                'label' => 'Etat',
+                'choices'  => array(
+                            'Pas livré' => 'Pas livré',
+                            'Livré' => 'Livré',
+                            'En cours' => 'En cours'
+                            )
+            ))
             ->add('position', ChoiceType::class, array(
                 'label' => 'Position',
                 'choices'  => array(
@@ -60,14 +68,6 @@ class EmplacementType extends AbstractType
                                                 'required'    => true,
                                                 'multiple' => false
                                                 ))
-            ->add('etat', ChoiceType::class, array(
-                'label' => 'Etat',
-                'choices'  => array(
-                            'Pas livré' => 'Pas livré',
-                            'Livré' => 'Livré',
-                            'En cours' => 'En cours'
-                            )
-                ))
         ;
     }
     

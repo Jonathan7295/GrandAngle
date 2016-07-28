@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 {% if oeuvre.genFlashCode %}
-                                    <a id="qrcindex" title="Imprimer un Qrcode" href="{{ oeuvre.imgFlashCode ~ '.png'}}" class="glyphicon glyphicon-qrcode"></a>
+                                    <a id="qrcindex" title="Imprimer un Qrcode" href="{{ qrcode_url(oeuvre.imgFlashcode, { extension: 'png'}) }}" class="glyphicon glyphicon-qrcode"></a>
                                 {% endif %}
                             </td>
                         </tr>

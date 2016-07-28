@@ -683,7 +683,7 @@ table.table.showexpo {
 	padding-right: 0px;
 }
 
-.labeloeuvre2 label, .labelpos2 label {
+.labeloeuvre2 label, .labelpos2 label, .labeletat label {
 	line-height: 33px;
 	margin-bottom: 15px;
 }

@@ -22,7 +22,7 @@ class AccueilController extends Controller
         $date = $dateJour->format('Y-m-d');
         $langue = "fr";
         
-	   //Connection à la base de données
+	       //Connection à la base de données
         $connection = $this->get('database_connection');
 
         // récupérer la liste complète des oeuvres
@@ -30,7 +30,7 @@ class AccueilController extends Controller
         		  inner join Emplacement as em on e.id=em.exposition_id
         		  inner join Oeuvre as oe on oe.id=em.oeuvre_id
                   inner join Text_exposition as texe on e.id=texe.exposition_id
-        		  where FORMAT(e.dateHeureDebutExposition,'Y-m-d') <= '".$date."'and FORMAT(e.dateHeureFinExposition,'Y-m-d') >= '".$date."' and texe.langue='".$langue."'";
+        		  where DATE_FORMAT(e.dateHeureDebutExposition,'%Y-%m-%d') <= '".$date."'and DATE_FORMAT(e.dateHeureFinExposition,'%Y-%m-%d') >= '".$date."' and texe.langue='".$langue."'";
 
                 // On stocke le résultat
                 $rows = $connection->fetchAll($query);
