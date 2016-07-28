@@ -22,12 +22,12 @@
                     <td>{% if exposition.dateHeureDebutExposition %}{{ exposition.dateHeureDebutExposition|date('d M Y H:i') }}{% endif %}</td>
                     <td>{% if exposition.dateHeureFinExposition %}{{ exposition.dateHeureFinExposition|date('d M Y H:i') }}{% endif %}</td>
                     <td>
-                        <a id="searchindex" class="glyphicon glyphicon-search" href="{{ path('exposition_show', { 'id': exposition.id }) }}"></a>
-                        <a id="editindex" class="glyphicon glyphicon-pencil" href="{{ path('exposition_edit', { 'id': exposition.id }) }}"></a>
-                        <a id="delindex" name="{{ exposition.id }}" class="glyphicon glyphicon-trash" href="{{ path('exposition_delete', { 'id': exposition.id }) }}"></a>
+                        <a id="searchindex" title="Afficher" class="glyphicon glyphicon-search" href="{{ path('exposition_show', { 'id': exposition.id }) }}"></a>
+                        <a id="editindex" title="Modifier" class="glyphicon glyphicon-pencil" href="{{ path('exposition_edit', { 'id': exposition.id }) }}"></a>
+                        <a id="delindex" title="Supprimer" name="{{ exposition.id }}" class="glyphicon glyphicon-trash" href="{{ path('exposition_delete', { 'id': exposition.id }) }}"></a>
                     </td>
                     <td>
-                        <a id="printindex" class="glyphicon glyphicon-print" href="{{ path('exposition_print', { 'id': exposition.id }) }}"></a>
+                        <a id="printindex" title="Imprimer la liste des oeuvres" class="glyphicon glyphicon-print" name="{{ exposition.id }}" href="{{ path('exposition_print', { 'id': exposition.id }) }}"></a>
                     </td>
                 </tr>
             {% endfor %}
@@ -35,13 +35,15 @@
         </table>
         <ul class="nav nav-pills">
             <li role="presentation">
-                <a id="expo" href="{{ path('exposition_new') }}">Nouveau</a>
+                <a id="expo" title="Nouvelle Exposition" href="{{ path('exposition_new') }}">Nouveau</a>
             </li>
         </ul>
         <div class="navigation">
             {{ knp_pagination_render(expositions) }}
         </div>
         <script type="text/javascript">
+
+            // Suppression d'une exposition
             $('a#delindex').click(function(event) {
                 
                 // On bloque le comportement du bouton
@@ -65,6 +67,31 @@
                     }); 
                 }
                
+            });
+
+            // On vérifie avant le print si il y a des oeuvres liées
+            $('a#printindex').click(function(event) {
+                    
+                    // On bloque le comportement du bouton
+                    event.preventDefault();
+
+                    // On récupère l'id de l'expo
+                    var id = $ (this).attr('name');
+                    var path = $(this).attr('href');
+                  
+                    $.ajax({
+                        url: "{{ path('test_expo_oeuvre') }}",  // On renseigne l'url TWIG
+                        method: "post",
+                        data: {id: id} // On passe l'id dans la requête
+                    }).done(function(msg){
+                        
+                        if(msg.data == 'false'){
+                           window.open(path);
+                        }else{
+                           alert("Vous ne pouvez pas imprimer la liste des Oeuvres car il n'y en a pas !");
+                           return;
+                        }
+                    }); 
             });
         </script>
     </div>

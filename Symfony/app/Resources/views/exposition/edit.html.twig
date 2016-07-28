@@ -99,24 +99,10 @@
                                 </div>
                             </div>
                         </div>
-                       {#  <div class="row">
-                            <div class="form-group"> #}
-                                {# Génération du label #}
-                                {# {{ form_label(edit_form.fichier, "Image", {'label_attr': {'class': 'col-md-2 control-label ajust'}})}} #}
-
-                                {# Affichage des erreurs pour ce champs précis #}
-                                {# {{ form_errors(edit_form.fichier) }}
-
-                                <div class="col-md-3 control-label ajust file">
-                                    {# Génération de l'input #}
-                                    {# {{ form_widget(edit_form.fichier, {'id': 'input-id', 'attr': {'class': 'file'}}) }}
-                                </div>
-                            </div>
-                        </div> #}
                         <div class="row">
                             <div class="form-group">
-                                {% image 'image/position.png'
-                                    filter='jpegoptim' output='/image/position.png' %}
+                                {% image 'images/position.png'
+                                    filter='jpegoptim' output='/images/position.png' %}
                                     <img class="img" src="{{ asset_url }}" alt="Example" width="500" heugth="250"/>
                                 {% endimage %}
                             </div>
@@ -129,12 +115,13 @@
                     $(document).ready(function() {
 
                         var $addLink =$('<a type="button" id="add_oeuvre" class="glyphicon glyphicon-ok-circle vert"></a>');
-                        $('#lienrow').append($addLink);
+                        $('#oeuvreexpo').append($addLink);
+
                         var nbElements = $('#exposition_emplacements_1').length;
                         var index = 0;
                         while ($('#exposition_emplacements_'+index).length > 0) {
                             // On récupère le lien de suppression
-                            var dellink = '<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red red3"></a>'
+                            var dellink = '<a type="button" name="'+index+'" class="glyphicon glyphicon-remove-circle red3"></a>'
 
                             // On désactive le label de l'indice de collection
                             $('label.required:contains('+index+')').css('display','none');
@@ -144,12 +131,14 @@
 
                             // On en extrait les balises descendantes
                             var descendant = enfant.find("*");
-
+                            
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
                             $('.labelpos2').append(descendant[0]);
                             $('.champspos').append(descendant[1]);
                             $('.labeloeuvre2').append(descendant[32]);
                             $('.champsoeuvre').append(descendant[33]);
+                            $('.labeletat').append(descendant[38]);
+                            $('.champsetat').append(descendant[39]);
                             $('.deplace2 ').append(dellink);
                             // On incremente après chaque disposition de champs
                             index++;
@@ -172,6 +161,10 @@
                             $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
                             // Champs oeuvre
                             $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                            // Label etat
+                            $('[for="exposition_emplacements_'+num+'_etat"]').remove();
+                            // Champs etat
+                            $('[id="exposition_emplacements_'+num+'_etat"]').remove();
                             $(this).remove();
 
                             e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
@@ -211,11 +204,12 @@
 
                             var descendant = $newprototype.find('*');
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-
                             $('.labelpos2').append(descendant[3]);
                             $('.champspos').append(descendant[4]);
                             $('.labeloeuvre2').append(descendant[36]);
                             $('.champsoeuvre').append(descendant[37]);
+                            $('.labeletat').append(descendant[43]);
+                            $('.champsetat').append(descendant[44]);
 
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                             addDeleteLinkOeuvre2($('.deplace2'));
@@ -229,7 +223,7 @@
                         //la fonction qui ajoute un lien de suppression d'un text
                         function addDeleteLinkOeuvre2($prototype) {
                             //création du lien 
-                            $deleteLink = $('<a type="button" name="'+index+'2'+'" class="glyphicon glyphicon-remove-circle red red3"></a>');
+                            $deleteLink = $('<a type="button" name="'+index+'2'+'" class="glyphicon glyphicon-remove-circle red"></a>');
 
                             //Ajout du lien
                             $prototype.append($deleteLink);
@@ -248,6 +242,10 @@
                                 $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
                                 // Champs oeuvre
                                 $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                                // Label etat
+                                $('[for="exposition_emplacements_'+num+'_etat"]').remove();
+                                // Champs etat
+                                $('[id="exposition_emplacements_'+num+'_etat"]').remove();
                                 $(this).remove();
                                 
                                 e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
@@ -259,13 +257,15 @@
                 </script>
                 <div class="row">
                     <div class="row">
-                        <div id="oeuvreexpo" class="col-md-10 col-sm-10 col-xs-10">
+                        <div id="oeuvreexpo" class="col-md-12 col-sm-10 col-xs-10">
                             <div class="form-group">
                                 <div class="form-group">
                                     <div class="col-md-1 col-sm-1 col-xs-1 labelpos2 control-label"></div>
-                                    <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 champspos control-label"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
-                                    <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                                    <div class="col-md-4 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajust"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
                                 </div>
                             </div>
@@ -315,12 +315,14 @@
                             $newprototype = $($prototype);
 
                             var descendant = $newprototype.find('*');
-                           
+
                             // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
                             $('.labelpos2').append(descendant[3]);
                             $('.champspos').append(descendant[4]);
                             $('.labeloeuvre2').append(descendant[36]);
                             $('.champsoeuvre').append(descendant[37]);
+                            $('.labeletat').append(descendant[43]);
+                            $('.champsetat').append(descendant[44]);
 
                             // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                             addDeleteLinkOeuvre($('.deplace2'));
@@ -353,6 +355,10 @@
                                 $('[for="exposition_emplacements_'+num+'_oeuvre"]').remove();
                                 // Champs oeuvre
                                 $('[id="exposition_emplacements_'+num+'_oeuvre"]').remove();
+                                // Label etat
+                                $('[for="exposition_emplacements_'+num+'_etat"]').remove();
+                                // Champs etat
+                                $('[id="exposition_emplacements_'+num+'_etat"]').remove();
                                 $(this).remove();
 
                                 e.preventDefault(); // Evite qu'un # apparaisse dans l'URL
@@ -371,6 +377,8 @@
                                     <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre2 control-label"></div>
                                     <div class="col-md-2 col-sm-2 col-xs-2 champsoeuvre control-label"></div>
+                                    <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
+                                    <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajust"></div>
                                     <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label"></div>
                                 </div>
                             </div>
@@ -384,7 +392,7 @@
                         //On ajoute un lien pour ajouter un nouveau textexposition
                         var $addLink =$('<a type="button" id="add_textexposition" class="glyphicon glyphicon-plus vert"></a>');
 
-                        $('#lienrow').append($addLink);
+                        $('#oeuvreexpo').append($addLink);
 
                         // Nombre de champs téléphone généré
                         var nbElements = $('#exposition_textexpositions_1').length;
@@ -530,6 +538,8 @@
                         <div class="col-md-4 col-sm-3 col-xs-10 champsdes"></div>
                         <div class="col-md-1 col-sm-2 col-xs-2 labellang control-label ajust ajust2"></div>
                         <div class="col-md-3 col-sm-3 col-xs-10 champslang control-label ajust ajust2"></div>
+                        <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
+                        <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajust"></div>
                         <div class="col-md-1 col-sm-1 col-xs-1 deplace control-label ajust ajust2"></div>
                     </div>
                 </div>
@@ -542,7 +552,7 @@
                         //On ajoute un lien pour ajouter un nouveau textexposition
                         var $addLink =$('<a type="button" id="add_textexposition" class="glyphicon glyphicon-plus vert"></a>');
 
-                        $('#lienrow').append($addLink);
+                        $('#oeuvreexpo').append($addLink);
 
                         //On ajoute un nouveau champs à chaque clic sur le lien d'ajout.
                         $addLink.click(function(e) {

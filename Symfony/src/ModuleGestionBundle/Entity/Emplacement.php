@@ -30,6 +30,13 @@ class Emplacement
     private $position;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="etat", type="string", length=255)
+     */
+    private $etat;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="nombreVisiteOeuvre", type="integer", nullable=true)
@@ -152,5 +159,29 @@ class Emplacement
     public function getOeuvre()
     {
         return $this->oeuvre;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param string $etat
+     *
+     * @return Emplacement
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
     }
 }

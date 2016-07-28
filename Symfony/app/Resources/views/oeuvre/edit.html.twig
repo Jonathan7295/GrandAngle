@@ -12,7 +12,7 @@
         <div id="contnewOeuv" class="container">
             {# Selection de l'artiste et Etat de l'oeuvre #}
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-10">
                     <div class="col-md-1 form-group">
                         {# Génération du label #}
                         {{ form_label(edit_form.nom, "Nom", {'label_attr': {'class': 'control-label ajust'}})}}
@@ -285,12 +285,8 @@
                 {% endif %}
                 {# Fin de la condition multimédia #}
                 </div>
-                <div class="col-md-2">
-                    {{ form_label(edit_form.etat)}}
-                    {{ form_widget(edit_form.etat)}}
-                </div>
                 <div id="previsu" class="col-md-2">
-                {% image 'image/specimen.png' filter='jpegoptim' %}
+                {% image 'images/specimen.png' filter='jpegoptim' %}
                     <img class="specimen img-responsive" title="Image Oeuvre" src="{{ asset_url }}" width="141px" height="141px"/>
                 {% endimage %}
                 </div>
@@ -836,6 +832,17 @@
                                             }
                                         }
                                     });
+
+
+                                    // Si on choisis une date on agrandit la page
+                                    $('#tableau_tableau_dateCreation').click(function(){
+                                        $('#contnewOeuv').css('height','53em');
+                                    });
+
+                                    // Si on ressort du champs
+                                    $('#tableau_tableau_dateCreation').change(function(){
+                                        $('#contnewOeuv').css('height','');
+                                    });
                                 });
                             </script>
                     </div>
@@ -858,6 +865,7 @@
                 document.location.href="{{ path('artiste_new') }}";
             }
         }
+
 
         // Fonction pour afficher une miniature du lien
         function myImageFunction(valeur) {

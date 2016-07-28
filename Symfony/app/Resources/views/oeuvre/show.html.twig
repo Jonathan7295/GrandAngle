@@ -45,7 +45,7 @@
                             </tr>
                             <tr>
                                 <th>Etat</th>
-                                <td>{{ oeuvre.etat }}</td>
+                                <td>{{ oeuvre.emplacements.0.etat }}</td>
                             </tr>
                             <tr>
                                 <th>Artiste</th>
@@ -87,6 +87,7 @@
                             </table>
                         </div>
                     {% endif %}
+                    <img id="imgShowOeuv" class="img-responsive" src="{{ app.request.basepath }}/upload/{{ oeuvre.image}}" alt="Image Exposition" />
                 </div>
             </div>
         </div>

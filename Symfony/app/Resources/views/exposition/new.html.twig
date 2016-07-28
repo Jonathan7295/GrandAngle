@@ -147,8 +147,8 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                {% image 'image/position.png'  
-                                    filter='jpegoptim' output='/image/position.png' %}
+                                {% image 'images/position.png'  
+                                    filter='jpegoptim' output='/images/position.png' %}
                                     <img class="img" src="{{ asset_url }}" alt="Example" width="500" heugth="250"/>
                                 {% endimage %}
                             </div>
@@ -326,13 +326,15 @@
             </script>
             <div class="row">
                 <div class="row">
-                    <div id="oeuvre" class="col-md-10 col-sm-10 col-xs-10 oeuvre2">
+                    <div id="oeuvre" class="col-md-12 col-sm-10 col-xs-10 oeuvre2">
                         <div class="form-group">
                             <div class="form-group">
                                 <div class="col-md-1 col-sm-1 col-xs-1 labelpos position2 control-label ajust"></div>
                                 <div class="col-md-2 col-sm-1 col-xs-1 champspos control-label ajustSel1"></div>
                                 <div class="col-md-1 col-sm-1 col-xs-1 labeloeuvre control-label ajust"></div>
                                 <div class="col-md-4 col-sm-2 col-xs-2 champsoeuvre control-label ajustSel2"></div>
+                                <div class="col-md-1 col-sm-1 col-xs-1 labeletat control-label ajust"></div>
+                                <div class="col-md-2 col-sm-2 col-xs-2 champsetat control-label ajustSel2"></div>
                                 <div class="col-md-1 col-sm-1 col-xs-1 deplace2 control-label ajust "></div>
                             </div>
                         </div>
@@ -506,6 +508,8 @@
                 $('.champspos').append(descendant2[4]);
                 $('.labeloeuvre').append(descendant2[36]);
                 $('.champsoeuvre').append(descendant2[37]);
+                $('.labeletat').append(descendant2[43]);
+                $('.champsetat').append(descendant2[44]);
 
                 // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                 addDeleteLink2($('.deplace2'));
@@ -538,6 +542,11 @@
                     $('[for="exposition_emplacements_'+num2+'_oeuvre"]').remove();
                     // Champs oeuvre
                     $('[id="exposition_emplacements_'+num2+'_oeuvre"]').remove();
+                     // Label etat
+                    $('[for="exposition_emplacements_'+num2+'_etat"]').remove();
+                    // Champs etat
+                    $('[id="exposition_emplacements_'+num2+'_etat"]').remove();
+
                     $(this).remove();
                     
                     e.preventDefault(); // Evite qu'un # apparaisse dans l'URL

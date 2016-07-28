@@ -465,6 +465,7 @@ class ExpositionController extends Controller
     {
         // On récupère le role de la personne connectée
         $role = $this->getUser()->getRole();
+
         $id = $exposition->getId();
         $connection = $this->get('database_connection');
         $query = "SELECT e.nomExposition as nomE, o.nom as nomO, emp.position as pos, emp.nombreVisiteOeuvre as nb
@@ -479,5 +480,33 @@ class ExpositionController extends Controller
             'expositions' => $exposition,
             'role' => $role
         ));
+    }
+
+    public function testExpoOeuvAction(Request $request)
+    {
+        if($request->isXMLHttpRequest()) {
+
+            $idExpo = $request->get('id');
+            
+            $connection = $this->get('database_connection');
+
+            $query = "SELECT emp.oeuvre_id
+                      FROM Emplacement as emp
+                      WHERE emp.exposition_id = ".$idExpo."";
+
+            $Trouve = $connection->fetchAll($query);
+
+            if(empty($Trouve))
+            {
+                $message = true;
+            }
+            else
+            {
+                $message = false;
+            }
+
+            return new JsonResponse(array('data' => json_encode($message)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
 }
