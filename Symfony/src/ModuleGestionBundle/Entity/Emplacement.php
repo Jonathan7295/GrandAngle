@@ -39,7 +39,7 @@ class Emplacement
     /**
      * @var int
      *
-     * @ORM\Column(name="nombreVisiteOeuvre", type="integer", nullable=true)
+     * @ORM\Column(name="nombreVisiteOeuvre", type="integer", nullable=true, options={"default":0})
      */
     private $nombreVisiteOeuvre;
 
