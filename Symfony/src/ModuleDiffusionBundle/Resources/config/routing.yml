@@ -15,3 +15,13 @@ module_diffusion_oeuvre:
     path:     /oeuvre
     defaults: { _controller: "ModuleDiffusionBundle:Accueil:oeuvre" }
 
+module_diffusion_listexpo:
+    path:     /list
+    defaults: { _controller: "ModuleDiffusionBundle:Accueil:listexpo" }
+    methods: [POST, GET]
+
+module_diffusion_showoeuvre:
+    path:     /oeuvre/{id}/detail
+    defaults: { _controller: "ModuleDiffusionBundle:Accueil:detail" }
+    methods: [POST, GET]
+
