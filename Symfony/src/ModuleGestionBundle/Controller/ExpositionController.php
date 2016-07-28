@@ -429,6 +429,7 @@ class ExpositionController extends Controller
             'role' => $role,
             'oeuvNonLivre' => $oeuvresNonLivre
         ));
+
     }
 
     public function DateFrancais($datefr)

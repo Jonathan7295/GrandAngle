@@ -22,7 +22,7 @@ class AccueilController extends Controller
         $date = $dateJour->format('Y-m-d');
         $langue = "fr";
         
-	   //Connection à la base de données
+	       //Connection à la base de données
         $connection = $this->get('database_connection');
 
         // récupérer la liste complète des oeuvres
@@ -30,7 +30,7 @@ class AccueilController extends Controller
         		  inner join Emplacement as em on e.id=em.exposition_id
         		  inner join Oeuvre as oe on oe.id=em.oeuvre_id
                   inner join Text_exposition as texe on e.id=texe.exposition_id
-        		  where FORMAT(e.dateHeureDebutExposition,'Y-m-d') <= '".$date."'and FORMAT(e.dateHeureFinExposition,'Y-m-d') >= '".$date."' and texe.langue='".$langue."'";
+        		  where DATE_FORMAT(e.dateHeureDebutExposition,'%Y-%m-%d') <= '".$date."'and DATE_FORMAT(e.dateHeureFinExposition,'%Y-%m-%d') >= '".$date."' and texe.langue='".$langue."'";
 
                 // On stocke le résultat
                 $rows = $connection->fetchAll($query);
@@ -48,7 +48,6 @@ class AccueilController extends Controller
     public function oeuvreAction(Request $req)
     {
         if($req->isXMLHttpRequest()){
-
             //Connection à la base de données
             $connection = $this->get('database_connection');
             $date = new \DateTime();
@@ -59,13 +58,12 @@ class AccueilController extends Controller
                       ON em.exposition_id = e.id
                       INNER JOIN Oeuvre o
                       ON em.oeuvre_id = o.id
-                      WHERE e.dateHeureDebutExposition <= '".$date."'
-                      AND e.dateHeureFinExposition >= '".$date."'";
+                      WHERE DATE_FORMAT(e.dateHeureDebutExposition,'%Y-%m-%d') <= '".$date."'
+                      AND DATE_FORMAT(e.dateHeureFinExposition,'%Y-%m-%d') >= '".$date."'";
             $rows = $connection->fetchAll($query);
                     
             // Puis on le renvoie dans un tableau en Json
             return new JsonResponse(array('data' => json_encode($rows)));
-
         // Sinon on charge normalement
         }else{
             $em = $this->getDoctrine()->getManager();
@@ -79,9 +77,10 @@ class AccueilController extends Controller
                       ON em.exposition_id = e.id
                       INNER JOIN Oeuvre o
                       ON em.oeuvre_id = o.id
-                      WHERE e.dateHeureDebutExposition <= '".$date."'
-                      AND e.dateHeureFinExposition >= '".$date."'";
+                      WHERE DATE_FORMAT(e.dateHeureDebutExposition,'%Y-%m-%d') <= '".$date."'
+                      AND DATE_FORMAT(e.dateHeureFinExposition,'%Y-%m-%d') >= '".$date."'";
             $oeuvres = $connection->fetchAll($query);
+
             if(!empty($oeuvres))
             {
               $idExposition = $oeuvres[0]['idEx'];
@@ -93,7 +92,6 @@ class AccueilController extends Controller
                 ));
         }
     }
-
     public function listexpoAction(Request $request)
     {
         if($request->isXMLHttpRequest()) 

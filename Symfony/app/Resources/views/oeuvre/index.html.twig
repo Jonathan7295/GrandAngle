@@ -51,7 +51,7 @@
                             </td>
                             <td>
                                 {% if oeuvre.genFlashCode %}
-                                    <a id="qrcindex" title="Imprimer un Qrcode" href="{{ oeuvre.imgFlashCode ~ '.png'}}" class="glyphicon glyphicon-qrcode"></a>
+                                    <a id="qrcindex" title="Imprimer un Qrcode" href="{{ qrcode_url(oeuvre.imgFlashcode, { extension: 'png'}) }}" class="glyphicon glyphicon-qrcode" target="_blank"></a>
                                 {% endif %}
                             </td>
                         </tr>
@@ -97,6 +97,7 @@
         </div>
         <div class="row"></div>
         <input id="url_path" type="hidden" name="path" value="{{ app.request.requestUri }}">
+        <input id="url_code" type="hidden" name="code" value="{{ app.request.baseurl }}">
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -181,6 +182,8 @@
 
                 // On récupère le path pour les boutons
                 var path = $('#url_path').val();
+                // On récupère le path pour le qrcode
+                var Qrcode = $('#url_code').val();
 
                 // On créé les boutons
                 var show = document.createElement('a');
@@ -206,8 +209,9 @@
                 if(item.img != ""){
                     var code = document.createElement('a');
                     code.id = 'qrcindex';
-                    code.href = item.img+'.png';
+                    code.href = Qrcode+'/gestion/qrcode/'+item.img+'.png';
                     code.title = 'Imprimer un Qrcode';
+                    code.target = '_blank';
                     code.setAttribute('class','glyphicon glyphicon-qrcode');
                 }
                 
