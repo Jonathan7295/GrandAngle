@@ -13,7 +13,7 @@
 	<div class="row">
 		<div id="div" class="row text-center">
 			{% for oeuvre in oeuvres %}
-				<div class="col-md-3 margepaver">
+				<div class="col-md-4 margepaver">
 				    <div class="thumbnail">
 						<img class="img" src="{{ app.request.basepath }}/upload/{{ oeuvre.fichier}}" alt="Image Oeuvre" />
 				       	<p><strong>{{ oeuvre.nom }}</strong></p>
@@ -29,42 +29,44 @@
 {% block javascripts %}
 <script type="text/javascript">
 	$(document).ready(function(){
-		var idex = {{oeuvres.0.idEx}};
-		console.log(idex);
-		if(idex != "")
+		if({{oeuvres.0.idEx}} != undefined)
 		{
-			$('#selecexpo option[value='+idex+']').prop('selected', true);
-		}
-
-		$('#selecexpo').change(function(){
-			var id = $(this).val();
-			if (id != 'choix') 
+			var idex = {{oeuvres.0.idEx}};
+			if(idex != "")
 			{
-				div = $('#div');
-				$('option[value="choix"]').html("Recharger l'exposition en cours");
-				contenu = document.createElement('div'); 
-				ajaxCall(id);
-				function ajaxCall(id){
-                    $.ajax(
-                    {
-                        url: "{{ path('module_diffusion_listexpo') }}", // On renseigne l'url TWIG
-                        method: "post",
-                        data: {id: id} // On passe l'id dans la requête
-                    }).done(function(msg){
-                    	console.log(msg);
-                        refreshList(msg);
-                    });
-                }
-			}else{
-                $.ajax({
-                    url: "{{ path('module_diffusion_oeuvre') }}", // On renseigne l'url TWIG
-                    method: "post",
-                }).done(function(msg){
-                    refreshList2(msg);
-                });
-                scroll();
-        	}
-		});
+				$('#selecexpo option[value='+idex+']').prop('selected', true);
+			}
+
+			$('#selecexpo').change(function(){
+				var id = $(this).val();
+				if (id != 'choix') 
+				{
+					div = $('#div');
+					$('option[value="choix"]').html("Recharger l'exposition en cours");
+					contenu = document.createElement('div'); 
+					ajaxCall(id);
+					function ajaxCall(id){
+	                    $.ajax(
+	                    {
+	                        url: "{{ path('module_diffusion_listexpo') }}", // On renseigne l'url TWIG
+	                        method: "post",
+	                        data: {id: id} // On passe l'id dans la requête
+	                    }).done(function(msg){
+	                    	console.log(msg);
+	                        refreshList(msg);
+	                    });
+	                }
+				}else{
+	                $.ajax({
+	                    url: "{{ path('module_diffusion_oeuvre') }}", // On renseigne l'url TWIG
+	                    method: "post",
+	                }).done(function(msg){
+	                    refreshList2(msg);
+	                });
+	                scroll();
+	        	}
+			});
+		}
 	});
 	function refreshList(msg)
 	{

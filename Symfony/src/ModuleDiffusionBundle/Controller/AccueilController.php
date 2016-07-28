@@ -110,8 +110,24 @@ class AccueilController extends Controller
 
     public function detailAction(Oeuvre $oeuvre)
     {
+        $connection = $this->get('database_connection');
+        $id = $oeuvre->getId();
+        $query = "SELECT t.description as descrpt
+                  FROM Texte_Oeuvre as t
+                  WHERE t.langue = 'fr' 
+                  AND t.oeuvre_id =".$id;
+        $trad = $connection->fetchAll($query);
+
+        $query = "SELECT m.nom as nom, m.lien as lien
+                  FROM multimedia as m
+                  INNER JOIN oeuvre o
+                  ON o.id = m.oeuvre_id
+                  WHERE o.id =".$id;
+        $multis = $connection->fetchAll($query);
         return $this->render('ModuleDiffusion/accueil/detail_oeuvre.html.twig', array(
-            'oeuvre' => $oeuvre
+            'oeuvre' => $oeuvre,
+            'trad' => $trad,
+            'multis' => $multis
         ));
     }
 }
