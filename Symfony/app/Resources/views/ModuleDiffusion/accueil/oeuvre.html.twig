@@ -10,14 +10,15 @@
 			<option value="{{exposition.id}}">{{exposition.nomExposition}}</option>
 		{% endfor %}
 	</select>
+	<input id="input" type="hidden" value=""/>
 	<div class="row">
-		<div id="div" class="row text-center">
+		<div id="div" name="btn_input" class="row text-center">
 			{% for oeuvre in oeuvres %}
 				<div class="col-md-4 margepaver">
 				    <div class="thumbnail">
 						<img class="img" src="{{ app.request.basepath }}/upload/{{ oeuvre.fichier}}" alt="Image Oeuvre" />
 				       	<p><strong>{{ oeuvre.nom }}</strong></p>
-				       	<a class="btn btn-primary" href="{{ path('module_diffusion_showoeuvre', { 'id': oeuvre.id }) }}">Voir détail</a>
+				       	<a class="btn btn-primary btn_path" href="{{ path('module_diffusion_showoeuvre', { 'id': oeuvre.id, 'idE': idExposition}) }}">Voir détail</a>
 				    </div>
 				  </div>
 			{% endfor %}
@@ -35,10 +36,12 @@
 			if(idex != "")
 			{
 				$('#selecexpo option[value='+idex+']').prop('selected', true);
+				$('#input').attr('value',idex);
 			}
 
 			$('#selecexpo').change(function(){
 				var id = $(this).val();
+				$('#input').attr('value',id);
 				if (id != 'choix') 
 				{
 					div = $('#div');

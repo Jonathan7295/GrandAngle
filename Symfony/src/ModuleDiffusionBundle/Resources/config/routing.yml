@@ -21,7 +21,12 @@ module_diffusion_listexpo:
     methods: [POST, GET]
 
 module_diffusion_showoeuvre:
-    path:     /oeuvre/{id}/detail
+    path:     /oeuvre/{id}/{idE}/detail
     defaults: { _controller: "ModuleDiffusionBundle:Accueil:detail" }
+    methods: [POST, GET]
+
+module_diffusion_majvuo:
+    path:     /maj_vu_oeuvre
+    defaults: { _controller: "ModuleDiffusionBundle:Accueil:majvuo" }
     methods: [POST, GET]
 

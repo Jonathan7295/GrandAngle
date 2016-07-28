@@ -82,9 +82,14 @@ class AccueilController extends Controller
                       WHERE e.dateHeureDebutExposition <= '".$date."'
                       AND e.dateHeureFinExposition >= '".$date."'";
             $oeuvres = $connection->fetchAll($query);
+            if(!empty($oeuvres))
+            {
+              $idExposition = $oeuvres[0]['idEx'];
+            }
             return $this->render('ModuleDiffusion/accueil/oeuvre.html.twig', array(
                 'expositions' => $expositions,
-                'oeuvres' => $oeuvres
+                'oeuvres' => $oeuvres,
+                'idExposition' => $idExposition
                 ));
         }
     }
@@ -108,7 +113,7 @@ class AccueilController extends Controller
         return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
 
-    public function detailAction(Oeuvre $oeuvre)
+    public function detailAction(Oeuvre $oeuvre, $idE)
     {
         $connection = $this->get('database_connection');
         $id = $oeuvre->getId();
@@ -117,7 +122,6 @@ class AccueilController extends Controller
                   WHERE t.langue = 'fr' 
                   AND t.oeuvre_id =".$id;
         $trad = $connection->fetchAll($query);
-
         $query = "SELECT m.nom as nom, m.lien as lien
                   FROM multimedia as m
                   INNER JOIN oeuvre o
@@ -127,7 +131,33 @@ class AccueilController extends Controller
         return $this->render('ModuleDiffusion/accueil/detail_oeuvre.html.twig', array(
             'oeuvre' => $oeuvre,
             'trad' => $trad,
-            'multis' => $multis
+            'multis' => $multis,
+            'idE' => $idE
         ));
+    }
+
+    public function majvuoAction(Request $request)
+    {
+        if($request->isXMLHttpRequest()) 
+        {
+            // $connection = $this->get('database_connection');
+            // $id = $request->get('id');
+            // $idE = $request->get('idE');
+            // $query = "UPDATE Emplacement as em 
+            //           SET em.nombreVisiteOeuvre =3
+            //           WHERE em.exposition_id =7 
+            //           AND em.oeuvre_id =6";
+            // $new = $connection->fetchAll($query);
+            // var_dump($new);
+            $id = $request->get('id');
+            $idE = $request->get('idE');
+            $emplacement = new Emplacement();
+            $em = $this->getDoctrine()->getEntityManager();
+            $repo = $em->getRepository('ModuleGestionBundle:Emplacement');
+            $repo->updateVisite($id,$idE,$em);
+            $message = true;
+            return new JsonResponse(array('data' => json_encode($message)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
 }
