@@ -1,15 +1,15 @@
-
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="utf-8">
-	<title>Bienvenue</title>
-
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-	{% stylesheets 'template/css/animate.css' %}
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bienvenue</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    {% stylesheets 'template/css/animate.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
     {% stylesheets 'template/css/style.css' %}
@@ -53,14 +53,14 @@
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     {% block stylesheets %}{% endblock %}
-	</head>
-	<body>
-	<div id="fh5co-page">
-		<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-		<aside id="fh5co-aside" role="complementary" class="border js-fullheight">
-			<h1 id="fh5co-logo"><a href="#"></a></h1>
-			<nav id="fh5co-main-menu" role="navigation">
-				<ul>
+    </head>
+    <body>
+    <div id="fh5co-page">
+        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+        <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
+            <h1 id="fh5co-logo"><a href="#"></a></h1>
+            <nav id="fh5co-main-menu" role="navigation">
+                <ul>
                     <li>
                         <div class="barre"></div>
                         <a href="{{ path('module_diffusion_homepage')}}" class="lien">
@@ -104,33 +104,32 @@
                     </li>
                 </ul>
                 <div id="my-calendar" class="calendar"></div>
-	            <script>
-	                $.ajax({
-	                    url: "{{ path('affiche_calendar') }}", 
-	                    method: "post",
-	                    data: {id: 0}
-	                }).done(function(msg){
-	                    console.log(msg);
-	                    affiche_calendar(msg.data);
-	                });
-	                function affiche_calendar(tab)
-	                {
-	                    var table = [{"date":"2016-07-05","badge":true,"title":"exemple0"}];
-	                    var table2 = tab;
-	                    $("#my-calendar").zabuto_calendar({
-	                        language: "fr",
-	                        //data: tab
-	                        data: table2
-	                    });
-	                }
-	            </script>
-			</nav>
-		</aside>
-	</div>
-	<div id="fh5co-main">
-		{% block body %} {% endblock %}
+                <script>
+                    $.ajax({
+                        url: "{{ path('affiche_calendar') }}", 
+                        method: "post",
+                        data: {id: 0}
+                    }).done(function(msg){
+                        console.log(msg);
+                        affiche_calendar(msg.data);
+                    });
+                    function affiche_calendar(tab)
+                    {
+                        var table = [{"date":"2016-07-05","badge":true,"title":"exemple0"}];
+                        var table2 = tab;
+                        $("#my-calendar").zabuto_calendar({
+                            language: "fr",
+                            //data: tab
+                            data: table2
+                        });
+                    }
+                </script>
+            </nav>
+        </aside>
+    </div>
+    <div id="fh5co-main">
+        {% block body %} {% endblock %}
         {% block javascripts %} {% endblock %}
-	</div>
-	</body>
+    </div>
+    </body>
 </html>
-

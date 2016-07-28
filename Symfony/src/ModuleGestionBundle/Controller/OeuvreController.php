@@ -268,9 +268,9 @@ class OeuvreController extends Controller
                 // Si on a coché pour générer un Qrcode
                 if($request->request->All()["oeuvre"]["genFlashcode"] == 1){
 
-                   $IP = "172.16.86.156"; // Adresse en local du serveur attribuée statique
-                   // Puis on l'intègre dans le lien de redirection
-                   $oeuvre->setImgFlashcode('/qrcode/'.$IP.'/GrandAngle/Symfony/web/app_dev.php/oeuvre');
+                  $IP = "172.16.86.156"; // Adresse en local du serveur attribuée statique
+                  // Puis on l'intègre dans le lien de redirection
+                  $oeuvre->setImgFlashcode('/qrcode/'.$IP.'/GrandAngle/Symfony/web/app_dev.php/oeuvre/'.$id.'/detail');
                    // On persist le changement
                    $em->persist($oeuvre);
                    // On enregistre

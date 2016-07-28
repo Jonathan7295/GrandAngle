@@ -48,7 +48,6 @@ class AccueilController extends Controller
     public function oeuvreAction(Request $req)
     {
         if($req->isXMLHttpRequest()){
-
             //Connection à la base de données
             $connection = $this->get('database_connection');
             $date = new \DateTime();
@@ -59,13 +58,12 @@ class AccueilController extends Controller
                       ON em.exposition_id = e.id
                       INNER JOIN Oeuvre o
                       ON em.oeuvre_id = o.id
-                      WHERE e.dateHeureDebutExposition <= '".$date."'
-                      AND e.dateHeureFinExposition >= '".$date."'";
+                      WHERE DATE_FORMAT(e.dateHeureDebutExposition,'%Y-%m-%d') <= '".$date."'
+                      AND DATE_FORMAT(e.dateHeureFinExposition,'%Y-%m-%d') >= '".$date."'";
             $rows = $connection->fetchAll($query);
                     
             // Puis on le renvoie dans un tableau en Json
             return new JsonResponse(array('data' => json_encode($rows)));
-
         // Sinon on charge normalement
         }else{
             $em = $this->getDoctrine()->getManager();
@@ -79,16 +77,21 @@ class AccueilController extends Controller
                       ON em.exposition_id = e.id
                       INNER JOIN Oeuvre o
                       ON em.oeuvre_id = o.id
-                      WHERE e.dateHeureDebutExposition <= '".$date."'
-                      AND e.dateHeureFinExposition >= '".$date."'";
+                      WHERE DATE_FORMAT(e.dateHeureDebutExposition,'%Y-%m-%d') <= '".$date."'
+                      AND DATE_FORMAT(e.dateHeureFinExposition,'%Y-%m-%d') >= '".$date."'";
             $oeuvres = $connection->fetchAll($query);
+
+            if(!empty($oeuvres))
+            {
+              $idExposition = $oeuvres[0]['idEx'];
+            }
             return $this->render('ModuleDiffusion/accueil/oeuvre.html.twig', array(
                 'expositions' => $expositions,
-                'oeuvres' => $oeuvres
+                'oeuvres' => $oeuvres,
+                'idExposition' => $idExposition
                 ));
         }
     }
-
     public function listexpoAction(Request $request)
     {
         if($request->isXMLHttpRequest()) 
@@ -107,11 +110,50 @@ class AccueilController extends Controller
         }
         return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
-
-    public function detailAction(Oeuvre $oeuvre)
+    public function detailAction(Oeuvre $oeuvre, $idE)
     {
+        $connection = $this->get('database_connection');
+        $id = $oeuvre->getId();
+        $query = "SELECT t.description as descrpt
+                  FROM Texte_Oeuvre as t
+                  WHERE t.langue = 'fr' 
+                  AND t.oeuvre_id =".$id;
+        $trad = $connection->fetchAll($query);
+        $query = "SELECT m.nom as nom, m.lien as lien
+                  FROM multimedia as m
+                  INNER JOIN oeuvre o
+                  ON o.id = m.oeuvre_id
+                  WHERE o.id =".$id;
+        $multis = $connection->fetchAll($query);
         return $this->render('ModuleDiffusion/accueil/detail_oeuvre.html.twig', array(
-            'oeuvre' => $oeuvre
+            'oeuvre' => $oeuvre,
+            'trad' => $trad,
+            'multis' => $multis,
+            'idE' => $idE
         ));
+    }
+    public function majvuoAction(Request $request)
+    {
+        if($request->isXMLHttpRequest()) 
+        {
+            // $connection = $this->get('database_connection');
+            // $id = $request->get('id');
+            // $idE = $request->get('idE');
+            // $query = "UPDATE Emplacement as em 
+            //           SET em.nombreVisiteOeuvre =3
+            //           WHERE em.exposition_id =7 
+            //           AND em.oeuvre_id =6";
+            // $new = $connection->fetchAll($query);
+            // var_dump($new);
+            $id = $request->get('id');
+            $idE = $request->get('idE');
+            $emplacement = new Emplacement();
+            $em = $this->getDoctrine()->getEntityManager();
+            $repo = $em->getRepository('ModuleGestionBundle:Emplacement');
+            $repo->updateVisite($id,$idE,$em);
+            $message = true;
+            return new JsonResponse(array('data' => json_encode($message)));
+        }
+        return new Response("Erreur : Ce n'est pas une requête Ajax", 400);
     }
 }
