@@ -61,6 +61,7 @@ class StatistiqueController extends Controller
         $role = $this->getUser()->getRole();
         // On se connecte à la base de données
         $connection = $this->get('database_connection');
+        // Récupère les exposition qui posséde au moins 1 oeuvre
         $query = "SELECT distinct e.id as idexpo, e.nomExposition as nomexpo
                   FROM Exposition as e
                   INNER JOIN Emplacement em

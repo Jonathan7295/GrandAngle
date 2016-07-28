@@ -16,13 +16,13 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	            	<tr>
-						{% for exposition in expositions %}
+					{% for exposition in expositions %}
+						<tr>
 							<td>{{exposition.nomO}}</td>
 							<td>{{exposition.pos}}</td>
 							<td>{{exposition.nb}}</td>
-						{% endfor %}
-					</tr>
+						</tr>
+					{% endfor %}
 				</tbody>
 			</table>
 		</div>

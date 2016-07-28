@@ -424,7 +424,6 @@ class ExpositionController extends Controller
         $em = $this->getDoctrine()->getManager();
         // Alerte Oeuvre non livrée
         $oeuvresNonLivre = $em->getRepository('ModuleGestionBundle:Exposition')->findAllCurrent();
-
         return $this->render('accueil/index.html.twig', array(
             'expositions' => $exposition,
             'role' => $role,
