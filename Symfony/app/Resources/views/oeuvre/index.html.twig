@@ -96,7 +96,7 @@
             </table>
         </div>
         <div class="row"></div>
-        <input id="url_path" type="hidden" name="path" value="{{ app.request.requestUri }}">
+        <input id="url_path" type="hidden" name="path" value="{{ app.request.baseurl }}">
         <input id="url_code" type="hidden" name="code" value="{{ app.request.baseurl }}">
     </div>
 {% endblock %}
@@ -151,6 +151,7 @@
         });
         // Fonction pour afficher les données
         function refreshList(msg){
+
             // mettre à jour les données de la page
             list[0].innerHTML = ""; // Efface la liste
 
@@ -159,16 +160,15 @@
  
                 // On créé une colonne pour chacun des champs
                 li = document.createElement('td');
-                li1 = document.createElement('td');
                 li2 = document.createElement('td');
                 li3 = document.createElement('td');
                 li5 = document.createElement('td');
                 li5.setAttribute('class', 'buttonTab');
                 li6 = document.createElement('td');
                 
+                console.log(item);
                 // On récupère les données
                 nom = document.createTextNode(item.nom);
-                etat = document.createTextNode(item.etat);
                 artiste = document.createTextNode(item.nomArt+' '+item.preNomArt);
 
                 // On reformate le nom des types correctement
@@ -188,25 +188,25 @@
                 // On créé les boutons
                 var show = document.createElement('a');
                 show.id = 'searchindex';
-                show.href = path+item.id+'/show';
+                show.href = path+'/gestion/oeuvre/'+item.id+'/show';
                 show.title = 'Voir détail';
                 show.setAttribute('class','glyphicon glyphicon-search');
 
                 var edit = document.createElement('a');
                 edit.id = 'editindex';
-                edit.href = path+item.id+'/edit';
+                edit.href = path+'/gestion/oeuvre/'+item.id+'/edit';
                 edit.title = 'Modifier';
                 edit.setAttribute('class','glyphicon glyphicon-pencil');
 
                 var del  = document.createElement('a');
                 del.id = 'delindex';
-                del.href = path+'delete?id='+item.id;
+                del.href = path+'/gestion/oeuvre/delete?id='+item.id;
                 del.title = 'Supprimer';
                 del.setAttribute('name', item.id);
                 del.setAttribute('class','glyphicon glyphicon-trash del');
 
                 // On vérifie si un qrcode a été généré avant de créé le bouton
-                if(item.img != ""){
+                if(item.img != "" && item.img != null){
                     var code = document.createElement('a');
                     code.id = 'qrcindex';
                     code.href = Qrcode+'/gestion/qrcode/'+item.img+'.png';
@@ -214,21 +214,21 @@
                     code.target = '_blank';
                     code.setAttribute('class','glyphicon glyphicon-qrcode');
                 }
+
+                console.log(item);
                 
                 // On insère les données dans chacune des colonnes
                 li.appendChild(nom);
-                li1.appendChild(etat);
                 li2.appendChild(artiste);
                 li3.appendChild(type);
                 li5.appendChild(show);
                 li5.appendChild(edit);
                 li5.appendChild(del);
-                if(item.img != "")
+                if(item.img != "" && item.img != null)
                     li6.appendChild(code);
 
                 //On insère dans la ligne les différentes colonnes
                 tr.appendChild(li);
-                tr.appendChild(li1);
                 tr.appendChild(li2);
                 tr.appendChild(li3);
                 tr.appendChild(li5);

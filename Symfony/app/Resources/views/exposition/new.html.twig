@@ -503,13 +503,15 @@
 
                 var descendant2 = $newprototype2.find('*');
 
+                console.log(descendant2);
+
                 // Puis on les accompagne une par une dans les balises div mises en forme pour l'affichage
-                $('.labelpos').append(descendant2[3]);
-                $('.champspos').append(descendant2[4]);
-                $('.labeloeuvre').append(descendant2[36]);
-                $('.champsoeuvre').append(descendant2[37]);
-                $('.labeletat').append(descendant2[43]);
-                $('.champsetat').append(descendant2[44]);
+                $('.labeletat').append(descendant2[3]);
+                $('.champsetat').append(descendant2[4]);
+                $('.labelpos').append(descendant2[9]);
+                $('.champspos').append(descendant2[10]);
+                $('.labeloeuvre').append(descendant2[42]);
+                $('.champsoeuvre').append(descendant2[43]);
 
                 // On ajoute au prototype un lien pour pouvoir supprimer le telephone
                 addDeleteLink2($('.deplace2'));

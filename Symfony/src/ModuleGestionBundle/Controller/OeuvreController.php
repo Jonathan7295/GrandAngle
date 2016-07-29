@@ -32,8 +32,7 @@ class OeuvreController extends Controller
             //Connection à la base de données
             $connection = $this->get('database_connection');
             // récupérer la liste complète des oeuvres
-            $query = "select o.nom,e.etat,a.nom as nomArt,a.prenom as preNomArt,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
-                            inner join emplacement as e on e.oeuvre_id = o.id
+            $query = "select o.nom,a.nom as nomArt,a.prenom as preNomArt,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             inner join artiste as a on o.artiste_id = a.id
                             left join typeoeuvre as t on o.typeoeuvre_id = t.id";
             // On stocke le résultat
@@ -73,7 +72,7 @@ class OeuvreController extends Controller
             $id = $req->get('id');
             $connection = $this->get('database_connection');
             // récupérer la liste des oeuvres
-            $query = "select o.nom,e.etat,a.nom as nomArt,a.prenom as preNomArt,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
+            $query = "select o.nom,a.nom as nomArt,a.prenom as preNomArt,o.id,o.imgFlashcode as img, t.discr as type from oeuvre as o
                             left join emplacement as e on e.oeuvre_id = o.id
                             inner join artiste as a on o.artiste_id = a.id
                             inner join typeoeuvre as t on o.typeoeuvre_id = t.id  
@@ -399,9 +398,9 @@ class OeuvreController extends Controller
                 // Si on a coché pour générer un Qrcode
                 if($request->request->All()["oeuvre"]["genFlashcode"] == 1){
 
-                   $IP = "192.168.1.19"; // Adresse en local du serveur attribuée statique
+                   $IP = "172.16.86.156"; // Adresse en local du serveur attribuée statique
                    // Puis on l'intègre dans le lien de redirection
-                  $oeuvre->setImgFlashcode('/qrcode/'.$IP.'/GrandAngle/Symfony/web/gestion/testoeuvre/'.$id.'/show');
+                   $oeuvre->setImgFlashcode('/qrcode/'.$IP.'/GrandAngle/Symfony/web/app_dev.php/oeuvre/'.$id.'/detail');
                    // On persist le changement
                    $em->persist($oeuvre);
                    // On enregistre
