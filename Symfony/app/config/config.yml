@@ -95,9 +95,9 @@ swiftmailer:
     transport:    smtp
     encryption:    ssl
     auth_mode:    login 
-    host:         smtp.orange.fr
-    username:     flac5@wanadoo.fr
-    password:     sultan
+    host:         smtp.example.fr
+    username:     mail@example.fr
+    password:     password
     # spool:     { type: memory }
 
 endroid_qr_code:
